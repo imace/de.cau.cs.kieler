@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4" id="_R">
   <states id="Thread" label="Thread">
     <signals name="forked" hostType="" isInput="true"/>
     <signals name="joined" initialValue="" hostType="" isInput="true"/>
@@ -11,7 +11,7 @@
     <regions id="_R0">
       <states id="disabled" label="disabled" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
         <outgoingTransitions label="forked" priority="1" targetState="//@states.0/@regions.0/@states.1">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
       </states>
       <states id="enabled" label="enabled" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
@@ -20,35 +20,35 @@
             <regions id="_R0">
               <states id="preempted" label="preempted" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
                 <outgoingTransitions label="instrClk and schedule" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:OperatorExpression" operator="and">
-                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
-                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                  <trigger xsi:type="kexpressions:OperatorExpression" operator="and">
+                    <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                    <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                   </trigger>
                 </outgoingTransitions>
               </states>
               <states id="executing" label="executing" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                 <outgoingTransitions label="instrClk and not schedule" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0">
-                  <trigger xsi:type="expressions:OperatorExpression" operator="and">
-                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
-                    <subExpressions xsi:type="expressions:OperatorExpression" operator="not">
-                      <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                  <trigger xsi:type="kexpressions:OperatorExpression" operator="and">
+                    <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                    <subExpressions xsi:type="kexpressions:OperatorExpression" operator="not">
+                      <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                     </subExpressions>
                   </trigger>
                 </outgoingTransitions>
               </states>
             </regions>
             <outgoingTransitions label="delay" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
             </outgoingTransitions>
           </states>
           <states id="inactive" label="inactive" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
             <outgoingTransitions label="startTick" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
             </outgoingTransitions>
           </states>
         </regions>
         <outgoingTransitions label="joined" priority="1" targetState="//@states.0/@regions.0/@states.0">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
         </outgoingTransitions>
       </states>
     </regions>

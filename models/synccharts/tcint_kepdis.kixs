@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4" id="_R">
   <states id="tcint_kepdis" label="tcint_kepdis">
     <signals name="RDY" isOutput="true"/>
     <signals name="RREQ" isOutput="true"/>
@@ -68,7 +68,9 @@
             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1"/>
           </states>
           <states id="16" label="16" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
-            <outgoingTransitions label="/RREQ" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1"/>
+            <outgoingTransitions label="/ RREQ" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+            </outgoingTransitions>
           </states>
         </regions>
         <regions id="R1" label="R1">
@@ -83,7 +85,9 @@
             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.1/@states.1"/>
           </states>
           <states id="139" label="139" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.1/@states.1/@outgoingTransitions.0">
-            <outgoingTransitions label="/WREQ" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.1/@states.1"/>
+            <outgoingTransitions label="/ WREQ" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.1/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.2"/>
+            </outgoingTransitions>
           </states>
         </regions>
         <regions id="R2" label="R2">
@@ -120,7 +124,9 @@
             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.4/@states.1"/>
           </states>
           <states id="418" label="418" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.4/@states.1/@outgoingTransitions.0">
-            <outgoingTransitions label="/TCRegOutOE" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.4/@states.1"/>
+            <outgoingTransitions label="/ TCRegOutOE" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.4/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.12"/>
+            </outgoingTransitions>
           </states>
         </regions>
         <regions id="R5" label="R5">
@@ -215,19 +221,29 @@
                                 <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
                               </states>
                             </regions>
-                            <outgoingTransitions label="#haltTrap132_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.0"/>
-                            <outgoingTransitions label="#AWAIT_OP_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
+                            <outgoingTransitions isImmediate="true" label="# haltTrap132_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.0">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@signals.1"/>
+                            </outgoingTransitions>
+                            <outgoingTransitions isImmediate="true" label="# AWAIT_OP_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@signals.0"/>
+                            </outgoingTransitions>
                           </states>
                           <states id="I" label="I" isInitial="true">
                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="/EndOfHostDrives_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.2"/>
+                        <outgoingTransitions label="/ EndOfHostDrives_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@signals.0"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="976" label="976" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                     </regions>
-                    <outgoingTransitions label="#haltTrap114_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.0"/>
-                    <outgoingTransitions label="#EndOfHostDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.1"/>
+                    <outgoingTransitions isImmediate="true" label="# haltTrap114_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.0">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@signals.1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions isImmediate="true" label="# EndOfHostDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@signals.0"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="I" label="I" isInitial="true">
                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.1/@regions.0/@states.2"/>
@@ -273,12 +289,19 @@
                             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="pHostDrives/EndOfPamDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.2/@regions.1/@states.2"/>
+                        <outgoingTransitions label="pHostDrives / EndOfPamDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.2/@regions.1/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@signals.0"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="1250" label="1250" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                     </regions>
-                    <outgoingTransitions label="#haltTrap154_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.0"/>
-                    <outgoingTransitions label="#EndOfPamDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.1"/>
+                    <outgoingTransitions isImmediate="true" label="# haltTrap154_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.0">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@signals.1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions isImmediate="true" label="# EndOfPamDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@signals.0"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="I" label="I" isInitial="true">
                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.3/@regions.0/@states.2"/>
@@ -319,12 +342,19 @@
                             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="pHostDrives/EndOfRomDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.2"/>
+                        <outgoingTransitions label="pHostDrives / EndOfRomDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@signals.0"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="1525" label="1525" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                     </regions>
-                    <outgoingTransitions label="#haltTrap175_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.0"/>
-                    <outgoingTransitions label="#EndOfRomDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.1"/>
+                    <outgoingTransitions isImmediate="true" label="# haltTrap175_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.0">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@signals.1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions isImmediate="true" label="# EndOfRomDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@signals.0"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="I" label="I" isInitial="true">
                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.4/@regions.0/@states.2"/>
@@ -365,12 +395,19 @@
                             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="pHostDrives/EndOfLcaDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.2/@regions.1/@states.2"/>
+                        <outgoingTransitions label="pHostDrives / EndOfLcaDrives_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.2/@regions.1/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@signals.0"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="1800" label="1800" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                     </regions>
-                    <outgoingTransitions label="#haltTrap195_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.0"/>
-                    <outgoingTransitions label="#EndOfLcaDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.1"/>
+                    <outgoingTransitions isImmediate="true" label="# haltTrap195_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.0">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@signals.1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions isImmediate="true" label="# EndOfLcaDrives_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@signals.0"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="I" label="I" isInitial="true">
                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.5/@states.1/@regions.1/@states.5/@regions.0/@states.2"/>
@@ -403,7 +440,9 @@
                 <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.1/@regions.0/@states.1"/>
               </states>
             </regions>
-            <outgoingTransitions label="SetDMAReadAddressReady" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.2"/>
+            <outgoingTransitions label="SetDMAReadAddressReady" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.2">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.35"/>
+            </outgoingTransitions>
           </states>
           <states id="Loop223state" label="Loop223state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.6/@states.1/@outgoingTransitions.0">
             <regions id="R0" label="R0">
@@ -417,7 +456,9 @@
                 <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.2/@regions.0/@states.1"/>
               </states>
             </regions>
-            <outgoingTransitions label="DMAReadOver" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.1"/>
+            <outgoingTransitions label="DMAReadOver" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.6/@states.1">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.36"/>
+            </outgoingTransitions>
           </states>
         </regions>
         <regions id="R7" label="R7">
@@ -433,7 +474,9 @@
                 <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.1/@regions.0/@states.1"/>
               </states>
             </regions>
-            <outgoingTransitions label="SetDMAWriteAddressReady" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.2"/>
+            <outgoingTransitions label="SetDMAWriteAddressReady" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.2">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.37"/>
+            </outgoingTransitions>
           </states>
           <states id="Loop238state" label="Loop238state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.7/@states.1/@outgoingTransitions.0">
             <regions id="R0" label="R0">
@@ -447,7 +490,9 @@
                 <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.2/@regions.0/@states.1"/>
               </states>
             </regions>
-            <outgoingTransitions label="DMAWriteOver" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.1"/>
+            <outgoingTransitions label="DMAWriteOver" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.7/@states.1">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.38"/>
+            </outgoingTransitions>
           </states>
         </regions>
         <regions id="R8" label="R8">
@@ -469,7 +514,9 @@
                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.1/@regions.0/@states.1"/>
                   </states>
                 </regions>
-                <outgoingTransitions label="ConflictOnSEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2"/>
+                <outgoingTransitions label="ConflictOnSEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2">
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.48"/>
+                </outgoingTransitions>
               </states>
               <states id="StatementList257state" label="StatementList257state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
                 <regions id="R0" label="R0">
@@ -485,7 +532,9 @@
                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
                       </states>
                     </regions>
-                    <outgoingTransitions label="#SEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2"/>
+                    <outgoingTransitions isImmediate="true" label="# SEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.20"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="StatementList268state" label="StatementList268state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0">
                     <regions id="R0" label="R0">
@@ -496,10 +545,14 @@
                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.1"/>
                       </states>
                     </regions>
-                    <outgoingTransitions label="SEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2"/>
+                    <outgoingTransitions label="SEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.2/@regions.0/@states.2">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.20"/>
+                    </outgoingTransitions>
                   </states>
                 </regions>
-                <outgoingTransitions label="AcceptSEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.1"/>
+                <outgoingTransitions label="AcceptSEL" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.0/@states.1">
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.49"/>
+                </outgoingTransitions>
               </states>
             </regions>
             <regions id="R1" label="R1">
@@ -514,7 +567,10 @@
                 <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.1/@states.1"/>
               </states>
               <states id="2753" label="2753" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.1/@states.1/@outgoingTransitions.0">
-                <outgoingTransitions label="/RDY,CONFLICT" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.1/@states.1"/>
+                <outgoingTransitions label="/ RDY, CONFLICT" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.8/@states.1/@regions.1/@states.1">
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.3"/>
+                </outgoingTransitions>
               </states>
             </regions>
           </states>
@@ -609,14 +665,20 @@
                                                 <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.5"/>
                                               </states>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap293_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#AC_1_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap293_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# AC_1_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/TagFlag" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1"/>
+                                        <outgoingTransitions label="/ TagFlag" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.9"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="Trap341state" label="Trap341state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
                                         <signals name="ReadSharedEnd_"/>
@@ -640,7 +702,9 @@
                                                     <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.3"/>
                                                   </states>
                                                   <states id="3388" label="3388" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/WPomAdCyc" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.39"/>
+                                                    <outgoingTransitions label="/ WPomAdCyc" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.39">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3626" label="3626" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.1">
                                                     <outgoingTransitions isImmediate="true" label="#" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.30"/>
@@ -651,17 +715,24 @@
                                                   </states>
                                                   <states id="4894" label="4894" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.6/@outgoingTransitions.0"/>
                                                   <states id="4818" label="4818" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.7/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="2/ReadSharedEnd_,haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.5"/>
+                                                    <outgoingTransitions delay="2" label="2  / ReadSharedEnd_, haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.5">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4790" label="4790" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.37/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/pLcaDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.6"/>
+                                                    <outgoingTransitions label="/ pLcaDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.6">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.42"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4753" label="4753" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.38/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.24/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.9/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.18/@outgoingTransitions.0"/>
                                                   <states id="4729" label="4729" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.10/@outgoingTransitions.0">
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.8"/>
                                                   </states>
                                                   <states id="4701" label="4701" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.36/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.9"/>
+                                                    <outgoingTransitions label="/ RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.9">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4668" label="4668" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.12/@outgoingTransitions.0"/>
                                                   <states id="Loop474state" label="Loop474state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.13/@outgoingTransitions.0">
@@ -676,45 +747,76 @@
                                                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.12/@regions.0/@states.1"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="5/RomOE,ReadSharedEnd_,haltTrap342_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.11"/>
+                                                    <outgoingTransitions delay="5" label="5  / RomOE, ReadSharedEnd_, haltTrap342_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.11">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.18"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4494" label="4494" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.14/@outgoingTransitions.0">
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.12"/>
                                                   </states>
                                                   <states id="4446" label="4446" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.35/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/pRomDrives,RomAD" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.13"/>
+                                                    <outgoingTransitions label="/ pRomDrives, RomAD" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.13">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.40"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.16"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4413" label="4413" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.16/@outgoingTransitions.0"/>
                                                   <states id="4365" label="4365" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.17/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/ReadSharedEnd_,haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.15"/>
+                                                    <outgoingTransitions label="/ ReadSharedEnd_, haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.15">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4297" label="4297" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.34/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/pPamDrives,pOEnRFifo,PopRFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.16"/>
+                                                    <outgoingTransitions label="/ pPamDrives, pOEnRFifo, PopRFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.16">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.41"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.8"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4236" label="4236" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.19/@outgoingTransitions.0">
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.8"/>
                                                   </states>
                                                   <states id="4188" label="4188" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.20/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.18"/>
+                                                    <outgoingTransitions label="/ WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.18">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4160" label="4160" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.33/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.19"/>
+                                                    <outgoingTransitions label="/ RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.19">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="4127" label="4127" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.22/@outgoingTransitions.0"/>
                                                   <states id="4079" label="4079" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.23/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/ReadSharedEnd_,haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.21"/>
+                                                    <outgoingTransitions label="/ ReadSharedEnd_, haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.21">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3991" label="3991" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.32/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/pPamDrives,pOEnRFifo,PopRFifo,WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.22"/>
+                                                    <outgoingTransitions label="/ pPamDrives, pOEnRFifo, PopRFifo, WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.22">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.41"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.8"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3930" label="3930" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.25/@outgoingTransitions.0">
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.8"/>
                                                   </states>
                                                   <states id="3882" label="3882" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.26/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.24"/>
+                                                    <outgoingTransitions label="/ WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.24">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3834" label="3834" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.31/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/RDY,WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.25"/>
+                                                    <outgoingTransitions label="/ RDY, WFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.25">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3801" label="3801" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.29/@outgoingTransitions.0"/>
                                                   <states id="Loop377state" label="Loop377state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.30/@outgoingTransitions.0">
@@ -726,13 +828,21 @@
                                                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.28/@regions.0/@states.1"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="PomIoDone" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.29"/>
+                                                    <outgoingTransitions label="PomIoDone" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.29">
+                                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.34"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3747" label="3747" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.28/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/ReadSharedEnd_,haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.27"/>
+                                                    <outgoingTransitions label="/ ReadSharedEnd_, haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.27">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3629" label="3629" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="/pPamDrives,RPomAdCyc" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.28"/>
+                                                    <outgoingTransitions label="/ pPamDrives, RPomAdCyc" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.28">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.41"/>
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3831" label="3831" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.1">
                                                     <outgoingTransitions isImmediate="true" label="#" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.26"/>
@@ -774,26 +884,42 @@
                                                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.39/@regions.0/@states.1"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="PomIoDone" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.40"/>
+                                                    <outgoingTransitions label="PomIoDone" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.40">
+                                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.34"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="3486" label="3486" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.39/@outgoingTransitions.0">
-                                                    <outgoingTransitions label="2/RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.38"/>
+                                                    <outgoingTransitions delay="2" label="2  / RDY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@regions.0/@states.38">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                 </regions>
-                                                <outgoingTransitions label="#haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.0"/>
-                                                <outgoingTransitions label="#WriteSharedEnd_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
+                                                <outgoingTransitions isImmediate="true" label="# haltTrap342_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.0">
+                                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.1"/>
+                                                </outgoingTransitions>
+                                                <outgoingTransitions isImmediate="true" label="# WriteSharedEnd_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1">
+                                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@signals.0"/>
+                                                </outgoingTransitions>
                                                 <outgoingTransitions priority="3" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
                                               </states>
                                               <states id="I" label="I" isInitial="true">
                                                 <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2"/>
                                               </states>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap341_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#ReadSharedEnd_/pDriveTBC" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.3"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap341_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# ReadSharedEnd_ / pDriveTBC" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.3">
+                                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.43"/>
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                            </outgoingTransitions>
                                             <outgoingTransitions priority="3" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
                                           </states>
                                           <states id="5117" label="5117" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@outgoingTransitions.1">
-                                            <outgoingTransitions label="/RDY,pHostDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.5"/>
+                                            <outgoingTransitions label="/ RDY, pHostDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.5">
+                                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+                                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.39"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2"/>
@@ -802,21 +928,31 @@
                                             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/AWAIT_CASE_,haltTrap291_,haltTrap289_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
+                                        <outgoingTransitions label="/ AWAIT_CASE_, haltTrap291_, haltTrap289_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@signals.0"/>
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="5258" label="5258" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0"/>
                                       <states id="I" label="I" isInitial="true">
                                         <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                                       </states>
                                     </regions>
-                                    <outgoingTransitions label="#haltTrap291_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0"/>
-                                    <outgoingTransitions label="#AC_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1"/>
+                                    <outgoingTransitions isImmediate="true" label="# haltTrap291_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0">
+                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                                    </outgoingTransitions>
+                                    <outgoingTransitions isImmediate="true" label="# AC_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1">
+                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@signals.0"/>
+                                    </outgoingTransitions>
                                   </states>
                                   <states id="I" label="I" isInitial="true">
                                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2"/>
                                   </states>
                                 </regions>
-                                <outgoingTransitions label="/ConflictOnSEL" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1"/>
+                                <outgoingTransitions label="/ ConflictOnSEL" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
+                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.48"/>
+                                </outgoingTransitions>
                               </states>
                               <states id="Trap545state" label="Trap545state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
                                 <signals name="EndOfDmaRead_"/>
@@ -865,7 +1001,7 @@
                                                         <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.1"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="ACK/R:=3" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3"/>
+                                                    <outgoingTransitions label="ACK/R:=3 " priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3"/>
                                                   </states>
                                                   <states id="5706" label="5706" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@outgoingTransitions.0"/>
                                                   <states id="Trap564state" label="Trap564state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
@@ -880,7 +1016,7 @@
                                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.1"/>
                                                           </states>
                                                           <states id="5553" label="5553" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.1 //@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
-                                                            <outgoingTransitions label="/R:=R-1" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.3"/>
+                                                            <outgoingTransitions label="/ R=(R(-1))" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.3"/>
                                                           </states>
                                                           <states id="5603" label="5603" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.0"/>
                                                           <states id="5601" label="5601" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
@@ -888,20 +1024,30 @@
                                                             <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2/@regions.0/@states.1"/>
                                                           </states>
                                                         </regions>
-                                                        <outgoingTransitions label="#haltTrap564_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.0"/>
-                                                        <outgoingTransitions label="#REPEAT_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.1"/>
+                                                        <outgoingTransitions isImmediate="true" label="# haltTrap564_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.0">
+                                                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@signals.1"/>
+                                                        </outgoingTransitions>
+                                                        <outgoingTransitions isImmediate="true" label="# REPEAT_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.1">
+                                                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@signals.0"/>
+                                                        </outgoingTransitions>
                                                       </states>
                                                       <states id="I" label="I" isInitial="true">
                                                         <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.3/@regions.0/@states.2"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="/WordCount_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2"/>
+                                                    <outgoingTransitions label="/ WordCount_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2">
+                                                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                 </regions>
                                               </states>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap547_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#WordCount_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap547_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# WordCount_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2"/>
@@ -914,7 +1060,9 @@
                                         <outgoingTransitions isImmediate="true" label="#/pLcaDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1"/>
                                       </states>
                                       <states id="5777" label="5777" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.0/@outgoingTransitions.0">
-                                        <outgoingTransitions label="/pHostDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2"/>
+                                        <outgoingTransitions label="/ pHostDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.39"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="Trap590state" label="Trap590state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0">
                                         <signals name="AckReceived_"/>
@@ -950,18 +1098,28 @@
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                                                   </states>
                                                 </regions>
-                                                <outgoingTransitions label="#ACK/AckReceived_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.2/@regions.1/@states.2"/>
+                                                <outgoingTransitions isImmediate="true" label="# ACK / AckReceived_" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.2/@regions.1/@states.2">
+                                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@signals.0"/>
+                                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.22"/>
+                                                </outgoingTransitions>
                                               </states>
                                               <states id="6052" label="6052" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap590_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#AckReceived_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap590_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# AckReceived_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.0/@states.2"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/AcceptSEL,pDriveTBC" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.3"/>
+                                        <outgoingTransitions label="/ AcceptSEL, pDriveTBC" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.3">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.49"/>
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.43"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="Loop613state" label="Loop613state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@outgoingTransitions.0">
                                         <regions id="R0" label="R0">
@@ -972,7 +1130,9 @@
                                             <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.3/@regions.0/@states.1"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="ACK" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4"/>
+                                        <outgoingTransitions label="ACK" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4">
+                                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.22"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="Trap615state" label="Trap615state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.3/@outgoingTransitions.0">
                                         <signals name="NotAck_"/>
@@ -1019,50 +1179,75 @@
                                                         <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
                                                       </states>
                                                     </regions>
-                                                    <outgoingTransitions label="#haltTrap624_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.0"/>
-                                                    <outgoingTransitions label="#AWAIT_OP_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
+                                                    <outgoingTransitions isImmediate="true" label="# haltTrap624_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.0">
+                                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@signals.1"/>
+                                                    </outgoingTransitions>
+                                                    <outgoingTransitions isImmediate="true" label="# AWAIT_OP_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1">
+                                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@signals.0"/>
+                                                    </outgoingTransitions>
                                                   </states>
                                                   <states id="I" label="I" isInitial="true">
                                                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.2"/>
                                                   </states>
                                                 </regions>
-                                                <outgoingTransitions label="/NotAck_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.2"/>
+                                                <outgoingTransitions label="/ NotAck_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.2">
+                                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@signals.0"/>
+                                                </outgoingTransitions>
                                               </states>
                                               <states id="6498" label="6498" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap615_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#NotAck_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap615_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# NotAck_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@regions.0/@states.2"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/EndOfDmaRead_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.5"/>
+                                        <outgoingTransitions label="/ EndOfDmaRead_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.5">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="6563" label="6563" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.4/@outgoingTransitions.0"/>
                                     </regions>
-                                    <outgoingTransitions label="#haltTrap545_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0"/>
-                                    <outgoingTransitions label="#EndOfDmaRead_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
+                                    <outgoingTransitions isImmediate="true" label="# haltTrap545_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0">
+                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.1"/>
+                                    </outgoingTransitions>
+                                    <outgoingTransitions isImmediate="true" label="# EndOfDmaRead_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1">
+                                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                    </outgoingTransitions>
                                   </states>
                                   <states id="I" label="I" isInitial="true">
                                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2"/>
                                   </states>
                                 </regions>
-                                <outgoingTransitions label="/AWAIT_CASE_,haltTrap289_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
+                                <outgoingTransitions label="/ AWAIT_CASE_, haltTrap289_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2">
+                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@signals.0"/>
+                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                                </outgoingTransitions>
                               </states>
                               <states id="6628" label="6628" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0"/>
                               <states id="I" label="I" isInitial="true">
                                 <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                               </states>
                             </regions>
-                            <outgoingTransitions label="#haltTrap289_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0"/>
-                            <outgoingTransitions label="#AC_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1"/>
+                            <outgoingTransitions isImmediate="true" label="# haltTrap289_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.0">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@signals.1"/>
+                            </outgoingTransitions>
+                            <outgoingTransitions isImmediate="true" label="# AC_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.1">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@signals.0"/>
+                            </outgoingTransitions>
                           </states>
                           <states id="I" label="I" isInitial="true">
                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@regions.0/@states.2"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="/ConflictOnSEL" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
+                        <outgoingTransitions label="/ ConflictOnSEL" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.48"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="Trap641state" label="Trap641state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
                         <signals name="AlmostEndOfDmaWrite_"/>
@@ -1087,7 +1272,9 @@
                                 <outgoingTransitions isImmediate="true" label="#/pLcaDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1"/>
                               </states>
                               <states id="6792" label="6792" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.0/@outgoingTransitions.0">
-                                <outgoingTransitions label="/pPamDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2"/>
+                                <outgoingTransitions label="/ pPamDrives" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2">
+                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.41"/>
+                                </outgoingTransitions>
                               </states>
                               <states id="ParallelStatementList651state" label="ParallelStatementList651state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0">
                                 <regions id="R0" label="R0">
@@ -1141,18 +1328,25 @@
                                                     <outgoingTransitions label="" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                                                   </states>
                                                 </regions>
-                                                <outgoingTransitions label="#ACK/AckReceived_1236756259" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.2"/>
+                                                <outgoingTransitions isImmediate="true" label="# ACK / AckReceived_1236756259" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.2">
+                                                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@signals.0"/>
+                                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.22"/>
+                                                </outgoingTransitions>
                                               </states>
                                               <states id="7167" label="7167" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0"/>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap658_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#AckReceived_1236756259" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap658_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# AckReceived_1236756259" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.2"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/AcceptSEL,pDriveTBC,R_0:=3" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
+                                        <outgoingTransitions label="/ AcceptSEL,pDriveTBC,R_0:=3" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
                                       </states>
                                       <states id="Trap685state" label="Trap685state" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
                                         <signals name="REPEAT_0_"/>
@@ -1166,7 +1360,7 @@
                                                 <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
                                               </states>
                                               <states id="7313" label="7313" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.1">
-                                                <outgoingTransitions label="/PopRFifo,pDriveTBC,R_0:=R_0-1" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.3"/>
+                                                <outgoingTransitions label="/PopRFifo,pDriveTBC,R_0:=R_0-1 " priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.3"/>
                                               </states>
                                               <states id="7403" label="7403" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.3/@outgoingTransitions.0"/>
                                               <states id="7401" label="7401" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
@@ -1174,14 +1368,20 @@
                                                 <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1"/>
                                               </states>
                                             </regions>
-                                            <outgoingTransitions label="#haltTrap685_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.0"/>
-                                            <outgoingTransitions label="#REPEAT_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.1"/>
+                                            <outgoingTransitions isImmediate="true" label="# haltTrap685_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.0">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@signals.1"/>
+                                            </outgoingTransitions>
+                                            <outgoingTransitions isImmediate="true" label="# REPEAT_0_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.1">
+                                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@signals.0"/>
+                                            </outgoingTransitions>
                                           </states>
                                           <states id="I" label="I" isInitial="true">
                                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.2"/>
                                           </states>
                                         </regions>
-                                        <outgoingTransitions label="/AlmostEndOfDmaWrite_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.3"/>
+                                        <outgoingTransitions label="/ AlmostEndOfDmaWrite_" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.3">
+                                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                                        </outgoingTransitions>
                                       </states>
                                       <states id="I" label="I" isInitial="true">
                                         <outgoingTransitions isImmediate="true" label="#/PopRFifo" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2/@regions.1/@states.2/@regions.1/@states.1/@regions.0/@states.0"/>
@@ -1192,28 +1392,42 @@
                                 </regions>
                               </states>
                             </regions>
-                            <outgoingTransitions label="#haltTrap641_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0"/>
-                            <outgoingTransitions label="#AlmostEndOfDmaWrite_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1"/>
+                            <outgoingTransitions isImmediate="true" label="# haltTrap641_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.1"/>
+                            </outgoingTransitions>
+                            <outgoingTransitions isImmediate="true" label="# AlmostEndOfDmaWrite_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1">
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@signals.0"/>
+                            </outgoingTransitions>
                           </states>
                           <states id="I" label="I" isInitial="true">
                             <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.2"/>
                           </states>
                         </regions>
-                        <outgoingTransitions label="/pHostDrives" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.2"/>
+                        <outgoingTransitions label="/ pHostDrives" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.39"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="7594" label="7594" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
-                        <outgoingTransitions label="/pDriveTBC" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.5"/>
+                        <outgoingTransitions label="/ pDriveTBC" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.5">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.43"/>
+                        </outgoingTransitions>
                       </states>
                       <states id="I" label="I" isInitial="true">
                         <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.0"/>
                       </states>
                       <states id="7690" label="7690" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.5/@outgoingTransitions.0"/>
                       <states id="7642" label="7642" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0">
-                        <outgoingTransitions label="/AWAIT_CASE_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.4"/>
+                        <outgoingTransitions label="/ AWAIT_CASE_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2/@regions.0/@states.4">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@signals.0"/>
+                        </outgoingTransitions>
                       </states>
                     </regions>
-                    <outgoingTransitions label="#haltTrap287_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.0"/>
-                    <outgoingTransitions label="#AWAIT_CASE_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.1"/>
+                    <outgoingTransitions isImmediate="true" label="# haltTrap287_" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.0">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@signals.1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions isImmediate="true" label="# AWAIT_CASE_" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@signals.0"/>
+                    </outgoingTransitions>
                   </states>
                   <states id="I" label="I" isInitial="true">
                     <outgoingTransitions isImmediate="true" label="#/" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.9/@states.2/@regions.1/@states.1/@regions.0/@states.2"/>
