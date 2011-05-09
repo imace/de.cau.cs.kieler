@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
   <states id="ReflexGame" label="ReflexGame">
     <signals name="On_Off" isInput="true"/>
     <signals name="Coin" isInput="true"/>
@@ -12,7 +12,7 @@
     <regions id="R0">
       <states id="Initial" label="Initial" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
         <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
       </states>
       <states id="On" label="On" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
@@ -24,7 +24,7 @@
                 <outgoingTransitions isImmediate="true" label="#  / GameOver, Display(0)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
-                    <newValue xsi:type="expressions:IntValue" value="0"/>
+                    <newValue xsi:type="kexpressions:IntValue" value="0"/>
                   </effects>
                 </outgoingTransitions>
               </states>
@@ -32,13 +32,13 @@
                 <outgoingTransitions label="/ GameOver, Display(0)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
-                    <newValue xsi:type="expressions:IntValue" value="0"/>
+                    <newValue xsi:type="kexpressions:IntValue" value="0"/>
                   </effects>
                 </outgoingTransitions>
               </states>
             </regions>
             <outgoingTransitions label="Coin" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
           </states>
           <states id="Game" label="Game" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
@@ -48,12 +48,12 @@
                 <regions id="R0">
                   <states id="Initial" label="Initial" isInitial="true">
                     <outgoingTransitions label="Ready" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                     </outgoingTransitions>
                   </states>
                   <states id="S0" label="S0" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                     <outgoingTransitions label="Ms" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Wait" label="Wait" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
@@ -66,16 +66,16 @@
                       <states id="S0" label="S0" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
                         <outgoingTransitions isImmediate="true" label="# Ms / ReflexTime(pre(?ReflexTime) + 1)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@signals.0">
-                            <newValue xsi:type="expressions:OperatorExpression" operator="+">
-                              <subExpressions xsi:type="expressions:OperatorExpression" operator="pre">
-                                <subExpressions xsi:type="expressions:OperatorExpression" operator="?">
-                                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
+                            <newValue xsi:type="kexpressions:OperatorExpression" operator="+">
+                              <subExpressions xsi:type="kexpressions:OperatorExpression" operator="pre">
+                                <subExpressions xsi:type="kexpressions:OperatorExpression" operator="?">
+                                  <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
                                 </subExpressions>
                               </subExpressions>
-                              <subExpressions xsi:type="expressions:IntValue" value="1"/>
+                              <subExpressions xsi:type="kexpressions:IntValue" value="1"/>
                             </newValue>
                           </effects>
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                         </outgoingTransitions>
                         <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
                       </states>
@@ -87,11 +87,11 @@
                     </regions>
                     <outgoingTransitions label="Stop / Display(?ReflexTime)" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.3">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
-                        <newValue xsi:type="expressions:OperatorExpression" operator="?">
-                          <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
+                        <newValue xsi:type="kexpressions:OperatorExpression" operator="?">
+                          <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
                         </newValue>
                       </effects>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                     </outgoingTransitions>
                   </states>
                   <states id="S2" label="S2" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
@@ -102,12 +102,12 @@
                   <states id="S3" label="S3" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.3/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="MeasureDone" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@signals.0"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@signals.0"/>
                 </outgoingTransitions>
               </states>
               <states id="S0" label="S0" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
                 <outgoingTransitions label="Ms" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                 </outgoingTransitions>
               </states>
               <states id="S1" label="S1" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0"/>
@@ -119,7 +119,7 @@
           </states>
         </regions>
         <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.0">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
       </states>
     </regions>
