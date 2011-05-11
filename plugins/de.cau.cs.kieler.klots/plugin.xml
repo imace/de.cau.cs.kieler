@@ -108,5 +108,20 @@
 		id="de.cau.cs.kieler.klots.editor.instructionMarkerProvider">
 	</imageprovider>
   </extension>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           category="de.cau.cs.kieler"
+           class="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
+           id="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
+           name="KLOTS">
+     </page>
+  </extension>
+  <extension
+        point="org.eclipse.core.runtime.preferences">
+     <initializer
+           class="de.cau.cs.kieler.klots.preferences.KlotsPreferenceInitializer">
+     </initializer>
+  </extension>
      
 </plugin>
