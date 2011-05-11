@@ -124,7 +124,8 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements IJSON
             if (start >= 0) {
                 end = buffer.indexOf("},", start);
                 console.println("REMOTE PRINT: "
-                        + buffer.substring(1 + start + KlotsConstants.PRINT_TAG.length(), end));
+                        + buffer.substring(1 + start + KlotsConstants.PRINT_TAG.length(), end)
+                        .replaceFirst(KlotsConstants.MESSAGE_NEW_LINE, ""));
                 buffer.replace(start, end + 2, "");
                 System.out.println("====;;;;;;;==== MESSAGE BUFFER AFTER PRINT = >"
                         + buffer.toString() + "<");

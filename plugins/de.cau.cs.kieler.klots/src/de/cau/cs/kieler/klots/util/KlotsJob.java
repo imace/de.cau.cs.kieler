@@ -98,9 +98,9 @@ public class KlotsJob extends Job {
             projectPath = activeProject.getLocation().toOSString();
             projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
 
-            Bundle lejosBundle = Platform.getBundle("org.lejos.nxt");
+            Bundle lejosBundle = Platform.getBundle("org.lejos.classes");
             lejosPath = lejosBundle.getLocation();
-            lejosPath = lejosPath.replaceFirst(".*file:", "");
+            lejosPath = lejosPath.replaceFirst(".*file:", "") + "bin" + OS_FILE_SEPARATOR;
             System.out.println("%%%%%%%%%%%%%%%%%%>>> org.lejos.nxt LOCATION = >" + lejosPath + "<");
         }
 

@@ -17,6 +17,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+
+import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.preferences.KlotsPreferenceConstants;
+
 import lejos.pc.comm.NXTCommFactory;
 import lejos.pc.comm.NXTConnector;
 import lejos.pc.comm.NXTInfo;
@@ -46,6 +51,7 @@ public class NXTCommunicator {
      * 
      */
     public NXTCommunicator() {
+        NXTCommunicator.updateNXTInfo();
         NXTCommunicator.connectToNXT();
     }
 
@@ -57,6 +63,7 @@ public class NXTCommunicator {
     public static NXTCommunicator getInstance() {
         if (!connected) {
             System.out.println("Reconnecting to NXT... ");
+            updateNXTInfo();
             connectToNXT();
         }
         return INSTANCE;
@@ -73,7 +80,10 @@ public class NXTCommunicator {
             connOK = conn.connectTo("btspp://", NXTComm.LCP);
         } else {
             System.out.println("Connecting to NXT >" + nxtInfo.name + "< ...");
-            connOK = conn.connectTo(nxtInfo, NXTComm.LCP);
+            //connOK = conn.connectTo(nxtInfo, NXTComm.LCP);
+            System.out.println("Connection data: >" + nxtInfo.name + ", " + nxtInfo.deviceAddress
+                    + ", " + nxtInfo.protocol + "<");
+            connOK = conn.connectTo(nxtInfo.name, nxtInfo.deviceAddress, nxtInfo.protocol);
         }
         if (!connOK) {
             System.out.println();
@@ -89,6 +99,17 @@ public class NXTCommunicator {
     }
 
 
+    
+    private static void updateNXTInfo() {
+        IPreferenceStore prefStore = KlotsPlugin.getDefault().getPreferenceStore();
+        nxtInfo = new NXTInfo(prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_TYPE)
+                .equals(KlotsPreferenceConstants.P_PROTOCOL_USB)
+                ? NXTCommFactory.USB : NXTCommFactory.BLUETOOTH,
+                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_NAME),
+                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_ADDRESS));
+    }
+    
+    
     
     /**
      * @return NXTInfo 
@@ -108,6 +129,18 @@ public class NXTCommunicator {
     }
 
 
+    
+    /**
+     * @param name 
+     * @param address 
+     * @param protocol 
+     * @return NXTInfo[] 
+     */
+    public NXTInfo[] searchForNXTs(final String name, final String address, final int protocol) {
+        return conn.search(name, address, protocol);
+    }
+    
+    
     
     /**
      * @return NXTInfo[] 
