@@ -48,6 +48,8 @@ public class KlotsPerspective implements IPerspectiveFactory {
     
     // CHECKSTYLEON LineLength
 
+    
+    
     public void createInitialLayout(final IPageLayout layout) {
         createNewWizardShortcuts(layout);
         createViewLayout(layout);
