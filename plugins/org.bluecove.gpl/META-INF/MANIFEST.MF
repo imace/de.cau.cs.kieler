@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bluecove-gpl Bluetooth Library
+Bundle-SymbolicName: org.bluecove.gpl
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.bluecove.gpl.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.bluecove;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.intel.bluetooth,
+ org.bluecove.gpl
