@@ -17,10 +17,17 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console;bundle-version="3.5.0",
  de.cau.cs.kieler.core.kivi;bundle-version="0.1.0",
  de.cau.cs.kieler.core.model;bundle-version="0.4.0",
- org.lejos.pc.all;bundle-version="1.0.0",
- org.lejos.nxt;bundle-version="1.0.0",
  org.eclipse.jdt.core,
- de.cau.cs.kieler.sj;bundle-version="0.1.0"
+ de.cau.cs.kieler.sj;bundle-version="0.1.0",
+ org.lejos.classes;bundle-version="1.0.0",
+ org.lejos.jtools;bundle-version="1.0.0",
+ org.lejos.pccomms;bundle-version="1.0.0",
+ org.lejos.pctools;bundle-version="1.0.0",
+ net.sf.antcontrib.cpptasks;bundle-version="1.0.0",
+ org.apache.bcel;bundle-version="1.0.0",
+ org.apache.commons.cli;bundle-version="1.0.0",
+ org.bluecove;bundle-version="1.0.0",
+ org.bluecove.gpl;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
