@@ -187,7 +187,6 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
             }
         };
         klotsConsoleToggleButton.addPropertyChangeListener(new IPropertyChangeListener() {
-            @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getProperty().equals("checked")) {
                     if (event.getNewValue().toString().equals("true")) {

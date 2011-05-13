@@ -144,7 +144,6 @@ public class KlotsPreferencePage extends FieldEditorPreferencePage implements IW
         searchForNXTsButton.setText("Search for NXTs");
         searchForNXTsButton.setToolTipText("Search for NXTs");
         searchForNXTsButton.addSelectionListener(new SelectionListener() {
-            @Override
             public void widgetSelected(final SelectionEvent e) {
                 searchForNXTsButton.setEnabled(false);
                 searchForNXTsButton.setText("Searching...");
@@ -174,7 +173,6 @@ public class KlotsPreferencePage extends FieldEditorPreferencePage implements IW
                         KlotsPreferenceConstants.P_CONNECTION_TYPE) + "<");
                 
             }
-            @Override
             public void widgetDefaultSelected(final SelectionEvent e) {
             } 
         });
@@ -189,7 +187,6 @@ public class KlotsPreferencePage extends FieldEditorPreferencePage implements IW
         nxtsTable.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
         nxtsTable.pack();
         nxtsTableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-            @Override
             public void selectionChanged(final SelectionChangedEvent event) {
                 // if the selection is empty do nothing
                 if (event.getSelection().isEmpty()) {
