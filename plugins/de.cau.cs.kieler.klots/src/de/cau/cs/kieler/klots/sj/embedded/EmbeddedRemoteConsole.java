@@ -13,7 +13,7 @@
  */
 package de.cau.cs.kieler.klots.sj.embedded;
 
-import lejos.nxt.Button;
+//import lejos.nxt.Button;
 
 
 /**
@@ -63,21 +63,21 @@ public class EmbeddedRemoteConsole {
     public void open() {
         System.out.println("     ");
         System.out.print("ESTABLISH PC\nCONNECTION?");
-        int buttonPressed = Button.waitForPress();
-        if (buttonPressed == Button.ID_ESCAPE) {
-            System.out.println("  NO");
-        } else if (buttonPressed == Button.ID_ENTER) {
-            System.out.println("  YES");
-            System.out.println("     ");
-            System.out.println("Waiting for PC  connection...");
-            comm = EmbeddedPCCommunicator.getInstance();
-            if (comm.receiveMessage().toString()
-                    .indexOf(EmbeddedConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY) > 0) {
-                System.out.println("Connected!");
-            } else {
-                System.out.println("Connection ERROR");
-            }
-        }
+//        int buttonPressed = Button.waitForPress();
+//        if (buttonPressed == Button.ID_ESCAPE) {
+//            System.out.println("  NO");
+//        } else if (buttonPressed == Button.ID_ENTER) {
+//            System.out.println("  YES");
+//            System.out.println("     ");
+//            System.out.println("Waiting for PC  connection...");
+//            comm = EmbeddedPCCommunicator.getInstance();
+//            if (comm.receiveMessage().toString()
+//                    .indexOf(EmbeddedConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY) > 0) {
+//                System.out.println("Connected!");
+//            } else {
+//                System.out.println("Connection ERROR");
+//            }
+//        }
     }
 
 

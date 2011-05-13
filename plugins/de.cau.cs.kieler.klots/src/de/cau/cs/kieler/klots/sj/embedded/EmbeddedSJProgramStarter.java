@@ -13,8 +13,8 @@
  */
 package de.cau.cs.kieler.klots.sj.embedded;
 
-import lejos.nxt.Button;
-import lejos.nxt.LCD;
+//import lejos.nxt.Button;
+//import lejos.nxt.LCD;
 
 import java.io.IOException;
 
@@ -97,14 +97,14 @@ public class EmbeddedSJProgramStarter {
         System.out.println("     ");
         System.out.print("ENTER DEBUG MODE?");
 
-        int buttonPressed = Button.waitForPress();
-        if (buttonPressed == Button.ID_ESCAPE) {
-            System.out.println("  NO");
-            normalMode(program, programName);
-        } else if (buttonPressed == Button.ID_ENTER) {
-            System.out.println("  YES");
-            debugMode(program, programName, console);
-        }
+//        int buttonPressed = Button.waitForPress();
+//        if (buttonPressed == Button.ID_ESCAPE) {
+//            System.out.println("  NO");
+//            normalMode(program, programName);
+//        } else if (buttonPressed == Button.ID_ENTER) {
+//            System.out.println("  YES");
+//            debugMode(program, programName, console);
+//        }
     }
 
 
@@ -180,7 +180,7 @@ public class EmbeddedSJProgramStarter {
 
             } else if (comm.equals(EmbeddedConstants.STOP_COMMAND_KEY)) {
                 pcComm.destroy();
-                LCD.clearDisplay();
+//                LCD.clearDisplay();
                 System.out.println("                ");
                 System.out.println("                ");
                 System.out.println("----------------");
@@ -242,81 +242,81 @@ public class EmbeddedSJProgramStarter {
 
         boolean inputExpected = false;
         System.out.print("Does " + programName + " expect signal inputs?");
-        int buttonPressed = Button.waitForPress();
-        if (buttonPressed == Button.ID_ESCAPE) {
-            System.out.println("  NO");
-            System.out.println("                ");
-            System.out.println("                ");
-            System.out.println("----------------");
-            System.out.println("STANDALONE MODE!");
-            System.out.println("----------------");
-            System.out.println("                ");
-            System.out.println("                ");
-            inputExpected = false;
-        } else if (buttonPressed == Button.ID_ENTER) {
-            System.out.println("  YES");
-            inputExpected = true;
-        } else {
-            System.out.println("\nI TAKE THIS AS A\nYES");
-            inputExpected = true;
-        }
+//        int buttonPressed = Button.waitForPress();
+//        if (buttonPressed == Button.ID_ESCAPE) {
+//            System.out.println("  NO");
+//            System.out.println("                ");
+//            System.out.println("                ");
+//            System.out.println("----------------");
+//            System.out.println("STANDALONE MODE!");
+//            System.out.println("----------------");
+//            System.out.println("                ");
+//            System.out.println("                ");
+//            inputExpected = false;
+//        } else if (buttonPressed == Button.ID_ENTER) {
+//            System.out.println("  YES");
+//            inputExpected = true;
+//        } else {
+//            System.out.println("\nI TAKE THIS AS A\nYES");
+//            inputExpected = true;
+//        }
         // ------------------------------------------------------------------
 
         while (!program.isTerminated()) {
 
             // ---------------- processing button input ---------------------
-            LCD.refresh();
-            if (inputExpected) {
-                presentSignals.clear();
-                System.out.println("Input signals:");
-                knownSignals = program.getSignals();
-                for (int i = 0; i < knownSignals.length; i++) {
-                    System.out.print(knownSignals[i].getName() + ": ");
-                    buttonPressed = Button.waitForPress();
-
-                    if (buttonPressed == Button.ID_LEFT) {
-                        System.out.println("\nAre you sure you\nwant to exit?");
-                        buttonPressed = Button.waitForPress();
-                        if (buttonPressed == Button.ID_ENTER) {
-                            LCD.clearDisplay();
-                            System.out.println("                ");
-                            System.out.println("                ");
-                            System.out.println("----------------");
-                            System.out.println("EXITING PROGRAM!");
-                            System.out.println("----------------");
-                            System.out.println("                ");
-                            System.out.println("                ");
-                            System.out.println("                ");
-                            try {
-                                java.lang.Thread.sleep(1000);
-                            } catch (Exception e) {
-                                ;
-                            }
-                            System.exit(0);
-                        } else {
-                            System.out.println("Input signals:");
-                            i--;
-                            continue;
-                        }
-
-                    } else if (buttonPressed == Button.ID_ENTER) {
-                        presentSignals.add(knownSignals[i].getName() + EmbeddedConstants.COMMA_STRING
-                                + EmbeddedConstants.NULL_STRING);
-                        System.out.println("+");
-
-                    } else {
-                        System.out.println("-");
-                    }
-                } // end for
-
-                signals = new String[presentSignals.size()];
-                int i = 0;
-                for (String s : presentSignals) {
-                    signals[i] = s;
-                    i++;
-                }
-
-            } // end if(inputExpected)
+//            LCD.refresh();
+//            if (inputExpected) {
+//                presentSignals.clear();
+//                System.out.println("Input signals:");
+//                knownSignals = program.getSignals();
+//                for (int i = 0; i < knownSignals.length; i++) {
+//                    System.out.print(knownSignals[i].getName() + ": ");
+//                    buttonPressed = Button.waitForPress();
+//
+//                    if (buttonPressed == Button.ID_LEFT) {
+//                        System.out.println("\nAre you sure you\nwant to exit?");
+//                        buttonPressed = Button.waitForPress();
+//                        if (buttonPressed == Button.ID_ENTER) {
+//                            LCD.clearDisplay();
+//                            System.out.println("                ");
+//                            System.out.println("                ");
+//                            System.out.println("----------------");
+//                            System.out.println("EXITING PROGRAM!");
+//                            System.out.println("----------------");
+//                            System.out.println("                ");
+//                            System.out.println("                ");
+//                            System.out.println("                ");
+//                            try {
+//                                java.lang.Thread.sleep(1000);
+//                            } catch (Exception e) {
+//                                ;
+//                            }
+//                            System.exit(0);
+//                        } else {
+//                            System.out.println("Input signals:");
+//                            i--;
+//                            continue;
+//                        }
+//
+//                    } else if (buttonPressed == Button.ID_ENTER) {
+//                        presentSignals.add(knownSignals[i].getName() + EmbeddedConstants.COMMA_STRING
+//                                + EmbeddedConstants.NULL_STRING);
+//                        System.out.println("+");
+//
+//                    } else {
+//                        System.out.println("-");
+//                    }
+//                } // end for
+//
+//                signals = new String[presentSignals.size()];
+//                int i = 0;
+//                for (String s : presentSignals) {
+//                    signals[i] = s;
+//                    i++;
+//                }
+//
+//            } // end if(inputExpected)
             // --------------------------------------------------------------
 
             // ------- supply input signals to program and run tick() -------
@@ -333,13 +333,13 @@ public class EmbeddedSJProgramStarter {
     // ######################################################################
 
     private static void doTick(final EmbeddedSJProgram<?> program, final String[] signals) {
-        LCD.refresh();
+//        LCD.refresh();
 
         // if no input signals do tick without signals
-        if (signals == null) {
-            program.doTick();
-            return;
-        }
+//        if (signals == null) {
+//            program.doTick();
+//            return;
+//        }
 
         // if there are input signals process input
         Signal[] signalArray = new Signal[signals.length];
