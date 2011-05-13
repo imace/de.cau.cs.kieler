@@ -17,8 +17,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-//import lejos.nxt.comm.BTConnection;
-//import lejos.nxt.comm.Bluetooth;
+import lejos.nxt.comm.BTConnection;
+import lejos.nxt.comm.Bluetooth;
 
 
 
@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 public class EmbeddedPCCommunicator {
     
-//    private BTConnection btc;
+    private BTConnection btc;
     private DataInputStream dis;
     private DataOutputStream dos;
 
@@ -42,9 +42,9 @@ public class EmbeddedPCCommunicator {
      * 
      */
     public EmbeddedPCCommunicator() {
-//        btc = Bluetooth.waitForConnection();
-//        dis = btc.openDataInputStream();
-//        dos = btc.openDataOutputStream();
+        btc = Bluetooth.waitForConnection();
+        dis = btc.openDataInputStream();
+        dos = btc.openDataOutputStream();
     }
 
 
@@ -108,7 +108,7 @@ public class EmbeddedPCCommunicator {
             dis.close();
             dos.close();
             Thread.sleep(100); // wait for data to drain
-//            btc.close();
+            btc.close();
         } catch (IOException e) {
             e.getMessage();
         } catch (InterruptedException ie) {
