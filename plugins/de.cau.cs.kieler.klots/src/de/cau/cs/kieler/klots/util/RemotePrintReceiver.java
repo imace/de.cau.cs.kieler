@@ -18,11 +18,17 @@ package de.cau.cs.kieler.klots.util;
  * @author root
  *
  */
+/**
+ * @author root
+ *
+ */
 public class RemotePrintReceiver extends Thread {
 
     private static KlotsConsole console = KlotsConsole.getInstance();
     private static RemotePrintReceiver printerInstance = new RemotePrintReceiver();
     private NXTCommunicator comm;
+    private static boolean isWaiting = false;
+    private static boolean isStopping = false;
 
     
     
@@ -31,6 +37,8 @@ public class RemotePrintReceiver extends Thread {
      */
     public RemotePrintReceiver() {
         this.comm = NXTCommunicator.getInstance();
+        isWaiting = false;
+        isStopping = false;
     }
     
     
@@ -44,8 +52,8 @@ public class RemotePrintReceiver extends Thread {
         }
         return printerInstance;
     }
-
-
+    
+    
     
     /**
      * 
@@ -53,7 +61,9 @@ public class RemotePrintReceiver extends Thread {
     @Override
     public void run() {
         String line = comm.receiveMessageLine();
-        while (!line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY)) {
+        while (!isClosing()
+               && !line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY)
+               && line != null) {
             if (line.endsWith(KlotsConstants.MESSAGE_NEW_LINE)) {
                 console.print(
                         line.replaceFirst(KlotsConstants.PRINT_TAG, "")
@@ -62,6 +72,15 @@ public class RemotePrintReceiver extends Thread {
             } else {
                 console.print(line.replaceFirst(KlotsConstants.PRINT_TAG, ""));
             }
+            synchronized (this) {
+                while (isWaiting) {
+                    try {
+                        wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             line = comm.receiveMessageLine();
         }
         comm.closeTransmission(false);
@@ -69,6 +88,63 @@ public class RemotePrintReceiver extends Thread {
     }
 
 
+    
+    /**
+     * @return boolean 
+     */
+    public static synchronized boolean exists() {
+        return (printerInstance != null);
+    }
+    
+    
+    
+    /**
+     * @return boolean 
+     */
+    public synchronized boolean isPaused() {
+       return isWaiting; 
+    }
+    
+    
+    
+    /**
+     * 
+     */
+    public synchronized void pause() {
+        isWaiting = true;
+    }
+    
+    
+    
+    /**
+     * 
+     */
+    public synchronized void proceed() {
+        isWaiting = false;
+        if (exists()) {
+            notify();
+        }
+    }
+    
+    
+    
+    /**
+     * 
+     */
+    public synchronized void close() {
+        isStopping = true;
+    }
+    
+    
+    
+    /**
+     * @return boolean 
+     */
+    public synchronized boolean isClosing() {
+        return isStopping;
+    }
+    
+    
     
     /**
      * 

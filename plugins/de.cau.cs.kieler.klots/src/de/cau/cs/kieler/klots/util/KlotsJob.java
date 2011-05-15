@@ -219,7 +219,7 @@ public class KlotsJob extends Job {
             // must close low level transmission in order to be able to start a high level transmission
             NXTCommunicator.getInstance().closeTransmission(false);
             if (editor instanceof KlotsEditor) {
-                editor.initSJContent();
+//                editor.initSJContent();
                 if (!editor.hasSJContent()) {
                     showConnectDialog();
                 }
@@ -285,8 +285,8 @@ public class KlotsJob extends Job {
                 if (connect) {
                     NXTCommunicator.getInstance()
                     .sendMessage(KlotsConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY);
-                    RemotePrintReceiver printer = RemotePrintReceiver.getInstance();
-                    printer.start();
+//                    RemotePrintReceiver.init();
+                    RemotePrintReceiver.getInstance().start();
                 }
             }
         };

@@ -28,8 +28,9 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.util.KlotsConsole;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.util.KlotsJob;
+import de.cau.cs.kieler.klots.util.RemotePrintReceiver;
 
 
 /**
@@ -42,6 +43,8 @@ import de.cau.cs.kieler.klots.util.KlotsJob;
  */
 public class KlotsEditorContributor extends EditorActionBarContributor {
 
+    private static final int KLOTS_CONSOLE_WARM_UP_TIME = 10; 
+    
     private IEditorPart activeEditorPart;
     private Action compileAndLink;
     private Action downloadToNXT;
@@ -157,6 +160,13 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
 //                klotsConsoleToggleButton.setEnabled(true);
 //                klotsConsoleToggleButton.setChecked(true);
 //                KlotsConsole.getInstance().setEnabled(true);
+                klotsConsoleToggleButton.setChecked(true);
+                // wait for remaining 'print data' from previous execution, if any, to drain
+                try {
+                    Thread.sleep(KLOTS_CONSOLE_WARM_UP_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 KlotsJob job = new KlotsJob(KlotsJob.RUN_JOB,
                         KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow()
                         .getActivePage().getActiveEditor());
@@ -175,14 +185,15 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
         
         
         // ------------------ KLOTS console toggle button -------------------
-        klotsConsoleToggleButton = new Action("KLOTS console", IAction.AS_CHECK_BOX) {
+        klotsConsoleToggleButton = new Action(
+                KlotsConstants.KLOTS_SHORT_NAME + " console", IAction.AS_CHECK_BOX) {
             public void run() {
                 if (klotsConsoleToggleButton.isChecked()) {
-                    klotsConsoleToggleButton.setText("Hide console");
-                    klotsConsoleToggleButton.setToolTipText("Hide console");
+                    klotsConsoleToggleButton.setText("Disable console");
+                    klotsConsoleToggleButton.setToolTipText("Disable console");
                 } else {
-                    klotsConsoleToggleButton.setText("Show console");
-                    klotsConsoleToggleButton.setToolTipText("Show console");
+                    klotsConsoleToggleButton.setText("Enable console");
+                    klotsConsoleToggleButton.setToolTipText("Enable console");
                 }
             }
         };
@@ -190,17 +201,27 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getProperty().equals("checked")) {
                     if (event.getNewValue().toString().equals("true")) {
-                        KlotsConsole.getInstance().setEnabled(true);
+                        //KlotsConsole.getInstance().setEnabled(true);
+                        if (RemotePrintReceiver.exists()
+                                && RemotePrintReceiver.getInstance().isPaused()) {
+                            System.out.println("++++++++ CONSOLE BUTTON -> printer.proceed()!");
+                            RemotePrintReceiver.getInstance().proceed();
+                        }
                     } else {
-                        KlotsConsole.getInstance().setEnabled(false);
+                        //KlotsConsole.getInstance().setEnabled(false);
+                        if (RemotePrintReceiver.exists()
+                                && !RemotePrintReceiver.getInstance().isPaused()) {
+                            System.out.println("++++++++ CONSOLE BUTTON -> printer.pause()!");
+                            RemotePrintReceiver.getInstance().pause();
+                        }
                     }
                 }
             }
             
         });
 //        KlotsConsole.getInstance().setEnabled(true);
-//        klotsConsoleToggleButton.setText("Hide console");
-//        klotsConsoleToggleButton.setToolTipText("Hide console");
+//        klotsConsoleToggleButton.setText("Disable console");
+//        klotsConsoleToggleButton.setToolTipText("Disable console");
 //        klotsConsoleToggleButton.setEnabled(true);
         
 //        klotsConsoleToggleButton.setEnabled(false);
