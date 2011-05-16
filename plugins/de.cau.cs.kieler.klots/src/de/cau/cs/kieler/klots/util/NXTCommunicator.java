@@ -73,7 +73,7 @@ public class NXTCommunicator {
     
     private static void connectToNXT() {
         // Connect to any NXT over Bluetooth
-        conn = new NXTConnector();
+        conn = new NXTConnector();        
         boolean connOK = false;
         if (nxtInfo == null) {
             System.out.println("Searching for NXTs... ");
@@ -102,11 +102,14 @@ public class NXTCommunicator {
     
     private static void updateNXTInfo() {
         IPreferenceStore prefStore = KlotsPlugin.getDefault().getPreferenceStore();
-        nxtInfo = new NXTInfo(prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_TYPE)
-                .equals(KlotsPreferenceConstants.P_PROTOCOL_USB)
-                ? NXTCommFactory.USB : NXTCommFactory.BLUETOOTH,
-                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_NAME),
-                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_ADDRESS));
+        nxtInfo = new NXTInfo(
+                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_TYPE)
+                    .equals(KlotsPreferenceConstants.P_PROTOCOL_USB)
+                    ? NXTCommFactory.USB : NXTCommFactory.BLUETOOTH,
+                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECT_TO_NAMED_BRICK)
+                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_NAME) : null,
+                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECT_TO_BRICK_ADDRESS)
+                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_ADDRESS) : null);
     }
     
     

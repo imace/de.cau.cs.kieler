@@ -219,7 +219,7 @@ public class KlotsJob extends Job {
             // must close low level transmission in order to be able to start a high level transmission
             NXTCommunicator.getInstance().closeTransmission(false);
             if (editor instanceof KlotsEditor) {
-//                editor.initSJContent();
+                editor.initSJContent();
                 if (!editor.hasSJContent()) {
                     showConnectDialog();
                 }

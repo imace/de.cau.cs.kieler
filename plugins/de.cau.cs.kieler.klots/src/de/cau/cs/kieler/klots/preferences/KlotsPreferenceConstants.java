@@ -53,5 +53,9 @@ public class KlotsPreferenceConstants {
      * 
      */
     public static final String P_SEARCH_FOR_BRICKS = "SearchForNXTs";
+    /**
+     * 
+     */
+    public static final String P_SEARCH_FOR_BRICKS_TEXT = "Select a NXT to be connected to.";
 
 }
