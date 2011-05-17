@@ -112,9 +112,15 @@
         point="org.eclipse.ui.preferencePages">
      <page
            category="de.cau.cs.kieler"
-           class="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
+           class="de.cau.cs.kieler.klots.preferences.KlotsConnectionsPreferencePage"
            id="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
            name="Lego Execution">
+     </page>
+     <page
+           category="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
+           class="de.cau.cs.kieler.klots.preferences.KlotsColorsPreferencePage"
+           id="de.cau.cs.kieler.klots.preferences.KlotsColorsPreferencePage"
+           name="Colors">
      </page>
   </extension>
   <extension

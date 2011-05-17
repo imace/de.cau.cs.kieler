@@ -28,6 +28,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -42,6 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.preferences.KlotsPreferenceConstants;
+import de.cau.cs.kieler.klots.util.ColorProvider;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**
@@ -58,7 +62,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
 
     
     // ======================================================================
-    // >>>>>>>>>> LABEL INFO INNER CLASS <<<<<<<<<<
+    // >>>>>>>>>>              LABEL INFO INNER CLASS              <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -152,9 +156,20 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> FIELDS & VARIABLES <<<<<<<<<<
+    // >>>>>>>>>>                FIELDS & VARIABLES                <<<<<<<<<<
     // ======================================================================
 
+    // colors
+    private static ColorProvider colorProvider;
+    private static Color colorForegroundStandard;
+    private static Color colorBackgroundStandard;
+    private static Color colorForegroundAlreadyDoneMicrostep;
+    private static Color colorBackgroundAlreadyDoneMicrostep;
+    private static Color colorForegroundActiveMicrostep;
+    private static Color colorBackgroundActiveMicrostep;
+    private static Color colorForegroundYetToBeDoneMicrostep;
+    private static Color colorBackgroundYetToBeDoneMicrostep;
+    
     // KiVi effects lists
     private static int microStepNumber = -1;
     private static List<HighlightSJMarkerEffect> kiviList = new ArrayList<HighlightSJMarkerEffect>();
@@ -178,7 +193,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> CONSTRUCTORS <<<<<<<<<<
+    // >>>>>>>>>>                   CONSTRUCTORS                   <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -187,6 +202,8 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     public KlotsEditor() {
         super();
         ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+        colorProvider = KlotsPlugin.getColorProvider();
+        initColors();
 
         // -------------------- set up the status line ----------------------
         // IActionBars aBars = editor.getEditorSite().getActionBars();
@@ -207,13 +224,41 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ######################################################################
-    // ###################### METHODS SECTION #######################
+    // ######################     METHODS SECTION     #######################
     // ######################################################################
 
     // ======================================================================
-    // >>>>>>>>>> STANDARD IMPLEMENTETION METHODS & SETUP <<<<<<<<<<
+    // >>>>>>>>>>      STANDARD IMPLEMENTETION METHODS & SETUP     <<<<<<<<<<
     // ======================================================================
 
+    /**
+     * 
+     */
+    private void initColors() {
+        System.out.println("***********>>>> EDITOR > initColors()");
+        if (colorProvider == null) {
+            colorProvider = KlotsPlugin.getColorProvider();
+        }
+        colorForegroundStandard = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_FOREGROUND_STANDARD);
+        colorBackgroundStandard = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_BACKGROUND_STANDARD);
+        colorForegroundAlreadyDoneMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_FOREGROUND_ALREADY_DONE_MICROSTEP);
+        colorBackgroundAlreadyDoneMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_BACKGROUND_ALREADY_DONE_MICROSTEP);
+        colorForegroundActiveMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_FOREGROUND_ACTIVE_MICROSTEP);
+        colorBackgroundActiveMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_BACKGROUND_ACTIVE_MICROSTEP);
+        colorForegroundYetToBeDoneMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_FOREGROUND_YET_TO_BE_DENE_MICROSTEP);
+        colorBackgroundYetToBeDoneMicrostep = colorProvider.getColor(
+                KlotsPreferenceConstants.P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP);
+    }
+    
+    
+    
     /**
      * @return JavaEditor
      */
@@ -312,6 +357,21 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handlePreferenceStoreChanged(final PropertyChangeEvent event) {
+        System.out.println("***********>>>> EDITOR > handlePreferenceStoreChanged()");
+        // TODO: handle KLOTS preference changes
+        colorProvider.handlePreferenceStoreChanged(event);
+        initColors();
+        // must also call super
+        super.handlePreferenceStoreChanged(event);
+    }
+    
+    
+    
+    /**
      * @return boolean 
      */
     public boolean hasSJContent() {
@@ -332,7 +392,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> SJ INITIALIZATION UTILITY METHODS <<<<<<<<<<
+    // >>>>>>>>>>         SJ INITIALIZATION UTILITY METHODS        <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -815,7 +875,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> MACRO STEP UPDATE METHODS <<<<<<<<<<
+    // >>>>>>>>>>             MACRO STEP UPDATE METHODS            <<<<<<<<<<
     // ======================================================================
 
     static void updateJavaEditor() {
@@ -851,16 +911,16 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
                     // set all instructions 'already done'
                     for (int i = 0; i < kiviList.size() - 1; i++) {
                         kiviList.get(i).setColor(
-                                KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+                                colorForegroundAlreadyDoneMicrostep);
                         kiviList.get(i).setBackgroundColor(
-                                KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+                                colorBackgroundAlreadyDoneMicrostep);
                         kiviList.get(i).execute();
                     }
                     // set last instruction 'active'
                     kiviList.get(kiviList.size() - 1).setColor(
-                            KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+                            colorForegroundActiveMicrostep);
                     kiviList.get(kiviList.size() - 1).setBackgroundColor(
-                            KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+                            colorBackgroundActiveMicrostep);
                     kiviList.get(kiviList.size() - 1).execute();
                     // adjust microstep counter
                     microStepNumber = kiviList.size() - 1;
@@ -958,10 +1018,10 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         // create highlight effect
         HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(
                 marker,
-                KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR,
-                KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR,
-                KlotsConstants.FOREGROUND_STANDARD_COLOR,
-                KlotsConstants.BACKGROUND_STANDARD_COLOR,
+                colorForegroundYetToBeDoneMicrostep,
+                colorBackgroundYetToBeDoneMicrostep,
+                colorForegroundStandard,
+                colorBackgroundStandard,
                 getEditor());
         kiviList.add(e);
     }
@@ -971,7 +1031,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> INTERACTIONS WITH THE KIEM DATA OBSERVER <<<<<<<<<<
+    // >>>>>>>>>>     INTERACTIONS WITH THE KIEM DATA OBSERVER     <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -1028,7 +1088,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // ======================================================================
-    // >>>>>>>>>> INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW <<<<<<<<<<
+    // >>>>>>>>>>    INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW    <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -1043,25 +1103,25 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
             // set all instructions 'yet to be done'
             for (int i = 1; i < kiviList.size(); i++) {
                 kiviList.get(i).setColor(
-                        KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+                        colorForegroundYetToBeDoneMicrostep);
                 kiviList.get(i).setBackgroundColor(
-                        KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+                        colorBackgroundYetToBeDoneMicrostep);
                 kiviList.get(i).execute();
             }
         } else {
             // set old current instruction 'already done'
             kiviList.get(microStepNumber).setColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundAlreadyDoneMicrostep);
             kiviList.get(microStepNumber).setBackgroundColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundAlreadyDoneMicrostep);
             kiviList.get(microStepNumber).execute();
         }
         // set new current instruction 'active'
         microStepNumber++;
         kiviList.get(microStepNumber).setColor(
-                KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+                colorForegroundActiveMicrostep);
         kiviList.get(microStepNumber).setBackgroundColor(
-                KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+                colorBackgroundActiveMicrostep);
         kiviList.get(microStepNumber).execute();
     }
 
@@ -1074,16 +1134,16 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         if (microStepNumber > 0) {
             // set old current instruction 'yet to be done'
             kiviList.get(microStepNumber).setColor(
-                    KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundYetToBeDoneMicrostep);
             kiviList.get(microStepNumber).setBackgroundColor(
-                    KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundYetToBeDoneMicrostep);
             kiviList.get(microStepNumber).execute();
             // set new current instruction 'active'
             microStepNumber--;
             kiviList.get(microStepNumber).setColor(
-                    KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundActiveMicrostep);
             kiviList.get(microStepNumber).setBackgroundColor(
-                    KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundActiveMicrostep);
             kiviList.get(microStepNumber).execute();
         }
     }
@@ -1097,16 +1157,16 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         // set all instructions 'already done'
         for (int i = 0; i < kiviList.size() - 1; i++) {
             kiviList.get(i).setColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundAlreadyDoneMicrostep);
             kiviList.get(i).setBackgroundColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundAlreadyDoneMicrostep);
             kiviList.get(i).execute();
         }
         // set last instruction 'active'
         kiviList.get(kiviList.size() - 1).setColor(
-                KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+                colorForegroundActiveMicrostep);
         kiviList.get(kiviList.size() - 1).setBackgroundColor(
-                KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+                colorBackgroundActiveMicrostep);
         kiviList.get(kiviList.size() - 1).execute();
         // adjust microstep counter
         microStepNumber = kiviList.size() - 1;
@@ -1151,25 +1211,25 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         // highlight 'already done' instructions
         for (int i = 0; i < indexArray[0]; i++) {
             kiviList.get(i).setColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundAlreadyDoneMicrostep);
             kiviList.get(i).setBackgroundColor(
-                    KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundAlreadyDoneMicrostep);
             kiviList.get(i).execute();
         }
         // highlight 'yet to be done' instructions
         for (int i = indexArray[0] + 1; i < kiviList.size(); i++) {
             kiviList.get(i).setColor(
-                    KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundYetToBeDoneMicrostep);
             kiviList.get(i).setBackgroundColor(
-                    KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundYetToBeDoneMicrostep);
             kiviList.get(i).execute();
         }
         // highlight 'active' instructions
         for (int i = 0; i < indexArray.length; i++) {
             kiviList.get(indexArray[i]).setColor(
-                    KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+                    colorForegroundActiveMicrostep);
             kiviList.get(indexArray[i]).setBackgroundColor(
-                    KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+                    colorBackgroundActiveMicrostep);
             kiviList.get(indexArray[i]).execute();
         }
         // adjust microStepNumber
@@ -1181,7 +1241,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    // XXXXXXXXXX HISTORICAL METHODS XXXXXXXXXX
+    // XXXXXXXXXX                HISTORICAL METHODS                XXXXXXXXXX
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     // private void bindToDataPool() {

@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.klots.util;
 
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 
@@ -66,6 +67,24 @@ public interface KlotsConstants {
     public static final String SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END = "instructionEnd";
 
     // HIGHLIGHT COLORS
+    public static final int COLORS_NUMBER = 8;
+    // black
+    public static final RGB COLOR_RGB_FOREGROUND_STANDARD =                 new RGB(  0,   0,   0);
+    // white
+    public static final RGB COLOR_RGB_BACKGROUND_STANDARD =                 new RGB(255, 255, 255);
+    // dark orange
+    public static final RGB COLOR_RGB_FOREGROUND_ALREADY_DONE_MICROSTEP =   new RGB(255, 140,   0);
+    // eclipse standard selected line background color
+    public static final RGB COLOR_RGB_BACKGROUND_ALREADY_DONE_MICROSTEP =   new RGB(232, 242, 254);
+    // red
+    public static final RGB COLOR_RGB_FOREGROUND_ACTIVE_MICROSTEP =         new RGB(255,   0,   0);
+    // eclipse standard selected line background color
+    public static final RGB COLOR_RGB_BACKGROUND_ACTIVE_MICROSTEP =         new RGB(232, 242, 254);
+    // dark green
+    public static final RGB COLOR_RGB_FOREGROUND_YET_TO_BE_DONE_MICROSTEP = new RGB(  0, 100,   0);
+    // misty rose
+    public static final RGB COLOR_RGB_BACKGROUND_YET_TO_BE_DONE_MICROSTEP = new RGB(255, 228, 225);
+    
     // black
     public static final Color FOREGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 0, 0, 0);
     // white

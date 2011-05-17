@@ -16,6 +16,7 @@ package de.cau.cs.kieler.klots;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.cau.cs.kieler.klots.util.ColorProvider;
 import de.cau.cs.kieler.klots.views.SJInstructionsView;
 
 /**
@@ -29,6 +30,10 @@ public class KlotsPlugin extends AbstractUIPlugin {
 
     /** The plugin. */
     private static KlotsPlugin plugin;
+    
+    
+    /** The color provider. */
+    private static ColorProvider colorProvider;
 
     
     
@@ -46,6 +51,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         plugin = this;
+        // create color provider
+        colorProvider = new ColorProvider(getPreferenceStore());
     }
 
     
@@ -55,6 +62,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
      */
     public void stop(final BundleContext context) throws Exception {
         plugin = null;
+        // dispose color provider
+        colorProvider.dispose();
         super.stop(context);
     }
 
@@ -67,6 +76,15 @@ public class KlotsPlugin extends AbstractUIPlugin {
      */
     public static KlotsPlugin getDefault() {
         return plugin;
+    }
+    
+    
+    
+    /**
+     * @return ColorProvider the color provider.
+     */
+    public static ColorProvider getColorProvider() {
+        return colorProvider;
     }
 
     

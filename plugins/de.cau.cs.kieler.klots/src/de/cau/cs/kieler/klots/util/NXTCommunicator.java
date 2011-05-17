@@ -103,13 +103,13 @@ public class NXTCommunicator {
     private static void updateNXTInfo() {
         IPreferenceStore prefStore = KlotsPlugin.getDefault().getPreferenceStore();
         nxtInfo = new NXTInfo(
-                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_TYPE)
-                    .equals(KlotsPreferenceConstants.P_PROTOCOL_USB)
+                prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE)
+                    .equals(KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_USB)
                     ? NXTCommFactory.USB : NXTCommFactory.BLUETOOTH,
-                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECT_TO_NAMED_BRICK)
-                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_NAME) : null,
-                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECT_TO_BRICK_ADDRESS)
-                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_BRICK_ADDRESS) : null);
+                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK)
+                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME) : null,
+                prefStore.getBoolean(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS)
+                    ? prefStore.getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS) : null);
     }
     
     
