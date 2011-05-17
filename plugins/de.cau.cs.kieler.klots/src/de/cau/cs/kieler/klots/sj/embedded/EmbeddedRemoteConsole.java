@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.klots.sj.embedded;
 
 import lejos.nxt.Button;
+import lejos.nxt.LCD;
 
 
 /**
@@ -69,8 +70,33 @@ public class EmbeddedRemoteConsole {
         } else if (buttonPressed == Button.ID_ENTER) {
             System.out.println("  YES");
             System.out.println("     ");
-            System.out.println("Waiting for PC  connection...");
-            comm = EmbeddedPCCommunicator.getInstance();
+            System.out.println("Specify protocol");
+            System.out.println("> BLUETOOTH ?");
+            int protocol = EmbeddedConstants.BLUETOOTH_CONNECTION;
+            while (true) {
+                buttonPressed = Button.waitForPress();
+                if (buttonPressed == Button.ID_ENTER) {
+                    System.out.println("Waiting for PC  connection...");
+                    comm = EmbeddedPCCommunicator.getInstance();
+                    comm.init(protocol);
+                    break;
+                }
+                LCD.clearDisplay();
+                System.out.println("     ");
+                System.out.print("ESTABLISH PC\nCONNECTION?");
+                System.out.println("  YES");
+                System.out.println("     ");
+                System.out.println("Specify protocol");
+                if (buttonPressed == Button.ID_LEFT || buttonPressed == Button.ID_RIGHT) {
+                    if (protocol == EmbeddedConstants.BLUETOOTH_CONNECTION) {
+                        System.out.println("> USB");
+                        protocol = EmbeddedConstants.USB_CONNECTION;
+                    } else {
+                        System.out.println("> BLUETOOTH");
+                        protocol = EmbeddedConstants.BLUETOOTH_CONNECTION;
+                    }
+                }
+            }
             if (comm.receiveMessage().toString()
                     .indexOf(EmbeddedConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY) > 0) {
                 System.out.println("Connected!");

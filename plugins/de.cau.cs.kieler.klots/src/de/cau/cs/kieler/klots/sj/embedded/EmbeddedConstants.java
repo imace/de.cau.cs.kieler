@@ -18,6 +18,9 @@ package de.cau.cs.kieler.klots.sj.embedded;
  *
  */
 public interface EmbeddedConstants {
+    
+    public static final int USB_CONNECTION = 1;
+    public static final int BLUETOOTH_CONNECTION = 2;
 
     public static final String SIGNALS_TAG = "SIGNALS";
     public static final String INSTRUCTION_TAG = "INSTRUCTION";

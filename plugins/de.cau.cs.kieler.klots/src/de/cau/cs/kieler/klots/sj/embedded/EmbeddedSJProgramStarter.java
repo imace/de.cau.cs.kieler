@@ -21,17 +21,16 @@ import java.io.IOException;
 import sj.EmbeddedSJProgram;
 import sj.SJLogger;
 import sj.Signal;
+import sj.ValuedSignal;
 import sj.exceptions.SignalNotDeclaredException;
 import sj.util.LinkedList;
 
-
 /**
- * @author root
+ * @author ybe
  *
  */
 public class EmbeddedSJProgramStarter {
 
-    
     /**
      * @param str 
      * @param program 
@@ -39,7 +38,7 @@ public class EmbeddedSJProgramStarter {
      * @throws SignalNotDeclaredException 
      */
     public static Signal string2Signal(final String str, final EmbeddedSJProgram<?> program)
-        throws SignalNotDeclaredException {
+    throws SignalNotDeclaredException {
         Signal[] signals = program.getSignals();
         for (Signal s : signals) {
             if (s.getName().equals(str)) {
@@ -50,7 +49,7 @@ public class EmbeddedSJProgramStarter {
                 + program.getName() + "!");
     }
 
-
+    
     
     /**
      * @param program 
@@ -60,7 +59,7 @@ public class EmbeddedSJProgramStarter {
         start(program, "Program", null);
     }
 
-
+    
     
     /**
      * @param program 
@@ -72,7 +71,7 @@ public class EmbeddedSJProgramStarter {
         start(program, programName, null);
     }
 
-
+    
     
     /**
      * @param program 
@@ -84,7 +83,7 @@ public class EmbeddedSJProgramStarter {
         start(program, "Program", console);
     }
 
-
+    
     
     /**
      * @param program 
@@ -107,8 +106,8 @@ public class EmbeddedSJProgramStarter {
         }
     }
 
-
-
+    
+    
     // ######################################################################
     // ###################           DEBUG MODE           ###################
     // ######################################################################
@@ -119,8 +118,35 @@ public class EmbeddedSJProgramStarter {
         System.out.println("     ");
         System.out.println("|> DEBUG MODE <|");
         System.out.println("     ");
-        System.out.println("Waiting for PC  connection...");
-        EmbeddedPCCommunicator pcComm = EmbeddedPCCommunicator.getInstance();
+        System.out.println("Specify protocol");
+        System.out.println("> BLUETOOTH ?");
+        int protocol = EmbeddedConstants.BLUETOOTH_CONNECTION;
+        EmbeddedPCCommunicator pcComm;
+        int buttonPressed;
+        while (true) {
+            buttonPressed = Button.waitForPress();
+            if (buttonPressed == Button.ID_ENTER) {
+                System.out.println("Waiting for PC  connection...");
+                pcComm = EmbeddedPCCommunicator.getInstance();
+                pcComm.init(protocol);
+                break;
+            }
+            LCD.clearDisplay();
+            System.out.println("     ");
+            System.out.println("|> DEBUG MODE <|");
+            System.out.println("     ");
+            System.out.println("Specify protocol");
+            if (buttonPressed == Button.ID_LEFT || buttonPressed == Button.ID_RIGHT) {
+                if (protocol == EmbeddedConstants.BLUETOOTH_CONNECTION) {
+                    System.out.println("> USB");
+                    protocol = EmbeddedConstants.USB_CONNECTION;
+                } else {
+                    System.out.println("> BLUETOOTH");
+                    protocol = EmbeddedConstants.BLUETOOTH_CONNECTION;
+                }
+            }
+        }
+
         if (console != null) {
             console.openSJMode();
         }
@@ -132,8 +158,7 @@ public class EmbeddedSJProgramStarter {
         String comm = "";
         int count = 0;
         String[] signals = null;
-        pcComm.sendMessage(
-                EmbeddedConstants.SYNCHRONIZED_COMMAND_KEY
+        pcComm.sendMessage(EmbeddedConstants.SYNCHRONIZED_COMMAND_KEY
                 + EmbeddedConstants.MESSAGE_LINE_DELIMITER
                 + EmbeddedConstants.END_OF_MESSAGE_COMMAND_KEY
                 + EmbeddedConstants.MESSAGE_LINE_DELIMITER);
@@ -146,10 +171,9 @@ public class EmbeddedSJProgramStarter {
             comm = pcComm.receiveMessage().toString();
             System.out.println("INPUT: >" + comm + "<");
 
-            if (comm.substring(0, EmbeddedConstants.STEP_COMMAND_KEY.length())
-                    .equals(EmbeddedConstants.STEP_COMMAND_KEY)) {
+            if (comm.substring(0, 4).equals(EmbeddedConstants.STEP_COMMAND_KEY)) {
                 System.out.println("NEXT STEP OK");
-                comm = comm.substring(EmbeddedConstants.STEP_COMMAND_KEY.length());
+                comm = comm.substring(4);
 
                 // if there are no input signals do tick without inputs
                 if (comm.length() < 2) {
@@ -220,16 +244,12 @@ public class EmbeddedSJProgramStarter {
 
     }
 
-
-
+    
+    
     // ######################################################################
     // ##################           NORMAL MODE           ###################
     // ######################################################################
 
-    /**
-     * @param program 
-     * @param programName 
-     */
     private static void normalMode(final EmbeddedSJProgram<?> program, final String programName) {
         // ----------------------- init normal mode -------------------------
         System.out.println("     ");
@@ -317,7 +337,7 @@ public class EmbeddedSJProgramStarter {
                 }
 
             } // end if(inputExpected)
-            // --------------------------------------------------------------
+              // --------------------------------------------------------------
 
             // ------- supply input signals to program and run tick() -------
             doTick(program, signals);
@@ -326,8 +346,8 @@ public class EmbeddedSJProgramStarter {
         } // end while(!program.isTerminated())
     }
 
-
-
+    
+    
     // ######################################################################
     // #######           DO TICK (same for both run modes)           ########
     // ######################################################################
@@ -356,7 +376,29 @@ public class EmbeddedSJProgramStarter {
                 sig = string2Signal(signals[i].substring(0, index) + "", program);
                 // if signal is a valued signal update value
                 if (!(signals[i].substring(index + 1)).equals(EmbeddedConstants.NULL_STRING)) {
-                    // TODO: deal with valued signals
+                    if (sig instanceof ValuedSignal) {
+                        // 1. Transform value to either double or integer.
+                        // 2. Set it as the signal's start value for this tick.
+                        if (signals[i].substring(index + 1)
+                                .indexOf((EmbeddedConstants.COMMA_STRING)) > 0) {
+                            ((ValuedSignal) sig)
+                            .setStartValue(new Double(signals[i].substring(index + 1)));
+                        } else {
+                            ((ValuedSignal) sig)
+                            .setStartValue(new Integer(signals[i].substring(index + 1)));
+                        }
+                    } else {
+                        System.out.println("SIGNAL MISMATCH!");
+                        System.out.println(sig.getName() + "");
+                        System.out.println("is not declared ");
+                        System.out.println("as valued signal");
+                        try {
+                            java.lang.Thread.sleep(1000);
+                        } catch (Exception e) {
+                            ;
+                        }
+                    }
+                    
                 }
                 signalArray[i] = sig;
             } catch (SignalNotDeclaredException e) {

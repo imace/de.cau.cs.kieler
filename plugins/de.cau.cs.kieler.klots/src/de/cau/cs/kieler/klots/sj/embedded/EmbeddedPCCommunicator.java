@@ -17,8 +17,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import lejos.nxt.comm.BTConnection;
+import javax.microedition.io.StreamConnection;
+
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
 import lejos.nxt.comm.Bluetooth;
+import lejos.nxt.comm.USB;
 
 
 
@@ -28,9 +32,10 @@ import lejos.nxt.comm.Bluetooth;
  */
 public class EmbeddedPCCommunicator {
     
-    private BTConnection btc;
+    private StreamConnection connection;
     private DataInputStream dis;
     private DataOutputStream dos;
+    private int protocol = 0;
 
     private boolean closeTransmissionRequest = false;
 
@@ -42,9 +47,35 @@ public class EmbeddedPCCommunicator {
      * 
      */
     public EmbeddedPCCommunicator() {
-        btc = Bluetooth.waitForConnection();
-        dis = btc.openDataInputStream();
-        dos = btc.openDataOutputStream();
+    }
+    
+    
+    
+    /**
+     *  
+     */
+    public void init() {
+        if (protocol == EmbeddedConstants.BLUETOOTH_CONNECTION) {
+            connection = Bluetooth.waitForConnection();
+        } else if (protocol == EmbeddedConstants.USB_CONNECTION) {
+            connection = USB.waitForConnection();
+        }
+        try {
+            dis = connection.openDataInputStream();
+            dos = connection.openDataOutputStream();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    
+    
+    /**
+     * @param protocol 
+     */
+    public void init(final int protocol) {
+        setProtocol(protocol);
+        init();
     }
 
 
@@ -97,6 +128,44 @@ public class EmbeddedPCCommunicator {
 
     
     /**
+     * @param protocol 
+     */
+    public void setProtocol(final int protocol) {
+        if (protocol == EmbeddedConstants.BLUETOOTH_CONNECTION
+            || protocol == EmbeddedConstants.USB_CONNECTION) {
+            this.protocol = protocol;
+        } else {
+            LCD.clearDisplay();
+            System.out.println("================");
+            System.out.println("# FATAL ERROR! #");
+            System.out.println("================");
+            System.out.println("Connection type ");
+            System.out.println("mismatch! Protoc");
+            System.out.println("ol type is >" + protocol + "<!");
+            System.out.println("Press any button");
+            System.out.println("to exit!");
+            Button.waitForPress();
+            LCD.clearDisplay();
+            System.out.println("                ");
+            System.out.println("                ");
+            System.out.println("----------------");
+            System.out.println("EXITING PROGRAM!");
+            System.out.println("----------------");
+            System.out.println("                ");
+            System.out.println("                ");
+            System.out.println("                ");
+            try {
+                java.lang.Thread.sleep(1000);
+            } catch (Exception e) {
+                ;
+            }
+            destroy();
+            System.exit(0);
+        }
+    }
+    
+    
+    /**
      * 
      */
     public void destroy() {
@@ -108,7 +177,7 @@ public class EmbeddedPCCommunicator {
             dis.close();
             dos.close();
             Thread.sleep(100); // wait for data to drain
-            btc.close();
+            connection.close();
         } catch (IOException e) {
             e.getMessage();
         } catch (InterruptedException ie) {

@@ -151,7 +151,13 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements IJSON
                     key = (String) iter.next();
                     returnObj.accumulate(key, tmp.get(key));
                 }
+            } else {
+                System.err.println("NXTDataDistributor: EORROR! > No return signals part at the expected"
+                        + "line number in the received JSON object! Got >" + signals.toString()
+                        + "< instead!");
             }
+            System.out.println("#######>>>> NXTDataDistributor returns JSON object >"
+                    + returnObj.toString() + "<");
             return returnObj;
         } catch (JSONException e) {
             console.println("OBSERVER ERROR: " + e.getMessage());
