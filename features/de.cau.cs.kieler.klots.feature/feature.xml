@@ -217,6 +217,10 @@ litigation.
       <update label="KIELER Nightly Builds" url="http://rtsys.informatik.uni-kiel.de/~kieler/updatesite/nightly/"/>
    </url>
 
+   <requires>
+      <import plugin="org.apache.commons.cli"/>
+   </requires>
+
    <plugin
          id="de.cau.cs.kieler.core"
          download-size="0"
@@ -317,13 +321,6 @@ litigation.
 
    <plugin
          id="org.apache.bcel"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.commons.cli"
          download-size="0"
          install-size="0"
          version="0.0.0"
