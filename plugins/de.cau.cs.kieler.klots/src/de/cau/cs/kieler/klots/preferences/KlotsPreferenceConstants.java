@@ -27,6 +27,10 @@ public class KlotsPreferenceConstants {
     /**
      * 
      */
+    public static final String P_CONNECTION_PREFERENCE_PREFIX = "prefConnection";
+    /**
+     * 
+     */
     public static final String P_CONNECTION_PROTOCOL_USB = "u";
     /**
      * 
@@ -64,6 +68,10 @@ public class KlotsPreferenceConstants {
     
     
     // ##################### COLOR PREFERENCE CONSTANTS ######################
+    /**
+     * 
+     */
+    public static final String P_COLOR_PREFERENCE_PREFIX = "prefColor";
     /**
      * 
      */

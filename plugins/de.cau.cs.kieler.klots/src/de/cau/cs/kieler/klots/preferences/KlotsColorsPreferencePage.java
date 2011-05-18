@@ -15,6 +15,7 @@ package de.cau.cs.kieler.klots.preferences;
 
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -136,6 +137,15 @@ public class KlotsColorsPreferencePage extends FieldEditorPreferencePage
      * {@inheritDoc}
      */
     public void init(final IWorkbench workbench) {
+    }
+    
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public IPreferenceStore doGetPreferenceStore() {
+        return KlotsPlugin.getDefault().getPreferenceStore();
     }
     
 }

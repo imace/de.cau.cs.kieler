@@ -54,11 +54,11 @@ public class KlotsJob extends Job {
     /**
      * 
      */
-    public static final String DOWNLOAD_JOB = "Download program";
+    public static final String DOWNLOAD_JOB = "Downloading program";
     /**
      * 
      */
-    public static final String RUN_JOB = "Run program";
+    public static final String RUN_JOB = "Running program";
     /**
      * 
      */

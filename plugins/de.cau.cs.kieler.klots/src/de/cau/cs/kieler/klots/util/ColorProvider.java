@@ -89,8 +89,10 @@ public class ColorProvider {
     public void handlePreferenceStoreChanged(final PropertyChangeEvent event) {
         System.out.println("***********>>>> COLOR PROVIDER > handlePreferenceStoreChanged()");
         // remove old color
-        RGB oldColor = StringConverter.asRGB((String) event.getOldValue());
-        colorTable.remove(oldColor).dispose();
+        Color oldColor = colorTable.remove(event.getOldValue());
+        if (oldColor != null) {
+            oldColor.dispose();
+        }
         // save new color
         String colorName = store.getString(event.getProperty());
         RGB rgb = StringConverter.asRGB(colorName);
