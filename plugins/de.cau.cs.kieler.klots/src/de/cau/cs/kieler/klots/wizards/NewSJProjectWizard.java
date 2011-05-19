@@ -47,6 +47,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
+
 
 /**
  * @author root
@@ -175,14 +178,13 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
              * before updating the perspective.
              */
             IContainer container = (IContainer) proj;
-            String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + "sj_templates" + OS_FILE_SEPARATOR + "";
+            String templatesPath = KlotsPlugin.getDefault().getBundle().getEntry(
+                    "/" + KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME).getPath();
             String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
             System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
 
             // FIXME: see if you can use IResource.copy() to copy all template files!
+            
             // add src and bin folders, also add examples package to src
             final IFolder srcFolder = container.getFolder(new Path("src"));
             srcFolder.create(true, true, monitor);
@@ -193,19 +195,21 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
 
             System.out.println(
                     "???????????>>>>>>>>>>>> src folder full path = >" + srcFolder.getLocation() + "<");
-
+            
             // add embeddedSJ.jar
-            InputStream resourceStream =
-                this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
-            System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: "
-                    + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
-            addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
-
+            InputStream resourceStream = this.getClass().getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME);
+            System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME).getPath());
+            addFileToProject(container, new Path(KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME),
+                    resourceStream, monitor);
+            
             // add lejos' classes.jar
-            resourceStream =
-                this.getClass().getResourceAsStream(templatesPath + Path.SEPARATOR + "lejos"
-                        + Path.SEPARATOR + "classes.jar");
-            addFileToProject(container, new Path("classes.jar"), resourceStream, monitor);
+            resourceStream = this.getClass().getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME
+                    + Path.SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME);
+            addFileToProject(container, new Path(KlotsConstants.KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME),
+                    resourceStream, monitor);
 
             // add example file EmbeddedABRO.java
             resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
@@ -217,18 +221,25 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             addFileToProject(container, new Path("embeddedSJ.execution"), resourceStream, monitor);
 
             // add the .classpath file
-            resourceStream = this.getClass().getResourceAsStream(templatesPath + "classpath.template");
+            resourceStream = this.getClass().getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_CLASSPATH_FILE_NAME);
             addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
 
             // add the .project file
-            resourceStream = this.getClass().getResourceAsStream(templatesPath + "project.template");
+            resourceStream = this.getClass().getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME);
             // put the name of the new project in the .project file
             BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
             String projectFileContent = "";
             String projectFileLine = "";
             while ((projectFileLine = projectFile.readLine()) != null) {
-                if (projectFileLine.equals("<name></name>")) {
-                    projectFileLine = "<name>" + projectName + "</name>";
+                if (projectFileLine.contains(KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_OPEN_TAG
+                        + KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_CLOSE_TAG)) {
+                    projectFileLine = projectFileLine.replace(
+                            KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_OPEN_TAG
+                            + KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_CLOSE_TAG,
+                            KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_OPEN_TAG + projectName
+                            + KlotsConstants.KLOTS_TEMPLATES_PROJECT_FILE_NAME_CLOSE_TAG);
                 }
                 projectFileContent += projectFileLine + "\n";
             }

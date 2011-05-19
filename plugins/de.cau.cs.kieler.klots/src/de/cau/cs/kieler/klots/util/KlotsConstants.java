@@ -28,6 +28,19 @@ public interface KlotsConstants {
     
     public static final String KLOTS_SHORT_NAME = "KLOTS";
     public static final String KLOTS_FULL_NAME = "KIELER LEGO On-line Testing System";
+    
+    public static final String KLOTS_TEMPLATES_FOLDER_NAME = "sj_templates";
+    public static final String KLOTS_TEMPLATES_LEJOS_FOLDER_NAME = "lejos";
+    public static final String KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME = "embeddedSJ.jar";
+    public static final String KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME = "classes.jar";
+    public static final String KLOTS_TEMPLATES_CLASSPATH_FILE_NAME = "classpath.template";
+    public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME = "project.template";
+    public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_JAVA_FILE_NAME = "NewPOJFile.template";
+    public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_SJ_FILE_NAME = "NewSJFile.template";
+    public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME_OPEN_TAG = "<name>";
+    public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME_CLOSE_TAG = "</name>";
+    public static final String KLOTS_TEMPLATES_PACKAGE_TAG = "<PACKAGE>";
+    public static final String KLOTS_TEMPLATES_CLASS_TAG = "<CLASS>";
 
     public static final String SIGNALS_TAG = "SIGNALS";
     public static final String INSTRUCTION_TAG = "INSTRUCTION";
@@ -57,6 +70,7 @@ public interface KlotsConstants {
     public static final String JSON_INITIAL_EXECUTION_TAG = "initialExcecution";
 
     public static final String SJ_FILE_NAME_EXTENSION = "java";
+    public static final String EMBEDDED_JAVA_FILE_NAME_EXTENSION = "java";
 
 
     // SJ INSTRUCTION MARKER ID & ATTRIBUTES

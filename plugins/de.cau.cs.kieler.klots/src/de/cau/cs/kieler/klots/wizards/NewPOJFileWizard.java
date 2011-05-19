@@ -43,6 +43,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -65,7 +66,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
     public static final String ID = "de.cau.cs.kieler.klots.editor.NewPOJFileWizard";
 
     // the OS specific file separator char, e.g. '/' or '\'
-    private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
+    //private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
 
     private NewPOJFileWizardPage page;
     private ISelection selection;
@@ -182,24 +183,25 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
      */
     protected static InputStream openContentStream(final String projectName, final String fileName) {
         try {
-            String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
-            + "sj_templates" + OS_FILE_SEPARATOR + "";
-            InputStream resourceStream =
-                NewPOJFileWizard.class.getResourceAsStream(templatesPath + "NewPOJFile.template");
+            String templatesPath = KlotsPlugin.getDefault().getBundle().getEntry(
+                    "/" + KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME).getPath();
+            InputStream resourceStream = NewPOJFileWizard.class.getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_NEW_EMBEDDED_JAVA_FILE_NAME);
             // adjust package and class tags
             BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
             String projectFileContent = "";
             String projectFileLine = "";
             while ((projectFileLine = projectFile.readLine()) != null) {
-                if (projectFileLine.contains("<CLASS>")) {
-                    projectFileLine = projectFileLine.replace("<CLASS>", fileName.replace(".java", ""));
+                if (projectFileLine.contains(KlotsConstants.KLOTS_TEMPLATES_CLASS_TAG)) {
+                    projectFileLine = projectFileLine.replace(KlotsConstants.KLOTS_TEMPLATES_CLASS_TAG,
+                            fileName.replace(
+                                    "." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION, ""));
                 }
-                if (projectFileLine.contains("<PACKAGE>")) {
+                if (projectFileLine.contains(KlotsConstants.KLOTS_TEMPLATES_PACKAGE_TAG)) {
                     String packageName = projectName.replaceFirst(".*/src/", "");
                     packageName = packageName.replace('/', '.');
-                    projectFileLine = projectFileLine.replace("<PACKAGE>", packageName);
+                    projectFileLine = projectFileLine.replace(
+                            KlotsConstants.KLOTS_TEMPLATES_PACKAGE_TAG, packageName);
                 }
                 projectFileContent += projectFileLine + "\n";
             }

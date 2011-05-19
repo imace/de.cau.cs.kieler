@@ -98,10 +98,29 @@ public class KlotsJob extends Job {
             projectPath = activeProject.getLocation().toOSString();
             projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
 
+            // print some eclipse file system information for easier debugging
+            System.out.println("%%%%%%%%%%%%%%%>>> eclipse instance LOCATION = >"
+                    + Platform.getInstanceLocation().getURL().getPath() + "<");
+            System.out.println("%%%%%%%%%%%%%%%>>>  eclipse install LOCATION = >"
+                    + Platform.getInstallLocation().getURL().getPath() + "<");
+            
+            // get 'org.lejos.classes' bundle from the 'org.lejos.classes' plugin activator
+            //Bundle lejosBundle = LejosClassesBundlePluginActivator.getDefault().getBundle();
             Bundle lejosBundle = Platform.getBundle("org.lejos.classes");
-            lejosPath = lejosBundle.getLocation();
-            lejosPath = lejosPath.replaceFirst(".*file:", "") + "bin" + OS_FILE_SEPARATOR;
-            System.out.println("%%%%%%%%%%%%%%%%%%>>> org.lejos.nxt LOCATION = >" + lejosPath + "<");
+            lejosPath = lejosBundle.getLocation().replaceFirst(".*file:", "");
+            System.out.println("%%%%%%%%%%%%%%%>>> org.lejos.nxt relative LOCATION = >"
+                    + lejosPath + "<");
+            // test if eclipse is a working instance or installed one
+            if (lejosPath.endsWith(".jar")) {
+                String eclipseInstallLocation = Platform.getInstallLocation().getURL().getPath();
+                System.out.println("%%%%%%%%%%%%%%%>>> eclipse install LOCATION = >"
+                        + eclipseInstallLocation + "<");
+                lejosPath = eclipseInstallLocation + lejosPath;
+            } else {
+                lejosPath += "bin" + OS_FILE_SEPARATOR;
+            }
+            System.out.println("%%%%%%%%%%%%%%%>>> org.lejos.nxt final LOCATION = >" + lejosPath + "<");
+            
         }
 
         if (
@@ -154,7 +173,12 @@ public class KlotsJob extends Job {
         setProperty(IProgressConstants.ICON_PROPERTY,
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/linkIcon.png"));
         try {
-            
+
+            // TODO: see if possible to remove 'embeddedSJ.jar' from project's directory
+            // and give a path to the 'embeddedSJ.jar' file in 'sj_templates' or even better
+            // give a path to the 'de.cau.cs.kieler.sj' bundle
+            // and to the 'de.cau.cs.kieler.klots.sj.embedded' package in the KLOTS plugin
+            // (this package is perhaps to be placed in a separate plugin)
             // CHECKSTYLEOFF LineLength
             final String[] args = {"--bootclasspath", lejosPath,
                     "--writeorder", "LE",

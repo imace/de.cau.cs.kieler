@@ -144,7 +144,7 @@ public class NewSJFileWizardPage extends WizardPage {
                 containerText.setText(container.getFullPath().toString());
             }
         }
-        fileText.setText("NewSJFile.java");
+        fileText.setText("NewSJFile." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
     }
 
     

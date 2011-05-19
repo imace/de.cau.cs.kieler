@@ -144,7 +144,7 @@ public class NewPOJFileWizardPage extends WizardPage {
                 containerText.setText(container.getFullPath().toString());
             }
         }
-        fileText.setText("NewPlainJavaLeJOSFile.java");
+        fileText.setText("NewPlainJavaLeJOSFile." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
     }
 
     
@@ -201,7 +201,8 @@ public class NewPOJFileWizardPage extends WizardPage {
         if (dotLoc != -1) {
             String ext = fileName.substring(dotLoc + 1);
             if (!ext.equalsIgnoreCase(KlotsConstants.SJ_FILE_NAME_EXTENSION)) {
-                updateStatus("File extension must be \"" + KlotsConstants.SJ_FILE_NAME_EXTENSION + "\"");
+                updateStatus("File extension must be \""
+                        + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION + "\"");
                 return;
             }
         }
