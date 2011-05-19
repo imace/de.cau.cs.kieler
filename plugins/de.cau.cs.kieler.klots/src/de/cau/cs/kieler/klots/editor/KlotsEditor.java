@@ -1266,8 +1266,8 @@ public class KlotsEditor extends CompilationUnitEditor
         }
         // repaint 'yet to be done' instructions
         for (int i = microStepNumber + 1; i < kiviList.size(); i++) {
-            kiviList.get(i).setColor(colorForegroundAlreadyDoneMicrostep);
-            kiviList.get(i).setBackgroundColor(colorBackgroundAlreadyDoneMicrostep);
+            kiviList.get(i).setColor(colorForegroundYetToBeDoneMicrostep);
+            kiviList.get(i).setBackgroundColor(colorBackgroundYetToBeDoneMicrostep);
             kiviList.get(i).execute();
         }
         // repaint 'active' instruction

@@ -87,15 +87,15 @@ public interface KlotsConstants {
     // white
     public static final RGB COLOR_RGB_BACKGROUND_STANDARD =                 new RGB(255, 255, 255);
     // dark orange
-    public static final RGB COLOR_RGB_FOREGROUND_ALREADY_DONE_MICROSTEP =   new RGB(255, 140,   0);
-    // eclipse standard selected line background color
-    public static final RGB COLOR_RGB_BACKGROUND_ALREADY_DONE_MICROSTEP =   new RGB(232, 242, 254);
+    public static final RGB COLOR_RGB_FOREGROUND_ALREADY_DONE_MICROSTEP =   new RGB(  0,   0,   0);//(255, 140,   0);
+    // dark sea green 1 //eclipse standard selected line background color
+    public static final RGB COLOR_RGB_BACKGROUND_ALREADY_DONE_MICROSTEP =   new RGB(193, 255, 193);//(232, 242, 254);
     // red
-    public static final RGB COLOR_RGB_FOREGROUND_ACTIVE_MICROSTEP =         new RGB(255,   0,   0);
-    // eclipse standard selected line background color
-    public static final RGB COLOR_RGB_BACKGROUND_ACTIVE_MICROSTEP =         new RGB(232, 242, 254);
+    public static final RGB COLOR_RGB_FOREGROUND_ACTIVE_MICROSTEP =         new RGB(  0,   0,   0);//(255,   0,   0);
+    // light sky blue 1 //eclipse standard selected line background color
+    public static final RGB COLOR_RGB_BACKGROUND_ACTIVE_MICROSTEP =         new RGB(176, 226, 255);//(232, 242, 254);
     // dark green
-    public static final RGB COLOR_RGB_FOREGROUND_YET_TO_BE_DONE_MICROSTEP = new RGB(  0, 100,   0);
+    public static final RGB COLOR_RGB_FOREGROUND_YET_TO_BE_DONE_MICROSTEP = new RGB(  0,   0,   0);//(  0, 100,   0);
     // misty rose
     public static final RGB COLOR_RGB_BACKGROUND_YET_TO_BE_DONE_MICROSTEP = new RGB(255, 228, 225);
     
@@ -105,15 +105,15 @@ public interface KlotsConstants {
     public static final Color BACKGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 255, 255, 255);
 
     // dark orange
-    public static final Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 140, 0);
-    // eclipse standard selected line background color
-    public static final Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
+    public static final Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 0, 0);//255, 140, 0);
+    // dark sea green 1 //eclipse standard selected line background color
+    public static final Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 193, 255, 193);//232, 242, 254);
     // red
-    public static final Color ACTIVE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 0, 0);
-    // eclipse standard selected line background color
-    public static final Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
+    public static final Color ACTIVE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 0, 0);// 255, 0, 0);
+    // light sky blue 1 //eclipse standard selected line background color
+    public static final Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 176, 226, 255);//232, 242, 254);
     // dark green
-    public static final Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 100, 0);
+    public static final Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 0, 0);// 0, 100, 0);
     // misty rose
     public static final Color YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 255, 228, 225);
 
