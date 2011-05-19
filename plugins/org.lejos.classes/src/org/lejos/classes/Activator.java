@@ -6,18 +6,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class LejosClassesBundlePluginActivator extends AbstractUIPlugin {
+public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.lejos.nxt"; //$NON-NLS-1$
 
 	// The shared instance
-	private static LejosClassesBundlePluginActivator plugin;
+	private static Activator plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public LejosClassesBundlePluginActivator() {
+	public Activator() {
 	}
 
 	/*
@@ -43,7 +43,7 @@ public class LejosClassesBundlePluginActivator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static LejosClassesBundlePluginActivator getDefault() {
+	public static Activator getDefault() {
 		return plugin;
 	}
 
