@@ -433,8 +433,12 @@ public class KlotsEditor extends CompilationUnitEditor
         initialized = false;
         microStepNumber = -1;
         sjInstructionsUpdateData = "";
-        IEditorInput input = getEditorInput();
-        this.setInput(input);
+        // execute asynchronously just in case method is called from the UI thread
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run() {
+                setInput(getEditorInput());
+            }
+        });
         // uiStatusLineItem.setToolTipText("");
         // uiStatusLineItem.setErrorText("");
     }
@@ -908,7 +912,7 @@ public class KlotsEditor extends CompilationUnitEditor
     // ======================================================================
 
     static void updateJavaEditor() {
-        Display.getDefault().syncExec(new Runnable() {
+        Display.getDefault().asyncExec(new Runnable() {
             public void run() {
 
                 // ------------ undo highlight old instructions -------------
@@ -960,7 +964,7 @@ public class KlotsEditor extends CompilationUnitEditor
                 // ----------------------------------------------------------
 
             } // end run()
-        }); // end syncExec()
+        }); // end asyncExec()
     }
 
     
@@ -1093,7 +1097,7 @@ public class KlotsEditor extends CompilationUnitEditor
      * @param b 
      */
     public void useAsExecutionViewer(final boolean b) {
-        Display.getDefault().syncExec(new Runnable() {
+        Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 getViewer().getTextWidget().setEditable(!b);
             }
