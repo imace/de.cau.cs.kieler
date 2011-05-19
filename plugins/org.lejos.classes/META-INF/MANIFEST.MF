@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: lejos NXT Library
 Bundle-SymbolicName: org.lejos.classes
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.lejos.classes.Activator
+Bundle-Activator: org.lejos.classes.LejosClassesBundlePluginActivator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
