@@ -16,6 +16,10 @@ package de.cau.cs.kieler.klots.views;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
@@ -577,8 +581,18 @@ public class SJInstructionsView extends ViewPart {
             public void run() {
                 Execution e = KiemPlugin.getDefault().getExecution();
                 if (e == null) {
-                    // FIXME: initExecution() does not return??!!
-                    KiemPlugin.getDefault().initExecution();
+                    // KiemPlugin.getDefault().initExecution() blocks the UI thread.
+                    // Initialize the KIEM execution from within a job, in order to avoid deadlock.
+                    final Job job = new Job("Initialize KIEM Execution") {
+                        protected IStatus run(final IProgressMonitor monitor) {
+                            // TODO: find a way to load Data Components from here
+                            KiemPlugin.getDefault().initExecution();
+                            return Status.OK_STATUS;
+                        }
+                    };
+                    job.setSystem(true);
+                    job.schedule();
+                    
                     // enable/disable the KIEM actions
                     kiemStepBackwards.setEnabled(true);
                     kiemStop.setEnabled(true);
@@ -631,7 +645,21 @@ public class SJInstructionsView extends ViewPart {
         // ---------------------------- KIEM run ----------------------------
         kiemRun = new Action() {
             public void run() {
-                KiemPlugin.getDefault().getExecution().runExecutionSync();
+                // KiemPlugin.getDefault().initExecution() and
+                // KiemPlugin.getDefault().runExecutionSync() both block the UI thread.
+                // Initialize the KIEM execution from within a job, in order to avoid deadlock.
+                final Job job = new Job("Start KIEM Execution") {
+                    protected IStatus run(final IProgressMonitor monitor) {
+                        if (KiemPlugin.getDefault().getExecution() == null) {
+                            // TODO: find a way to load Data Components from here
+                            KiemPlugin.getDefault().initExecution();
+                        }
+                        KiemPlugin.getDefault().getExecution().runExecutionSync();
+                        return Status.OK_STATUS;
+                    }
+                };
+                job.setSystem(true);
+                job.schedule();
 
                 // enable/disable the KIEM actions
                 kiemStepForwards.setEnabled(false);
