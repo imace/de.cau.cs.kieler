@@ -19,18 +19,22 @@ import sj.EmbeddedSJProgram;
 import sj.EmbeddedSJProgramStarter;
 import sj.Signal;
 import examples.EmbeddedABRO.StateLabel;
+/* Note: In order to allow static imports, the Java Compiler compliance level
+ * should be set to 1.5 */
 import static examples.EmbeddedABRO.StateLabel.*;
 
 /**
- * 
- * The program ABRO. ABRO is the "hello world" of synchronous languages. This is the version of ABRO
- * in SJ that can be used on embedded systems. This implementation based on the SC version of ABRO.
- * For informations about SC see the <a href="http://www.informatik.uni-kiel.de/rtsys/sc"
- * target="_parent">SC homepage</a>.
+ * The program ABRO. ABRO is the "hello world" of synchronous languages. This
+ * version of ABRO in Synchronous Java (SJ) can be run on Lego Mindstorms NXT
+ * systems. This implementation is based on the Synchronous C (SC) version of
+ * ABRO. For informations about SC see the
+ * <a href="http://www.informatik.uni-kiel.de/rtsys/sc" target="_parent">
+ * SC homepage
+ * </a>.
  * 
  * @author mhei, ybe
  * @see ABRO
- * 
+ * @version 1.1
  */
 public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
 
@@ -40,22 +44,21 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
     enum StateLabel { ABO, AB, WaitA, WaitB, ABMain, ABOMain }
 
     /**
-     * The signals used by the Program.
-     * 
-     * Because the class SJProgram is in a different package than this program, all signals must be
-     * public.
+     * The signals used by the program.
+     * Because the class EmbeddedSJProgram is in a different package than
+     * this program, all signals must be public.
      */
     // SUPPRESS CHECKSTYLE NEXT VisibilityModifierCheck
     public Signal a, b, r, o;
 
     // CHECKSTYLEOFF MagicNumber
-    // Priority's are part of the concept and not magic numbers
+    // Priority's are part of the SJ concept and are not magic numbers.
 
     /**
-     * Starts a new instance of the program EmbeddedABRO.
+     * Initializes a new instance of EmbeddedABRO.
      */
     public EmbeddedABRO() {
-        // start ABRO at label ABO with the priority 4
+        // Start EmbeddedABRO at label ABO with priority 4.
         super(ABO, 4);
         a = new Signal("a");
         b = new Signal("b");
@@ -65,6 +68,9 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
     }
 
 
+    /**
+     * Starts the program.
+     */
     public static void main(String[] args) {
         try {
             EmbeddedSJProgramStarter.start(new EmbeddedABRO(), "ABRO");
@@ -73,6 +79,10 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
     }
 
 
+    /**
+     * The heart method of the EmbeddedABRO program.
+     * tick() is executed each macrostep until program termination.
+     */
     @Override
     public void tick() {
         while (!isTickDone()) {

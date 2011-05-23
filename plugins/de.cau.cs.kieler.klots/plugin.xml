@@ -50,7 +50,7 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            category="cau.cs.kieler.klots.editor"
+            category="de.cau.cs.kieler"
             class="de.cau.cs.kieler.klots.wizards.NewSJFileWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.NewSJFileWizard"
@@ -61,7 +61,7 @@
             name="KLOTS Wizards">
       </category>
       <wizard
-            category="cau.cs.kieler.klots.editor"
+            category="de.cau.cs.kieler"
             class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
@@ -69,7 +69,7 @@
             project="true">
       </wizard>
       <wizard
-            category="cau.cs.kieler.klots.editor"
+            category="de.cau.cs.kieler"
             class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
             icon="icons/KLOTS5.png"
             id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"

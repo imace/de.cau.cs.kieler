@@ -3,11 +3,13 @@ package <PACKAGE>;
 import sj.EmbeddedRemoteConsole;
 
 public class <CLASS> {
-	static EmbeddedRemoteConsole console = new EmbeddedRemoteConsole();
+
+    /* UNCOMMENT NEXT LINE TO ENABLE REMOTE CONSOLE PRINT */
+	// static EmbeddedRemoteConsole console = new EmbeddedRemoteConsole();
 
 	public static void main(String[] args) {
-		// open remote console if you want to to print remotely
-		console.open();
+		/* Uncomment next line to open remote print console. */
+		// console.open();
 		
 		// ------------------------------------------------------------------
 		// ------------------------------------------------------------------
@@ -21,7 +23,7 @@ public class <CLASS> {
 		// ------------------------------------------------------------------
 		// ------------------------------------------------------------------
 		
-		// don't forget to close the remote console on program exit
-		console.close();
+		/* Uncomment next line to close the remote console on program exit. */
+		// console.close();
 	}
 }
