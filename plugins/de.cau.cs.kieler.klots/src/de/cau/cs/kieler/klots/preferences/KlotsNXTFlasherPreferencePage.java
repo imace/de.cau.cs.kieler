@@ -13,11 +13,6 @@
  */
 package de.cau.cs.kieler.klots.preferences;
 
-import java.io.IOException;
-import lejos.pc.comm.NXTCommFactory;
-import lejos.pc.comm.NXTInfo;
-
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -26,19 +21,14 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.dialogs.ElementListSelectionDialog;
-
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
-import de.cau.cs.kieler.klots.util.NXTCommunicator;
 import de.cau.cs.kieler.klots.util.NXTFirmwareFlasher;
 
 
@@ -50,7 +40,7 @@ import de.cau.cs.kieler.klots.util.NXTFirmwareFlasher;
  */
 
 public class KlotsNXTFlasherPreferencePage extends PreferencePage
-                                        implements IWorkbenchPreferencePage, ILabelProvider {
+                                           implements IWorkbenchPreferencePage, ILabelProvider {
     
     /** The NXT firmware flash button. */
     private Button flashNXTFirmwareButton;
@@ -89,55 +79,26 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
     public void buildPage(final Composite parent) {
         SelectListener listener = new SelectListener();
         
-        Group connectionTypeGroup = new Group(parent, SWT.SHADOW_ETCHED_IN);
-        connectionTypeGroup.setText("&Flash NXT firmware");
-        connectionTypeGroup.setLayout(new GridLayout(1, true));
-        connectionTypeGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
-        // search NXTs button
+        Label description = new Label(parent, SWT.NONE);
+        description.setText("As leJOS NXJ is a firmware replacement, you will need to flash the "
+                + "firmware\n"
+                + "to your NXT. Note that this will overwrite any existing firmware. If you have\n"
+                + "the standard LEGO firmware or other third-party firmware on your NXT,\n"
+                + "existing files will be lost. Make sure your NXT is attached to the PC by its USB\n"
+                + "cable, and switch it on by pressing the orange button.");
+        description.setVisible(true);
+        
+        // flash NXT firmware button
         flashNXTFirmwareButton = new Button(parent, SWT.NONE);
-        flashNXTFirmwareButton.setText("Search for NXTs");
-        flashNXTFirmwareButton.setToolTipText("Search for NXTs");
+        flashNXTFirmwareButton.setText("Flash NXT firmware");
+        flashNXTFirmwareButton.setToolTipText("Flash NXT firmware");
         flashNXTFirmwareButton.addSelectionListener(listener);
-        connectionTypeGroup.layout();
         
         // invisible label to fill out unused space
         Label label = new Label(parent, SWT.NONE);
         label.setEnabled(false);
         label.setVisible(false);
         label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-    }
-
-    
-    
-    private NXTInfo displayNXTSearchDialog(final String message) {
-        ElementListSelectionDialog dialog = new ElementListSelectionDialog(this.getShell(), this);
-        dialog.setMultipleSelection(false);
-        dialog.setMessage(message);
-        dialog.setHelpAvailable(false);
-        
-        NXTInfo[] nxts = NXTCommunicator.getInstance().searchForNXTs();
-        try {
-            NXTCommunicator.getInstance().getNXTConnector().close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        String[] elements = new String[nxts.length];
-        for (int i = 0; i < nxts.length; i++) {
-            elements[i] = nxts[i].name + ", " + nxts[i].deviceAddress + ", "
-            + (nxts[i].protocol == NXTCommFactory.USB ? "USB" : "BLUETOOTH");
-            System.out.println("XXXXXXXXXX>>>> " + (i + 1) + ". found NXT >" + elements[i] + "<");
-        }
-        dialog.setElements(elements);
-        
-        if (dialog.open() == Dialog.OK) {
-            Object[] result = dialog.getResult();
-            for (int i = 0; i < elements.length; i++) {
-                if (result[0].equals(elements[i])) {
-                    return nxts[i];
-                }
-            }
-        }
-        return null;
     }
     
     
@@ -235,32 +196,10 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
                 flashNXTFirmwareButton.setEnabled(false);
                 flashNXTFirmwareButton.setSize(flashNXTFirmwareButtonWidth,
                         flashNXTFirmwareButton.getSize().y);
-                flashNXTFirmwareButton.setText("Flashinf NXT firmware...");
-//                NXTInfo selectedNXT = displayNXTSearchDialog(
-//                        KlotsPreferenceConstants.P_CONNECTION_SEARCH_FOR_BRICKS_TEXT);
+                flashNXTFirmwareButton.setText("Flashing NXT firmware...");
                 flashNXTFirmwareButton.setEnabled(true);
                 flashNXTFirmwareButton.setText("Flash NXT firmware");
-//                if (selectedNXT == null) {
-//                    System.out.println("XXXXXXXXXX>>>> No NXT selected!");
-//                    return;
-//                }
                 NXTFirmwareFlasher flasher = new NXTFirmwareFlasher();
-//                System.out.println("XXXXXXXXXX>>>> Selected NXT >"
-//                        + selectedNXT.name + ", "
-//                        + selectedNXT.deviceAddress + ", "
-//                        + (selectedNXT.protocol == NXTCommFactory.USB ? "USB" : "BLUETOOTH") + "<");
-//                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK,
-//                        false);
-//                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME,
-//                        selectedNXT.name);
-//                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS,
-//                        true);
-//                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS,
-//                        selectedNXT.deviceAddress);
-//                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE,
-//                        selectedNXT.protocol == NXTCommFactory.USB
-//                        ? KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_USB
-//                                : KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_BLUETOOTH);
             }
         }
     }
