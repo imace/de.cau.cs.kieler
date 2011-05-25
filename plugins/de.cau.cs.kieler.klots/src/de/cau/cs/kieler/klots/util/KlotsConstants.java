@@ -33,6 +33,8 @@ public interface KlotsConstants {
     public static final String KLOTS_TEMPLATES_LEJOS_FOLDER_NAME = "lejos";
     public static final String KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME = "embeddedSJ.jar";
     public static final String KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME = "classes.jar";
+    public static final String KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME = "lejos_nxt_rom.bin";
+    public static final String KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME = "StartUpText.bin";
     public static final String KLOTS_TEMPLATES_CLASSPATH_FILE_NAME = "classpath.template";
     public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME = "project.template";
     public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_JAVA_FILE_NAME = "NewPOJFile.template";

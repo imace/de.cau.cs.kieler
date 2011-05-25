@@ -122,6 +122,12 @@
            id="de.cau.cs.kieler.klots.preferences.KlotsColorsPreferencePage"
            name="Colors">
      </page>
+     <page
+           category="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
+           class="de.cau.cs.kieler.klots.preferences.KlotsNXTFlasherPreferencePage"
+           id="de.cau.cs.kieler.klots.preferences.KlotsNXTFlasherPreferencePage"
+           name="Firmware flash">
+     </page>
   </extension>
   <extension
         point="org.eclipse.core.runtime.preferences">
