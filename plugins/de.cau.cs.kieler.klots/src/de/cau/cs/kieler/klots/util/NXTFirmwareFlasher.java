@@ -29,6 +29,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
+
+import de.cau.cs.kieler.klots.KlotsPlugin;
+
 /***
  * GUI application to write the leJOS Virtual Machine and Menu system to the NXT Flash.
  * Based on Roger Glassey original GUI code and Andy Shaw original command line code.
@@ -144,12 +149,25 @@ public class NXTFirmwareFlasher extends javax.swing.JFrame {
 //						home = System.getenv("NXJ_HOME");
 //					byte[] memoryImage = updater.createFirmwareImage(null,
 //							null, home);
-					String vmName = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + OS_FILE_SEPARATOR
-					+ KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + OS_FILE_SEPARATOR
-					+ KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
-					String menuName = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + OS_FILE_SEPARATOR
-					+ KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + OS_FILE_SEPARATOR
-					+ KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
+					
+		            Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
+		            String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
+		            System.out.println("%%%%%%%%%%%%%%%>>> org.lejos.nxt relative LOCATION = >"
+		                    + klotsPath + "<");
+		            // test if eclipse is a working instance or installed one
+		            if (klotsPath.endsWith(".jar")) {
+		                String eclipseInstallLocation = Platform.getInstallLocation().getURL().getPath();
+		                System.out.println("%%%%%%%%%%%%%%%>>> eclipse install LOCATION = >"
+		                        + eclipseInstallLocation + "<");
+		                klotsPath = eclipseInstallLocation + klotsPath;
+		            } else {
+		                klotsPath += "bin" + OS_FILE_SEPARATOR;
+		            }
+					
+					String vmName = templatesPath + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME
+					+ OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
+					String menuName = templatesPath + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME
+					+ OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
 					byte[] memoryImage = updater.createFirmwareImage(vmName,
 							menuName, null);
 					
