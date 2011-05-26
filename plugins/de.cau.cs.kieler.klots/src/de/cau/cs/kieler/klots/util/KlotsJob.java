@@ -305,7 +305,7 @@ public class KlotsJob extends Job {
         return new Action() {
             public void run() {
                 boolean connect = MessageDialog.openQuestion(editor.getEditorSite().getShell(),
-                        "KLOTS", "Connect to NXT?");
+                        "KLOTS", "Connect to NXT?\n(Please make this choice on the NXT first.)");
                 if (connect) {
                     NXTCommunicator.getInstance()
                     .sendMessage(KlotsConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY);
