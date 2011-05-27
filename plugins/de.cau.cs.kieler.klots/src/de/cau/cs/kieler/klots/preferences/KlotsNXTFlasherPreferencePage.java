@@ -30,7 +30,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.util.NXTFirmwareFlasher;
-//import de.cau.cs.kieler.klots.util.NXTFirmwareFlasher2;
 
 
 /**
@@ -46,7 +45,7 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
     /** The NXT firmware flash button. */
     private Button flashNXTFirmwareButton;
     private final int flashNXTFirmwareButtonWidth = 120;
-//    private Composite parentComposite;
+    private Composite parentComposite;
     
     
     
@@ -66,7 +65,7 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
      */
     @Override
     protected Control createContents(final Composite parent) {
-//        parentComposite = parent;
+        parentComposite = parent;
         buildPage(parent);
         return null;
     }
@@ -202,8 +201,8 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
                 flashNXTFirmwareButton.setText("Flashing NXT firmware...");
                 flashNXTFirmwareButton.setEnabled(true);
                 flashNXTFirmwareButton.setText("Flash NXT firmware");
-                NXTFirmwareFlasher flasher = new NXTFirmwareFlasher();
-//                NXTFirmwareFlasher2 flasher2 = new NXTFirmwareFlasher2(parentComposite);
+                NXTFirmwareFlasher flasher = new NXTFirmwareFlasher(parentComposite);
+                flasher.run();
             }
         }
     }

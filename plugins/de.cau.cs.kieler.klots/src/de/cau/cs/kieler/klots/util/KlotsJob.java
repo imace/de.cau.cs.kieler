@@ -39,6 +39,7 @@ import org.osgi.framework.Bundle;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.editor.KlotsEditor;
+import de.cau.cs.kieler.klots.preferences.KlotsPreferenceConstants;
 
 
 /**
@@ -211,9 +212,16 @@ public class KlotsJob extends Job {
         setProperty(IProgressConstants.ICON_PROPERTY,
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png"));
         
-        // CHECKSTYLEOFF LineLength
-        String[] args = {"-b", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
-        // CHECKSTYLEON LineLength
+        String connType;
+        if (KlotsPlugin.getDefault().getPreferenceStore()
+                .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE)
+                .equals(KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_USB)) {
+            connType = "-u";
+        } else {
+            connType = "-b";
+        }
+        String[] args = {connType, projectPath + projectName + OS_FILE_SEPARATOR + "bin"
+                + OS_FILE_SEPARATOR + fileName + ".nxj"};
         
         NXJUpload up = new NXJUpload();
         try {
