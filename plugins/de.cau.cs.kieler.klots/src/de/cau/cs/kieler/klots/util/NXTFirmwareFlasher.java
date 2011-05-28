@@ -13,20 +13,13 @@
  */
 package de.cau.cs.kieler.klots.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.jar.JarInputStream;
-import java.util.zip.ZipEntry;
-
 import lejos.pc.comm.NXTCommException;
 import lejos.pc.comm.NXTCommFactory;
 import lejos.pc.comm.NXTConnector;
 import lejos.pc.comm.NXTInfo;
 import lejos.pc.comm.NXTSamba;
 import lejos.pc.tools.NXJFlashUI;
-import lejos.pc.tools.NXJFlashUpdate;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -54,8 +47,8 @@ import org.osgi.framework.Bundle;
 
 /***
  * GUI application to write the leJOS Virtual Machine and Menu system to the NXT Flash. 
- * This Eclipse SWT application is based on Roger Glassey original Swing code and 
- * on Andy Shaw original command line code.
+ * This Eclipse SWT adapted implementation is based on Roger Glassey original Swing code
+ * and on Andy Shaw original command line code.
  * 
  * @author ybe
  */
@@ -176,8 +169,7 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
         
         private boolean flashFirmwareConfirmed = false;
         private boolean flashExceptionOccured = false;
-        private boolean deleteFilesOnExit = false;
-        private NXJFlashUpdate updater = new NXJFlashUpdate(this);
+        private NXTFlashUpdate updater = new NXTFlashUpdate(this);
         
     
         
@@ -224,18 +216,28 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
                         // ----------------------------------------------------------
                         try {
                             String vmPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
-                            + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
-                            + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
+                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
+                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
                             String menuPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
-                            + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
-                            + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
-                            vmPath = ensureFile(
-                                    KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME,
-                                    vmPath);
-                            menuPath = ensureFile(
-                                    KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME,
-                                    menuPath);
-                            byte[] memoryImage = updater.createFirmwareImage(vmPath, menuPath, null);
+                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
+                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
+                            
+                            Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
+                            String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
+                            System.out.println("%%%%%%%%>>> de.cau.cs.kieler.klots relative LOCATION = >"
+                                    + klotsPath + "<");
+                            String eclipseInstallLocation =
+                                Platform.getInstallLocation().getURL().getPath();
+                            // test if eclipse is a working instance or installed one
+                            if (klotsPath.endsWith(".jar")) {
+                                System.out.println("%%%%%%%%>>> eclipse install LOCATION = >"
+                                        + eclipseInstallLocation + "<");
+                                klotsPath = eclipseInstallLocation + klotsPath;
+                            }
+                            System.out.println("%%%%%%%%>>> final LOCATION = >" + klotsPath + "<");
+                            
+                            byte[] memoryImage = updater.createFirmwareImage(
+                                    vmPath, menuPath, klotsPath);
                             // ------------------------------------------------------
 
                             //   wait for user to confirm format NXT memory process
@@ -254,9 +256,6 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
                             if (nxt != null) {
                                 updater.updateDevice(nxt, memoryImage, fs, true, true, true);
                             }
-                            freeFile(vmPath);
-                            freeFile(menuPath);
-                            deleteFilesOnExit = false;
                             // ------------------------------------------------------
                             
                         //                handle exception occurred
@@ -326,89 +325,70 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
         
         
         
-        /**
-         * @param fullFilePath 
-         */
-        private void freeFile(final String fullFilePath) {
-            if (deleteFilesOnExit) {
-                try {
-                    File f = new File(fullFilePath);
-                    f.delete();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    KlotsConsole.getInstance().println(e.getMessage());
-                }
-            }
-        }
-        
-        
-        
-        /**
-         * @param relativeFilePath 
-         * @return String 
-         * @throws Exception 
-         */
-        private String ensureFile(final String fileName, final String relativeFilePath) {
-            Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
-            String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
-            System.out.println("%%%%%%%%%%%%%%%>>> de.cau.cs.kieler.klots relative LOCATION = >"
-                    + klotsPath + "<");
-            String eclipseInstallLocation = Platform.getInstallLocation().getURL().getPath();
-            // test if eclipse is a working instance or installed one
-            if (klotsPath.endsWith(".jar")) {
-                System.out.println("%%%%%%%%%%%%%%%>>> eclipse install LOCATION = >"
-                        + eclipseInstallLocation + "<");
-                klotsPath = eclipseInstallLocation + klotsPath;
-            } else {
-                return klotsPath + relativeFilePath;
-            }
-            System.out.println("%%%%%%%%%%%%%%%>>> final LOCATION = >" + klotsPath + "<");
-            
-            String fullPath = eclipseInstallLocation + fileName;
-            FileInputStream fin = null;
-            JarInputStream jin = null;
-            FileOutputStream os = null;
-            try {
-                fin = new FileInputStream(klotsPath);
-                jin = new JarInputStream(fin);
-                ZipEntry entry;
-                while ((entry = jin.getNextEntry()) != null) {
-                    if (entry.getName().equals(relativeFilePath)) {
-                        break;
-                    }
-                }
-                File f = new File(fullPath);
-                os = new FileOutputStream(f);
-                final int byteArrayLen = 512;
-                byte[] b = new byte[byteArrayLen];
-                int len;
-                while ((len = jin.read(b, 0, b.length)) != -1) {
-                    os.write(b, 0, len);
-                }
-            } catch (Exception e) {
-                MessageDialog.openError(parentShell, "Fatal Error",
-                        "Bad news: An error has occurred " + e);
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (os != null) {
-                        os.close();
-                    }
-                    if (jin != null) {
-                        jin.closeEntry();
-                        jin.close();
-                    }
-                    if (fin != null) {
-                        fin.close();
-                    }
-                } catch (Exception finallyExc) {
-                    finallyExc.printStackTrace();
-                }
-            }
-            
-            deleteFilesOnExit = true;
-            return fullPath;
-        } // end method ensureFile()
+//        /**
+//         * @param relativeFilePath 
+//         * @return String 
+//         * @throws Exception 
+//         */
+//        private String ensureFile(final String fileName, final String relativeFilePath) {
+//            Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
+//            String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
+//            System.out.println("%%%%%%%%%%%%%%%>>> de.cau.cs.kieler.klots relative LOCATION = >"
+//                    + klotsPath + "<");
+//            String eclipseInstallLocation = Platform.getInstallLocation().getURL().getPath();
+//            // test if eclipse is a working instance or installed one
+//            if (klotsPath.endsWith(".jar")) {
+//                System.out.println("%%%%%%%%%%%%%%%>>> eclipse install LOCATION = >"
+//                        + eclipseInstallLocation + "<");
+//                klotsPath = eclipseInstallLocation + klotsPath;
+//            } else {
+//                return klotsPath + relativeFilePath;
+//            }
+//            System.out.println("%%%%%%%%%%%%%%%>>> final LOCATION = >" + klotsPath + "<");
+//            
+//            String fullPath = eclipseInstallLocation + fileName;
+//            FileInputStream fin = null;
+//            JarInputStream jin = null;
+//            FileOutputStream os = null;
+//            try {
+//                fin = new FileInputStream(klotsPath);
+//                jin = new JarInputStream(fin);
+//                ZipEntry entry;
+//                while ((entry = jin.getNextEntry()) != null) {
+//                    if (entry.getName().equals(relativeFilePath)) {
+//                        break;
+//                    }
+//                }
+//                File f = new File(fullPath);
+//                os = new FileOutputStream(f);
+//                final int byteArrayLen = 512;
+//                byte[] b = new byte[byteArrayLen];
+//                int len;
+//                while ((len = jin.read(b, 0, b.length)) != -1) {
+//                    os.write(b, 0, len);
+//                }
+//            } catch (Exception e) {
+//                MessageDialog.openError(parentShell, "Fatal Error",
+//                        "Bad news: An error has occurred " + e);
+//                e.printStackTrace();
+//            } finally {
+//                try {
+//                    if (os != null) {
+//                        os.close();
+//                    }
+//                    if (jin != null) {
+//                        jin.closeEntry();
+//                        jin.close();
+//                    }
+//                    if (fin != null) {
+//                        fin.close();
+//                    }
+//                } catch (Exception finallyExc) {
+//                    finallyExc.printStackTrace();
+//                }
+//            }
+//            return fullPath;
+//        } // end method ensureFile()
 
     } // end inner class Flasher
     
