@@ -63,6 +63,7 @@
       <wizard
             category="de.cau.cs.kieler"
             class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
+            finalPerspective="de.cau.cs.kieler.klots.KlotsPerspective"
             icon="icons/KLOTS7.png"
             id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
             name="Embedded Java Project"
@@ -77,8 +78,6 @@
       </wizard>
    </extension>
    
-   
-   <!-- ############################ MARKERS ############################## -->
   <extension
         point="org.eclipse.ui.perspectives">
      <perspective
@@ -89,6 +88,9 @@
      </perspective>
   </extension>
    
+   
+   
+   <!-- ############################ MARKERS ############################## -->
    <extension
       	point="org.eclipse.core.resources.markers"
       	id="instructionMarker"

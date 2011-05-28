@@ -96,9 +96,9 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
          * don't necessarily define our own.
          */
         wizardPage = new WizardNewProjectCreationPage(
-        "NewEmbeddedSJProject");
+        "NewEmbeddedJavaProject");
         wizardPage.setDescription("Enter a project name.");
-        wizardPage.setTitle("Create a new Embedded SJ Project");
+        wizardPage.setTitle("Create a new Embedded Java Project");
         addPage(wizardPage);
     }
 
@@ -181,15 +181,18 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             String templatesPath = KlotsPlugin.getDefault().getBundle().getEntry(
                     "/" + KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME).getPath();
             String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
+            String projectSettingsPath = ".settings";
             System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
 
             // FIXME: see if you can use IResource.copy() to copy all template files!
             
-            // add src and bin folders, also add examples package to src
+            // add src, bin and .settings folders, also add examples package to src
             final IFolder srcFolder = container.getFolder(new Path("src"));
             srcFolder.create(true, true, monitor);
             final IFolder binFolder = container.getFolder(new Path("bin"));
             binFolder.create(true, true, monitor);
+            final IFolder projectSettingsFolder = container.getFolder(new Path(projectSettingsPath));
+            projectSettingsFolder.create(true, true, monitor);
             final IFolder examplesFolder = container.getFolder(new Path(examplesPath));
             examplesFolder.create(true, true, monitor);
 
@@ -247,11 +250,18 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             resourceStream = new ByteArrayInputStream(projectFileContent.getBytes());
             // add the adjusted .project file
             addFileToProject(container, new Path(".project"), resourceStream, monitor);
+            
+            // add project settings file ./settings/org.eclipse.jdt.core.prefs
+            resourceStream = this.getClass().getResourceAsStream(
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_PROJECT_SETTINGS_FILE_NAME);
+            addFileToProject(container,
+                    new Path(projectSettingsPath + Path.SEPARATOR + "org.eclipse.jdt.core.prefs"),
+                    resourceStream, monitor);
 
             resourceStream.close();
 
         } catch (IOException ioe) {
-            IStatus status = new Status(IStatus.ERROR, "NewSJProjectWizard", IStatus.OK,
+            IStatus status = new Status(IStatus.ERROR, "NewEmbeddedJavaProjectWizard", IStatus.OK,
                     ioe.getLocalizedMessage(), null);
             System.out.println(ioe.getStackTrace());
             throw new CoreException(status);

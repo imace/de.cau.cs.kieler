@@ -127,7 +127,7 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
             }
         };
         compileAndLink.setText("Build program");
-        compileAndLink.setToolTipText("Build Embedded SJ program");
+        compileAndLink.setToolTipText("Build Embedded Java program");
         compileAndLink.setImageDescriptor(
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/linkIcon.png"));
 //        compileAndLink.setDisabledImageDescriptor(
@@ -146,7 +146,7 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
             }
         };
         downloadToNXT.setText("Download to NXT");
-        downloadToNXT.setToolTipText("Download Embedded SJ program to NXT");
+        downloadToNXT.setToolTipText("Download Embedded Java program to NXT");
         downloadToNXT.setImageDescriptor(
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png"));
 //        downloadToNXT.setDisabledImageDescriptor(
@@ -175,7 +175,7 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
             }
         };
         runProgram.setText("Run program on NXT");
-        runProgram.setToolTipText("Run program on NXT");
+        runProgram.setToolTipText("Run Embedded Java program on NXT");
         runProgram.setImageDescriptor(
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID,
                         "icons/runProgramIcon.png"));

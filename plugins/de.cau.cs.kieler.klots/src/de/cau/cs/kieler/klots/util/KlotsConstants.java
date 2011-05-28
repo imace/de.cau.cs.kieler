@@ -37,6 +37,7 @@ public interface KlotsConstants {
     public static final String KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME = "StartUpText.bin";
     public static final String KLOTS_TEMPLATES_CLASSPATH_FILE_NAME = "classpath.template";
     public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME = "project.template";
+    public static final String KLOTS_TEMPLATES_PROJECT_SETTINGS_FILE_NAME = "org.eclipse.jdt.core.prefs.template";
     public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_JAVA_FILE_NAME = "NewPOJFile.template";
     public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_SJ_FILE_NAME = "NewSJFile.template";
     public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME_OPEN_TAG = "<name>";
