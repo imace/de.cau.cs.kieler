@@ -156,14 +156,16 @@ public class KlotsConnectionsPreferencePage extends PreferencePage
                     + " No saved connection type info found!");
         }
         
-        if (getPreferenceStore().getBoolean(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS)) {
+        if (getPreferenceStore().getBoolean(
+                KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS)) {
             connectionSiteAddressRadioButton.setSelection(true);
             connectionSiteNameRadioButton.setSelection(false);
             //connectionSiteAddressTextField.setEditable(true);
             connectionSiteAddressTextField.setEnabled(true);
             //connectionSiteNameTextField.setEditable(false);
             connectionSiteNameTextField.setEnabled(false);
-        } else if (getPreferenceStore().getBoolean(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK)) {
+        } else if (getPreferenceStore().getBoolean(
+                KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK)) {
             connectionSiteAddressRadioButton.setSelection(false);
             connectionSiteNameRadioButton.setSelection(true);
             //connectionSiteAddressTextField.setEditable(false);
@@ -174,10 +176,10 @@ public class KlotsConnectionsPreferencePage extends PreferencePage
             System.err.println("XXXXXXXXXX>>>> CRITICAL ERROR WHILE READING PREFERENCES -> "
                     + " No saved connection site info found!");
         }
-        connectionSiteNameTextField.setText(
-                getPreferenceStore().getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME));
-        connectionSiteAddressTextField.setText(
-                getPreferenceStore().getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS));
+        connectionSiteNameTextField.setText(getPreferenceStore().getString(
+                KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME));
+        connectionSiteAddressTextField.setText(getPreferenceStore().getString(
+                KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS));
         
     }
 
@@ -377,13 +379,14 @@ public class KlotsConnectionsPreferencePage extends PreferencePage
                         + selectedNXT.name + ", "
                         + selectedNXT.deviceAddress + ", "
                         + (selectedNXT.protocol == NXTCommFactory.USB ? "USB" : "BLUETOOTH") + "<");
-                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK,
-                        false);
-                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME,
-                        selectedNXT.name);
-                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS,
-                        true);
-                getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS,
+                getPreferenceStore().setValue(
+                        KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK, false);
+                getPreferenceStore().setValue(
+                        KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME, selectedNXT.name);
+                getPreferenceStore().setValue(
+                        KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS, true);
+                getPreferenceStore().setValue(
+                        KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS,
                         selectedNXT.deviceAddress);
                 getPreferenceStore().setValue(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE,
                         selectedNXT.protocol == NXTCommFactory.USB

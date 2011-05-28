@@ -50,6 +50,9 @@ public class KlotsPerspective implements IPerspectiveFactory {
 
     
     
+    /**
+     * {@inheritDoc}
+     */
     public void createInitialLayout(final IPageLayout layout) {
         createNewWizardShortcuts(layout);
         createViewLayout(layout);

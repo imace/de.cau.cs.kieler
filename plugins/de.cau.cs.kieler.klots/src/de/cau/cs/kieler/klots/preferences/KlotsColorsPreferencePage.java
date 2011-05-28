@@ -36,21 +36,13 @@ public class KlotsColorsPreferencePage extends FieldEditorPreferencePage
     // CHECKSTYLEOFF LineLength
     
     private static final String COLOR_TEXT_FOREGROUND_STANDARD = "Standard foreground color";
-    private static final String COLOR_TEXT_TOOLTIP_FOREGROUND_STANDARD = "";
     private static final String COLOR_TEXT_BACKGROUND_STANDARD = "Standard background color";
-    private static final String COLOR_TEXT_TOOLTIP_BACKGROUND_STANDARD = "";
     private static final String COLOR_TEXT_FOREGROUND_ALREADY_DONE_MICROSTEP = "Foreground color for already done microsteps";
-    private static final String COLOR_TEXT_TOOLTIP_FOREGROUND_ALREADY_DONE_MICROSTEP = "";
     private static final String COLOR_TEXT_BACKGROUND_ALREADY_DONE_MICROSTEP = "Background color for already done microsteps";
-    private static final String COLOR_TEXT_TOOLTIP_BACKGROUND_ALREADY_DONE_MICROSTEP = "";
     private static final String COLOR_TEXT_FOREGROUND_ACTIVE_MICROSTEP = "Foreground color for the active microstep";
-    private static final String COLOR_TEXT_TOOLTIP_FOREGROUND_ACTIVE_MICROSTEP = "";
     private static final String COLOR_TEXT_BACKGROUND_ACTIVE_MICROSTEP = "Background color for the active microstep";
-    private static final String COLOR_TEXT_TOOLTIP_BACKGROUND_ACTIVE_MICROSTEP = "";
     private static final String COLOR_TEXT_FOREGROUND_YET_TO_BE_DONE_MICROSTEP = "Foreground color for microsteps yet to be done";
-    private static final String COLOR_TEXT_TOOLTIP_FOREGROUND_YET_TO_BE_DONE_MICROSTEP = "";
     private static final String COLOR_TEXT_BACKGROUND_YET_TO_BE_DONE_MICROSTEP = "Background color for microsteps yet to be done";
-    private static final String COLOR_TEXT_TOOLTIP_BACKGROUND_YET_TO_BE_DONE_MICROSTEP = "";
     
     // CHECKSTYLEON LineLength
     

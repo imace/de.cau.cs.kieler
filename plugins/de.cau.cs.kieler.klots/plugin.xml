@@ -63,9 +63,9 @@
       <wizard
             category="de.cau.cs.kieler"
             class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
-            icon="icons/editor7.gif"
+            icon="icons/KLOTS7.png"
             id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
-            name="Embedded SJ Project"
+            name="Embedded Java Project"
             project="true">
       </wizard>
       <wizard
@@ -73,7 +73,7 @@
             class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
             icon="icons/KLOTS5.png"
             id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
-            name="Plain Old Java Embedded File">
+            name="Embedded Java File">
       </wizard>
    </extension>
    

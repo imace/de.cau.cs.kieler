@@ -83,7 +83,8 @@ public class SJInstructionsViewNXTDataObserver extends JSONObjectDataComponent
                     jSONKey = (String) iter.next();
                 }
 
-                if (jSONKey.equals("present")) {   // FIXME: find a way to deal with 'present' hidden in 'awaitDone'
+                if (jSONKey.equals("present")) {
+                    // FIXME: find a way to deal with 'present' hidden in 'awaitDone'
                     continue;
                 }
 
@@ -133,6 +134,7 @@ public class SJInstructionsViewNXTDataObserver extends JSONObjectDataComponent
      */
     public void bringToFront() {
         broughtToFront = false;
+        final int sleepTime = 100;
         Display.getDefault().syncExec(new Runnable() {
             public void run() {
                 // bring view to the front (lazy loading)
@@ -152,7 +154,7 @@ public class SJInstructionsViewNXTDataObserver extends JSONObjectDataComponent
         });
         while (!broughtToFront) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

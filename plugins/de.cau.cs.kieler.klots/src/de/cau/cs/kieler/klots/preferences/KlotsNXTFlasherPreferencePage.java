@@ -81,13 +81,14 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
     public void buildPage(final Composite parent) {
         SelectListener listener = new SelectListener();
         
-        Label description = new Label(parent, SWT.NONE);
-        description.setText("As leJOS NXJ is a firmware replacement, you will need to flash the "
-                + "firmware\n"
+        Label description = new Label(parent, SWT.BOLD);
+        description.setText(
+                "As leJOS NXJ is a firmware replacement, you will need to flash the firmware\n"
                 + "to your NXT. Note that this will overwrite any existing firmware. If you have\n"
                 + "the standard LEGO firmware or other third-party firmware on your NXT,\n"
                 + "existing files will be lost. Make sure your NXT is attached to the PC by its USB\n"
                 + "cable, and switch it on by pressing the orange button.");
+        description.setSize(parent.getSize().x, parent.getSize().y);
         description.setVisible(true);
         
         // flash NXT firmware button
