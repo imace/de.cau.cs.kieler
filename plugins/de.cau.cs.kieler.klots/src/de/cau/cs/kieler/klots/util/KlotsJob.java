@@ -25,6 +25,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
@@ -77,6 +78,7 @@ public class KlotsJob extends Job {
     private String lejosPath = "No leJOS path";
     private KlotsEditor editor;
     private MultiStatus info;
+    private boolean isSJProject = false;
 
 
 
@@ -98,6 +100,11 @@ public class KlotsJob extends Job {
             projectName = activeProject.getName();
             projectPath = activeProject.getLocation().toOSString();
             projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
+            
+            isSJProject = activeProject.exists(
+                    new Path(KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME));
+            System.out.println("(:)(:)(:)(:)(:)(:)(:)(:)(:) CHECKING IF THE PROJECT IS A SJ PROJECT? -> "
+                    + (isSJProject ? "YES!" : "NO!") + " (:)(:)(:)(:)(:)(:)(:)(:)(:)");
 
             // print some eclipse file system information for easier debugging
             System.out.println("%%%%%%%%%%%%%%%>>> eclipse instance LOCATION = >"
@@ -185,7 +192,8 @@ public class KlotsJob extends Job {
                     "--writeorder", "LE",
                     "--classpath", "\".\"",
                     "-v",
-                    "-cp", projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR
+                    "-cp", projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME + OS_PATH_SEPARATOR
+                    + (isSJProject ? projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME + OS_PATH_SEPARATOR : "")
                     + projectPath + projectName + OS_FILE_SEPARATOR + "bin",
                     "." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
                     "-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};

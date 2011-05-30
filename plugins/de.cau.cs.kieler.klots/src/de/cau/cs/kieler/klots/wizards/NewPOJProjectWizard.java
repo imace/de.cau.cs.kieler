@@ -55,12 +55,12 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
  * @author root
  *
  */
-public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
+public class NewPOJProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 
     /**
      * 
      */
-    public static final String ID = "de.cau.cs.kieler.klots.editor.NewSJProjectWizard";
+    public static final String ID = "de.cau.cs.kieler.klots.editor.NewEmbeddedJavaProjectWizard";
 
     // the OS specific file separator char, e.g. '/' or '\'
     private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
@@ -81,7 +81,7 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
     /**
      * Constructor.
      */
-    public NewSJProjectWizard() {
+    public NewPOJProjectWizard() {
         super();
     }
 
@@ -98,7 +98,7 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
         wizardPage = new WizardNewProjectCreationPage(
         "NewEmbeddedJavaProject");
         wizardPage.setDescription("Enter a project name.");
-        wizardPage.setTitle("Create a new Embedded Synchronous Java (SJ) Project");
+        wizardPage.setTitle("Create a new Embedded Java Project");
         addPage(wizardPage);
     }
 
@@ -183,7 +183,7 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
             String projectSettingsPath = ".settings";
             System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
-            
+
             // add src, bin and .settings folders, also add examples package to src
             final IFolder srcFolder = container.getFolder(new Path("src"));
             srcFolder.create(true, true, monitor);
@@ -205,12 +205,6 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             addFileToProject(container, new Path(KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME),
                     resourceStream, monitor);
             
-            // add embeddedSJ.jar
-            resourceStream = this.getClass().getResourceAsStream(
-                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME);
-            addFileToProject(container, new Path(KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME),
-                    resourceStream, monitor);
-            
             // add lejos' classes.jar
             resourceStream = this.getClass().getResourceAsStream(
                     templatesPath + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME
@@ -218,14 +212,9 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             addFileToProject(container, new Path(KlotsConstants.KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME),
                     resourceStream, monitor);
 
-            // add example file EmbeddedABRO.java
-            resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
-            addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"),
-                    resourceStream, monitor);
-
             // add the .classpath file
             resourceStream = this.getClass().getResourceAsStream(
-                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_CLASSPATH_FILE_NAME);
+                    templatesPath + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_CLASSPATH_FILE_NAME);
             addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
 
             // add the .project file
@@ -261,7 +250,7 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
             resourceStream.close();
 
         } catch (IOException ioe) {
-            IStatus status = new Status(IStatus.ERROR, "NewSJProjectWizard", IStatus.OK,
+            IStatus status = new Status(IStatus.ERROR, "NewEmbeddedJavaProjectWizard", IStatus.OK,
                     ioe.getLocalizedMessage(), null);
             System.out.println(ioe.getStackTrace());
             throw new CoreException(status);

@@ -93,8 +93,8 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
         
         // flash NXT firmware button
         flashNXTFirmwareButton = new Button(parent, SWT.NONE);
-        flashNXTFirmwareButton.setText("Flash NXT firmware");
-        flashNXTFirmwareButton.setToolTipText("Flash NXT firmware");
+        flashNXTFirmwareButton.setText(" Flash leJOS NXJ Firmware ");
+        flashNXTFirmwareButton.setToolTipText("Flash leJOS NXJ Firmware");
         flashNXTFirmwareButton.addSelectionListener(listener);
         
         // invisible label to fill out unused space
@@ -196,14 +196,8 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
          */
         public void widgetSelected(final SelectionEvent e) {
             if (e.widget == flashNXTFirmwareButton) {
-                flashNXTFirmwareButton.setEnabled(false);
-                flashNXTFirmwareButton.setSize(flashNXTFirmwareButtonWidth,
-                        flashNXTFirmwareButton.getSize().y);
-                flashNXTFirmwareButton.setText("Flashing NXT firmware...");
-                flashNXTFirmwareButton.setEnabled(true);
-                flashNXTFirmwareButton.setText("Flash NXT firmware");
                 NXTFirmwareFlasher flasher = new NXTFirmwareFlasher(parentComposite);
-                flasher.run();
+                flasher.run(flashNXTFirmwareButton);
             }
         }
     }

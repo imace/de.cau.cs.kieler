@@ -62,7 +62,7 @@ public class NewSJFileWizard extends Wizard implements INewWizard {
     /**
      * 
      */
-    public static final String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"; 
+    public static final String ID = "de.cau.cs.kieler.klots.editor.NewSJFileWizard"; 
 
     // the OS specific file separator char, e.g. '/' or '\'
     //private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");

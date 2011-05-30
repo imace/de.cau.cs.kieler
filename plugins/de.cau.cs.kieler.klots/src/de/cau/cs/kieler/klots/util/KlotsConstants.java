@@ -29,13 +29,15 @@ public interface KlotsConstants {
     public static final String KLOTS_SHORT_NAME = "KLOTS";
     public static final String KLOTS_FULL_NAME = "KIELER LEGO On-line Testing System";
     
-    public static final String KLOTS_TEMPLATES_FOLDER_NAME = "sj_templates";
+    public static final String KLOTS_TEMPLATES_FOLDER_NAME = "templates";
     public static final String KLOTS_TEMPLATES_LEJOS_FOLDER_NAME = "lejos";
     public static final String KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME = "embeddedSJ.jar";
+    public static final String KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME = "embeddedJava.jar";
     public static final String KLOTS_TEMPLATES_LEJOS_CLASSES_JAR_NAME = "classes.jar";
     public static final String KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME = "lejos_nxt_rom.bin";
     public static final String KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME = "StartUpText.bin";
-    public static final String KLOTS_TEMPLATES_CLASSPATH_FILE_NAME = "classpath.template";
+    public static final String KLOTS_TEMPLATES_EMBEDDED_JAVA_CLASSPATH_FILE_NAME = "classpathEmbeddedJava.template";
+    public static final String KLOTS_TEMPLATES_EMBEDDED_SJ_CLASSPATH_FILE_NAME = "classpathSJ.template";
     public static final String KLOTS_TEMPLATES_PROJECT_FILE_NAME = "project.template";
     public static final String KLOTS_TEMPLATES_PROJECT_SETTINGS_FILE_NAME = "org.eclipse.jdt.core.prefs.template";
     public static final String KLOTS_TEMPLATES_NEW_EMBEDDED_JAVA_FILE_NAME = "NewPOJFile.template";

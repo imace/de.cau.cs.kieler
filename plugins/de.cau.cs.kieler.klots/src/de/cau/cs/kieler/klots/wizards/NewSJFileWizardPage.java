@@ -62,8 +62,8 @@ public class NewSJFileWizardPage extends WizardPage {
      */
     public NewSJFileWizardPage(final ISelection selection) {
         super("NewSJFileWizardPage");
-        setTitle("Create a new Embedded SJ file");
-        setDescription("Creates a new Embedded SJ file");
+        setTitle("Create a new Embedded Synchronous Java (SJ) file");
+        setDescription("Creates a new Embedded Synchronous Java (SJ) file");
         this.selection = selection;
     }
 
@@ -144,7 +144,7 @@ public class NewSJFileWizardPage extends WizardPage {
                 containerText.setText(container.getFullPath().toString());
             }
         }
-        fileText.setText("NewSJFile." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
+        fileText.setText("SJFile." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
     }
 
     

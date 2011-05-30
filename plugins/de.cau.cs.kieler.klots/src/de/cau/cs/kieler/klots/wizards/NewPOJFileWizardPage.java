@@ -61,9 +61,9 @@ public class NewPOJFileWizardPage extends WizardPage {
      * @param selection 
      */
     public NewPOJFileWizardPage(final ISelection selection) {
-        super("NewPOJFileWizzardPage");
-        setTitle("Create a new plain old java embedded file");
-        setDescription("Creates a new plain old java embedded SJ file");
+        super("NewEmbeddedJavaFileWizzardPage");
+        setTitle("Create a new Embedded Java file");
+        setDescription("Creates a new Embedded Java file");
         this.selection = selection;
     }
 
@@ -144,7 +144,7 @@ public class NewPOJFileWizardPage extends WizardPage {
                 containerText.setText(container.getFullPath().toString());
             }
         }
-        fileText.setText("NewPlainJavaLeJOSFile." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
+        fileText.setText("EmbddJavaFile." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
     }
 
     
@@ -158,7 +158,7 @@ public class NewPOJFileWizardPage extends WizardPage {
                 getShell(),
                 ResourcesPlugin.getWorkspace().getRoot(),
                 false,
-                "Select a parent SJ project");
+                "Select a parent Embedded Java project");
         if (dialog.open() == ContainerSelectionDialog.OK) {
             Object[] result = dialog.getResult();
             if (result.length == 1) {
@@ -178,11 +178,11 @@ public class NewPOJFileWizardPage extends WizardPage {
         String fileName = getFileName();
 
         if (getContainerName().length() == 0) {
-            updateStatus("Parent SJ project must be specified");
+            updateStatus("Parent Embedded Java project must be specified");
             return;
         }
         if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-            updateStatus("Parent SJ project must exist");
+            updateStatus("Parent Embedded Java project must exist");
             return;
         }
         if (!container.isAccessible()) {

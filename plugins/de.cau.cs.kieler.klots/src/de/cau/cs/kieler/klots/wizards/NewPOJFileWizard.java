@@ -63,7 +63,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
     /**
      * 
      */
-    public static final String ID = "de.cau.cs.kieler.klots.editor.NewPOJFileWizard";
+    public static final String ID = "de.cau.cs.kieler.klots.editor.NewEmbeddedJavaFileWizard";
 
     // the OS specific file separator char, e.g. '/' or '\'
     //private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
@@ -140,7 +140,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
         IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
         IResource resource = root.findMember(new Path(containerName));
         if (!resource.exists() || !(resource instanceof IContainer)) {
-            throwCoreException("SJ project \"" + containerName + "\" does not exist.");
+            throwCoreException("Embedded Java project \"" + containerName + "\" does not exist.");
         }
         IContainer container = (IContainer) resource;
         final IFile file = container.getFile(new Path(fileName));
@@ -218,7 +218,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
     
     private void throwCoreException(final String message) throws CoreException {
         IStatus status =
-            new Status(IStatus.ERROR, "NewPOJFileWizard", IStatus.OK, message, null);
+            new Status(IStatus.ERROR, "NewEmbeddedJavaFileWizard", IStatus.OK, message, null);
         throw new CoreException(status);
     }
 

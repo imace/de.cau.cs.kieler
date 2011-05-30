@@ -83,12 +83,17 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
     
     /**
      * Runs the application.
+     * @param button 
      */
-    public void run() {
+    public void run(final Button button) {
+        button.setEnabled(false);
+        
         // Don't return from open() until window closes
         setBlockOnOpen(true);
         // Open the main window
         open();
+        
+        button.setEnabled(true);
     }
 
     
@@ -102,7 +107,7 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
         // Set the title bar text and the size
-        shell.setText("Install  NXJ  Firmware in  NXT");
+        shell.setText("Flash  leJOS NXJ  Firmware");
         shell.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
@@ -121,13 +126,16 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
         
         // Create the Start button
         flashButton = new Button(composite, SWT.PUSH);
-        flashButton.setText(" Flash Firmware ");
+        flashButton.setText(" Flash leJOS NXJ Firmware ");
         flashButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         // Display a Confirmation dialog
         flashButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(final SelectionEvent event) {
-                flasher.setSystem(true);
-                flasher.schedule();
+                if (flashButton.isEnabled()) {
+                    flashButton.setEnabled(false);
+                    flasher.setSystem(true);
+                    flasher.schedule();
+                }
             }
             public void widgetDefaultSelected(final SelectionEvent e) {
                 // do nothing
@@ -167,7 +175,6 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
      */
     private class Flasher extends Job implements NXJFlashUI {
         
-        private boolean flashFirmwareConfirmed = false;
         private boolean flashExceptionOccured = false;
         private NXTFlashUpdate updater = new NXTFlashUpdate(this);
         
@@ -201,84 +208,76 @@ public class NXTFirmwareFlasher extends ApplicationWindow {
          */
         public IStatus run(final IProgressMonitor monitor) {
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖ FIRMWARE FLASH PROCESS STARTED ÖÖÖÖÖÖÖÖÖÖÖÖÖ");
-            flashFirmwareConfirmed = true;
-            while (flashFirmwareConfirmed) {
-                Display.getDefault().syncExec(new Runnable() {
-                    public void run() {
+            Display.getDefault().syncExec(new Runnable() {
+                public void run() {
 
-                        //                wait for NXT to be connected
-                        // ----------------------------------------------------------
-                        MessageDialog.openInformation(parentShell, "",
-                        "Click OK when your NXT is turned on and connected ");
-                        // ----------------------------------------------------------
+                    //                wait for NXT to be connected
+                    // ----------------------------------------------------------
+                    MessageDialog.openInformation(parentShell, "",
+                    "Click OK when your NXT is turned on and connected ");
+                    // ----------------------------------------------------------
+                    
+                    //           get NXT firmware images (VM and menu)
+                    // ----------------------------------------------------------
+                    try {
+                        String vmPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
+                                + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
+                                + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
+                        String menuPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
+                                + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
+                                + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
                         
-                        //           get NXT firmware images (VM and menu)
-                        // ----------------------------------------------------------
-                        try {
-                            String vmPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
-                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
-                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_FILE_NAME;
-                            String menuPath = KlotsConstants.KLOTS_TEMPLATES_FOLDER_NAME + Path.SEPARATOR
-                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FOLDER_NAME + Path.SEPARATOR
-                                    + KlotsConstants.KLOTS_TEMPLATES_LEJOS_FIRMWARE_MENU_FILE_NAME;
-                            
-                            Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
-                            String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
-                            System.out.println("%%%%%%%%>>> de.cau.cs.kieler.klots relative LOCATION = >"
-                                    + klotsPath + "<");
-                            String eclipseInstallLocation =
-                                Platform.getInstallLocation().getURL().getPath();
-                            // test if eclipse is a working instance or installed one
-                            if (klotsPath.endsWith(".jar")) {
-                                System.out.println("%%%%%%%%>>> eclipse install LOCATION = >"
-                                        + eclipseInstallLocation + "<");
-                                klotsPath = eclipseInstallLocation + klotsPath;
-                            }
-                            System.out.println("%%%%%%%%>>> final LOCATION = >" + klotsPath + "<");
-                            
-                            byte[] memoryImage = updater.createFirmwareImage(
-                                    vmPath, menuPath, klotsPath);
-                            // ------------------------------------------------------
-
-                            //   wait for user to confirm format NXT memory process
-                            // ------------------------------------------------------
-                            boolean formatNXTMemory = MessageDialog.openConfirm(parentShell,
-                                    "Clear memory first", "Do you want to erase all NXT files now?");
-                            // ------------------------------------------------------
-                            
-                            //                    flash NXT firmware
-                            // ------------------------------------------------------
-                            byte[] fs = null;
-                            if (formatNXTMemory) {
-                                fs = updater.createFilesystemImage();
-                            }
-                            NXTSamba nxt = openDevice();
-                            if (nxt != null) {
-                                updater.updateDevice(nxt, memoryImage, fs, true, true, true);
-                            }
-                            // ------------------------------------------------------
-                            
-                        //                handle exception occurred
-                        // ----------------------------------------------------------
-                        } catch (final Exception e) {
-                            MessageDialog.openError(parentShell, "Fatal Error",
-                                    "Bad news: An error has occurred " + e);
-                            e.printStackTrace();
-                            flashFirmwareConfirmed = false;
-                            flashExceptionOccured = true;
-                            return;
+                        Bundle klotsBundle = Platform.getBundle("de.cau.cs.kieler.klots");
+                        String klotsPath = klotsBundle.getLocation().replaceFirst(".*file:", "");
+                        System.out.println("%%%%%%%%>>> de.cau.cs.kieler.klots relative LOCATION = >"
+                                + klotsPath + "<");
+                        String eclipseInstallLocation =
+                            Platform.getInstallLocation().getURL().getPath();
+                        // test if eclipse is a working instance or installed one
+                        if (klotsPath.endsWith(".jar")) {
+                            System.out.println("%%%%%%%%>>> eclipse install LOCATION = >"
+                                    + eclipseInstallLocation + "<");
+                            klotsPath = eclipseInstallLocation + klotsPath;
                         }
-                        // ----------------------------------------------------------
+                        System.out.println("%%%%%%%%>>> final LOCATION = >" + klotsPath + "<");
                         
-                        //         wait for user to confirm another flashing
-                        // ----------------------------------------------------------
-                        flashFirmwareConfirmed = MessageDialog.openConfirm(parentShell, "",
-                                "Do you want to flash firmware again?");
-                        // ----------------------------------------------------------
+                        byte[] memoryImage = updater.createFirmwareImage(
+                                vmPath, menuPath, klotsPath);
+                        // ------------------------------------------------------
+
+                        //   wait for user to confirm format NXT memory process
+                        // ------------------------------------------------------
+                        boolean formatNXTMemory = MessageDialog.openConfirm(parentShell,
+                                "Clear memory first", "Do you want to erase all NXT files now?");
+                        // ------------------------------------------------------
                         
-                    } // end run()
-                }); // end synchExec()
-            } // end while()
+                        //                    flash NXT firmware
+                        // ------------------------------------------------------
+                        byte[] fs = null;
+                        if (formatNXTMemory) {
+                            fs = updater.createFilesystemImage();
+                        }
+                        NXTSamba nxt = openDevice();
+                        if (nxt != null) {
+                            updater.updateDevice(nxt, memoryImage, fs, true, true, true);
+                        }
+                        // ------------------------------------------------------
+                        
+                    //                handle exception occurred
+                    // ----------------------------------------------------------
+                    } catch (final Exception e) {
+                        MessageDialog.openError(parentShell, "Fatal Error",
+                                "Bad news: An error has occurred " + e);
+                        e.printStackTrace();
+                        flashExceptionOccured = true;
+                        flashButton.setEnabled(true);
+                        return;
+                    }
+                    // ----------------------------------------------------------
+                 
+                    flashButton.setEnabled(true);
+                } // end run()
+            }); // end synchExec()
             if (flashExceptionOccured) {
                 return Status.CANCEL_STATUS;
             }
