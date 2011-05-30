@@ -1,0 +1,27 @@
+package <PACKAGE>;
+
+public class <CLASS> {
+
+    /* UNCOMMENT NEXT LINE TO ENABLE REMOTE CONSOLE PRINT */
+	// static sj.EmbeddedRemoteConsole console = new sj.EmbeddedRemoteConsole();
+
+	public static void main(String[] args) {
+		/* Uncomment next line to open remote print console. */
+		// console.open();
+		
+		// ------------------------------------------------------------------
+		// ------------------------------------------------------------------
+		
+		
+		
+		// WRITE YOUR CODE HERE
+		
+		
+		
+		// ------------------------------------------------------------------
+		// ------------------------------------------------------------------
+		
+		/* Uncomment next line to close the remote console on program exit. */
+		// console.close();
+	}
+}

@@ -26,6 +26,17 @@
      </content>
   </extension>
   <extension
+         point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
+      <executionFile
+            file="execution/embeddedSJ.execution">
+         <editor
+               id="de.cau.cs.kieler.klots.editor.KlotsEditor"
+               name="KLOTS Editor"
+               priority="6">
+         </editor>
+      </executionFile>
+   </extension>
+  <extension
         point="org.eclipse.ui.editors">
      <editor
            class="de.cau.cs.kieler.klots.editor.KlotsEditor"
@@ -51,10 +62,19 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="de.cau.cs.kieler"
-            class="de.cau.cs.kieler.klots.wizards.NewSJFileWizard"
-            icon="icons/editor7.gif"
-            id="de.cau.cs.kieler.klots.editor.NewSJFileWizard"
-            name="Embedded SJ File">
+            class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
+            icon="icons/KLOTS5.png"
+            id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
+            name="Embedded Java File">
+      </wizard>
+      <wizard
+            category="de.cau.cs.kieler"
+            class="de.cau.cs.kieler.klots.wizards.NewPOJProjectWizard"
+            finalPerspective="de.cau.cs.kieler.klots.KlotsPerspective"
+            icon="icons/KLOTS7.png"
+            id="de.cau.cs.kieler.klots.editor.NewEmbeddedJavaProjectWizard"
+            name="Embedded Java Project"
+            project="true">
       </wizard>
       <category
             id="de.cau.cs.kieler.klots.editor"
@@ -62,19 +82,19 @@
       </category>
       <wizard
             category="de.cau.cs.kieler"
-            class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
-            finalPerspective="de.cau.cs.kieler.klots.KlotsPerspective"
-            icon="icons/KLOTS7.png"
-            id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
-            name="Embedded Java Project"
-            project="true">
+            class="de.cau.cs.kieler.klots.wizards.NewSJFileWizard"
+            icon="icons/editor7.gif"
+            id="de.cau.cs.kieler.klots.editor.NewSJFileWizard"
+            name="Embedded SJ File">
       </wizard>
       <wizard
             category="de.cau.cs.kieler"
-            class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
-            icon="icons/KLOTS5.png"
-            id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
-            name="Embedded Java File">
+            class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
+            finalPerspective="de.cau.cs.kieler.klots.KlotsPerspective"
+            icon="icons/editor7.gif"
+            id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
+            name="Embedded SJ Project"
+            project="true">
       </wizard>
    </extension>
    
