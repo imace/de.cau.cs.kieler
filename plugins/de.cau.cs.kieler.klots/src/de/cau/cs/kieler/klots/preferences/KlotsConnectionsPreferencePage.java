@@ -13,7 +13,6 @@
  */
 package de.cau.cs.kieler.klots.preferences;
 
-import java.io.IOException;
 import lejos.pc.comm.NXTCommFactory;
 import lejos.pc.comm.NXTInfo;
 
@@ -191,12 +190,13 @@ public class KlotsConnectionsPreferencePage extends PreferencePage
         dialog.setMessage(message);
         dialog.setHelpAvailable(false);
         
-        NXTInfo[] nxts = NXTCommunicator.getInstance().searchForNXTs();
-        try {
-            NXTCommunicator.getInstance().getNXTConnector().close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        NXTInfo[] nxts;
+        nxts = NXTCommunicator.getInstance().searchForNXTs();
+//        try {
+//            NXTCommunicator.getInstance().getNXTConnector().close();
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        }
         String[] elements = new String[nxts.length];
         for (int i = 0; i < nxts.length; i++) {
             elements[i] = nxts[i].name + ", " + nxts[i].deviceAddress + ", "

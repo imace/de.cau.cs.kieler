@@ -35,7 +35,7 @@ public class KlotsPreferenceInitializer extends AbstractPreferenceInitializer {
         IPreferenceStore store = KlotsPlugin.getDefault().getPreferenceStore();
         
         // connections
-        store.setDefault(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE, "b");
+        store.setDefault(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE, "u");
         
         // colors
         store.setDefault(KlotsPreferenceConstants.P_COLOR_FOREGROUND_STANDARD,

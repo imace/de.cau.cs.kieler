@@ -44,7 +44,6 @@ public class KlotsNXTFlasherPreferencePage extends PreferencePage
     
     /** The NXT firmware flash button. */
     private Button flashNXTFirmwareButton;
-    private final int flashNXTFirmwareButtonWidth = 120;
     private Composite parentComposite;
     
     

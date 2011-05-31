@@ -219,9 +219,6 @@ public class KlotsJob extends Job {
     private void performDownloadAction() {
         setProperty(IProgressConstants.ICON_PROPERTY,
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png"));
-        
-        
-        
         // *************************************************************************************** //
 //        String connType;
 //        if (KlotsPlugin.getDefault().getPreferenceStore()
@@ -234,9 +231,7 @@ public class KlotsJob extends Job {
         
 //        String[] args = {connType, projectPath + projectName + OS_FILE_SEPARATOR + "bin"
 //                + OS_FILE_SEPARATOR + fileName + ".nxj"};
-        
         // *************************************************************************************** //
-        
         String argsStr = "";
         if (KlotsPlugin.getDefault().getPreferenceStore()
                 .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE)
@@ -259,10 +254,7 @@ public class KlotsJob extends Job {
                 + fileName + ".nxj";
         
         String[] args = argsStr.split(";");
-        
         // *************************************************************************************** //
-        
-        
         
         NXJUpload up = new NXJUpload();
         try {
@@ -272,9 +264,14 @@ public class KlotsJob extends Job {
             info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
         } catch (Exception le) {
             le.printStackTrace();
+            String msg = le.getMessage();
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1,
                     "Error while trying to download Embedded SJ program " + fileName + "!", null);
-            info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
+            info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, msg, null));
+            if (msg.contains("No NXT found")) { 
+                msg = "Are the connection preferences set up properly?";
+                info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, msg, null));
+            }
         }
     }
 
