@@ -13,6 +13,7 @@
  */
 package de.cau.cs.kieler.klots;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -53,6 +54,16 @@ public class KlotsPlugin extends AbstractUIPlugin {
         plugin = this;
         // create color provider
         colorProvider = new ColorProvider(getPreferenceStore());
+        String nxjHome = Platform.getInstallLocation().getURL().getPath();
+        try {
+            String prevVal = System.setProperty("nxj.home", nxjHome);
+            System.out.println("|%|%|%|%|%|%|%|%| >>> setting 'nxj.home' to: >" + nxjHome + "<");
+            System.out.println("|%|%|%|%|%|%|%|%| >>> previous value ot 'nxj.home': >" + prevVal + "<");
+        } catch (SecurityException e) {
+            System.err.println("====== EXCEPTION WHILE TRYING TO SET SYSTEM PROPERTY 'nxt.home' ======");
+            e.printStackTrace();
+            System.err.println("======================================================================");
+        }
     }
 
     
