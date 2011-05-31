@@ -171,6 +171,8 @@ public interface KlotsConstants {
     public static final String STRING_START_STRING = "\"";
     public static final char STRING_END_CHAR = '\"';
     public static final String STRING_END_STRING = "\"";
+    
+    public static final String SEARATOR_STRING = "<#>";
 
     // CHECKSTYLEON LineLength
 

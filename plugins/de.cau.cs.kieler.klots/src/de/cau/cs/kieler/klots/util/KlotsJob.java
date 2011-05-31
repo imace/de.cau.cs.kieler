@@ -13,7 +13,6 @@
  */
 package de.cau.cs.kieler.klots.util;
 
-import js.common.CLIToolProgressMonitor;
 import js.tinyvm.TinyVM;
 import js.tinyvm.TinyVMException;
 import lejos.nxt.remote.NXTCommand;
@@ -199,12 +198,17 @@ public class KlotsJob extends Job {
                     "-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
             // CHECKSTYLEON LineLength
             
+            StringBuffer buf = new StringBuffer();
             final TinyVM link = new TinyVM();
-            link.addProgressMonitor(new CLIToolProgressMonitor());
+            link.addProgressMonitor(new LinkProgramProgressMonitor(buf));
             link.start(args);
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0,
                     "Embedded SJ program " + fileName + " built successfully!", null);
-            info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+            String[] output = buf.toString().split(KlotsConstants.SEARATOR_STRING);
+            buf = null;
+            for (String s : output) {
+                info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, s, null));
+            }
         } catch (TinyVMException e) {
             e.printStackTrace();
             e.printStackTrace();
