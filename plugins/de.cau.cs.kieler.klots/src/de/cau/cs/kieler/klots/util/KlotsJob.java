@@ -220,16 +220,49 @@ public class KlotsJob extends Job {
         setProperty(IProgressConstants.ICON_PROPERTY,
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png"));
         
-        String connType;
+        
+        
+        // *************************************************************************************** //
+//        String connType;
+//        if (KlotsPlugin.getDefault().getPreferenceStore()
+//                .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE)
+//                .equals(KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_USB)) {
+//            connType = "-u";
+//        } else {
+//            connType = "-b";
+//        }
+        
+//        String[] args = {connType, projectPath + projectName + OS_FILE_SEPARATOR + "bin"
+//                + OS_FILE_SEPARATOR + fileName + ".nxj"};
+        
+        // *************************************************************************************** //
+        
+        String argsStr = "";
         if (KlotsPlugin.getDefault().getPreferenceStore()
                 .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_TYPE)
                 .equals(KlotsPreferenceConstants.P_CONNECTION_PROTOCOL_USB)) {
-            connType = "-u";
+            argsStr = "-u;";
         } else {
-            connType = "-b";
+            argsStr = "-b;";
+            if (KlotsPlugin.getDefault().getPreferenceStore().getBoolean(
+                    KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_BRICK_ADDRESS)) {
+                argsStr += "-d;" + KlotsPlugin.getDefault().getPreferenceStore()
+                .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_ADDRESS) + ";";
+            }
+            if (KlotsPlugin.getDefault().getPreferenceStore().getBoolean(
+                    KlotsPreferenceConstants.P_CONNECTION_CONNECT_TO_NAMED_BRICK)) {
+                argsStr += "-n;" + KlotsPlugin.getDefault().getPreferenceStore()
+                .getString(KlotsPreferenceConstants.P_CONNECTION_CONNECTION_BRICK_NAME) + ";";
+            }
         }
-        String[] args = {connType, projectPath + projectName + OS_FILE_SEPARATOR + "bin"
-                + OS_FILE_SEPARATOR + fileName + ".nxj"};
+        argsStr += projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR
+                + fileName + ".nxj";
+        
+        String[] args = argsStr.split(";");
+        
+        // *************************************************************************************** //
+        
+        
         
         NXJUpload up = new NXJUpload();
         try {
