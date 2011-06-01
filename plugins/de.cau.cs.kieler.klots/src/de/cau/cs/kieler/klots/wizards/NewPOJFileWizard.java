@@ -198,7 +198,12 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
                                     "." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION, ""));
                 }
                 if (projectFileLine.contains(KlotsConstants.KLOTS_TEMPLATES_PACKAGE_TAG)) {
-                    String packageName = projectName.replaceFirst(".*/src/", "");
+                    String packageName = projectName.replaceFirst(".*/src/", "");  // note the second '/'
+                    // if the file is not in a package, ignore the 'package <A PACKAGE>' line
+                    if (packageName.equals(projectName) || packageName.equals("")) {
+                        projectFileLine = "";
+                        continue;
+                    }
                     packageName = packageName.replace('/', '.');
                     projectFileLine = projectFileLine.replace(
                             KlotsConstants.KLOTS_TEMPLATES_PACKAGE_TAG, packageName);

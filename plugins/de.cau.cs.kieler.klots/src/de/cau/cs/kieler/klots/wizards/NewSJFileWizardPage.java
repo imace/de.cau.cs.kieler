@@ -176,13 +176,22 @@ public class NewSJFileWizardPage extends WizardPage {
         IResource container =
             ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getContainerName()));
         String fileName = getFileName();
-
+        
         if (getContainerName().length() == 0) {
             updateStatus("Parent SJ project must be specified");
             return;
         }
         if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-            updateStatus("Parent SJ project must exist");
+            updateStatus("Parent SJ project and parent package must exist");
+            return;
+        }
+        if (!getContainerName().contains(Path.SEPARATOR + "src" + Path.SEPARATOR)) {
+            updateStatus("A new file can only be created inside a package in the src folder");
+            return;
+        }
+        if (getContainerName().endsWith(Path.SEPARATOR + "src")
+                || getContainerName().endsWith(Path.SEPARATOR + "src" + Path.SEPARATOR)) {
+            updateStatus("A package must be specified");
             return;
         }
         if (!container.isAccessible()) {
@@ -222,6 +231,15 @@ public class NewSJFileWizardPage extends WizardPage {
      */
     public String getContainerName() {
         return containerText.getText();
+    }
+    
+    
+    
+    /**
+     * @param name  
+     */
+    public void setContainerName(final String name) {
+        containerText.setText(name);
     }
 
     

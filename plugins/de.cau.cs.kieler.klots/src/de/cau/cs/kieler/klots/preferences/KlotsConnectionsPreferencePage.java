@@ -395,6 +395,7 @@ public class KlotsConnectionsPreferencePage extends PreferencePage
                 
                 // update preference page
                 KlotsConnectionsPreferencePage.this.restoreSavedPreferences();
+                //KlotsPlugin.getDefault().getWorkbench().restart();
             }
         }
     }

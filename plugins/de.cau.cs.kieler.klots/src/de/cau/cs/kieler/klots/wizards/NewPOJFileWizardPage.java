@@ -182,7 +182,11 @@ public class NewPOJFileWizardPage extends WizardPage {
             return;
         }
         if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-            updateStatus("Parent Embedded Java project must exist");
+            updateStatus("Parent SJ project and parent package must exist");
+            return;
+        }
+        if (!getContainerName().contains(Path.SEPARATOR + "src" + Path.SEPARATOR)) {
+            updateStatus("A new file can only be created inside a package in the src folder");
             return;
         }
         if (!container.isAccessible()) {

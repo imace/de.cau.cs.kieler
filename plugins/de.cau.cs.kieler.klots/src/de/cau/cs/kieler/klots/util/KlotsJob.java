@@ -73,7 +73,8 @@ public class KlotsJob extends Job {
     private String jobType = "No job";
     private String projectName = "No project name";
     private String projectPath = "No project path";
-    private String fileName = "No file nale";
+    private String fileRelativePath = "No file relative path";
+    private String fileName = "No file name";
     private String lejosPath = "No leJOS path";
     private KlotsEditor editor;
     private MultiStatus info;
@@ -97,8 +98,14 @@ public class KlotsJob extends Job {
                     0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
             IProject activeProject = file.getProject();
             projectName = activeProject.getName();
+            System.out.println("HHHHHHHH>>> project name is: >" + projectName + "<");
             projectPath = activeProject.getLocation().toOSString();
             projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
+            System.out.println("HHHHHHHH>>> project path is: >" + projectPath + "<");
+            fileRelativePath = file.getProjectRelativePath().toOSString().replaceFirst("src", "");
+            int fileNameIndex = fileRelativePath.lastIndexOf(file.getName());
+            fileRelativePath = fileRelativePath.substring(0, fileNameIndex);
+            System.out.println("HHHHHHHH>>> file final relative path is: >" + fileRelativePath + "<");
             
             isSJProject = activeProject.exists(
                     new Path(KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME));
@@ -194,7 +201,8 @@ public class KlotsJob extends Job {
                     "-cp", projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME + OS_PATH_SEPARATOR
                     + (isSJProject ? projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME + OS_PATH_SEPARATOR : "")
                     + projectPath + projectName + OS_FILE_SEPARATOR + "bin",
-                    "." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
+                    //"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
+                    "." + fileRelativePath + fileName,
                     "-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
             // CHECKSTYLEON LineLength
             
