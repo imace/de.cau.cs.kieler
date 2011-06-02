@@ -186,29 +186,29 @@ public class KlotsJob extends Job {
     private void performLinkingAction() {
         setProperty(IProgressConstants.ICON_PROPERTY,
                 KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/linkIcon.png"));
+        
+        // TODO: see if possible to remove 'embeddedSJ.jar' from project's directory
+        // and give a path to the 'embeddedSJ.jar' file in 'sj_templates' or even better
+        // give a path to the 'de.cau.cs.kieler.sj' bundle
+        // and to the 'de.cau.cs.kieler.klots.sj.embedded' package in the KLOTS plugin
+        // (this package is perhaps to be placed in a separate plugin)
+        // CHECKSTYLEOFF LineLength
+        final String[] args = {"--bootclasspath", lejosPath,
+                "--writeorder", "LE",
+                "--classpath", "\".\"",
+                "-v",
+                "-cp", projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME + OS_PATH_SEPARATOR
+                + (isSJProject ? projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME + OS_PATH_SEPARATOR : "")
+                + projectPath + projectName + OS_FILE_SEPARATOR + "bin",
+                //"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
+                "." + fileRelativePath + fileName,
+                "-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
+        // CHECKSTYLEON LineLength
+        
+        final TinyVM link = new TinyVM();
+        StringBuffer buf = new StringBuffer();
+        link.addProgressMonitor(new LinkProgramProgressMonitor(buf));
         try {
-
-            // TODO: see if possible to remove 'embeddedSJ.jar' from project's directory
-            // and give a path to the 'embeddedSJ.jar' file in 'sj_templates' or even better
-            // give a path to the 'de.cau.cs.kieler.sj' bundle
-            // and to the 'de.cau.cs.kieler.klots.sj.embedded' package in the KLOTS plugin
-            // (this package is perhaps to be placed in a separate plugin)
-            // CHECKSTYLEOFF LineLength
-            final String[] args = {"--bootclasspath", lejosPath,
-                    "--writeorder", "LE",
-                    "--classpath", "\".\"",
-                    "-v",
-                    "-cp", projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_JAVA_JAR_NAME + OS_PATH_SEPARATOR
-                    + (isSJProject ? projectPath + projectName + OS_FILE_SEPARATOR + KlotsConstants.KLOTS_TEMPLATES_EMBEDDED_SJ_JAR_NAME + OS_PATH_SEPARATOR : "")
-                    + projectPath + projectName + OS_FILE_SEPARATOR + "bin",
-                    //"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
-                    "." + fileRelativePath + fileName,
-                    "-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
-            // CHECKSTYLEON LineLength
-            
-            StringBuffer buf = new StringBuffer();
-            final TinyVM link = new TinyVM();
-            link.addProgressMonitor(new LinkProgramProgressMonitor(buf));
             link.start(args);
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0,
                     "Embedded SJ program " + fileName + " built successfully!", null);
@@ -223,6 +223,11 @@ public class KlotsJob extends Job {
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1,
                     "Error while trying to build Embedded SJ program " + fileName + "!", null);
             info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, e.getMessage(), null));
+            String[] output = buf.toString().split(KlotsConstants.SEARATOR_STRING);
+            buf = null;
+            for (String s : output) {
+                info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, s, null));
+            }
         }
     }
 
@@ -269,16 +274,27 @@ public class KlotsJob extends Job {
         // *************************************************************************************** //
         
         NXJUpload up = new NXJUpload();
+        StringBuffer buf = new StringBuffer();
+        up.addLogListener(new CommandLogListener(buf));
         try {
             up.run(args);
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0,
                     "Embedded SJ program " + fileName + " downloaded successfully!", null);
-            info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+            String[] output = buf.toString().split(KlotsConstants.SEARATOR_STRING);
+            buf = null;
+            for (String s : output) {
+                info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, s, null));
+            }
         } catch (Exception le) {
             le.printStackTrace();
             String msg = le.getMessage();
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1,
                     "Error while trying to download Embedded SJ program " + fileName + "!", null);
+            String[] output = buf.toString().split(KlotsConstants.SEARATOR_STRING);
+            buf = null;
+            for (String s : output) {
+                info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 1, s, null));
+            }
             info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, msg, null));
             if (msg.contains("No NXT found")) { 
                 msg = "Are the connection preferences set up properly?";
@@ -299,6 +315,7 @@ public class KlotsJob extends Job {
             nxtCommand.setNXTComm(nxtComm);
             nxtCommand.startProgram(fileName + ".nxj");
             // must close low level transmission in order to be able to start a high level transmission
+            // FIXME: use nxtCommand.close() instead???
             NXTCommunicator.getInstance().closeTransmission(false);
             if (editor instanceof KlotsEditor) {
                 editor.initSJContent();

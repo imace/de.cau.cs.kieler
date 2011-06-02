@@ -43,6 +43,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**
@@ -152,6 +153,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
                 file.create(stream, true, monitor);
             }
             stream.close();
+//            PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(fileName, KlotsEditor.ID);
         } catch (IOException e) {
             e.printStackTrace();
         }
