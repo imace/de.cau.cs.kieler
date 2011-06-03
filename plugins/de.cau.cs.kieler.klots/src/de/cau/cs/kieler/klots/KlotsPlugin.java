@@ -152,6 +152,7 @@ public class KlotsPlugin extends AbstractUIPlugin {
                 new PerspectiveAdapter() {
                     public void perspectiveActivated(final IWorkbenchPage page,
                             final IPerspectiveDescriptor perspective) {
+                        super.perspectiveActivated(page, perspective);
                         if (perspective.getId().equals(KlotsPerspective.ID)) {
                             System.out.println("|%|%|%|%|%|%|%|%| >>> Setting the default editor for "
                                     + "Embedded Java files (*."
@@ -173,6 +174,7 @@ public class KlotsPlugin extends AbstractUIPlugin {
                     }
                     public void perspectiveDeactivated(final IWorkbenchPage page,
                             final IPerspectiveDescriptor perspective) {
+                        super.perspectiveActivated(page, perspective);
                         if (perspective.getId().equals(KlotsPerspective.ID)) {
                             System.out.println("|%|%|%|%|%|%|%|%| >>> Setting the default editors for "
                                     + "Embedded Java files (*."
