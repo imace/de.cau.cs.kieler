@@ -323,8 +323,8 @@ public class KlotsJob extends Job {
                     showConnectDialog();
                 }
             }
-            info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, fileName + " is running!", null);
-            info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+//            info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, fileName + " is running!", null);
+//            info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
             
         } catch (Exception le) {
             le.printStackTrace();
@@ -380,11 +380,11 @@ public class KlotsJob extends Job {
         return new Action() {
             public void run() {
                 boolean connect = MessageDialog.openQuestion(editor.getEditorSite().getShell(),
-                        "KLOTS", "Connect to NXT?\n(Please make this choice on the NXT first.)");
+                        "KLOTS", fileName + " is running!\n"
+                        + "Connect to NXT?\n(Please make this choice on the NXT first.)");
                 if (connect) {
                     NXTCommunicator.getInstance()
                     .sendMessage(KlotsConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY);
-//                    RemotePrintReceiver.init();
                     RemotePrintReceiver.getInstance().start();
                 }
             }

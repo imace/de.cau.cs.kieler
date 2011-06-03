@@ -28,6 +28,9 @@ import de.cau.cs.kieler.klots.wizards.NewSJProjectWizard;
  */
 public class KlotsPerspective implements IPerspectiveFactory {
     
+    /** The ID of the KLOTS perspective. */
+    public static final String ID = "de.cau.cs.kieler.klots.KlotsPerspective";
+    
     // CHECKSTYLEOFF LineLength
     
     private static final String VIEW_KLOTS = "de.cau.cs.kieler.klots.view.SJInstructionsView"; //$NON-NLS-1$
@@ -102,6 +105,11 @@ public class KlotsPerspective implements IPerspectiveFactory {
         addViewIfExists(rightTop, IPageLayout.ID_PROJECT_EXPLORER);
         addViewIfExists(rightTop, IPageLayout.ID_OUTLINE);
         addViewIfExists(rightTop, VIEW_KIEM_TABLE);
+        
+//        layout.addView("org.eclipse.ui.console.ConsoleView",
+//                IPageLayout.BOTTOM, (float) 0.8, editorArea);
+//        layout.addStandaloneView("org.eclipse.ui.console.ConsoleView", true,
+//                IPageLayout.BOTTOM, (float) 0.8, editorArea);
 
         // ------------------------- right bottom ---------------------------
         IFolderLayout rightBottom = layout.createFolder(

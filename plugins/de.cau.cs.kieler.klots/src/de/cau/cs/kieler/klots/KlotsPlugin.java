@@ -14,10 +14,17 @@
 package de.cau.cs.kieler.klots;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PerspectiveAdapter;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.klots.util.ColorProvider;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.views.SJInstructionsView;
 
 /**
@@ -35,6 +42,16 @@ public class KlotsPlugin extends AbstractUIPlugin {
     
     /** The color provider. */
     private static ColorProvider colorProvider;
+    /**
+     * The system editor for Embedded Java files (currently *.java files)
+     * before the KLOTS perspective has been activated.
+     */
+    private static IEditorDescriptor systemEmbeddedJavaFileEditor;
+    /**
+     * The system editor for Synchronous Java (SJ) files (currently *.java files)
+     * before the KLOTS perspective has been activated.
+     */
+    private static IEditorDescriptor systemSJFileEditor;
 
     
     
@@ -50,10 +67,16 @@ public class KlotsPlugin extends AbstractUIPlugin {
      * {@inheritDoc}
      */
     public void start(final BundleContext context) throws Exception {
+        System.out.println("\n#######################################################################");
+        System.out.println("######################## STARTING KLOTS PLUGIN ########################");
+        System.out.println("#######################################################################\n");
         super.start(context);
         plugin = this;
         // create color provider
         colorProvider = new ColorProvider(getPreferenceStore());
+        // add KLOTS perspective listener
+        addKlotsPerspectiveListener();
+        
         String nxjHome = Platform.getInstallLocation().getURL().getPath();
         try {
             String prevVal = System.setProperty("nxj.home", nxjHome);
@@ -66,8 +89,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
         }
     }
 
-    
-    
+
+
     /**
      * {@inheritDoc}
      */
@@ -76,6 +99,9 @@ public class KlotsPlugin extends AbstractUIPlugin {
         // dispose color provider
         colorProvider.dispose();
         super.stop(context);
+        System.out.println("\n#######################################################################");
+        System.out.println("######################## KLOTS PLUGIN STOPPED #########################");
+        System.out.println("#######################################################################\n");
     }
 
     
@@ -114,6 +140,57 @@ public class KlotsPlugin extends AbstractUIPlugin {
      */
     public static String getKlotsEditorID() {
         return de.cau.cs.kieler.klots.editor.KlotsEditor.ID;
+    }
+    
+    
+    
+    /**
+     * Adds a new KLOTS perspective listener.
+     */
+    private void addKlotsPerspectiveListener() {
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow().addPerspectiveListener(
+                new PerspectiveAdapter() {
+                    public void perspectiveActivated(final IWorkbenchPage page,
+                            final IPerspectiveDescriptor perspective) {
+                        if (perspective.getId().equals(KlotsPerspective.ID)) {
+                            System.out.println("|%|%|%|%|%|%|%|%| >>> Setting the default editor for "
+                                    + "Embedded Java files (*."
+                                    + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION + ") "
+                                    + "and SJ files (*." + KlotsConstants.SJ_FILE_NAME_EXTENSION + ") "
+                                    + "to be the to be the KLOTS Editor: " + KlotsEditor.ID + "!");
+                            systemEmbeddedJavaFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
+                            .getDefaultEditor("*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
+                            systemSJFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
+                            .getDefaultEditor("*." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
+                            PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
+                                    "*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION,
+                                    KlotsEditor.ID);
+                            PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
+                                    "*." + KlotsConstants.SJ_FILE_NAME_EXTENSION,
+                                    KlotsEditor.ID);
+                        }
+                        
+                    }
+                    public void perspectiveDeactivated(final IWorkbenchPage page,
+                            final IPerspectiveDescriptor perspective) {
+                        if (perspective.getId().equals(KlotsPerspective.ID)) {
+                            System.out.println("|%|%|%|%|%|%|%|%| >>> Setting the default editors for "
+                                    + "Embedded Java files (*."
+                                    + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION + ") "
+                                    + "and SJ files (*." + KlotsConstants.SJ_FILE_NAME_EXTENSION + ") "
+                                    + "to be the system default editors: "
+                                    + systemEmbeddedJavaFileEditor.getId() + " and "
+                                    + systemSJFileEditor.getId() + "!");
+                            PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
+                                    "*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION,
+                                    systemEmbeddedJavaFileEditor.getId());
+                            PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
+                                    "*." + KlotsConstants.SJ_FILE_NAME_EXTENSION,
+                                    systemSJFileEditor.getId());
+                        }
+                    }
+                }
+        );
     }
 
 }
