@@ -13,7 +13,7 @@
  */
 package de.cau.cs.kieler.klots.sj.embedded;
 
-import sj.SJLogger;
+import de.cau.cs.kieler.sj.SJLogger;
 
 
 /**

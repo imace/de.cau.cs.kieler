@@ -18,12 +18,12 @@ import lejos.nxt.LCD;
 
 import java.io.IOException;
 
-import sj.EmbeddedSJProgram;
-import sj.SJLogger;
-import sj.Signal;
-import sj.ValuedSignal;
-import sj.exceptions.SignalNotDeclaredException;
-import sj.util.LinkedList;
+import de.cau.cs.kieler.sj.EmbeddedSJProgram;
+import de.cau.cs.kieler.sj.SJLogger;
+import de.cau.cs.kieler.sj.Signal;
+import de.cau.cs.kieler.sj.ValuedSignal;
+import de.cau.cs.kieler.sj.exceptions.SignalNotDeclaredException;
+import de.cau.cs.kieler.sj.util.LinkedList;
 
 /**
  * @author ybe

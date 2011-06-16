@@ -16,6 +16,8 @@ package de.cau.cs.kieler.klots;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.klots.wizards.NewPOJFileWizard;
@@ -110,6 +112,14 @@ public class KlotsPerspective implements IPerspectiveFactory {
 //                IPageLayout.BOTTOM, (float) 0.8, editorArea);
 //        layout.addStandaloneView("org.eclipse.ui.console.ConsoleView", true,
 //                IPageLayout.BOTTOM, (float) 0.8, editorArea);
+        
+//        try {
+//            PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(
+//                    "org.eclipse.ui.console.ConsoleView", "org.eclipse.ui.console.ConsoleView2",
+//                    IWorkbenchPage.VIEW_CREATE);
+//        } catch (PartInitException e) {
+//            e.printStackTrace();
+//        }
 
         // ------------------------- right bottom ---------------------------
         IFolderLayout rightBottom = layout.createFolder(
