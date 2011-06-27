@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="ABRO" label="ABRO">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
+  <states id="ABRO" label="ABRO">
     <signals name="A" isInput="true"/>
     <signals name="B" isInput="true"/>
     <signals name="R" isInput="true"/>
     <signals name="O" isOutput="true"/>
-    <regions id="R0">
-      <innerStates id="ABO" label="ABO" isInitial="true">
-        <regions id="R0">
-          <innerStates id="WaitAB" label="WaitAB" isInitial="true">
-            <regions id="R0">
-              <innerStates id="wA" label="wA" isInitial="true">
-                <outgoingTransitions triggersAndEffects="A" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
-              </innerStates>
-              <innerStates id="dA" label="dA" isFinal="true"/>
+    <regions id="R0" label="R0">
+      <states id="ABO" label="ABO" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+        <regions id="R0" label="R0">
+          <states id="WaitAB" label="WaitAB" isInitial="true">
+            <regions id="R0" label="R0">
+              <states id="wA" label="wA" isInitial="true">
+                <outgoingTransitions label="A" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+              </states>
+              <states id="dA" label="dA" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
             </regions>
-            <regions id="R1">
-              <innerStates id="wB" label="wB" isInitial="true">
-                <outgoingTransitions triggersAndEffects="B" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1"/>
-              </innerStates>
-              <innerStates id="dB" label="dB" isFinal="true"/>
+            <regions id="R1" label="R1">
+              <states id="wB" label="wB" isInitial="true">
+                <outgoingTransitions label="B" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1"/>
+              </states>
+              <states id="dB" label="dB" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0"/>
             </regions>
-            <outgoingTransitions triggersAndEffects="/O" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
-          </innerStates>
-          <innerStates id="done" label="done"/>
+            <outgoingTransitions label="/O" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+          </states>
+          <states id="done" label="done" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
         </regions>
-        <outgoingTransitions triggersAndEffects="R" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.0"/>
-      </innerStates>
+        <outgoingTransitions label="R" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.0"/>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

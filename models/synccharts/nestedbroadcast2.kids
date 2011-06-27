@@ -1,166 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4" xmi:id="_4MEkAHoZEeCZSO_fAxZP7Q" type="Synccharts" measurementUnit="Pixel">
-  <children xmi:type="notation:Shape" xmi:id="_4PcBEHoZEeCZSO_fAxZP7Q" type="2006" fontHeight="8" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_4PcBEnoZEeCZSO_fAxZP7Q" type="5073"/>
-    <children xmi:type="notation:DecorationNode" xmi:id="_4PcBE3oZEeCZSO_fAxZP7Q" type="5074"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcBFHoZEeCZSO_fAxZP7Q" type="7067"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcBFXoZEeCZSO_fAxZP7Q" type="7068"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcBFnoZEeCZSO_fAxZP7Q" type="7069"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcBF3oZEeCZSO_fAxZP7Q" type="7070"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcBGHoZEeCZSO_fAxZP7Q" type="7071"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_4PcoIHoZEeCZSO_fAxZP7Q" type="7072">
-      <children xmi:type="notation:Shape" xmi:id="_4Pg5kHoZEeCZSO_fAxZP7Q" type="3054" fontHeight="8" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_4Pg5knoZEeCZSO_fAxZP7Q" type="5072"/>
-        <children xmi:type="notation:BasicCompartment" xmi:id="_4Pg5k3oZEeCZSO_fAxZP7Q" type="7073">
-          <children xmi:type="notation:Shape" xmi:id="_4PhgoHoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-            <children xmi:type="notation:DecorationNode" xmi:id="_4PhgonoZEeCZSO_fAxZP7Q" type="5070"/>
-            <children xmi:type="notation:DecorationNode" xmi:id="_4Phgo3oZEeCZSO_fAxZP7Q" type="5071"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PhgpHoZEeCZSO_fAxZP7Q" type="7074"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PhgpXoZEeCZSO_fAxZP7Q" type="7075"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PhgpnoZEeCZSO_fAxZP7Q" type="7076"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4Phgp3oZEeCZSO_fAxZP7Q" type="7077"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PhgqHoZEeCZSO_fAxZP7Q" type="7078"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PhgqXoZEeCZSO_fAxZP7Q" type="7079">
-              <children xmi:type="notation:Shape" xmi:id="_4PiuwHoZEeCZSO_fAxZP7Q" type="3054" fontHeight="8" lineColor="0">
-                <children xmi:type="notation:DecorationNode" xmi:id="_4PiuwnoZEeCZSO_fAxZP7Q" visible="false" type="5072"/>
-                <children xmi:type="notation:BasicCompartment" xmi:id="_4Piuw3oZEeCZSO_fAxZP7Q" type="7073">
-                  <children xmi:type="notation:Shape" xmi:id="_4PjV0HoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4PjV0noZEeCZSO_fAxZP7Q" type="5070"/>
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4PjV03oZEeCZSO_fAxZP7Q" type="5071"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV1HoZEeCZSO_fAxZP7Q" type="7074"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV1XoZEeCZSO_fAxZP7Q" type="7075"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV1noZEeCZSO_fAxZP7Q" type="7076"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV13oZEeCZSO_fAxZP7Q" type="7077"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV2HoZEeCZSO_fAxZP7Q" type="7078"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV2XoZEeCZSO_fAxZP7Q" type="7079"/>
-                    <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PjV0XoZEeCZSO_fAxZP7Q" x="1"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4" xmi:id="_7GkxQKCwEeCbgP9UJKAF7w" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_7K6esKCwEeCbgP9UJKAF7w" type="2006" fontName="Sans" fontHeight="10" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_7K6esqCwEeCbgP9UJKAF7w" type="5073"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_7K7FwKCwEeCbgP9UJKAF7w" type="5074"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7FwaCwEeCbgP9UJKAF7w" type="7067"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7FwqCwEeCbgP9UJKAF7w" type="7068"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7Fw6CwEeCbgP9UJKAF7w" type="7069"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7FxKCwEeCbgP9UJKAF7w" type="7070"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7FxaCwEeCbgP9UJKAF7w" type="7071"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_7K7FxqCwEeCbgP9UJKAF7w" type="7072">
+      <children xmi:type="notation:Shape" xmi:id="_7LBMYKCwEeCbgP9UJKAF7w" type="3054" fontName="Sans" fontHeight="10" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_7LBzcaCwEeCbgP9UJKAF7w" visible="false" type="5072"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_7LBzcqCwEeCbgP9UJKAF7w" type="7073">
+          <children xmi:type="notation:Shape" xmi:id="_7LDBkKCwEeCbgP9UJKAF7w" type="3055" fontName="Sans" fontHeight="10" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_7LDooaCwEeCbgP9UJKAF7w" type="5070"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_7LDooqCwEeCbgP9UJKAF7w" type="5071"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDoo6CwEeCbgP9UJKAF7w" type="7074"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDopKCwEeCbgP9UJKAF7w" type="7075"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDopaCwEeCbgP9UJKAF7w" type="7076"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDopqCwEeCbgP9UJKAF7w" type="7077"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDop6CwEeCbgP9UJKAF7w" type="7078"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_7LDoqKCwEeCbgP9UJKAF7w" type="7079">
+              <children xmi:type="notation:Shape" xmi:id="_7LHTAKCwEeCbgP9UJKAF7w" type="3054" fontName="Sans" fontHeight="10" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_7LH6EKCwEeCbgP9UJKAF7w" type="5072"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_7LH6EaCwEeCbgP9UJKAF7w" type="7073">
+                  <children xmi:type="notation:Shape" xmi:id="_7LJIMKCwEeCbgP9UJKAF7w" type="3055" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LJvQKCwEeCbgP9UJKAF7w" type="5070"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LJvQaCwEeCbgP9UJKAF7w" type="5071"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvQqCwEeCbgP9UJKAF7w" type="7074"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvQ6CwEeCbgP9UJKAF7w" type="7075"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvRKCwEeCbgP9UJKAF7w" type="7076"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvRaCwEeCbgP9UJKAF7w" type="7077"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvRqCwEeCbgP9UJKAF7w" type="7078"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LJvR6CwEeCbgP9UJKAF7w" type="7079"/>
+                    <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LJIMaCwEeCbgP9UJKAF7w" x="11" y="1"/>
                   </children>
-                  <children xmi:type="notation:Shape" xmi:id="_4PjV2noZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4PjV3HoZEeCZSO_fAxZP7Q" type="5070"/>
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4PjV3XoZEeCZSO_fAxZP7Q" type="5071"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV3noZEeCZSO_fAxZP7Q" type="7074"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV33oZEeCZSO_fAxZP7Q" type="7075"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV4HoZEeCZSO_fAxZP7Q" type="7076"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV4XoZEeCZSO_fAxZP7Q" type="7077"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV4noZEeCZSO_fAxZP7Q" type="7078"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4PjV43oZEeCZSO_fAxZP7Q" type="7079"/>
-                    <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PjV23oZEeCZSO_fAxZP7Q" x="83"/>
-                  </children>
-                </children>
-                <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PiuwXoZEeCZSO_fAxZP7Q" x="1" y="1" width="128" height="41"/>
-              </children>
-            </children>
-            <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.0/@states.0"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PhgoXoZEeCZSO_fAxZP7Q" x="1" y="1" width="142" height="77"/>
-          </children>
-        </children>
-        <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#//@states.0/@regions.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4Pg5kXoZEeCZSO_fAxZP7Q" x="1" y="1" width="154" height="138"/>
-      </children>
-      <children xmi:type="notation:Shape" xmi:id="_4Pg5lHoZEeCZSO_fAxZP7Q" type="3054" fontHeight="8" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_4Pg5lnoZEeCZSO_fAxZP7Q" type="5072"/>
-        <children xmi:type="notation:BasicCompartment" xmi:id="_4Pg5l3oZEeCZSO_fAxZP7Q" type="7073">
-          <children xmi:type="notation:Shape" xmi:id="_4PtG0HoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-            <children xmi:type="notation:DecorationNode" xmi:id="_4PtG0noZEeCZSO_fAxZP7Q" type="5070"/>
-            <children xmi:type="notation:DecorationNode" xmi:id="_4PtG03oZEeCZSO_fAxZP7Q" type="5071"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG1HoZEeCZSO_fAxZP7Q" type="7074"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG1XoZEeCZSO_fAxZP7Q" type="7075"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG1noZEeCZSO_fAxZP7Q" type="7076"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG13oZEeCZSO_fAxZP7Q" type="7077"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG2HoZEeCZSO_fAxZP7Q" type="7078"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_4PtG2XoZEeCZSO_fAxZP7Q" type="7079">
-              <children xmi:type="notation:Shape" xmi:id="_4PuU8HoZEeCZSO_fAxZP7Q" type="3054" fontHeight="8" lineColor="0">
-                <children xmi:type="notation:DecorationNode" xmi:id="_4PuU8noZEeCZSO_fAxZP7Q" visible="false" type="5072"/>
-                <children xmi:type="notation:BasicCompartment" xmi:id="_4PuU83oZEeCZSO_fAxZP7Q" type="7073">
-                  <children xmi:type="notation:Shape" xmi:id="_4Pu8AHoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4Pu8AnoZEeCZSO_fAxZP7Q" type="5070"/>
-                    <children xmi:type="notation:DecorationNode" xmi:id="_4Pu8A3oZEeCZSO_fAxZP7Q" type="5071"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8BHoZEeCZSO_fAxZP7Q" type="7074"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8BXoZEeCZSO_fAxZP7Q" type="7075"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8BnoZEeCZSO_fAxZP7Q" type="7076"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8B3oZEeCZSO_fAxZP7Q" type="7077"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8CHoZEeCZSO_fAxZP7Q" type="7078"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_4Pu8CXoZEeCZSO_fAxZP7Q" type="7079">
-                      <children xmi:type="notation:Shape" xmi:id="_4PwKIHoZEeCZSO_fAxZP7Q" type="3054" fontHeight="8" lineColor="0">
-                        <children xmi:type="notation:DecorationNode" xmi:id="_4PwKInoZEeCZSO_fAxZP7Q" visible="false" type="5072"/>
-                        <children xmi:type="notation:BasicCompartment" xmi:id="_4PwKI3oZEeCZSO_fAxZP7Q" type="7073">
-                          <children xmi:type="notation:Shape" xmi:id="_4PwxMHoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_4PwxMnoZEeCZSO_fAxZP7Q" type="5070"/>
-                            <children xmi:type="notation:DecorationNode" xmi:id="_4PwxM3oZEeCZSO_fAxZP7Q" type="5071"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxNHoZEeCZSO_fAxZP7Q" type="7074"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxNXoZEeCZSO_fAxZP7Q" type="7075"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxNnoZEeCZSO_fAxZP7Q" type="7076"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxN3oZEeCZSO_fAxZP7Q" type="7077"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxOHoZEeCZSO_fAxZP7Q" type="7078"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxOXoZEeCZSO_fAxZP7Q" type="7079"/>
-                            <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PwxMXoZEeCZSO_fAxZP7Q" x="1"/>
-                          </children>
-                          <children xmi:type="notation:Shape" xmi:id="_4PwxOnoZEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_4PwxPHoZEeCZSO_fAxZP7Q" type="5070"/>
-                            <children xmi:type="notation:DecorationNode" xmi:id="_4PwxPXoZEeCZSO_fAxZP7Q" type="5071"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxPnoZEeCZSO_fAxZP7Q" type="7074"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxP3oZEeCZSO_fAxZP7Q" type="7075"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxQHoZEeCZSO_fAxZP7Q" type="7076"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxQXoZEeCZSO_fAxZP7Q" type="7077"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxQnoZEeCZSO_fAxZP7Q" type="7078"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_4PwxQ3oZEeCZSO_fAxZP7Q" type="7079"/>
-                            <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PwxO3oZEeCZSO_fAxZP7Q" x="79"/>
-                          </children>
-                        </children>
-                        <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0"/>
-                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PwKIXoZEeCZSO_fAxZP7Q" x="1" y="1" width="124" height="41"/>
-                      </children>
-                    </children>
-                    <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0/@states.0"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4Pu8AXoZEeCZSO_fAxZP7Q" y="1" width="138" height="77"/>
+                  <children xmi:type="notation:Shape" xmi:id="_7LJvSKCwEeCbgP9UJKAF7w" type="3055" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LJvSqCwEeCbgP9UJKAF7w" type="5070"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LJvS6CwEeCbgP9UJKAF7w" type="5071"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWUKCwEeCbgP9UJKAF7w" type="7074"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWUaCwEeCbgP9UJKAF7w" type="7075"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWUqCwEeCbgP9UJKAF7w" type="7076"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWU6CwEeCbgP9UJKAF7w" type="7077"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWVKCwEeCbgP9UJKAF7w" type="7078"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LKWVaCwEeCbgP9UJKAF7w" type="7079"/>
+                    <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LJvSaCwEeCbgP9UJKAF7w" x="81" y="1"/>
                   </children>
                 </children>
-                <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PuU8XoZEeCZSO_fAxZP7Q" x="1" y="1" width="150" height="90"/>
+                <element xmi:type="synccharts:Region" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LHTAaCwEeCbgP9UJKAF7w" x="1" y="1" width="138" height="43"/>
+              </children>
+              <children xmi:type="notation:Shape" xmi:id="_7LH6EqCwEeCbgP9UJKAF7w" type="3054" fontName="Sans" fontHeight="10" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_7LH6FKCwEeCbgP9UJKAF7w" type="5072"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_7LH6FaCwEeCbgP9UJKAF7w" type="7073">
+                  <children xmi:type="notation:Shape" xmi:id="_7LfGcKCwEeCbgP9UJKAF7w" type="3055" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LfGcqCwEeCbgP9UJKAF7w" type="5070"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LfGc6CwEeCbgP9UJKAF7w" type="5071"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LfGdKCwEeCbgP9UJKAF7w" type="7074"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LfGdaCwEeCbgP9UJKAF7w" type="7075"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LfGdqCwEeCbgP9UJKAF7w" type="7076"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LftgKCwEeCbgP9UJKAF7w" type="7077"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LftgaCwEeCbgP9UJKAF7w" type="7078"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LftgqCwEeCbgP9UJKAF7w" type="7079"/>
+                    <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.0"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LfGcaCwEeCbgP9UJKAF7w" x="2" y="1"/>
+                  </children>
+                  <children xmi:type="notation:Shape" xmi:id="_7Lftg6CwEeCbgP9UJKAF7w" type="3055" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LfthaCwEeCbgP9UJKAF7w" type="5070"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_7LgUkKCwEeCbgP9UJKAF7w" type="5071"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUkaCwEeCbgP9UJKAF7w" type="7074"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUkqCwEeCbgP9UJKAF7w" type="7075"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUk6CwEeCbgP9UJKAF7w" type="7076"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUlKCwEeCbgP9UJKAF7w" type="7077"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUlaCwEeCbgP9UJKAF7w" type="7078"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_7LgUlqCwEeCbgP9UJKAF7w" type="7079"/>
+                    <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.1"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LfthKCwEeCbgP9UJKAF7w" x="90" y="1"/>
+                  </children>
+                </children>
+                <element xmi:type="synccharts:Region" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.1"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LH6E6CwEeCbgP9UJKAF7w" x="1" y="45" width="138" height="43"/>
               </children>
             </children>
-            <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PtG0XoZEeCZSO_fAxZP7Q" y="1" width="164" height="126"/>
+            <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0/@regions.0/@states.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LDooKCwEeCbgP9UJKAF7w" x="1" width="152" height="154"/>
           </children>
         </children>
-        <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#//@states.0/@regions.1"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4Pg5lXoZEeCZSO_fAxZP7Q" x="156" y="1" width="176" height="138"/>
+        <element xmi:type="synccharts:Region" href="broadcast2.kixs#//@states.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7LBzcKCwEeCbgP9UJKAF7w" x="1" y="1" width="164" height="166"/>
       </children>
     </children>
-    <element xmi:type="synccharts:State" href="nestedbroadcast2.kixs#//@states.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4PcBEXoZEeCZSO_fAxZP7Q" x="1" width="345" height="197"/>
+    <element xmi:type="synccharts:State" href="broadcast2.kixs#//@states.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7K6esaCwEeCbgP9UJKAF7w" x="1" width="178" height="233"/>
   </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_4MEkAXoZEeCZSO_fAxZP7Q"/>
-  <element xmi:type="synccharts:Region" href="nestedbroadcast2.kixs#/"/>
-  <edges xmi:type="notation:Connector" xmi:id="_4QIkoHoZEeCZSO_fAxZP7Q" type="4006" source="_4PjV0HoZEeCZSO_fAxZP7Q" target="_4PjV2noZEeCZSO_fAxZP7Q" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_4QIko3oZEeCZSO_fAxZP7Q" type="6011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_4QIkpHoZEeCZSO_fAxZP7Q" x="-1" y="-8"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_7GkxQaCwEeCbgP9UJKAF7w"/>
+  <element xmi:type="synccharts:Region" href="broadcast2.kixs#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_7L254KCwEeCbgP9UJKAF7w" type="4006" source="_7LJIMKCwEeCbgP9UJKAF7w" target="_7LJvSKCwEeCbgP9UJKAF7w" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_7L3g8KCwEeCbgP9UJKAF7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_7L3g8aCwEeCbgP9UJKAF7w" x="-1" y="-9"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_4QIkpXoZEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_4QIkpnoZEeCZSO_fAxZP7Q" x="2" y="3"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_7L3g8qCwEeCbgP9UJKAF7w" visible="false" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_7L3g86CwEeCbgP9UJKAF7w" x="4" y="4"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_4QIkoXoZEeCZSO_fAxZP7Q" fontHeight="8"/>
-    <element xmi:type="synccharts:Transition" href="nestedbroadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4QIkonoZEeCZSO_fAxZP7Q" points="[0, 0, -47, 0]$[14, 0, -33, 0]$[33, 0, -14, 0]$[47, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Y5fEHoZEeCZSO_fAxZP7Q" id="(1.0,0.5000040054321289)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Y5fEXoZEeCZSO_fAxZP7Q" id="(0.0,0.5000040054321289)"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_7L254aCwEeCbgP9UJKAF7w" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7L254qCwEeCbgP9UJKAF7w" points="[0, 0, -32, 0]$[10, 0, -22, 0]$[22, 0, -10, 0]$[32, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7n2SUKCwEeCbgP9UJKAF7w" id="(1.0,0.5039999961853028)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7n2SUaCwEeCbgP9UJKAF7w" id="(0.0,0.5039999961853028)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_4QJywHoZEeCZSO_fAxZP7Q" type="4006" source="_4PwxMHoZEeCZSO_fAxZP7Q" target="_4PwxOnoZEeCZSO_fAxZP7Q" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_4QJyw3oZEeCZSO_fAxZP7Q" type="6011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_4QJyxHoZEeCZSO_fAxZP7Q" y="-8"/>
+  <edges xmi:type="notation:Connector" xmi:id="_7L59MKCwEeCbgP9UJKAF7w" type="4006" source="_7LfGcKCwEeCbgP9UJKAF7w" target="_7Lftg6CwEeCbgP9UJKAF7w" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_7L59M6CwEeCbgP9UJKAF7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_7L59NKCwEeCbgP9UJKAF7w" x="-1" y="-9"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_4QJyxXoZEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_4QJyxnoZEeCZSO_fAxZP7Q" x="3" y="3"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_7L59NaCwEeCbgP9UJKAF7w" visible="false" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_7L59NqCwEeCbgP9UJKAF7w" x="1" y="4"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_4QJywXoZEeCZSO_fAxZP7Q" fontHeight="8"/>
-    <element xmi:type="synccharts:Transition" href="nestedbroadcast2.kixs#//@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4QJywnoZEeCZSO_fAxZP7Q" points="[0, 0, -43, 0]$[13, 0, -30, 0]$[30, 0, -13, 0]$[43, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Y5fEnoZEeCZSO_fAxZP7Q" id="(1.0,0.5000040054321289)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4Y5fE3oZEeCZSO_fAxZP7Q" id="(0.0,0.5000040054321289)"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_7L59MaCwEeCbgP9UJKAF7w" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="broadcast2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7L59MqCwEeCbgP9UJKAF7w" points="[0, 0, -50, 0]$[14, 0, -36, 0]$[35, 0, -15, 0]$[50, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7n1rQKCwEeCbgP9UJKAF7w" id="(1.0,0.5039999961853028)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7n1rQaCwEeCbgP9UJKAF7w" id="(0.0,0.5039999961853028)"/>
   </edges>
 </notation:Diagram>

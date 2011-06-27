@@ -86,19 +86,19 @@
                                           </children>
                                         </children>
                                         <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0"/>
-                                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcQAQXoeEeCZSO_fAxZP7Q" x="1" y="1" width="112" height="41"/>
+                                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcQAQXoeEeCZSO_fAxZP7Q" x="1" y="1" width="112" height="42"/>
                                       </children>
                                     </children>
                                     <element xmi:type="synccharts:State" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
-                                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcOyIXoeEeCZSO_fAxZP7Q" x="1" y="33" width="126" height="77"/>
+                                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcOyIXoeEeCZSO_fAxZP7Q" x="1" y="33" width="126" height="78"/>
                                   </children>
                                 </children>
                                 <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0"/>
-                                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcOLEXoeEeCZSO_fAxZP7Q" x="1" y="1" width="138" height="121"/>
+                                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcOLEXoeEeCZSO_fAxZP7Q" x="1" y="1" width="138" height="122"/>
                               </children>
                             </children>
                             <element xmi:type="synccharts:State" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcNkAXoeEeCZSO_fAxZP7Q" x="1" y="1" width="152" height="157"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcNkAXoeEeCZSO_fAxZP7Q" x="1" y="1" width="152" height="158"/>
                           </children>
                         </children>
                         <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0"/>
@@ -110,11 +110,11 @@
                   </children>
                 </children>
                 <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcLHwXoeEeCZSO_fAxZP7Q" x="1" y="1" width="190" height="249"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcLHwXoeEeCZSO_fAxZP7Q" x="1" y="1" width="190" height="250"/>
               </children>
             </children>
             <element xmi:type="synccharts:State" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcKgsXoeEeCZSO_fAxZP7Q" x="1" y="1" width="204" height="285"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcKgsXoeEeCZSO_fAxZP7Q" x="1" y="1" width="204" height="286"/>
           </children>
         </children>
         <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#//@states.0/@regions.0"/>
@@ -122,7 +122,7 @@
       </children>
     </children>
     <element xmi:type="synccharts:State" href="hierarchieHierarchie.kixs#//@states.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcEaEXoeEeCZSO_fAxZP7Q" x="1" width="230" height="357"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcEaEXoeEeCZSO_fAxZP7Q" x="1" width="230" height="361"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_NY5KQXoeEeCZSO_fAxZP7Q"/>
   <element xmi:type="synccharts:Region" href="hierarchieHierarchie.kixs#/"/>
@@ -135,34 +135,34 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_NccNgXoeEeCZSO_fAxZP7Q" fontHeight="8"/>
     <element xmi:type="synccharts:Transition" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NccNgnoeEeCZSO_fAxZP7Q" points="[0, 0, -55, 0]$[5, -11, -50, -11]$[14, -17, -41, -17]$[28, -17, -27, -17]$[41, -17, -14, -17]$[50, -11, -5, -11]$[55, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8HoeEeCZSO_fAxZP7Q" id="(0.3446415676159805,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8XoeEeCZSO_fAxZP7Q" id="(0.6553325867385007,0.0)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NccNgnoeEeCZSO_fAxZP7Q" points="[0, 0, -54, 0]$[5, -11, -49, -11]$[14, -18, -40, -18]$[27, -18, -27, -18]$[40, -18, -14, -18]$[49, -11, -5, -11]$[54, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8HoeEeCZSO_fAxZP7Q" id="(0.34786515825250175,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8XoeEeCZSO_fAxZP7Q" id="(0.6512359447693556,0.0)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_NcdboHoeEeCZSO_fAxZP7Q" type="4006" source="_NcOyIHoeEeCZSO_fAxZP7Q" target="_NcOyIHoeEeCZSO_fAxZP7Q" lineColor="0">
     <children xmi:type="notation:DecorationNode" xmi:id="_Ncdbo3oeEeCZSO_fAxZP7Q" type="6011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_NcdbpHoeEeCZSO_fAxZP7Q" x="-1" y="-7"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NcdbpHoeEeCZSO_fAxZP7Q" x="-1" y="-8"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_NcdbpXoeEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_NcdbpnoeEeCZSO_fAxZP7Q" y="4"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NcdbpnoeEeCZSO_fAxZP7Q" x="1" y="4"/>
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_NcdboXoeEeCZSO_fAxZP7Q" fontHeight="8"/>
     <element xmi:type="synccharts:Transition" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NcdbonoeEeCZSO_fAxZP7Q" points="[0, 0, -47, 0]$[2, -10, -45, -10]$[9, -18, -38, -18]$[24, -18, -23, -18]$[38, -18, -9, -18]$[45, -10, -2, -10]$[47, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB9HoeEeCZSO_fAxZP7Q" id="(0.3144365038190569,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB9XoeEeCZSO_fAxZP7Q" id="(0.6855634659055679,0.0)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NcdbonoeEeCZSO_fAxZP7Q" points="[0, 0, -46, 0]$[1, -10, -45, -10]$[9, -18, -37, -18]$[23, -18, -23, -18]$[37, -18, -9, -18]$[45, -10, -1, -10]$[46, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB9HoeEeCZSO_fAxZP7Q" id="(0.31746031746031744,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB9XoeEeCZSO_fAxZP7Q" id="(0.6825396825396826,0.0)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_NceCsHoeEeCZSO_fAxZP7Q" type="4006" source="_NcQnUHoeEeCZSO_fAxZP7Q" target="_NcQnWnoeEeCZSO_fAxZP7Q" lineColor="0">
     <children xmi:type="notation:DecorationNode" xmi:id="_NceCs3oeEeCZSO_fAxZP7Q" type="6011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_NceCtHoeEeCZSO_fAxZP7Q" x="-1" y="-8"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_NceCtXoeEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_NceCtnoeEeCZSO_fAxZP7Q" x="3" y="3"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NceCtnoeEeCZSO_fAxZP7Q" x="3" y="4"/>
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_NceCsXoeEeCZSO_fAxZP7Q" fontHeight="8"/>
     <element xmi:type="synccharts:Transition" href="hierarchieHierarchie.kixs#//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NceCsnoeEeCZSO_fAxZP7Q" points="[0, 0, -39, 0]$[11, 0, -28, 0]$[28, 0, -11, 0]$[39, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8noeEeCZSO_fAxZP7Q" id="(1.0,0.5000040054321289)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB83oeEeCZSO_fAxZP7Q" id="(0.0,0.5000040054321289)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NceCsnoeEeCZSO_fAxZP7Q" points="[0, 0, -40, 0]$[12, 0, -28, 0]$[28, 0, -12, 0]$[40, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB8noeEeCZSO_fAxZP7Q" id="(1.0,0.5039999961853028)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NpLB83oeEeCZSO_fAxZP7Q" id="(0.004000091552734375,0.5039999961853028)"/>
   </edges>
 </notation:Diagram>

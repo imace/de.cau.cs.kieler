@@ -2,7 +2,7 @@
 <notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_RL9WUEABEeCIfOdOxMaTvA" type="Kaom" measurementUnit="Pixel">
   <children xmi:type="notation:Node" xmi:id="_RMycwEABEeCIfOdOxMaTvA" type="2001">
     <children xmi:type="notation:DecorationNode" xmi:id="_RMycxEABEeCIfOdOxMaTvA" type="5004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_RMycxUABEeCIfOdOxMaTvA" y="5"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_RMycxUABEeCIfOdOxMaTvA" x="258" y="801"/>
     </children>
     <children xmi:type="notation:BasicCompartment" xmi:id="_RMycxkABEeCIfOdOxMaTvA" type="7001">
       <children xmi:type="notation:Node" xmi:id="_RM0R8EABEeCIfOdOxMaTvA" type="3002">
@@ -22,7 +22,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM0R8UABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM0R8kABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0R80ABEeCIfOdOxMaTvA" x="308" y="357"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0R80ABEeCIfOdOxMaTvA" x="312" y="357"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM0R90ABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM0R-0ABEeCIfOdOxMaTvA" type="5003">
@@ -41,7 +41,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM0R-EABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM0R-UABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.1"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0R-kABEeCIfOdOxMaTvA" x="483" y="15"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0R-kABEeCIfOdOxMaTvA" x="497" y="525"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM0R_kABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM0SAkABEeCIfOdOxMaTvA" type="5003">
@@ -69,7 +69,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM0R_0ABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM0SAEABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.2"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0SAUABEeCIfOdOxMaTvA" x="316" y="15"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0SAUABEeCIfOdOxMaTvA" x="320" y="437"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM0SBUABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM05AEABEeCIfOdOxMaTvA" type="5003">
@@ -97,7 +97,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM0SBkABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM0SB0ABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.3"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0SCEABEeCIfOdOxMaTvA" x="316" y="100"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM0SCEABEeCIfOdOxMaTvA" x="320" y="522"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM05A0ABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM05B0ABEeCIfOdOxMaTvA" type="5003">
@@ -125,7 +125,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM05BEABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM05BUABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.4"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05BkABEeCIfOdOxMaTvA" x="316" y="186"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05BkABEeCIfOdOxMaTvA" x="320" y="607"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM05CkABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM05DkABEeCIfOdOxMaTvA" type="5003">
@@ -153,7 +153,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM05C0ABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM05DEABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.5"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05DUABEeCIfOdOxMaTvA" x="316" y="271"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05DUABEeCIfOdOxMaTvA" x="320" y="692"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM05EUABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM05FUABEeCIfOdOxMaTvA" type="5003">
@@ -190,7 +190,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM05EkABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM05E0ABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.6"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05FEABEeCIfOdOxMaTvA" x="74" y="188"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM05FEABEeCIfOdOxMaTvA" x="78" y="525"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM1gEEABEeCIfOdOxMaTvA" type="3002">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM1gFEABEeCIfOdOxMaTvA" type="5003">
@@ -200,7 +200,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM1gEUABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM1gEkABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childEntities.7"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM1gE0ABEeCIfOdOxMaTvA" x="538" y="95"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM1gE0ABEeCIfOdOxMaTvA" x="23" y="38"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RM1gF0ABEeCIfOdOxMaTvA" type="3003">
         <children xmi:type="notation:DecorationNode" xmi:id="_RM1gG0ABEeCIfOdOxMaTvA" type="5002">
@@ -209,7 +209,7 @@
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_RM1gGEABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_RM1gGUABEeCIfOdOxMaTvA" fontName="Sans"/>
         <element xmi:type="kaom:Relation" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childRelations.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM1gGkABEeCIfOdOxMaTvA" x="216" y="204"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RM1gGkABEeCIfOdOxMaTvA" x="211" y="541"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_RTzDsEABEeCIfOdOxMaTvA" type="Note" fontName="Sans" description="This model shows that level crossing&#xA;detectors can be configured to detect&#xA;different directions of level crossings&#xA;with the &quot;direction&quot; parameter.&#xA;&#xA;When the direction is configured to be&#xA;&quot;rising&quot; (or &quot;falling&quot;), the level crossing &#xA;detector only detects the level crossings &#xA;when the input signal is rising (or falling). &#xA;For example, the second (or third) level &#xA;crossing detector. &#xA;&#xA;By default, the direction is configured to&#xA;be &quot;both&quot;, meaning any level crossing will&#xA;be detected no matter the signal is rising&#xA;or falling." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_RTzqwEABEeCIfOdOxMaTvA" type="DiagramName">
@@ -221,7 +221,7 @@
         <styles xmi:type="notation:TextStyle" xmi:id="_RTzDsUABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:LineTypeStyle" xmi:id="_RTzDskABEeCIfOdOxMaTvA"/>
         <element xsi:nil="true"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RTzDs0ABEeCIfOdOxMaTvA" x="451" y="165"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RTzDs0ABEeCIfOdOxMaTvA" x="410" y="30"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_RjyngEABEeCIfOdOxMaTvA" type="Note" fontName="Sans" description="Author: Haiyang Zheng" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
         <children xmi:type="notation:BasicDecorationNode" xmi:id="_RjzOkEABEeCIfOdOxMaTvA" type="DiagramName">
@@ -233,13 +233,13 @@
         <styles xmi:type="notation:TextStyle" xmi:id="_RjyngUABEeCIfOdOxMaTvA"/>
         <styles xmi:type="notation:LineTypeStyle" xmi:id="_RjyngkABEeCIfOdOxMaTvA"/>
         <element xsi:nil="true"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rjyng0ABEeCIfOdOxMaTvA" x="508" y="437"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rjyng0ABEeCIfOdOxMaTvA" x="188" y="30"/>
       </children>
     </children>
     <styles xmi:type="notation:DescriptionStyle" xmi:id="_RMycwUABEeCIfOdOxMaTvA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RMycwkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RMycw0ABEeCIfOdOxMaTvA" x="15" y="15" width="763" height="528"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RMycw0ABEeCIfOdOxMaTvA" x="20" y="38" width="747" height="797"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_RL9WUUABEeCIfOdOxMaTvA"/>
   <element xmi:type="kaom:Entity" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#/"/>
@@ -247,110 +247,110 @@
     <children xmi:type="notation:DecorationNode" xmi:id="_RPi11EABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPi11UABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPi10UABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPi10UABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPi10kABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPi100ABEeCIfOdOxMaTvA" points="[0, 0, -76, -169]$[35, 0, -41, -169]$[35, 169, -41, 0]$[76, 169, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPi100ABEeCIfOdOxMaTvA" points="[0, 0, -90, 168]$[40, 0, -50, 168]$[40, -168, -50, 0]$[90, -168, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMxkABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMx0ABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMx0ABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPkD8EABEeCIfOdOxMaTvA" type="4001" source="_RNVPUEABEeCIfOdOxMaTvA" target="_RNHz8EABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPkD9EABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPkD9UABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPkD8UABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPkD8UABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPkD8kABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.1"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPkD80ABEeCIfOdOxMaTvA" points="[0, 0, -78, 3]$[37, 0, -41, 3]$[37, -3, -41, 0]$[78, -3, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnolsEABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnolsUABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPkD80ABEeCIfOdOxMaTvA" points="[0, 0, -98, -85]$[48, 0, -50, -85]$[48, 85, -50, 0]$[98, 85, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnolsEABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnolsUABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPkrAEABEeCIfOdOxMaTvA" type="4001" source="_RM1gF0ABEeCIfOdOxMaTvA" target="_RNV2YUABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPkrBEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPkrBUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPkrAUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPkrAUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPkrAkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.2"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPkrA0ABEeCIfOdOxMaTvA" points="[0, 0, -84, 170]$[35, 0, -49, 170]$[35, -170, -49, 0]$[84, -170, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPkrA0ABEeCIfOdOxMaTvA" points="[0, 0, -98, 85]$[40, 0, -58, 85]$[40, -85, -58, 0]$[98, -85, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMwkABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMw0ABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMw0ABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPl5IEABEeCIfOdOxMaTvA" type="4001" source="_RNluAEABEeCIfOdOxMaTvA" target="_RNHz8EABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPl5JEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPl5JUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPl5IUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPl5IUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPl5IkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.3"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPl5I0ABEeCIfOdOxMaTvA" points="[0, 0, -78, 88]$[37, 0, -41, 88]$[37, -88, -41, 0]$[78, -88, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMykABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMy0ABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPl5I0ABEeCIfOdOxMaTvA" points="[0, 0, -98, 0]$[98, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMykABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMy0ABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPmgMEABEeCIfOdOxMaTvA" type="4001" source="_RM1gF0ABEeCIfOdOxMaTvA" target="_RNluBkABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPmgNEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPmgNUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPmgMUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPmgMUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPmgMkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.4"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPmgM0ABEeCIfOdOxMaTvA" points="[0, 0, -84, 85]$[35, 0, -49, 85]$[35, -85, -49, 0]$[84, -85, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPmgM0ABEeCIfOdOxMaTvA" points="[0, 0, -98, 0]$[40, 0, -58, 0]$[40, 0, -58, 0]$[98, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMzkABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMz0ABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMz0ABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPnuUEABEeCIfOdOxMaTvA" type="4001" source="_RN53EEABEeCIfOdOxMaTvA" target="_RNHz8EABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPnuVEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPnuVUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPnuUUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPnuUUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPnuUkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.5"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPnuU0ABEeCIfOdOxMaTvA" points="[0, 0, -78, 174]$[37, 0, -41, 174]$[37, -174, -41, 0]$[78, -174, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpM0EABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpM0UABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPnuU0ABEeCIfOdOxMaTvA" points="[0, 0, -98, 85]$[48, 0, -50, 85]$[48, -85, -50, 0]$[98, -85, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpM0EABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpM0UABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPoVYEABEeCIfOdOxMaTvA" type="4001" source="_RM1gF0ABEeCIfOdOxMaTvA" target="_RN53FkABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPoVZEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPo8cEABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPoVYUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPoVYUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPoVYkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.6"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPoVY0ABEeCIfOdOxMaTvA" points="[0, 0, -84, -1]$[35, 0, -49, -1]$[35, 1, -49, 0]$[84, 1, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPoVY0ABEeCIfOdOxMaTvA" points="[0, 0, -98, -85]$[40, 0, -58, -85]$[40, 85, -58, 0]$[98, 85, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMwEABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMwUABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMwUABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPpjgEABEeCIfOdOxMaTvA" type="4001" source="_ROJusEABEeCIfOdOxMaTvA" target="_RNHz8EABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPpjhEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPpjhUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPpjgUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPpjgUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPpjgkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.7"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPpjg0ABEeCIfOdOxMaTvA" points="[0, 0, -78, 259]$[37, 0, -41, 259]$[37, -259, -41, 0]$[78, -259, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMxEABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMxUABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPpjg0ABEeCIfOdOxMaTvA" points="[0, 0, -98, 170]$[48, 0, -50, 170]$[48, -170, -50, 0]$[98, -170, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMxEABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMxUABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPqKkEABEeCIfOdOxMaTvA" type="4001" source="_RM1gF0ABEeCIfOdOxMaTvA" target="_ROKVwkABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPqxoEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPqxoUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPqKkUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPqKkUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPqKkkABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.8"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPqKk0ABEeCIfOdOxMaTvA" points="[0, 0, -84, -86]$[35, 0, -49, -86]$[35, 86, -49, 0]$[84, 86, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPqKk0ABEeCIfOdOxMaTvA" points="[0, 0, -98, -170]$[40, 0, -58, -170]$[40, 170, -58, 0]$[98, 170, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMyEABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMyUABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMyUABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RPrYsEABEeCIfOdOxMaTvA" type="4001" source="_ROjXV0ABEeCIfOdOxMaTvA" target="_RM1gF0ABEeCIfOdOxMaTvA">
     <children xmi:type="notation:DecorationNode" xmi:id="_RPrYtEABEeCIfOdOxMaTvA" type="6001">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_RPrYtUABEeCIfOdOxMaTvA"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPrYsUABEeCIfOdOxMaTvA"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RPrYsUABEeCIfOdOxMaTvA" roundedBendpointsRadius="5"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RPrYskABEeCIfOdOxMaTvA" fontName="Sans"/>
     <element xmi:type="kaom:Link" href="continuous_LevelCrossingDetectorDetectingDirections.kaom#//@childEntities.0/@childLinks.9"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPrYs0ABEeCIfOdOxMaTvA" points="[0, 0, -71, 0]$[71, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMzEABEeCIfOdOxMaTvA" id="(1.0,0.5)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RPrYs0ABEeCIfOdOxMaTvA" points="[0, 0, -67, 0]$[67, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMzEABEeCIfOdOxMaTvA" id="(0.5,0.5)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnpMzUABEeCIfOdOxMaTvA" id="(0.0,0.5)"/>
   </edges>
 </notation:Diagram>

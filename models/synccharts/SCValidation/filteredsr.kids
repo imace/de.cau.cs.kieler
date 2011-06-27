@@ -22,7 +22,7 @@
             <children xmi:type="notation:BasicCompartment" xmi:id="_MVZF6HoeEeCZSO_fAxZP7Q" type="7078"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_MVZF6XoeEeCZSO_fAxZP7Q" type="7079"/>
             <element xmi:type="synccharts:State" href="filteredsr.kixs#//@states.0/@regions.0/@states.0"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVZF4XoeEeCZSO_fAxZP7Q" x="2"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVZF4XoeEeCZSO_fAxZP7Q" x="1" y="1"/>
           </children>
           <children xmi:type="notation:Shape" xmi:id="_MVZs8HoeEeCZSO_fAxZP7Q" type="3055" fontHeight="8" lineColor="0">
             <children xmi:type="notation:DecorationNode" xmi:id="_MVZs8noeEeCZSO_fAxZP7Q" type="5070"/>
@@ -34,42 +34,42 @@
             <children xmi:type="notation:BasicCompartment" xmi:id="_MVZs-HoeEeCZSO_fAxZP7Q" type="7078"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_MVZs-XoeEeCZSO_fAxZP7Q" type="7079"/>
             <element xmi:type="synccharts:State" href="filteredsr.kixs#//@states.0/@regions.0/@states.1"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVZs8XoeEeCZSO_fAxZP7Q" x="213"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVZs8XoeEeCZSO_fAxZP7Q" x="233" y="1"/>
           </children>
         </children>
         <element xmi:type="synccharts:Region" href="filteredsr.kixs#//@states.0/@regions.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVYe0XoeEeCZSO_fAxZP7Q" x="1" y="1" width="346" height="87"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVYe0XoeEeCZSO_fAxZP7Q" x="1" y="1" width="378" height="92"/>
       </children>
     </children>
     <element xmi:type="synccharts:State" href="filteredsr.kixs#//@states.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVUNYXoeEeCZSO_fAxZP7Q" x="1" y="1" width="360" height="169"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MVUNYXoeEeCZSO_fAxZP7Q" x="1" y="1" width="392" height="178"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_MSHIYXoeEeCZSO_fAxZP7Q"/>
   <element xmi:type="synccharts:Region" href="filteredsr.kixs#/"/>
   <edges xmi:type="notation:Connector" xmi:id="_MVlTIHoeEeCZSO_fAxZP7Q" type="4006" source="_MVZF4HoeEeCZSO_fAxZP7Q" target="_MVZs8HoeEeCZSO_fAxZP7Q" lineColor="0">
     <children xmi:type="notation:DecorationNode" xmi:id="_MVlTI3oeEeCZSO_fAxZP7Q" type="6011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVlTJHoeEeCZSO_fAxZP7Q" x="22" y="-8"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVlTJHoeEeCZSO_fAxZP7Q" x="-1" y="-8"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_MVlTJXoeEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVlTJnoeEeCZSO_fAxZP7Q" x="-11" y="3"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVlTJnoeEeCZSO_fAxZP7Q" x="-5" y="4"/>
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_MVlTIXoeEeCZSO_fAxZP7Q" fontHeight="8"/>
     <element xmi:type="synccharts:Transition" href="filteredsr.kixs#//@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVlTInoeEeCZSO_fAxZP7Q" points="[0, 0, -132, 0]$[29, 0, -103, 0]$[87, 0, -45, 0]$[132, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MHoeEeCZSO_fAxZP7Q" id="(0.6363376159667968,0.5000210812217311)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MXoeEeCZSO_fAxZP7Q" id="(0.0,0.5000210812217311)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVlTInoeEeCZSO_fAxZP7Q" points="[0, 0, -92, 0]$[29, 0, -63, 0]$[63, 0, -29, 0]$[92, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MHoeEeCZSO_fAxZP7Q" id="(0.9988571711948939,0.4994999885559082)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MXoeEeCZSO_fAxZP7Q" id="(0.0,0.4994999885559082)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_MVl6MHoeEeCZSO_fAxZP7Q" type="4006" source="_MVZs8HoeEeCZSO_fAxZP7Q" target="_MVZF4HoeEeCZSO_fAxZP7Q" lineColor="0">
     <children xmi:type="notation:DecorationNode" xmi:id="_MVl6M3oeEeCZSO_fAxZP7Q" type="6011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVl6NHoeEeCZSO_fAxZP7Q" y="11"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVl6NHoeEeCZSO_fAxZP7Q" x="1" y="11"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_MVl6NXoeEeCZSO_fAxZP7Q" visible="false" type="6012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVl6NnoeEeCZSO_fAxZP7Q" x="-3" y="3"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MVl6NnoeEeCZSO_fAxZP7Q" x="-5" y="4"/>
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_MVl6MXoeEeCZSO_fAxZP7Q" fontHeight="8"/>
     <element xmi:type="synccharts:Transition" href="filteredsr.kixs#//@states.0/@regions.0/@states.1/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVl6MnoeEeCZSO_fAxZP7Q" points="[0, 0, 87, 0]$[-3, 1, 84, 1]$[-6, 1, 81, 1]$[-8, 2, 79, 2]$[-39, 5, 48, 5]$[-48, 5, 39, 5]$[-78, 2, 9, 2]$[-81, 1, 6, 1]$[-84, 1, 3, 1]$[-87, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MnoeEeCZSO_fAxZP7Q" id="(0.0,0.7204816215916684)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2M3oeEeCZSO_fAxZP7Q" id="(0.9964736022949219,0.7204816215916684)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVl6MnoeEeCZSO_fAxZP7Q" points="[0, 0, 92, 0]$[-3, 0, 89, 0]$[-5, 1, 87, 1]$[-8, 1, 84, 1]$[-41, 4, 51, 4]$[-50, 4, 42, 4]$[-84, 1, 8, 1]$[-87, 1, 5, 1]$[-89, 0, 3, 0]$[-92, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2MnoeEeCZSO_fAxZP7Q" id="(0.0,0.7119999885559082)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mev2M3oeEeCZSO_fAxZP7Q" id="(0.9988571711948939,0.7119999885559082)"/>
   </edges>
 </notation:Diagram>
