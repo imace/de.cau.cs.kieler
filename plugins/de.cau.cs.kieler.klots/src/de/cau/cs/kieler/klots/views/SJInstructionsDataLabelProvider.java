@@ -89,7 +89,7 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
                 return "-";
             }
         default:
-            throw new RuntimeException("columnIndex out of bounds (6)");
+            throw new IndexOutOfBoundsException("columnIndex out of bounds (6)");
         }
     }
 
