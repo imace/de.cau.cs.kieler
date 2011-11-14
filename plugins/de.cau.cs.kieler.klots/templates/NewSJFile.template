@@ -17,26 +17,28 @@ public class <CLASS> extends EmbeddedSJProgram<StateLabel> {
     /**
      * The labels used for the different parts of the program.
      */
-    enum StateLabel { /* DECLARE YOUR PROGRAM LABELS HERE, E.G. L1, L2,... */ }
+    enum StateLabel { L1 /* DECLARE YOUR PROGRAM LABELS HERE, E.G. L1, L2,... */ }
 
     
     /**
      * The signals used by the program.
      */
-    public Signal /* DECLARE YOUR PROGRAM SIGNALS HERE, E.G. S1, S2,... */ ;
+    public Signal S1 /* DECLARE YOUR PROGRAM SIGNALS HERE, E.G. S1, S2,... */ ;
 
     
     /**
      * Initializes a new instance of the program.
      */
     public <CLASS>() {
-        super( /* INSERT START LABEL */ , /* INSERT START PRIORITY */ );
+        /* CALL CONSTRUCTOR OF THE SUPERCLASS WITH STARTLABEL AND -PRIORITY  */
+        /* I.E. CALL: super( <START_LABEL> , <START_PRIORITY> );. E.G. CALL: */
+        super(L1 , 1);
         
         /* INITIALIZE SIGNALS, I.E. FOR EACH DECLARED SIGNAL ADD LINE: */
         // <SIGNAL> = new Signal("<SIGNAL>");
         /* E.G. ADD: S1 = new Signal("S1") */
         
-        addSignals( /* INSERT DECLARED SIGNALS HERE, E.G. S1, S2,... */ );
+        addSignals( S1 /* INSERT DECLARED SIGNALS HERE, E.G. S1, S2,... */ );
     }
     
     
@@ -50,8 +52,10 @@ public class <CLASS> extends EmbeddedSJProgram<StateLabel> {
         try {
             EmbeddedSJProgramStarter.start(
                     new <CLASS>(),
-                    /* INSERT PROGRAM'S NAME HERE, E.G. "MY_SJ_PROGRAM" */,
-                    /* INSERT console IF REMOTE PRINT IS ENABLED, OR null OTHERWISE */ );
+                    /* INSERT PROGRAM'S NAME HERE, E.G. "MY_SJ_PROGRAM" */
+                    "MY_SJ_PROGRAM",
+                    /* INSERT console IF REMOTE PRINT IS ENABLED, OR null OTHERWISE */
+                    null);
         } catch (IOException e) {
         }
     }

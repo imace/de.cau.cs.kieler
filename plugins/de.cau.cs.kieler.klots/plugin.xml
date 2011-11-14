@@ -28,7 +28,7 @@
   <extension
          point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
       <executionFile
-            file="execution/embeddedSJ.execution">
+            file="execution/embeddedSJ.execution.old">
          <editor
                id="de.cau.cs.kieler.klots.editor.KlotsEditor"
                name="KLOTS Editor"
@@ -104,7 +104,7 @@
            class="de.cau.cs.kieler.klots.KlotsPerspective"
            icon="icons/KLOTS3.png"
            id="de.cau.cs.kieler.klots.KlotsPerspective"
-           name="KLOTS">
+           name="KIELER Lego On-line Testing System">
      </perspective>
   </extension>
    
@@ -136,7 +136,7 @@
            category="de.cau.cs.kieler"
            class="de.cau.cs.kieler.klots.preferences.KlotsConnectionsPreferencePage"
            id="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"
-           name="Lego Execution">
+           name="Lego Execution (KLOTS)">
      </page>
      <page
            category="de.cau.cs.kieler.klots.preferences.KlotsPreferencePage"

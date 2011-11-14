@@ -214,6 +214,11 @@ public class NXTCommunicator {
         try {
             String line = dis.readLine();   //FIXME: Find a way to use BufferedReader.readLine() instead!
             System.out.println(";;;;=======;;;; RECEIVED MESSAGE LINE = >" + line + "<");
+            if (line == null) {
+            	ErrorHandler err = new ErrorHandler("Connection Error!\nKLOTS does not receive any info "
+            			+ "from the NXT!\nIs your NXT properly connected?");
+            	err.showResults();
+            }
 
             // if in 'remote console print' mode
             if (consolePrint) {
