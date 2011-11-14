@@ -159,10 +159,15 @@ public class KlotsPlugin extends AbstractUIPlugin {
                                     + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION + ") "
                                     + "and SJ files (*." + KlotsConstants.SJ_FILE_NAME_EXTENSION + ") "
                                     + "to be the to be the KLOTS Editor: " + KlotsEditor.ID + "!");
-                            systemEmbeddedJavaFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
-                            .getDefaultEditor("*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
-                            systemSJFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
-                            .getDefaultEditor("*." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
+                            if (systemEmbeddedJavaFileEditor == null) {
+                            	systemEmbeddedJavaFileEditor = PlatformUI.getWorkbench()
+                            			.getEditorRegistry().getDefaultEditor("*."
+                            					+ KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
+                            }
+                            if (systemSJFileEditor == null) {
+                            	systemSJFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
+                            			.getDefaultEditor("*." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
+                            }
                             PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
                                     "*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION,
                                     KlotsEditor.ID);
@@ -189,6 +194,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
                             PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
                                     "*." + KlotsConstants.SJ_FILE_NAME_EXTENSION,
                                     systemSJFileEditor.getId());
+                            systemEmbeddedJavaFileEditor = null;
+                            systemSJFileEditor = null;
                         }
                     }
                 }
