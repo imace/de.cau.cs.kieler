@@ -28,7 +28,7 @@
   <extension
          point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
       <executionFile
-            file="execution/embeddedSJ.execution.old">
+            file="execution/embeddedSJ.execution">
          <editor
                id="de.cau.cs.kieler.klots.editor.KlotsEditor"
                name="KLOTS Editor"
