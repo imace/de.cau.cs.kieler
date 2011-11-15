@@ -83,10 +83,10 @@ public class SJInstructionsViewNXTDataObserver extends JSONObjectDataComponent
                     jSONKey = (String) iter.next();
                 }
 
-                if (jSONKey.equals("present")) {
-                    // FIXME: find a way to deal with 'present' hidden in 'awaitDone'
-                    continue;
-                }
+//                if (jSONKey.equals("present")) {
+//                    // fixme: find a way to deal with 'present' hidden in 'awaitDone'
+//                    continue;
+//                }
 
                 instrData.setInstructionsName(jSONKey);
                 instrInside = instr.getJSONObject(jSONKey);
