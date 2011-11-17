@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <plugin>
 <extension point="de.cau.cs.kieler.kex">
-<example author="KIELER Workgroup" category="de.cau.cs.kieler.klots" contact="kieler@informatik.uni-kiel.de" description="This is the standard ABRO example of the synchronous languages implemened in Synchronous Java and executable on a Lego Mindstorms NXT System with preinstalled leJOS firmware." generation_date="Wed Nov 16 12:46:47 CET 2011" id="de.cau.cs.kieler.klots.abro" overview_pic="images/abro.png" root_directory="examples/" title="Embedded Synchronous Java ABRO">
-<resource direct_open="true" local_path="examples/abro/EmbeddedABRO.java" resource_type="file"/>
-<resource
-      direct_open="false"
-      local_path="examples/abro/"
-      resource_type="folder">
-</resource>
-</example>
 <category
       icon="icons/SJFile.gif"
       id="de.cau.cs.kieler.klots"
       title="KIELER Lego On-line Testing System">
 </category>
+<example
+      author="KIELER Workgroup"
+      category="de.cau.cs.kieler.klots"
+      contact="kieler@informatik.uni-kiel.de"
+      description="This is the standard ABRO example of the synchronous languages implemened in Synchronous Java and executable on a Lego Mindstorms NXT System with preinstalled leJOS firmware."
+      generation_date="Wed Nov 16 12:46:47 CET 2011"
+      id="de.cau.cs.kieler.klots.abro"
+      overview_pic="images/abro.png"
+      root_directory="examples/"
+      title="Embedded Synchronous Java ABRO">
+<resource
+      direct_open="false"
+      local_path="examples/abro/"
+      resource_type="folder">
+</resource>
+<resource direct_open="true" local_path="examples/abro/EmbeddedABRO.java" resource_type="file"/>
+</example>
 </extension>
 </plugin>

@@ -11,17 +11,17 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package examples;
+package abro;
 
 import java.io.IOException;
 
 import sj.EmbeddedSJProgram;
 import sj.EmbeddedSJProgramStarter;
 import sj.Signal;
-import examples.EmbeddedABRO.StateLabel;
+import abro.EmbeddedABRO.StateLabel;
 /* Note: In order to allow static imports, the Java Compiler compliance level
  * should be set to 1.5 */
-import static examples.EmbeddedABRO.StateLabel.*;
+import static abro.EmbeddedABRO.StateLabel.*;
 
 /**
  * The program ABRO. ABRO is the "hello world" of synchronous languages. This
