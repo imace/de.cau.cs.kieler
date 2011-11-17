@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: SearchServicesThread.java 2556 2008-12-11 08:06:04Z skarzhevskyy $
+ *  @version $Id: SearchServicesThread.java 2986 2009-04-17 15:03:22Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -85,7 +85,7 @@ class SearchServicesThread extends Thread {
 		this.attrSet = attrSet;
 		this.listener = listener;
 		this.uuidSet = uuidSet;
-		this.device = device;
+		this.device = RemoteDeviceHelper.getStackBoundDevice(stack, device);
 	}
 
 	/**

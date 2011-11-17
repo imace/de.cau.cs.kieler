@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: BluetoothL2CAPConnection.java 2476 2008-12-01 17:41:59Z skarzhevskyy $
+ *  @version $Id: BluetoothL2CAPConnection.java 2945 2009-03-22 03:45:41Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -40,6 +40,8 @@ abstract class BluetoothL2CAPConnection implements L2CAPConnection, BluetoothCon
 
 	protected volatile long handle;
 
+	protected int transmitMTU;
+	
 	protected int securityOpt;
 
 	private RemoteDevice remoteDevice;
@@ -127,7 +129,7 @@ abstract class BluetoothL2CAPConnection implements L2CAPConnection, BluetoothCon
 		if (data == null) {
 			throw new NullPointerException("data is null");
 		}
-		bluetoothStack.l2Send(handle, data);
+		bluetoothStack.l2Send(handle, data, transmitMTU);
 	}
 
 	abstract void closeConnectionHandle(long handle) throws IOException;

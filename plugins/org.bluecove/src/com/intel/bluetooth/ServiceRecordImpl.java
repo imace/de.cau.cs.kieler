@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: ServiceRecordImpl.java 2624 2008-12-19 17:16:25Z skarzhevskyy $
+ *  @version $Id: ServiceRecordImpl.java 2975 2009-03-31 14:39:02Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -68,8 +68,7 @@ class ServiceRecordImpl implements ServiceRecord {
 	}
 
 	byte[] toByteArray() throws IOException {
-		DataElement element = new DataElement(DataElement.DATSEQ);
-
+	    DataElement rootSeq = new DataElement(DataElement.DATSEQ);
 		final boolean sort = true;
 		if (sort) {
 			int[] sortIDs = new int[attributes.size()];
@@ -91,24 +90,21 @@ class ServiceRecordImpl implements ServiceRecord {
 				}
 			}
 			// DebugLog.debug("sorted", sortIDs);
-
 			for (int i = 0; i < sortIDs.length; i++) {
-				element.addElement(new DataElement(DataElement.U_INT_2, sortIDs[i]));
-				element.addElement(getAttributeValue(sortIDs[i]));
+			    int attrID  = sortIDs[i];
+			    rootSeq.addElement(new DataElement(DataElement.U_INT_2, attrID));
+			    rootSeq.addElement(getAttributeValue(attrID));
 			}
 		} else {
 			for (Enumeration e = attributes.keys(); e.hasMoreElements();) {
 				Integer key = (Integer) e.nextElement();
-
-				element.addElement(new DataElement(DataElement.U_INT_2, key.intValue()));
-				element.addElement((DataElement) attributes.get(key));
+				rootSeq.addElement(new DataElement(DataElement.U_INT_2, key.intValue()));
+				rootSeq.addElement((DataElement) attributes.get(key));
 			}
 		}
-
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-		(new SDPOutputStream(out)).writeElement(element);
-
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        SDPOutputStream sdpOut = new SDPOutputStream(out);
+        sdpOut.writeElement(rootSeq);
 		return out.toByteArray();
 	}
 

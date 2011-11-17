@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: SelectServiceHandler.java 2476 2008-12-01 17:41:59Z skarzhevskyy $
+ *  @version $Id: SelectServiceHandler.java 2915 2009-03-13 17:07:26Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 

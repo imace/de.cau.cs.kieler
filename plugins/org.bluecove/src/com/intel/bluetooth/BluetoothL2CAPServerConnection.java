@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: BluetoothL2CAPServerConnection.java 2476 2008-12-01 17:41:59Z skarzhevskyy $
+ *  @version $Id: BluetoothL2CAPServerConnection.java 2945 2009-03-22 03:45:41Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -36,12 +36,17 @@ class BluetoothL2CAPServerConnection extends BluetoothL2CAPConnection implements
 	 * @param handle
 	 * @throws IOException
 	 */
-	protected BluetoothL2CAPServerConnection(BluetoothStack bluetoothStack, long handle, int securityOpt)
+	protected BluetoothL2CAPServerConnection(BluetoothStack bluetoothStack, long handle,  int transmitMTU, int securityOpt)
 			throws IOException {
 		super(bluetoothStack, handle);
 		boolean initOK = false;
 		try {
 			this.securityOpt = securityOpt;
+			this.transmitMTU = this.getTransmitMTU();
+            // JAR-82 If the byte array is larger than the TransmitMTU of the local device, send method will only send a byte array whose size is equal to the TransmitMTU of the local device.
+		    if ((transmitMTU > 0) && (transmitMTU < this.transmitMTU)) {
+                this.transmitMTU = transmitMTU;
+            }
 			RemoteDeviceHelper.connected(this);
 			initOK = true;
 		} finally {

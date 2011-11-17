@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: BluetoothStackBlueSoleil.java 2525 2008-12-09 03:48:51Z skarzhevskyy $
+ *  @version $Id: BluetoothStackBlueSoleil.java 2945 2009-03-22 03:45:41Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -536,7 +536,7 @@ class BluetoothStackBlueSoleil implements BluetoothStack, DeviceInquiryRunnable,
 	 * 
 	 * @see com.intel.bluetooth.BluetoothStack#l2send(long, byte[])
 	 */
-	public void l2Send(long handle, byte[] data) throws IOException {
+	public void l2Send(long handle, byte[] data, int transmitMTU) throws IOException {
 		throw new NotSupportedIOException(getStackID());
 	}
 

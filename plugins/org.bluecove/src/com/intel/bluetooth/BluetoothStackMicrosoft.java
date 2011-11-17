@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: BluetoothStackMicrosoft.java 2638 2008-12-22 15:12:17Z skarzhevskyy $
+ *  @version $Id: BluetoothStackMicrosoft.java 2945 2009-03-22 03:45:41Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -310,10 +310,10 @@ class BluetoothStackMicrosoft implements BluetoothStack {
 			return "0";
 		}
 
-		if ("bluecove.radio.version".equals(property)) {
+		if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_RADIO_VERSION.equals(property)) {
 			return String.valueOf(getDeviceVersion(localBluetoothAddress));
 		}
-		if ("bluecove.radio.manufacturer".equals(property)) {
+		if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_RADIO_MANUFACTURER.equals(property)) {
 			return String.valueOf(getDeviceManufacturer(localBluetoothAddress));
 		}
 		return null;
@@ -949,7 +949,7 @@ class BluetoothStackMicrosoft implements BluetoothStack {
 	 * 
 	 * @see com.intel.bluetooth.BluetoothStack#l2send(long, byte[])
 	 */
-	public void l2Send(long handle, byte[] data) throws IOException {
+	public void l2Send(long handle, byte[] data, int transmitMTU) throws IOException {
 		throw new NotSupportedIOException(getStackID());
 	}
 

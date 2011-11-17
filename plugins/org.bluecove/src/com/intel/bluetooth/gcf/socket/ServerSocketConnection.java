@@ -1,7 +1,7 @@
 /**
  *  MicroEmulator
  *  Copyright (C) 2006-2007 Bartek Teodorczyk <barteo@barteo.net>
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: ServerSocketConnection.java 2416 2008-10-09 17:59:55Z skarzhevskyy $
+ *  @version $Id: ServerSocketConnection.java 2915 2009-03-13 17:07:26Z skarzhevskyy $
  */
 package com.intel.bluetooth.gcf.socket;
 

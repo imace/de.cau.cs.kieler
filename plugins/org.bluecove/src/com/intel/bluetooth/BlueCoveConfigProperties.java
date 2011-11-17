@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2008-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: BlueCoveConfigProperties.java 2577 2008-12-13 18:21:46Z skarzhevskyy $
+ *  @version $Id: BlueCoveConfigProperties.java 3053 2010-07-31 21:07:20Z minashokry $
  */
 package com.intel.bluetooth;
 
@@ -77,9 +77,16 @@ public interface BlueCoveConfigProperties {
 
     /**
      * Load library (.dll) from specified location. Initialization property.
+     * 
+     * Path separated by system-dependent path-separator (: or ;) accepted.
      */
     public static final String PROPERTY_NATIVE_PATH = "bluecove.native.path";
 
+    /**
+     * Linux implementation class. Initialization property.
+     */
+    public static final String PROPERTY_BLUEZ_CLASS = "bluecove.bluez.class";
+    
     /**
      * If Stack support multiple bluetooth adapters select one by its system ID.
      * (Linux BlueZ and Emulator) Initialization property.
@@ -92,6 +99,11 @@ public interface BlueCoveConfigProperties {
      */
     public static final String PROPERTY_LOCAL_DEVICE_ADDRESS = "bluecove.deviceAddress";
 
+    /**
+     * JSR-82 simulator class. Initialization property.
+     */
+    public static final String PROPERTY_EMULATOR_CLASS = "bluecove.emulator.class";
+    
     /**
      * JSR-82 air simulator server can be on remote computer, default
      * 'localhost'. Initialization property.
@@ -117,7 +129,7 @@ public interface BlueCoveConfigProperties {
      * initialized.
      */
     public static final String[] INITIALIZATION_PROPERTIES = new String[] { PROPERTY_STACK, PROPERTY_STACK_FIRST, PROPERTY_NATIVE_RESOURCE,
-            PROPERTY_NATIVE_RESOURCE, PROPERTY_LOCAL_DEVICE_ID, PROPERTY_LOCAL_DEVICE_ADDRESS, PROPERTY_EMULATOR_HOST, PROPERTY_EMULATOR_PORT };
+            PROPERTY_NATIVE_RESOURCE, PROPERTY_BLUEZ_CLASS, PROPERTY_LOCAL_DEVICE_ID, PROPERTY_LOCAL_DEVICE_ADDRESS, PROPERTY_EMULATOR_CLASS, PROPERTY_EMULATOR_HOST, PROPERTY_EMULATOR_PORT };
 
     /**
      * The amount of time in milliseconds for which the implementation will
@@ -170,4 +182,34 @@ public interface BlueCoveConfigProperties {
      * >JSR-82 1.2</A>
      */
     public static final String PROPERTY_JSR_82_PSM_MINIMUM_OFF = "bluecove.jsr82.psm_minimum_off";
+    
+    /**
+     * In some cases BlueCove has a control how String are encoded in SDP records. 
+     * This one will force it to be encoded as ASCII (charsetName "US-ASCII").
+     * May be useful for connections with some OEM devices.
+     * 
+     * Used on MS stack and BlueZ GPL module for now. TODO other stacks.
+     * 
+     * Defaults to false.
+     */
+    public static final String PROPERTY_SDP_STRING_ENCODING_ASCII = "bluecove.sdp.string_encoding_ascii";
+
+	/**
+	 * To be able to use some of android bluetooth APIs, we need a reference to
+	 * an android context object
+	 */
+	public static final String PROPERTY_ANDROID_CONTEXT = "bluecove.android.context";
+
+	/**
+	 * In android, device can't be discoverable forever. you have to set time in seconds.
+	 * After this time, device will return automatically to non-discoverable.
+	 */
+	public static final String PROPERTY_ANDROID_DISCOVERABLE_DURATION = "bluecove.android.discoverable_duration";
+
+	/**
+	 * Android APIs don't give utilities to examine the service record. So, set this property
+	 * with comma-separated UUIDs you wish services containing them to be
+	 * considered as OBEX services.
+	 */
+	public static final String PROPERTY_ANDROID_OBEX_UUIDS = "bluecove.android.obex_uuids";
 }

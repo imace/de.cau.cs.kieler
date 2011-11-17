@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,15 +20,13 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: UtilsJavaSE.java 2476 2008-12-01 17:41:59Z skarzhevskyy $
+ *  @version $Id: UtilsJavaSE.java 3054 2010-08-11 20:31:52Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
 import java.security.PrivilegedActionException;
 import java.util.Properties;
 import java.util.Vector;
-
-import com.ibm.oti.vm.VM;
 
 /**
  *
@@ -92,7 +90,7 @@ public class UtilsJavaSE {
 			if ((javaV == null) || (javaV.length() < 3)) {
 				return 0;
 			}
-			return Integer.valueOf(javaV.charAt(2)).intValue();
+			return Integer.valueOf(javaV.substring(2, 3)).intValue();
 		} catch (Throwable e) {
 			return 0;
 		}
@@ -188,7 +186,7 @@ public class UtilsJavaSE {
 			// since Java 1.3
 			if (!javaSECompiledOut) {
 				if (ibmJ9midp) {
-					VM.addShutdownClass(thread);
+					IBMJ9Helper.addShutdownClass(thread);
 					return true;
 				} else {
 					Runtime.getRuntime().addShutdownHook(thread);

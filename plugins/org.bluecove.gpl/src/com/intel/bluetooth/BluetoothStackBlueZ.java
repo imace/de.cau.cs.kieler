@@ -1,7 +1,7 @@
 /**
  * BlueCove BlueZ module - Java library for Bluetooth on Linux
  *  Copyright (C) 2008 Mina Shokry
- *  Copyright (C) 2007-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2007-2009 Vlad Skarzhevskyy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @version $Id: BluetoothStackBlueZ.java 2557 2008-12-11 08:19:30Z skarzhevskyy $
+ * @version $Id: BluetoothStackBlueZ.java 3045 2010-07-06 16:16:28Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -34,11 +34,11 @@ import javax.bluetooth.ServiceRegistrationException;
 import javax.bluetooth.UUID;
 
 /**
- * Property "bluecove.deviceID" or "bluecove.deviceAddress" can be used to
- * select Local Bluetooth device.
+ * Property "bluecove.deviceID" or "bluecove.deviceAddress" can be used to select Local
+ * Bluetooth device.
  * 
  */
-class BluetoothStackBlueZ implements BluetoothStack {
+class BluetoothStackBlueZ implements BluetoothStack, BluetoothStackExtension {
 
     public static final String NATIVE_BLUECOVE_LIB_BLUEZ = "bluecove";
 
@@ -52,6 +52,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
     private final static int LISTEN_BACKLOG_L2CAP = 4;
 
     private final static Vector devicesUsed = new Vector();
+
+    private final static String BLUEZ_DEVICEID_PREFIX = "hci";
 
     private int deviceID = -1;
 
@@ -77,7 +79,6 @@ class BluetoothStackBlueZ implements BluetoothStack {
     BluetoothStackBlueZ() {
     }
 
-    // --- Library initialization
 
     public String getStackID() {
         return BlueCoveImpl.STACK_BLUEZ;
@@ -90,6 +91,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
             return getStackID();
         }
     }
+
+    // --- Library initialization
 
     /*
      * (non-Javadoc)
@@ -122,18 +125,27 @@ class BluetoothStackBlueZ implements BluetoothStack {
         return BlueCoveImpl.BLUECOVE_STACK_DETECT_BLUEZ;
     }
 
-    private native int nativeGetDeviceID(int id, long findLocalDeviceBTAddress) throws BluetoothStateException;
+    private native int nativeGetDeviceID(int findNumber, int findBlueZDeviceID, long findLocalDeviceBTAddress) throws BluetoothStateException;
 
     private native int nativeOpenDevice(int deviceID) throws BluetoothStateException;
 
     public void initialize() throws BluetoothStateException {
         long findLocalDeviceBTAddress = -1;
-        int findID = BlueCoveImpl.getConfigProperty(BlueCoveConfigProperties.PROPERTY_LOCAL_DEVICE_ID, -1);
+        String findID = BlueCoveImpl.getConfigProperty(BlueCoveConfigProperties.PROPERTY_LOCAL_DEVICE_ID);
+        int findNumber = -1;
+        int findBlueZDeviceID = -1;
+        if (findID != null) {
+            if (findID.startsWith(BLUEZ_DEVICEID_PREFIX)) {
+                findBlueZDeviceID = Integer.parseInt(findID.substring(BLUEZ_DEVICEID_PREFIX.length()));
+            } else {
+                findNumber = Integer.parseInt(findID);
+            }
+        }
         String deviceAddressStr = BlueCoveImpl.getConfigProperty(BlueCoveConfigProperties.PROPERTY_LOCAL_DEVICE_ADDRESS);
         if (deviceAddressStr != null) {
-            findLocalDeviceBTAddress = Long.parseLong(deviceAddressStr, 16);
+            findLocalDeviceBTAddress = Long.parseLong(deviceAddressStr, 0x10);
         }
-        int foundDeviceID = nativeGetDeviceID(findID, findLocalDeviceBTAddress);
+        int foundDeviceID = nativeGetDeviceID(findNumber, findBlueZDeviceID, findLocalDeviceBTAddress);
         if (devicesUsed.contains(new Long(foundDeviceID))) {
             throw new BluetoothStateException("LocalDevice " + foundDeviceID + " alredy in use");
         }
@@ -185,8 +197,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#isCurrentThreadInterruptedCallback()
+     * @see com.intel.bluetooth.BluetoothStack#isCurrentThreadInterruptedCallback()
      */
     public boolean isCurrentThreadInterruptedCallback() {
         return UtilsJavaSE.isCurrentThreadInterrupted();
@@ -198,10 +209,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
      * @see com.intel.bluetooth.BluetoothStack#getFeatureSet()
      */
     public int getFeatureSet() {
-        return FEATURE_SERVICE_ATTRIBUTES | FEATURE_L2CAP;
+        return FEATURE_SERVICE_ATTRIBUTES | FEATURE_L2CAP | FEATURE_RSSI | FEATURE_ASSIGN_SERVER_PSM;
     }
-
-    private native int[] getLocalDevicesID();
 
     // --- LocalDevice
 
@@ -234,6 +243,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
         return true;
     }
 
+    private native int[] getLocalDevicesID();
+
     public String getLocalDeviceProperty(String property) {
         if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_DEVICES_LIST.equals(property)) {
             int[] ids = getLocalDevicesID();
@@ -243,6 +254,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
                     if (i != 0) {
                         b.append(',');
                     }
+                    b.append(BLUEZ_DEVICEID_PREFIX);
                     b.append(String.valueOf(ids[i]));
                 }
             }
@@ -260,7 +272,11 @@ class BluetoothStackBlueZ implements BluetoothStack {
             if ("getRemoteDeviceVersionInfo".equals(function)) {
                 return getRemoteDeviceVersionInfo(address);
             } else if ("getRemoteDeviceRSSI".equals(function)) {
-                return String.valueOf(getRemoteDeviceRSSI(address));
+                try {
+                    return String.valueOf(readRemoteDeviceRSSI(address));
+                } catch (IOException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
             }
             return null;
         }
@@ -278,10 +294,10 @@ class BluetoothStackBlueZ implements BluetoothStack {
     /**
      * From JSR-82 docs
      * 
-     * @return <code>true</code> if the request succeeded, otherwise
-     *         <code>false</code> if the request failed because the BCC denied
-     *         the request; <code>false</code> if the Bluetooth system does not
-     *         support the access mode specified in <code>mode</code>
+     * @return <code>true</code> if the request succeeded, otherwise <code>false</code> if
+     *         the request failed because the BCC denied the request; <code>false</code>
+     *         if the Bluetooth system does not support the access mode specified in
+     *         <code>mode</code>
      */
     public boolean setLocalDeviceDiscoverable(int mode) throws BluetoothStateException {
         int curentMode = getLocalDeviceDiscoverable();
@@ -325,9 +341,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#removeAuthenticationWithRemoteDevice
-     * (long)
+     * @see com.intel.bluetooth.BluetoothStack#removeAuthenticationWithRemoteDevice (long)
      */
     public void removeAuthenticationWithRemoteDevice(long address) throws IOException {
         // TODO
@@ -342,9 +356,9 @@ class BluetoothStackBlueZ implements BluetoothStack {
         return getRemoteDeviceVersionInfoImpl(this.deviceDescriptor, address);
     }
 
-    private native int getRemoteDeviceRSSIImpl(int deviceDescriptor, long address);
+    private native int getRemoteDeviceRSSIImpl(int deviceDescriptor, long address) throws IOException;
 
-    public int getRemoteDeviceRSSI(long address) {
+    public int readRemoteDeviceRSSI(long address) throws IOException {
         return getRemoteDeviceRSSIImpl(this.deviceDescriptor, address);
     }
 
@@ -362,8 +376,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
 
     // --- Device Inquiry
 
-    private native int runDeviceInquiryImpl(DeviceInquiryRunnable inquiryRunnable, DeviceInquiryThread startedNotify, int deviceID, int deviceDescriptor, int accessCode, int inquiryLength,
-            int maxResponses, DiscoveryListener listener) throws BluetoothStateException;
+    private native int runDeviceInquiryImpl(DeviceInquiryRunnable inquiryRunnable, DeviceInquiryThread startedNotify, int deviceID, int deviceDescriptor,
+            int accessCode, int inquiryLength, int maxResponses, DiscoveryListener listener) throws BluetoothStateException;
 
     public boolean startInquiry(int accessCode, DiscoveryListener listener) throws BluetoothStateException {
         if (discoveryListener != null) {
@@ -557,7 +571,8 @@ class BluetoothStackBlueZ implements BluetoothStack {
             int timeout) throws IOException;
 
     public long connectionRfOpenClientConnection(BluetoothConnectionParams params) throws IOException {
-        return connectionRfOpenClientConnectionImpl(localDeviceBTAddress, params.address, params.channel, params.authenticate, params.encrypt, params.timeout);
+        return connectionRfOpenClientConnectionImpl(this.localDeviceBTAddress, params.address, params.channel, params.authenticate, params.encrypt,
+                params.timeout);
     }
 
     public native void connectionRfCloseClientConnection(long handle) throws IOException;
@@ -656,8 +671,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#l2OpenClientConnection(com.intel.bluetooth
+     * @see com.intel.bluetooth.BluetoothStack#l2OpenClientConnection(com.intel.bluetooth
      * .BluetoothConnectionParams, int, int)
      */
     public long l2OpenClientConnection(BluetoothConnectionParams params, int receiveMTU, int transmitMTU) throws IOException {
@@ -682,8 +696,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
      * (non-Javadoc)
      * 
      * @seecom.intel.bluetooth.BluetoothStack#l2ServerOpen(com.intel.bluetooth.
-     * BluetoothConnectionNotifierParams, int, int,
-     * com.intel.bluetooth.ServiceRecordImpl)
+     * BluetoothConnectionNotifierParams, int, int, com.intel.bluetooth.ServiceRecordImpl)
      */
     public long l2ServerOpen(BluetoothConnectionNotifierParams params, int receiveMTU, int transmitMTU, ServiceRecordImpl serviceRecord) throws IOException {
         validateMTU(receiveMTU, transmitMTU);
@@ -716,8 +729,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#l2ServerAcceptAndOpenServerConnection
+     * @see com.intel.bluetooth.BluetoothStack#l2ServerAcceptAndOpenServerConnection
      * (long)
      */
     public native long l2ServerAcceptAndOpenServerConnection(long handle) throws IOException;
@@ -745,7 +757,6 @@ class BluetoothStackBlueZ implements BluetoothStack {
         } finally {
             l2ServerCloseImpl(handle, false);
         }
-
     }
 
     /*
@@ -767,7 +778,7 @@ class BluetoothStackBlueZ implements BluetoothStack {
      * 
      * @see com.intel.bluetooth.BluetoothStack#l2send(long, byte[])
      */
-    public native void l2Send(long handle, byte[] data) throws IOException;
+    public native void l2Send(long handle, byte[] data, int transmitMTU) throws IOException;
 
     /*
      * (non-Javadoc)

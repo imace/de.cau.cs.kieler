@@ -1,7 +1,7 @@
 /**
  *  BlueCove - Java library for Bluetooth
  *  Copyright (C) 2006-2007 Eric Wagner
- *  Copyright (C) 2006-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2006-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: BluetoothStackOSX.java 2557 2008-12-11 08:19:30Z skarzhevskyy $
+ *  @version $Id: BluetoothStackOSX.java 3029 2010-03-25 05:52:47Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -41,7 +41,7 @@ import javax.bluetooth.ServiceRecord;
 import javax.bluetooth.ServiceRegistrationException;
 import javax.bluetooth.UUID;
 
-class BluetoothStackOSX implements BluetoothStack {
+class BluetoothStackOSX implements BluetoothStack, BluetoothStackExtension {
 
     public static final boolean debug = false;
 
@@ -50,9 +50,9 @@ class BluetoothStackOSX implements BluetoothStack {
     // TODO what is the real number for Attributes retrivable ?
     private final static int ATTR_RETRIEVABLE_MAX = 256;
 
-    private Vector deviceDiscoveryListeners = new Vector/* <DiscoveryListener> */();
+    private final Vector deviceDiscoveryListeners = new Vector/* <DiscoveryListener> */();
 
-    private Hashtable deviceDiscoveryListenerReportedDevices = new Hashtable();
+    private final Hashtable deviceDiscoveryListenerReportedDevices = new Hashtable();
 
     private int receive_mtu_max = -1;
 
@@ -103,7 +103,7 @@ class BluetoothStackOSX implements BluetoothStack {
      */
     public int getFeatureSet() {
         if (localDeviceSupportedSoftwareVersion >= BLUETOOTH_SOFTWARE_VERSION_2_0_0) {
-            return FEATURE_L2CAP | FEATURE_SERVICE_ATTRIBUTES | FEATURE_SET_DEVICE_SERVICE_CLASSES;
+            return FEATURE_L2CAP | FEATURE_SERVICE_ATTRIBUTES | FEATURE_SET_DEVICE_SERVICE_CLASSES | (isLocalDeviceFeatureRSSI() ? FEATURE_RSSI : 0);
         } else {
             return FEATURE_L2CAP | FEATURE_SERVICE_ATTRIBUTES;
         }
@@ -119,6 +119,15 @@ class BluetoothStackOSX implements BluetoothStack {
         if (singleInstance != null) {
             throw new BluetoothStateException("Only one instance of " + getStackID() + " stack supported");
         }
+
+        String sysVersion = System.getProperty("os.version");
+        String jreDataModel = System.getProperty("sun.arch.data.model");
+        boolean osIsLeopard = (sysVersion != null) && sysVersion.startsWith("10.5");
+        boolean jreIs64Bit = "64".equals(jreDataModel);
+        if (osIsLeopard && jreIs64Bit) {
+            throw new BluetoothStateException("Mac OS X 10.5 not supported with a 64 bit JRE");
+        }
+
         localDeviceSupportedSoftwareVersion = getLocalDeviceSupportedSoftwareVersion();
         DebugLog.debug("localDeviceSupportedSoftwareVersion", localDeviceSupportedSoftwareVersion);
         if (!initializeImpl()) {
@@ -139,8 +148,7 @@ class BluetoothStackOSX implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#isCurrentThreadInterruptedCallback()
+     * @see com.intel.bluetooth.BluetoothStack#isCurrentThreadInterruptedCallback()
      */
     public boolean isCurrentThreadInterruptedCallback() {
         return UtilsJavaSE.isCurrentThreadInterrupted();
@@ -213,6 +221,8 @@ class BluetoothStackOSX implements BluetoothStack {
 
     private native boolean isLocalDeviceFeatureParkMode();
 
+    private native boolean isLocalDeviceFeatureRSSI();
+
     private native int getLocalDeviceL2CAPMTUMaximum();
 
     private native int getLocalDeviceSupportedSoftwareVersion();
@@ -254,13 +264,13 @@ class BluetoothStackOSX implements BluetoothStack {
             return String.valueOf(receiveMTUMAX());
         }
 
-        if ("bluecove.radio.version".equals(property)) {
+        if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_RADIO_VERSION.equals(property)) {
             return getLocalDeviceVersion();
         }
-        if ("bluecove.radio.manufacturer".equals(property)) {
+        if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_RADIO_MANUFACTURER.equals(property)) {
             return String.valueOf(getLocalDeviceManufacturer());
         }
-        if ("bluecove.stack.version".equals(property)) {
+        if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_PROPERTY_STACK_VERSION.equals(property)) {
             return getLocalDeviceSoftwareVersionInfo();
         }
 
@@ -300,22 +310,55 @@ class BluetoothStackOSX implements BluetoothStack {
         }
     }
 
+    private native boolean retrieveDevicesImpl(int option, RetrieveDevicesCallback retrieveDevicesCallback);
+
     public RemoteDevice[] retrieveDevices(int option) {
-        return null;
+        final Vector devices = new Vector();
+        RetrieveDevicesCallback retrieveDevicesCallback = new RetrieveDevicesCallback() {
+            public void deviceFoundCallback(long deviceAddr, int deviceClass, String deviceName, boolean paired) {
+                DebugLog.debug("device found", deviceAddr);
+                RemoteDevice remoteDevice = RemoteDeviceHelper.createRemoteDevice(BluetoothStackOSX.this, deviceAddr, deviceName, paired);
+                if (!devices.contains(remoteDevice)) {
+                    devices.add(remoteDevice);
+                }
+            }
+        };
+        if (retrieveDevicesImpl(option, retrieveDevicesCallback)) {
+            return RemoteDeviceHelper.remoteDeviceListToArray(devices);
+        } else {
+            return null;
+        }
     }
+
+    private native boolean isRemoteDeviceTrustedImpl(long address);
 
     public Boolean isRemoteDeviceTrusted(long address) {
-        return null;
+        return new Boolean(isRemoteDeviceTrustedImpl(address));
     }
 
+    private native boolean isRemoteDeviceAuthenticatedImpl(long address);
+
     public Boolean isRemoteDeviceAuthenticated(long address) {
-        return null;
+        return new Boolean(isRemoteDeviceAuthenticatedImpl(address));
+    }
+
+    private native int readRemoteDeviceRSSIImpl(long address) throws IOException;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.intel.bluetooth.BluetoothStackExtension#readRemoteDeviceRSSI(long)
+     */
+    public int readRemoteDeviceRSSI(long address) throws IOException {
+        return readRemoteDeviceRSSIImpl(address);
     }
 
     // ---------------------- Remote Device authentication
 
+    private native boolean authenticateRemoteDeviceImpl(long address) throws IOException;
+
     public boolean authenticateRemoteDevice(long address) throws IOException {
-        return false;
+        return authenticateRemoteDeviceImpl(address);
     }
 
     /*
@@ -331,9 +374,7 @@ class BluetoothStackOSX implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#removeAuthenticationWithRemoteDevice
-     * (long)
+     * @see com.intel.bluetooth.BluetoothStack#removeAuthenticationWithRemoteDevice (long)
      */
     public void removeAuthenticationWithRemoteDevice(long address) throws IOException {
         throw new NotSupportedIOException(getStackID());
@@ -343,8 +384,8 @@ class BluetoothStackOSX implements BluetoothStack {
 
     public native String getRemoteDeviceFriendlyName(long address) throws IOException;
 
-    private native int runDeviceInquiryImpl(DeviceInquiryRunnable inquiryRunnable, DeviceInquiryThread startedNotify, int accessCode, int duration, DiscoveryListener listener)
-            throws BluetoothStateException;
+    private native int runDeviceInquiryImpl(DeviceInquiryRunnable inquiryRunnable, DeviceInquiryThread startedNotify, int accessCode, int duration,
+            DiscoveryListener listener) throws BluetoothStateException;
 
     public boolean startInquiry(int accessCode, DiscoveryListener listener) throws BluetoothStateException {
         // Inquiries are throttled if they are called too quickly in succession.
@@ -709,8 +750,7 @@ class BluetoothStackOSX implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#l2OpenClientConnection(com.intel.bluetooth
+     * @see com.intel.bluetooth.BluetoothStack#l2OpenClientConnection(com.intel.bluetooth
      * .BluetoothConnectionParams, int, int)
      */
     public long l2OpenClientConnection(BluetoothConnectionParams params, int receiveMTU, int transmitMTU) throws IOException {
@@ -740,8 +780,7 @@ class BluetoothStackOSX implements BluetoothStack {
      * (non-Javadoc)
      * 
      * @seecom.intel.bluetooth.BluetoothStack#l2ServerOpen(com.intel.bluetooth.
-     * BluetoothConnectionNotifierParams, int, int,
-     * com.intel.bluetooth.ServiceRecordImpl)
+     * BluetoothConnectionNotifierParams, int, int, com.intel.bluetooth.ServiceRecordImpl)
      */
     public long l2ServerOpen(BluetoothConnectionNotifierParams params, int receiveMTU, int transmitMTU, ServiceRecordImpl serviceRecord) throws IOException {
         verifyDeviceReady();
@@ -774,8 +813,7 @@ class BluetoothStackOSX implements BluetoothStack {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.intel.bluetooth.BluetoothStack#l2ServerAcceptAndOpenServerConnection
+     * @see com.intel.bluetooth.BluetoothStack#l2ServerAcceptAndOpenServerConnection
      * (long)
      */
     public native long l2ServerAcceptAndOpenServerConnection(long handle) throws IOException;
@@ -827,7 +865,7 @@ class BluetoothStackOSX implements BluetoothStack {
      * 
      * @see com.intel.bluetooth.BluetoothStack#l2send(long, byte[])
      */
-    public native void l2Send(long handle, byte[] data) throws IOException;
+    public native void l2Send(long handle, byte[] data, int transmitMTU) throws IOException;
 
     /*
      * (non-Javadoc)

@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2007-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2007-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: OBEXHeaderSetImpl.java 2641 2008-12-22 23:28:52Z skarzhevskyy $
+ *  @version $Id: OBEXHeaderSetImpl.java 2922 2009-03-14 20:50:11Z skarzhevskyy $
  */
 package com.intel.bluetooth.obex;
 
@@ -124,7 +124,7 @@ class OBEXHeaderSetImpl implements HeaderSet {
 	/** 1 byte quantity */
 	static final int OBEX_BYTE = 0x80;
 
-	/** 4 byte quantity – transmitted in network byte order (high byte first) */
+	/** 4 byte quantity - transmitted in network byte order (high byte first) */
 	static final int OBEX_INT = 0xC0;
 
 	private static final int OBEX_MAX_FIELD_LEN = 0xFF;
@@ -227,7 +227,7 @@ class OBEXHeaderSetImpl implements HeaderSet {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javax.obex.HeaderSet#getHeaderList()
 	 */
 	public int[] getHeaderList() throws IOException {
@@ -364,7 +364,7 @@ class OBEXHeaderSetImpl implements HeaderSet {
 		// null terminated Unicode text, length prefixed with 2 byte unsigned
 		// integer
 		// the length field includes the 2 bytes of the null
-		// terminator (0x00, 0x00). Therefore the length of the string ”Jumar”
+		// terminator (0x00, 0x00). Therefore the length of the string `Jumar`
 		// would be 12 bytes; 5 visible
 		// characters plus the null terminator, each two bytes in length.
 		if (value.length() == 0) {

@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2007-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2007-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: OBEXAuthentication.java 2641 2008-12-22 23:28:52Z skarzhevskyy $
+ *  @version $Id: OBEXAuthentication.java 2915 2009-03-13 17:07:26Z skarzhevskyy $
  */
 package com.intel.bluetooth.obex;
 

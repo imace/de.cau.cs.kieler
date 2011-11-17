@@ -19,7 +19,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: SDPOutputStream.java 2416 2008-10-09 17:59:55Z skarzhevskyy $
+ *  @version $Id: SDPOutputStream.java 2975 2009-03-31 14:39:02Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
@@ -91,24 +91,30 @@ class SDPOutputStream extends OutputStream {
 				return 1 + 4;
 			}
 		case DataElement.STRING: {
-			byte[] b = Utils.getUTF8Bytes((String) d.getValue());
-
-			if (b.length < 0x100)
+			byte[] b;
+			if (BlueCoveImpl.getConfigProperty(BlueCoveConfigProperties.PROPERTY_SDP_STRING_ENCODING_ASCII, false)) { 
+                b = Utils.getASCIIBytes((String) d.getValue());
+            } else {
+                b = Utils.getUTF8Bytes((String) d.getValue());
+            }
+			if (b.length < 0x100) {
 				return b.length + 2;
-			else if (b.length < 0x10000)
+			} else if (b.length < 0x10000) {
 				return b.length + 3;
-			else
+			} else {
 				return b.length + 5;
+			}
 		}
 		case DataElement.URL: {
 			byte[] b = Utils.getASCIIBytes((String) d.getValue());
 
-			if (b.length < 0x100)
+			if (b.length < 0x100) {
 				return b.length + 2;
-			else if (b.length < 0x10000)
+			} else if (b.length < 0x10000) {
 				return b.length + 3;
-			else
+			} else {
 				return b.length + 5;
+			}
 		}
 
 		case DataElement.DATSEQ:
@@ -134,7 +140,7 @@ class SDPOutputStream extends OutputStream {
 		}
 	}
 
-	public void writeElement(DataElement d) throws IOException {
+	void writeElement(DataElement d) throws IOException {
 		switch (d.getDataType()) {
 		case DataElement.NULL:
 			write(0 | 0);
@@ -197,7 +203,12 @@ class SDPOutputStream extends OutputStream {
 			break;
 
 		case DataElement.STRING: {
-			byte[] b = Utils.getUTF8Bytes((String) d.getValue());
+			byte[] b;
+			if (BlueCoveImpl.getConfigProperty(BlueCoveConfigProperties.PROPERTY_SDP_STRING_ENCODING_ASCII, false)) { 
+			    b = Utils.getASCIIBytes((String) d.getValue());
+			} else {
+			    b = Utils.getUTF8Bytes((String) d.getValue());
+			}
 
 			if (b.length < 0x100) {
 				write(32 | 5);

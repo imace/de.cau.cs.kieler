@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2007-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2007-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: OBEXClientSessionImpl.java 2644 2008-12-23 06:48:40Z skarzhevskyy $
+ *  @version $Id: OBEXClientSessionImpl.java 3006 2009-08-13 15:10:14Z skarzhevskyy $
  */
 package com.intel.bluetooth.obex;
 
@@ -47,7 +47,7 @@ import com.intel.bluetooth.Utils;
  */
 public class OBEXClientSessionImpl extends OBEXSessionBase implements ClientSession {
 
-	private OBEXClientOperation operation;
+    protected OBEXClientOperation operation;
 
 	private static final String FQCN = OBEXClientSessionImpl.class.getName();
 
@@ -161,7 +161,7 @@ public class OBEXClientSessionImpl extends OBEXSessionBase implements ClientSess
 		return this.connectionID;
 	}
 
-	private void canStartOperation() throws IOException {
+	protected void canStartOperation() throws IOException {
 		if (!isConnected) {
 			throw new IOException("Session not connected");
 		}
@@ -243,11 +243,15 @@ public class OBEXClientSessionImpl extends OBEXSessionBase implements ClientSess
 	}
 
 	public void close() throws IOException {
-		if (this.operation != null) {
-			this.operation.close();
-			this.operation = null;
-		}
-		super.close();
-	}
+        try {
+            if (this.operation != null) {
+                this.operation.close();
+                this.operation = null;
+            }
+        } finally {
+            // Close connection even if operation can't be closed.
+            super.close();
+        }
+    }
 
 }

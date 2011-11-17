@@ -22,7 +22,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *  
- *  @version $Id: LocalDevice.java 2530 2008-12-09 18:52:53Z skarzhevskyy $
+ *  @version $Id: LocalDevice.java 2736 2009-02-13 05:15:47Z skarzhevskyy $
  */
 package javax.bluetooth;
 
@@ -292,6 +292,8 @@ public class LocalDevice {
                 return BlueCoveImpl.instance().getLocalDeviceFeature(BluetoothStack.FEATURE_SERVICE_ATTRIBUTES);
             } else if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_PROPERTY_FEATURE_SET_DEVICE_SERVICE_CLASSES.equals(property)) {
                 return BlueCoveImpl.instance().getLocalDeviceFeature(BluetoothStack.FEATURE_SET_DEVICE_SERVICE_CLASSES);
+            } else if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_PROPERTY_FEATURE_RSSI.equals(property)) {
+                return BlueCoveImpl.instance().getLocalDeviceFeature(BluetoothStack.FEATURE_RSSI);
             } else if (BlueCoveLocalDeviceProperties.LOCAL_DEVICE_PROPERTY_OPEN_CONNECTIONS.equals(property)) {
                 return String.valueOf(RemoteDeviceHelper.openConnections());
             }

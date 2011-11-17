@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2007-2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2007-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
  *  under the License.
  *
  *  @author vlads
- *  @version $Id: OBEXUtils.java 2604 2008-12-17 16:36:11Z skarzhevskyy $
+ *  @version $Id: OBEXUtils.java 2915 2009-03-13 17:07:26Z skarzhevskyy $
  */
 package com.intel.bluetooth.obex;
 
@@ -58,7 +58,7 @@ abstract class OBEXUtils {
 					available = is.available();
 					if (available == 0) {
 						if (System.currentTimeMillis() > endOfDellay) {
-							throw new InterruptedIOException("OBEX read timeout");
+							throw new InterruptedIOException("OBEX read timeout; received " + got + " form " +  len + " expected");
 						}
 						try {
 							Thread.sleep(100);
@@ -70,7 +70,7 @@ abstract class OBEXUtils {
 			}
 			int rc = is.read(b, off + got, len - got);
 			if (rc < 0) {
-				throw new EOFException("EOF while reading OBEX packet");
+				throw new EOFException("EOF while reading OBEX packet; received " + got + " form " +  len + " expected");
 			}
 			got += rc;
 		}

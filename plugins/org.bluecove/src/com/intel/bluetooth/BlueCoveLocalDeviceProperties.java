@@ -1,6 +1,6 @@
 /**
  *  BlueCove - Java library for Bluetooth
- *  Copyright (C) 2008 Vlad Skarzhevskyy
+ *  Copyright (C) 2008-2009 Vlad Skarzhevskyy
  *
  *  Licensed to the Apache Software Foundation (ASF) under one
  *  or more contributor license agreements.  See the NOTICE file
@@ -19,13 +19,13 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: BlueCoveLocalDeviceProperties.java 2416 2008-10-09 17:59:55Z skarzhevskyy $
+ *  @version $Id: BlueCoveLocalDeviceProperties.java 2915 2009-03-13 17:07:26Z skarzhevskyy $
  */
 package com.intel.bluetooth;
 
 /**
  * BlueCove specific LocalDevice properties.
- *
+ * 
  * @see javax.bluetooth.LocalDevice#getProperty(String)
  */
 public interface BlueCoveLocalDeviceProperties {
@@ -36,14 +36,18 @@ public interface BlueCoveLocalDeviceProperties {
 	public static final String LOCAL_DEVICE_PROPERTY_BLUECOVE_VERSION = "bluecove";
 
 	/**
-	 * <code>"bluecove.stack"</code> The Bluetooth Stack: "winsock", "widcomm"
-	 * or "bluesoleil" on windows.
+	 * <code>"bluecove.stack"</code> The Bluetooth Stack: "winsock", "widcomm" or "bluesoleil" on windows. "mac", "bluez" or "emulator".
 	 */
 	public static final String LOCAL_DEVICE_PROPERTY_STACK = BlueCoveConfigProperties.PROPERTY_STACK;
 
 	/**
-	 * <code>"bluecove.feature.l2cap"</code> Does the current Bluetooth Stack
-	 * support L2CAP: "true" or "false"
+     * <code>"bluecove"</code> The version of native stack.
+     */
+	public static final String LOCAL_DEVICE_PROPERTY_STACK_VERSION = "bluecove.stack.version";
+	
+	
+	/**
+	 * <code>"bluecove.feature.l2cap"</code> Does the current Bluetooth Stack support L2CAP: "true" or "false"
 	 */
 	public static final String LOCAL_DEVICE_PROPERTY_FEATURE_L2CAP = "bluecove.feature.l2cap";
 
@@ -58,23 +62,39 @@ public interface BlueCoveLocalDeviceProperties {
 	public static final String LOCAL_DEVICE_PROPERTY_FEATURE_SET_DEVICE_SERVICE_CLASSES = "bluecove.feature.set_device_service_classes";
 
 	/**
-	 * <code>"bluecove.connections"</code> The number of open connections by
-	 * current Bluetooth Stack.
+	 * If function RemoteDeviceHelper.readRSSI(RemoteDevice device) available on native stack.
+	 * 
+     * <code>"bluecove.feature.rssi"</code>
+     */
+    public static final String LOCAL_DEVICE_PROPERTY_FEATURE_RSSI = "bluecove.feature.rssi";
+    
+	/**
+	 * <code>"bluecove.connections"</code> The number of open connections by current Bluetooth Stack.
 	 */
 	public static final String LOCAL_DEVICE_PROPERTY_OPEN_CONNECTIONS = "bluecove.connections";
 
 	/**
-	 * If Stack support multiple bluetooth adapters return selected one ID.
-	 * (Linux BlueZ and Emulator)
-	 *
+	 * If Stack support multiple bluetooth adapters return selected one ID. (Linux BlueZ and Emulator)
+	 * 
 	 * @see com.intel.bluetooth.BlueCoveConfigProperties#PROPERTY_LOCAL_DEVICE_ID
 	 */
 	public static final String LOCAL_DEVICE_PROPERTY_DEVICE_ID = BlueCoveConfigProperties.PROPERTY_LOCAL_DEVICE_ID;
 
 	/**
-	 * List the local adapters supported by the system. Returns comma separated
-	 * integer list.
+	 * List the local adapters supported by the system. Returns comma separated String list.
+	 * <code>"bluecove.local_devices_ids"</code>.
+	 * 
+	 * @see com.intel.bluetooth.BlueCoveConfigProperties#PROPERTY_LOCAL_DEVICE_ID
 	 */
 	public static final String LOCAL_DEVICE_DEVICES_LIST = "bluecove.local_devices_ids";
 
+	/**
+     * <code>"bluecove.radio.version"</code>.
+     */
+	public static final String LOCAL_DEVICE_RADIO_VERSION = "bluecove.radio.version";
+	
+	/**
+     * <code>"bluecove.radio.manufacturer"</code>.
+     */
+	public static final String LOCAL_DEVICE_RADIO_MANUFACTURER = "bluecove.radio.manufacturer";
 }

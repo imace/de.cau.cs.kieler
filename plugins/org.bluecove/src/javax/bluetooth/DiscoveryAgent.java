@@ -22,7 +22,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  *
- *  @version $Id: DiscoveryAgent.java 2530 2008-12-09 18:52:53Z skarzhevskyy $
+ *  @version $Id: DiscoveryAgent.java 2732 2009-02-12 18:40:30Z skarzhevskyy $
  */
 package javax.bluetooth;
 
@@ -166,7 +166,7 @@ public class DiscoveryAgent {
      *                <code>PREKNOWN</code>
      */
 	public RemoteDevice[] retrieveDevices(int option) {
-		return RemoteDeviceHelper.retrieveDevices(this.bluetoothStack, option);
+		return RemoteDeviceHelper.implRetrieveDevices(this.bluetoothStack, option);
 	}
 
 	/**
