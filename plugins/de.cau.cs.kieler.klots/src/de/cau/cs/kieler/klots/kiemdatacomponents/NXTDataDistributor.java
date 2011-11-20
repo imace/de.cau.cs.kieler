@@ -24,6 +24,7 @@ import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
+import de.cau.cs.kieler.klots.KlotsConnectionException;
 import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.util.NXTCommunicator;
@@ -45,7 +46,13 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements IJSON
     public void initialize() throws KiemInitializationException {
         console.clear();
         comm = NXTCommunicator.getInstance();
-        String msg = comm.receiveMessage().toString();
+        String msg = "";
+        try {
+            msg = comm.receiveMessage().toString();
+        } catch (KlotsConnectionException e) {
+            e.printStackTrace();
+            throw new KiemInitializationException("Connection Error!", true, e);
+        }
         if (msg.startsWith("[{" + KlotsConstants.SYNCHRONIZED_COMMAND_KEY)) {
             console.println(msg);
         } else {
@@ -113,7 +120,13 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements IJSON
         comm.sendMessage(KlotsConstants.STEP_COMMAND_KEY + KlotsConstants.MESSAGE_LINE_DELIMITER + msg);
 
         // --------------------------- observer -----------------------------
-        StringBuffer buffer = comm.receiveMessage();
+        StringBuffer buffer = new StringBuffer();
+        try {
+            buffer = comm.receiveMessage();
+        } catch (KlotsConnectionException e) {
+            e.printStackTrace();
+            throw new KiemExecutionException("Connection Error!", true, e);
+        }
         System.out.println("====;;;;;;;==== RECEIVED MESSAGE BUFFER = >" + buffer.toString() + "<");
 
         // remote console print processing

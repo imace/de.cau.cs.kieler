@@ -13,6 +13,9 @@
  */
 package de.cau.cs.kieler.klots.util;
 
+import de.cau.cs.kieler.klots.KlotsConnectionException;
+import de.cau.cs.kieler.klots.KlotsPlugin;
+
 
 /**
  * @author root
@@ -60,28 +63,32 @@ public class RemotePrintReceiver extends Thread {
      */
     @Override
     public void run() {
-        String line = comm.receiveMessageLine();
-        while (!isClosing()
-               && !line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY)
-               && line != null) {
-            if (line.endsWith(KlotsConstants.MESSAGE_NEW_LINE)) {
-                console.print(
-                        line.replaceFirst(KlotsConstants.PRINT_TAG, "")
-                        .replaceFirst(KlotsConstants.MESSAGE_NEW_LINE, "\n")
-                        );
-            } else {
-                console.print(line.replaceFirst(KlotsConstants.PRINT_TAG, ""));
-            }
-            synchronized (this) {
-                while (isWaiting) {
-                    try {
-                        wait();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        try {
+            String line = comm.receiveMessageLine();
+            while (!isClosing()
+                   && !line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY)
+                   && line != null) {
+                if (line.endsWith(KlotsConstants.MESSAGE_NEW_LINE)) {
+                    console.print(
+                            line.replaceFirst(KlotsConstants.PRINT_TAG, "")
+                            .replaceFirst(KlotsConstants.MESSAGE_NEW_LINE, "\n")
+                            );
+                } else {
+                    console.print(line.replaceFirst(KlotsConstants.PRINT_TAG, ""));
+                }
+                synchronized (this) {
+                    while (isWaiting) {
+                        try {
+                            wait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+                line = comm.receiveMessageLine();
             }
-            line = comm.receiveMessageLine();
+        } catch (KlotsConnectionException e) {
+            KlotsPlugin.getDefault().showError("Connection Error!", KlotsPlugin.PLUGIN_ID, e, false);
         }
         comm.closeTransmission(false);
         printerInstance = null;

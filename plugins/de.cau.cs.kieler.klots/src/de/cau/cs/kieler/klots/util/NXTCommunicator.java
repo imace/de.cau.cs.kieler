@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
+import de.cau.cs.kieler.klots.KlotsConnectionException;
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.preferences.KlotsPreferenceConstants;
 
@@ -190,8 +191,9 @@ public class NXTCommunicator {
     
     /**
      * @return StringBuffer 
+     * @throws KlotsConnectionException 
      */
-    public StringBuffer receiveMessage() {
+    public StringBuffer receiveMessage() throws KlotsConnectionException {
         StringBuffer buf = new StringBuffer();
         String line = this.receiveMessageLine();
         while (!line.equals(KlotsConstants.END_OF_MESSAGE_COMMAND_KEY)) {
@@ -208,16 +210,23 @@ public class NXTCommunicator {
 
     /**
      * @return String 
+     * @throws KlotsConnectionException 
      */
     @SuppressWarnings("deprecation")
-    public String receiveMessageLine() {
+    public String receiveMessageLine() throws KlotsConnectionException {
         try {
-            String line = dis.readLine();   //FIXME: Find a way to use BufferedReader.readLine() instead!
+            String line = "";
+            try {
+                line = dis.readLine();   //FIXME: Find a way to use BufferedReader.readLine() instead!
+            } catch (NullPointerException e) {
+                System.out.println(";;;;=======;;;; ERROR RECEIVING MESSAGE: NOT CONNECTED!!!");
+                throw new KlotsConnectionException("Connection Error!\nKLOTS does not receive any info "
+                        + "from the NXT!\nIs your NXT properly connected?", false, null);
+            }
             System.out.println(";;;;=======;;;; RECEIVED MESSAGE LINE = >" + line + "<");
-            if (line == null) {
-            	ErrorHandler err = new ErrorHandler("Connection Error!\nKLOTS does not receive any info "
-            			+ "from the NXT!\nIs your NXT properly connected?");
-            	err.showResults();
+            if (line.equals(null)) {
+                throw new KlotsConnectionException("Connection Error!\nKLOTS does not receive any info "
+                        + "from the NXT!\nIs your NXT properly connected?", false, null);
             }
 
             // if in 'remote console print' mode
@@ -278,6 +287,9 @@ public class NXTCommunicator {
         } catch (IOException ioe) {
             System.out.println("IOException closing connection:");
             System.out.println(ioe.getMessage());
+        } catch (NullPointerException npe) {
+            System.out.println(">>> Null Pointer Exception while closing connection! "
+                + "No connection partner found?!");
         }
     }
 

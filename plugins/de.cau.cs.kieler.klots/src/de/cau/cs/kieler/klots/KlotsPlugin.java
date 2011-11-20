@@ -13,19 +13,25 @@
  */
 package de.cau.cs.kieler.klots;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PerspectiveAdapter;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.statushandlers.IStatusAdapterConstants;
+import org.eclipse.ui.statushandlers.StatusAdapter;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
 
 import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.klots.util.ColorProvider;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.views.SJInstructionsView;
+import de.cau.cs.kieler.sim.kiem.KiemPlugin;
 
 /**
  * 
@@ -61,8 +67,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
     public KlotsPlugin() {
     }
 
-    
-    
+
+        
     /**
      * {@inheritDoc}
      */
@@ -83,9 +89,9 @@ public class KlotsPlugin extends AbstractUIPlugin {
             System.out.println("|%|%|%|%|%|%|%|%| >>> setting 'nxj.home' to: >" + nxjHome + "<");
             System.out.println("|%|%|%|%|%|%|%|%| >>> previous value ot 'nxj.home': >" + prevVal + "<");
         } catch (SecurityException e) {
-            System.err.println("====== EXCEPTION WHILE TRYING TO SET SYSTEM PROPERTY 'nxt.home' ======");
+            System.err.println("===== EXCEPTION WHILE TRYING TO SET SYSTEM PROPERTY 'nxt.home' =====");
             e.printStackTrace();
-            System.err.println("======================================================================");
+            System.err.println("====================================================================");
         }
     }
 
@@ -160,13 +166,13 @@ public class KlotsPlugin extends AbstractUIPlugin {
                                     + "and SJ files (*." + KlotsConstants.SJ_FILE_NAME_EXTENSION + ") "
                                     + "to be the to be the KLOTS Editor: " + KlotsEditor.ID + "!");
                             if (systemEmbeddedJavaFileEditor == null) {
-                            	systemEmbeddedJavaFileEditor = PlatformUI.getWorkbench()
-                            			.getEditorRegistry().getDefaultEditor("*."
-                            					+ KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
+                                systemEmbeddedJavaFileEditor = PlatformUI.getWorkbench()
+                                        .getEditorRegistry().getDefaultEditor("*."
+                                            + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION);
                             }
                             if (systemSJFileEditor == null) {
-                            	systemSJFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
-                            			.getDefaultEditor("*." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
+                                systemSJFileEditor = PlatformUI.getWorkbench().getEditorRegistry()
+                                        .getDefaultEditor("*." + KlotsConstants.SJ_FILE_NAME_EXTENSION);
                             }
                             PlatformUI.getWorkbench().getEditorRegistry().setDefaultEditor(
                                     "*." + KlotsConstants.EMBEDDED_JAVA_FILE_NAME_EXTENSION,
@@ -200,6 +206,151 @@ public class KlotsPlugin extends AbstractUIPlugin {
                     }
                 }
         );
+    }
+    
+    
+    
+    // ############################################################################################
+
+    private String getErrorWarningMessage(final String textMessage, final String pluginID,
+                                          final Exception exception) {
+        String message = "";
+
+        if (textMessage != null) {
+            message = textMessage + message;
+        } else if (exception != null) {
+            message = exception.getMessage() + message;
+        }
+
+        // do not post the same message twice
+        if ((exception != null) && (textMessage != null)
+            && (exception.getMessage().startsWith(textMessage))) {
+            message = "" + pluginID + "";
+        } else {
+            message += " (" + pluginID + ")";
+        }
+        return message;
+    }
+
+    
+    
+    private String getPluginID(final String textMessage, final String pluginID,
+            final Exception exception) {
+        String pluginID2 = null;
+        if (pluginID == null) {
+            pluginID2 = KiemPlugin.PLUGIN_ID;
+        } else {
+            pluginID2 = pluginID;
+        }
+        return pluginID2;
+    }
+
+
+    
+    /**
+     * Shows a warning dialog using the StatusAdapter. This dialog will *NOT* be modal, so that the
+     * user is notified but the current work is not interrupted. <BR>
+     * Additionally the information will be logged in the error log so that the user has the
+     * opportunity to e.g., access the error stack trace. The plug-in id is required, textMessage
+     * and exception are optional.
+     * 
+     * @param textMessage
+     *            the text message
+     * @param pluginID
+     *            the plug-in id
+     * @param exception
+     *            the exception
+     * @param silent
+     *            the silent tag indicates that only logging occurs, no message dialog is displayed
+     */
+    public void showWarning(final String textMessage, final String pluginID,
+                            final Exception exception, final boolean silent) {
+        try {
+            String message = getErrorWarningMessage(textMessage, pluginID, exception);
+            String pluginID2 = getPluginID(textMessage, pluginID, exception);
+
+            IStatus status;
+            if ((exception == null) || (exception instanceof RuntimeException)) {
+                status = new Status(IStatus.WARNING, pluginID2, IStatus.WARNING, message, exception);
+            } else {
+                try {
+                    status = new Status(
+                            IStatus.WARNING, pluginID2, IStatus.WARNING, message, exception.getCause());
+                } catch (Exception e) {
+                    status = new Status(
+                            IStatus.WARNING, pluginID2, IStatus.WARNING, message, exception);
+                }
+            }
+
+            StatusAdapter statusAdapter = new StatusAdapter(status);
+            statusAdapter.setProperty(
+                    IStatusAdapterConstants.TIMESTAMP_PROPERTY, System.currentTimeMillis());
+
+            // use status manager (log and (optionally) show)
+            if (!silent) {
+                StatusManager.getManager().handle(
+                        statusAdapter, StatusManager.LOG | StatusManager.SHOW);
+            } else {
+                StatusManager.getManager().handle(statusAdapter, StatusManager.LOG);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    
+    /**
+     * Shows an error dialog using the StatusAdapter. This dialog will be modal, so that the user
+     * has to click OK to end it. Additionally the information will be logged in the error log so
+     * that the user has the opportunity to e.g., access the error stack trace. The plug-in id is
+     * required, textMessage and exception are optional.
+     * 
+     * @param textMessage
+     *            the optional text message
+     * @param pluginID
+     *            the plug-in id
+     * @param exception
+     *            the exception if any, null otherwise
+     * @param silent
+     *            the silent tag indicates that only logging occurs, no message dialog is displayed
+     */
+    public void showError(final String textMessage, final String pluginID,
+                          final Exception exception, final boolean silent) {
+        try {
+            String message = getErrorWarningMessage(textMessage, pluginID, exception);
+            String pluginID2 = getPluginID(textMessage, pluginID, exception);
+
+            IStatus status;
+            if ((exception == null) || (exception instanceof RuntimeException)) {
+                status = new Status(IStatus.ERROR, pluginID2, IStatus.ERROR, message, exception);
+            } else {
+                try {
+                    status = new Status(
+                            IStatus.ERROR, pluginID2, IStatus.ERROR, message, exception.getCause());
+                } catch (Exception e) {
+                    status = new Status(IStatus.ERROR, pluginID2, IStatus.ERROR, message, exception);
+                }
+            }
+
+            StatusAdapter statusAdapter = new StatusAdapter(status);
+            statusAdapter.setProperty(
+                    IStatusAdapterConstants.TIMESTAMP_PROPERTY, System.currentTimeMillis());
+
+            // use status manager (log and show)
+            // BLOCK = modal window, force the user to act!
+            // use status manager (log and (optionally) show)
+            if (!silent) {
+                StatusManager.getManager().handle(
+                        statusAdapter, StatusManager.BLOCK | StatusManager.LOG | StatusManager.SHOW);
+            } else {
+                StatusManager.getManager().handle(statusAdapter, StatusManager.LOG);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
