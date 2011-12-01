@@ -5,31 +5,31 @@ Bundle-SymbolicName: de.cau.cs.kieler.klots;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: de.cau.cs.kieler.klots.KlotsPlugin
 Require-Bundle: org.eclipse.ui,
- de.cau.cs.kieler.sim.kiem;bundle-version="0.3.0",
- de.cau.cs.kieler.sim.table;bundle-version="0.1.0",
- de.cau.cs.kieler.sim.syncsignalreset;bundle-version="0.1.0",
  org.eclipse.core.runtime,
  org.eclipse.ui.editors;bundle-version="3.5.0",
  org.eclipse.jface.text;bundle-version="3.5.0",
- org.json;bundle-version="0.1.0",
  org.eclipse.ui.ide,
  org.eclipse.core.resources,
  org.eclipse.ui.navigator;bundle-version="3.5.0",
  org.eclipse.ui.console;bundle-version="3.5.0",
- de.cau.cs.kieler.core.kivi;bundle-version="0.1.0",
- de.cau.cs.kieler.core.model;bundle-version="0.4.0",
  org.eclipse.jdt.core,
- de.cau.cs.kieler.sj;bundle-version="0.1.0",
+ org.eclipse.ui.forms;bundle-version="3.5.2",
  org.lejos.classes;bundle-version="1.0.0",
  org.lejos.jtools;bundle-version="1.0.0",
  org.lejos.pccomms;bundle-version="1.0.0",
  org.lejos.pctools;bundle-version="1.0.0",
- net.sf.antcontrib.cpptasks;bundle-version="1.0.0",
  org.apache.bcel;bundle-version="1.0.0",
  org.apache.commons.cli;bundle-version="1.0.0",
+ net.sf.antcontrib.cpptasks;bundle-version="1.0.0",
  org.bluecove;bundle-version="1.0.0",
  org.bluecove.gpl;bundle-version="1.0.0",
- org.eclipse.ui.forms;bundle-version="3.5.2"
+ org.json,
+ de.cau.cs.kieler.sim.kiem,
+ de.cau.cs.kieler.sim.table,
+ de.cau.cs.kieler.sim.syncsignalreset,
+ de.cau.cs.kieler.core.kivi,
+ de.cau.cs.kieler.core.model,
+ de.cau.cs.kieler.sj
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
