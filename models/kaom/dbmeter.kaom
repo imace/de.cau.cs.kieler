@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
+  <childEntities name="process">
+    <childEntities name="x">
+      <childPorts incomingLinks="//@childEntities.0/@childLinks.0"/>
+    </childEntities>
+    <childEntities name="x">
+      <childLinks source="//@childEntities.0/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childPorts.0"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.1/@childLinks.0"/>
+    </childEntities>
+    <childEntities name="envelop">
+      <childEntities name="abs">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.2/@childEntities.2/@childPorts.2"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.0/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="db2linear(-96)">
+        <childEntities name="x">
+          <childEntities name="-96">
+            <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childPorts.0"/>
+            <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childEntities.0/@childLinks.0"/>
+          </childEntities>
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.3/@childPorts.1"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childLinks.0" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childEntities.0/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="10">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.4/@childPorts.1"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.1/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="20">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.3/@childPorts.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.2/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="/">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.3/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.4/@childPorts.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.2/@childLinks.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childLinks.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.3/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="powf">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.4/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.1/@childPorts.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.3/@childLinks.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.1/@childLinks.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.4/@childLinks.0"/>
+        </childEntities>
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.2/@childPorts.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childLinks.0" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.4/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="max">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.2/@childPorts.1" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childPorts.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.2/@childLinks.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.0/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="linear2db">
+        <childEntities name="x">
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="x">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.3/@childPorts.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.1/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="20">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.4/@childPorts.1"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.2/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="log10f">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.3/@childPorts.1" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.4/@childPorts.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.1/@childLinks.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.3/@childLinks.0"/>
+        </childEntities>
+        <childEntities name="*">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.4/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childPorts.1"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.3/@childLinks.0"/>
+          <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.2/@childLinks.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.4/@childLinks.0"/>
+        </childEntities>
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.0/@childPorts.0"/>
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.3/@childPorts.1" target="//@childEntities.0/@childEntities.2/@childEntities.5/@childPorts.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childLinks.0" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.2/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childLinks.1" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childEntities.4/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="10">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.4/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.5/@childPorts.1"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.4/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="min">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.5/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.6/@childPorts.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.3/@childLinks.1"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.4/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.5/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="max">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.6/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.7/@childPorts.0"/>
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.6/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childPorts.1"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.5/@childLinks.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.7/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.6/@childLinks.0 //@childEntities.0/@childEntities.2/@childEntities.6/@childLinks.1"/>
+      </childEntities>
+      <childEntities name="-">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.7/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.6/@childPorts.1"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.6/@childLinks.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.8/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.7/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="/">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.8/@childPorts.2" target="//@childEntities.0/@childEntities.2/@childEntities.7/@childPorts.1"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.9/@childLinks.0"/>
+        <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.10/@childLinks.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.8/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="96">
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.9/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.8/@childPorts.0"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.9/@childLinks.0"/>
+      </childEntities>
+      <childEntities name="SR">
+        <childEntities name="fSamplingFreq">
+          <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.10/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.10/@childPorts.0"/>
+          <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.10/@childEntities.0/@childLinks.0"/>
+        </childEntities>
+        <childLinks source="//@childEntities.0/@childEntities.2/@childEntities.10/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.8/@childPorts.1"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.10/@childLinks.0" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.10/@childEntities.0/@childLinks.0"/>
+      </childEntities>
+      <childLinks source="//@childEntities.0/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childEntities.2/@childEntities.0/@childPorts.0"/>
+      <childLinks source="//@childEntities.0/@childEntities.2/@childPorts.1" target="//@childEntities.0/@childEntities.3/@childPorts.0"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childLinks.0" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.0"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.2/@childLinks.1" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.6/@childLinks.1"/>
+    </childEntities>
+    <childEntities name="vbargraph(&quot;dB&quot;, -96, 10)">
+      <childLinks source="//@childEntities.0/@childEntities.3/@childPorts.1" target="//@childEntities.0/@childEntities.4/@childPorts.0"/>
+      <childPorts incomingLinks="//@childEntities.0/@childEntities.2/@childLinks.1"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.3/@childLinks.0"/>
+    </childEntities>
+    <childEntities name="attach">
+      <childLinks source="//@childEntities.0/@childEntities.4/@childPorts.2" target="//@childEntities.0/@childPorts.1"/>
+      <childPorts incomingLinks="//@childEntities.0/@childEntities.3/@childLinks.0"/>
+      <childPorts incomingLinks="//@childEntities.0/@childEntities.5/@childLinks.0"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.0"/>
+    </childEntities>
+    <childEntities name="x">
+      <childLinks source="//@childEntities.0/@childEntities.5/@childPorts.0" target="//@childEntities.0/@childEntities.4/@childPorts.1"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childEntities.5/@childLinks.0"/>
+    </childEntities>
+    <childLinks source="//@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.0/@childPorts.0"/>
+    <childPorts outgoingLinks="//@childEntities.0/@childLinks.0"/>
+    <childPorts incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.0"/>
+  </childEntities>
+</kaom:Entity>
