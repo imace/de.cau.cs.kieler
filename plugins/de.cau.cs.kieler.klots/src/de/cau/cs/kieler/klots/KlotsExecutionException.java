@@ -18,13 +18,13 @@ package de.cau.cs.kieler.klots;
  */
 public class KlotsExecutionException extends Exception {
 
-	/**
-	 * The Constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 8489113228221903901L;
-	
-	
-	/**
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 8489113228221903901L;
+    
+    
+    /**
      * The silent flag indicates that the component handles the "error" and KLOTS should not display
      * any error or warning message.
      */
@@ -49,7 +49,7 @@ public class KlotsExecutionException extends Exception {
      *            the silent parameter flags that KLOTS omits any message dialog
      */
     public KlotsExecutionException(final String message, final boolean silentParam,
-    		final Exception causeParam) {
+            final Exception causeParam) {
         super(message);
         this.silent = silentParam;
         this.cause = causeParam;
