@@ -26,8 +26,14 @@ import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator
 import java.util.List
 import org.eclipse.emf.common.util.TreeIterator
 import com.google.common.collect.ImmutableList
+import de.cau.cs.kieler.core.annotations.FloatAnnotation
+import com.google.inject.Inject
+import java.util.ArrayList
 
 class DiagramUtil {
+	
+	@Inject
+	extension XtendArithmeticExtensions
 	
     /**
      * Shortcut method for creating shapes. 
@@ -39,7 +45,7 @@ class DiagramUtil {
         rect.setWidth(1000);
                 
 		diag.link = PictogramsFactory::eINSTANCE.createPictogramLink;
-        diag.setGraphicsAlgorithm(rect); 
+        diag.setGraphicsAlgorithm(rect);
 	}
 	
 	
@@ -131,8 +137,11 @@ class DiagramUtil {
     	return anchor
     }
     
-    def private Anchor createPortAnchor(Shape shape, List<EObject> eos,int x, int y) {
-    	val anchor = createPortAnchor(eos.get(0), eos.get(1), eos.get(2));
+    def Anchor createPortAnchor(Shape shape, List<? extends EObject> eos,int x, int y) {
+    	val first = eos.head;
+    	val second = if (eos.size > 1) eos.get(1) else first;
+    	val third = if (eos.size > 2) eos.get(2) else second;
+    	val anchor = if (eos.empty) createAnonymousPortAnchor else createPortAnchor(first, second, third);
         anchor.setActive(true);
         anchor.setVisible(true);        
         anchor.setLocation(createPoint(x,y));
@@ -144,6 +153,10 @@ class DiagramUtil {
     def private FixPointAnchor create anchor: PictogramsFactory::eINSTANCE.createFixPointAnchor createPortAnchor(EObject eo1, EObject eo2, EObject eo3) {
         anchor.setLink(PictogramsFactory::eINSTANCE.createPictogramLink);
         anchor.link.businessObjects.addAll(newArrayList(eo1, eo2, eo3));
+    }
+    
+    def private FixPointAnchor createAnonymousPortAnchor() {
+    	PictogramsFactory::eINSTANCE.createFixPointAnchor
     }
     
     
@@ -311,14 +324,23 @@ class DiagramUtil {
         figure.setForeground(connection.graphicsAlgorithm.foreground);
         figure.setBackground(figure.foreground);
         figure.setFilled(true);  
-        decorator.setVisible(true);
-        decorator.setLocation(if (toHead) Float::valueOf("0.95") else Float::valueOf("0.05"));
+        decorator.setVisible(true); val x = 33+7;
+        decorator.setLocation(if (toHead) Float::valueOf("1.0") - relativeConnectionArrowOffset.value 
+        	                         else Float::valueOf("0.0") + relativeConnectionArrowOffset.value);
         decorator.setLocationRelative(true);
         decorator.setGraphicsAlgorithm(figure);
         connection.connectionDecorators.add(decorator);
         return decorator
     }
     
+    /**
+     * Default constant. Configured to enable a proper box label placement.
+     * Can be reconfigured using '...verticalPortPlacementOffsetTop.setValue'. 
+     */
+    def FloatAnnotation create offset: AnnotationsFactory::eINSTANCE.createFloatAnnotation getRelativeConnectionArrowOffset() {
+    	offset.value = Float::valueOf("0.00");
+    }
+
     def Connection addHeadArrow(Connection connection, int scale) {
     	connection.addConnectionArrow(scale, true);
     	return connection
@@ -610,31 +632,39 @@ class DiagramUtil {
      *                    *
      **********************/
     
-     def IntAnnotation intEObject(Integer value) {
-     	 val eo = AnnotationsFactory::eINSTANCE.createIntAnnotation;
-     	 eo.value = value;
-     	 eo
-     }
-     /**
-      * 
-      */
-     def IntAnnotation create intAnno: AnnotationsFactory::eINSTANCE.createIntAnnotation getIntProperty(Shape shape, String name) {
-         intAnno.setName(name);
-         intAnno.setValue(0);
-     }
+    def IntAnnotation intEObject(Integer value) {
+        val eo = AnnotationsFactory::eINSTANCE.createIntAnnotation;
+        eo.value = value;
+        eo
+    }
+    /**
+     * 
+     */
+    def IntAnnotation create intAnno: AnnotationsFactory::eINSTANCE.createIntAnnotation getIntProperty(Shape shape, String name) {
+        intAnno.setName(name);
+        intAnno.setValue(0);
+    }
 
 
-     def int getAndAddIntProperty(Shape shape, String name) {
-         val intAnno = shape.getIntProperty(name);
-         intAnno.setValue(intAnno.value + 1);
-         intAnno.value
-     }
+    def int getAndAddIntProperty(Shape shape, String name) {
+        val intAnno = shape.getIntProperty(name);
+        intAnno.setValue(intAnno.value + 1);
+        intAnno.value
+    }
      
-     /**
-      * Helper transforming an TreeIterator (mainly to be used with 'eAllContents')
-      * into an Iterable by creating a dedicated. 
-      */
-     def <T> List<T> toIterable(TreeIterator<T> iterator) {
-     	ImmutableList::<T>copyOf(iterator)
-     }
+    /**
+     * Helper transforming an TreeIterator (mainly to be used with 'eAllContents')
+     * into an Iterable by creating a dedicated. 
+     */
+    def <T> List<T> toIterable(TreeIterator<T> iterator) {
+        ImmutableList::<T>copyOf(iterator)
+    }
+    
+          
+    def ArrayList<Integer> create list: <Integer>newArrayList getListWithElementsTo(Integer size) {
+    	while (list.size < size) {
+            list.add(list.size);
+        }
+        list
+    } 
 }
