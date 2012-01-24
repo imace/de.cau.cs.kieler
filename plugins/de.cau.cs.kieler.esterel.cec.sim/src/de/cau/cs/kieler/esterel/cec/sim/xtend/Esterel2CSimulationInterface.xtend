@@ -114,13 +114,13 @@ int main(){«name»_reset();
    	  gen.newLine();
    	  for (signal : signals)  {
    	  	gen.append('''«moduleName»_O_«signal.name»(''');
-   	  	if (signal.type == "int") {
+   	  	if (signal.type.literal == "int" || signal.type.literal == "bool") {
    	  		gen.append('''int i''');
    	  	}
    	  	gen.append('''){  	
    	  		value = cJSON_CreateObject();
 			cJSON_AddTrueToObject(value, "present");''')
-   	  	if (signal.type == "int") {
+   	  	if (signal.type.literal == "int" || signal.type.literal == "bool") {
 			gen.newLine();
    	  		gen.append('''cJSON_AddNumberToObject(value, "value", i);''')
    	  	} 

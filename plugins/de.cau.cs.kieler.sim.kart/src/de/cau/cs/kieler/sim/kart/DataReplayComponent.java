@@ -13,17 +13,13 @@
  */
 package de.cau.cs.kieler.sim.kart;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.ui.IEditorInput;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,7 +33,6 @@ import de.cau.cs.kieler.sim.signals.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.KiemPlugin;
-import de.cau.cs.kieler.sim.kiem.internal.AbstractDataComponent;
 import de.cau.cs.kieler.sim.kiem.internal.DataComponentWrapper;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyException;
@@ -154,27 +149,35 @@ public class DataReplayComponent extends JSONObjectSimulationDataComponent imple
     @Override
     public JSONObject doStep(JSONObject obj) throws KiemExecutionException {
         JSONObject retval = null;
-        
-        if(trainingMode) {
-            addInputs(obj);
-        } else {
+
+              
+        if(!trainingMode) {
             retval = genInputs();
         }
+        
+        addInputs(obj, retval);
         
         // inject signals into simulation
         return retval;
     }
 
     /**
-     * @param obj
+     * Pushes signals currently present in the simulation (i. e. input signals)
+     * to the DataValidation component which is thus able to differentiate between
+     * input and output signals.
+     * This method takes two JSONObjects as parameters. It extracts the actual signals
+     * from both and sends a union of those two sets to the validation component.
+     * 
+     * @param obj First set of signals
+     * @param obj2 Second set of signals
      */
-    private void addInputs(JSONObject obj) {
+    private void addInputs(JSONObject obj, JSONObject obj2) {
         if(valComponent == null) {
             // TODO: Retrieve the actual instance of the active DataValidationComponent, not some fucked up new one.
             List<DataComponentWrapper> comps = KiemPlugin.getDefault().getDataComponentWrapperList();
             valComponent = null;
             for(DataComponentWrapper comp : comps) {
-                if(comp.getDataComponent().getDataComponentId().equals("de.cau.cs.kieler.sim.kart.DataValidationComponent")) {
+                if(comp.getDataComponent().getDataComponentId().equals(DataValidationComponent.COMPONENTID)) {
                     valComponent = (DataValidationComponent) comp.getDataComponent();
                 }
             }
@@ -199,9 +202,33 @@ public class DataReplayComponent extends JSONObjectSimulationDataComponent imple
                 }
             }
         }
+        
+        if(obj2 != null) {
+            @SuppressWarnings("unchecked") // necessary because the JSON library does not return a parameterized Iterator
+            Iterator<String> keys = obj2.keys();
+    
+            while(keys.hasNext()) {
+                String key = keys.next();
+                try {
+                    if(obj2.getJSONObject(key).getBoolean("present") && !signals.containsKey(key)) {
+                        Object val = obj2.getJSONObject(key).opt("value");
+                        signals.put(key, val);
+                    }
+                } catch(JSONException e) {
+                    // we catched a special signal, which is not a JSON object.
+                    // simply do nothing
+                }
+            }
+        }
         valComponent.putInputs(signals);
     }
 
+    /**
+     * Extract input signals from ESO file and prepare them for injection into the simulation
+     * 
+     * @return the signals that shall be injected
+     * @throws KiemExecutionException when building the JSONObject fails
+     */
     public JSONObject genInputs() throws KiemExecutionException {
         JSONObject retval = new JSONObject();
 
@@ -233,6 +260,7 @@ public class DataReplayComponent extends JSONObjectSimulationDataComponent imple
     /**
      * Provide a list of properties to KIEM so the user can configure this component.
      * 
+     * @return the properties
      */
     @Override
     public KiemProperty[] doProvideProperties() {
@@ -245,21 +273,24 @@ public class DataReplayComponent extends JSONObjectSimulationDataComponent imple
         
         String filename = null;
         try {
-            DiagramEditor curEditor = (DiagramEditor) getActivePage().getActiveEditor();
-            IEditorInput curEditorInput = curEditor.getEditorInput();
-                    
-            IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-            IResource resourceInRuntimeWorkspace = root.findMember(curEditorInput.getToolTipText());
-            
-            File file = new File(resourceInRuntimeWorkspace.getLocationURI());
-            filename = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(".")) + ".eso";
+            /*
+             * The try block is necessary to suppress NPEs and other exceptions when we are either
+             * running in headless mode or there are no editor opened. Below, you will see that a
+             * filename is only proposed if this try block succeeds. We have to use absolute file
+             * paths here, because the KiemPropertyTypeFile dialog only returns absolute paths. I do
+             * not want to change that for fear that something else breaks.
+             */
+            URI resource = ((DiagramEditor) getActivePage().getActiveEditor()).getDiagram()
+                    .eResource().getURI().trimFileExtension().appendFileExtension("eso");
+            URI absFile = CommonPlugin.resolve(resource);
+            filename = absFile.toFileString();
         } catch(Exception e) {
             // do nothing
         }
         
         KiemProperty[] properties = new KiemProperty[3];
         //properties[0] = new KiemProperty("Model editor", new KiemPropertyTypeEditor());
-        properties[0] = new KiemProperty("ESI/ESO trace file", new KiemPropertyTypeFile());
+        properties[0] = new KiemProperty("ESI/ESO trace file", fileProperty);
         if(filename != null) {
             fileProperty.setValue(properties[0], filename);
         }
