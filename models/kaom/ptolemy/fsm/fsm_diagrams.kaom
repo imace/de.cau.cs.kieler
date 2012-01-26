@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
+  <childEntities name="diagrams">
+    <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.ptolemy.fsm.modal.ModalModel"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_tableauFactory" type="ptolemy.vergil.ptolemy.fsm.modal.ModalModel$ModalTableauFactory"/>
+    <childEntities name="_Controller">
+      <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.ptolemy.fsm.modal.ModalController"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="initialStateName" value="init" type="ptolemy.kernel.util.StringAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_nonStrictMarker" type="ptolemy.kernel.util.Attribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_library" type="ptolemy.moml.LibraryAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[682, 388]" type="ptolemy.actor.gui.SizeAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilLocation" value="[63, 133]" type="ptolemy.actor.gui.LocationAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="count" value="0" type="ptolemy.data.expr.Parameter"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="run" value="10" type="ptolemy.data.expr.Parameter"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="annotation2" type="ptolemy.kernel.util.Attribute">
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_iconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_smallIconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.kernel.NodeControllerFactory"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_editorFactory" type="ptolemy.vergil.toolbox.AnnotationEditorFactory"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="296.5, 61.0" type="ptolemy.moml.Location"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="text" value="This state machine performs multiple runs of the refinment of mode1." type="ptolemy.kernel.util.StringAttribute"/>
+        <annotations xsi:type="ann:ReferenceAnnotation" name="attachedTo"/>
+      </annotations>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="numberOfRuns" value="10" type="ptolemy.data.expr.Parameter"/>
+      <childEntities name="mode1">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.fsm.kernel.State"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="refinementName" value="mode1" type="ptolemy.kernel.util.StringAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_centerName" type="ptolemy.kernel.util.Attribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.fsm.modal.HierarchicalStateControllerFactory"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="310.0, 205.0" type="ptolemy.moml.Location"/>
+        <childPorts name="incomingPort" incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.2 //@childEntities.0/@childEntities.0/@childLinks.0">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="input"/>
+        </childPorts>
+        <childPorts name="outgoingPort" outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.0 //@childEntities.0/@childEntities.0/@childLinks.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="output"/>
+        </childPorts>
+      </childEntities>
+      <childEntities name="init">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.fsm.kernel.State"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="refinementName" type="ptolemy.kernel.util.StringAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_centerName" type="ptolemy.kernel.util.Attribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.fsm.modal.HierarchicalStateControllerFactory"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="475.0, 175.0" type="ptolemy.moml.Location"/>
+        <childPorts name="incomingPort">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="input"/>
+        </childPorts>
+        <childPorts name="outgoingPort" outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.2">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="output"/>
+        </childPorts>
+      </childEntities>
+      <childEntities name="stop">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.fsm.kernel.State"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="refinementName" type="ptolemy.kernel.util.StringAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_centerName" type="ptolemy.kernel.util.Attribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.fsm.modal.HierarchicalStateControllerFactory"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="100.0, 130.0" type="ptolemy.moml.Location"/>
+        <childPorts name="incomingPort" incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="input"/>
+        </childPorts>
+        <childPorts name="outgoingPort">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childPorts>
+      </childEntities>
+      <childLinks source="//@childEntities.0/@childEntities.0/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.0/@childEntities.0/@childPorts.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+      <childLinks source="//@childEntities.0/@childEntities.0/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.0/@childEntities.2/@childPorts.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+      <childLinks source="//@childEntities.0/@childEntities.0/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childEntities.0/@childEntities.0/@childPorts.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+    </childEntities>
+    <childEntities name="mode1">
+      <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.ptolemy.fsm.modal.Refinement"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[600, 450]" type="ptolemy.actor.gui.SizeAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilLocation" value="[104, 102]" type="ptolemy.actor.gui.LocationAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="freq1" value="1/400.0" type="ptolemy.data.expr.Parameter"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="freq2" value="1.0E-3" type="ptolemy.data.expr.Parameter"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="blockSize" value="2000" type="ptolemy.data.expr.Parameter"/>
+      <childEntities name="Sinewave">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.Sinewave"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="samplingFrequency" value="1.0" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="frequency" value="freq1" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="phase" value="0.0" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[600, 450]" type="ptolemy.actor.gui.SizeAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilLocation" value="[104, 102]" type="ptolemy.actor.gui.LocationAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="annotation" type="ptolemy.kernel.util.Attribute">
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_iconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_smallIconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.kernel.NodeControllerFactory"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_editorFactory" type="ptolemy.vergil.toolbox.AnnotationEditorFactory"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="172.0, 45.0" type="ptolemy.moml.Location"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="text" value="Generate a sine wave." type="ptolemy.kernel.util.StringAttribute"/>
+          <annotations xsi:type="ann:ReferenceAnnotation" name="attachedTo"/>
+        </annotations>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="168.5, 119.5" type="ptolemy.moml.Location"/>
+        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childLinks.0">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="output"/>
+        </childPorts>
+      </childEntities>
+      <childEntities name="Sinewave2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.Sinewave"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="samplingFrequency" value="1.0" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="frequency" value="freq2" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="phase" value="0.0" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[600, 450]" type="ptolemy.actor.gui.SizeAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilLocation" value="[104, 102]" type="ptolemy.actor.gui.LocationAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="annotation" type="ptolemy.kernel.util.Attribute">
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_iconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_smallIconDescription" type="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_controllerFactory" type="ptolemy.vergil.ptolemy.kernel.NodeControllerFactory"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_editorFactory" type="ptolemy.vergil.toolbox.AnnotationEditorFactory"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="172.0, 45.0" type="ptolemy.moml.Location"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="text" value="Generate a sine wave." type="ptolemy.kernel.util.StringAttribute"/>
+          <annotations xsi:type="ann:ReferenceAnnotation" name="attachedTo"/>
+        </annotations>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="168.5, 204.5" type="ptolemy.moml.Location"/>
+        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childLinks.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations name="output"/>
+        </childPorts>
+      </childEntities>
+      <childEntities name="XYPlotter">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.gui.XYPlotter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="fillOnWrapup" value="false" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="legend" type="ptolemy.kernel.util.StringAttribute"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="startingDataset" value="9" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="285.0, 145.0" type="ptolemy.moml.Location"/>
+        <childPorts name="inputX" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.0">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
+        </childPorts>
+        <childPorts name="inputY" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
+        </childPorts>
+      </childEntities>
+      <childEntities name="SDF">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations name="Director"/>
+        <annotations name="annotationNode"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="SDF" type="ptolemy.domains.sdf.kernel.SDFDirector">
+          <annotations xsi:type="ann:TypedStringAnnotation" name="Scheduler" type="ptolemy.domains.sdf.kernel.SDFScheduler"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="iterations" value="0" type="ptolemy.data.expr.Parameter"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="vectorizationFactor" value="blockSize" type="ptolemy.data.expr.Parameter"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="85.0, 35.0" type="ptolemy.moml.Location"/>
+        </annotations>
+      </childEntities>
+      <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+      <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.1">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+    </childEntities>
+    <childEntities name="_Director">
+      <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      <annotations name="Director"/>
+      <annotations name="annotationNode"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_Director" type="ptolemy.domains.fsm.kernel.HSDirector">
+        <annotations xsi:type="ann:TypedStringAnnotation" name="controllerName" value="_Controller" type="ptolemy.kernel.util.StringAttribute"/>
+      </annotations>
+    </childEntities>
+  </childEntities>
+</kaom:Entity>

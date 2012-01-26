@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
+  <childEntities name="DEDomain_SDFActor">
+    <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.fsm.kernel.ia.InterfaceAutomaton"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="initialStateName" value="0_0" type="ptolemy.kernel.util.StringAttribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_nonStrictMarker" type="ptolemy.kernel.util.Attribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_createdBy" value="8.0.beta" type="ptolemy.kernel.attributes.VersionAttribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="f" type="ptolemy.data.expr.Parameter"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="g" type="ptolemy.data.expr.Parameter"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="t" type="ptolemy.data.expr.Parameter"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="fR" type="ptolemy.data.expr.Parameter"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[817, 635]" type="ptolemy.actor.gui.SizeAttribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilLocation" value="[-4, -4]" type="ptolemy.actor.gui.LocationAttribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_windowProperties" value="{bounds={205, 77, 1030, 746}, maximized=false}" type="ptolemy.actor.gui.WindowPropertiesAttribute"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilZoomFactor" value="1.0" type="ptolemy.data.expr.ExpertParameter"/>
+    <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilCenter" value="{408.5, 317.5}" type="ptolemy.data.expr.ExpertParameter"/>
+    <childPorts name="p">
+      <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="305.0, 165.0" type="ptolemy.kernel.util.Location"/>
+    </childPorts>
+    <childPorts name="pR">
+      <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="305.0, 220.0" type="ptolemy.kernel.util.Location"/>
+    </childPorts>
+  </childEntities>
+</kaom:Entity>
