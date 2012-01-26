@@ -1,24 +1,13 @@
 package de.cau.cs.kieler.esterel.xtend
 
-import de.cau.cs.kieler.synccharts.*
-import de.cau.cs.kieler.core.kexpressions.*
-import java.util.*
-import com.google.inject.Inject
-
-
-import org.eclipse.emf.ecore.EObject
-
+import de.cau.cs.kieler.core.kexpressions.ISignal
+import de.cau.cs.kieler.core.kexpressions.InterfaceSignalDecl
 import de.cau.cs.kieler.core.kexpressions.ValueType
-import de.cau.cs.kieler.esterel.esterel.*
-import de.cau.cs.kieler.esterel.esterel.impl.*
+import de.cau.cs.kieler.esterel.esterel.ConstantExpression
+import de.cau.cs.kieler.esterel.esterel.Program
 
-import org.eclipse.xtext.xtend2.lib.StringConcatenation
-import org.eclipse.xtend.util.stdlib.CloningExtensions
-import org.eclipse.xtend.util.stdlib.TraceComponent
-
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.ResourceSetExtensions.*
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+import static extension org.eclipse.xtext.xbase.lib.IteratorExtensions.*
+//WAS import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 
 // Transformation of Esterel code into Esterel code that fixes inconsistencies
 // of signal declarations due to additional channel desciptions.
@@ -33,9 +22,11 @@ class InterfaceDeclarationFix {
 //			target.modules.add(CloningExtensions::clone(module) as Module);	
 //		}   		
    		
-		var interfaceSignalDeclList = program.allContentsIterable.filter(typeof(InterfaceSignalDecl)).toList;
+		var interfaceSignalDeclList = program.eAllContents().toIterable().filter(typeof(InterfaceSignalDecl)).toList;
+//WAS	var interfaceSignalDeclList = program.allContentsIterable.filter(typeof(InterfaceSignalDecl)).toList;
 		
-		for (InterfaceSignalDecl interfaceSignalDecl : interfaceSignalDeclList) {
+		for (Object object : interfaceSignalDeclList) {
+			var InterfaceSignalDecl interfaceSignalDecl = object as InterfaceSignalDecl;
 			var signalList = interfaceSignalDecl.signals;
 			
 			for (ISignal signal : signalList) {
