@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/annotations java://de.cau.cs.kieler.core.annotations.AnnotationsPackage http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage">
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
   <childEntities name="AdaptiveBeamForming">
     <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.TypedCompositeActor"/>
@@ -225,6 +225,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[425.0, 350.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{32}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.9">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -234,9 +235,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[rg=0,ant=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[pul=1,empty2=0,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" incomingLinks="//@childEntities.0/@childLinks.3">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -246,9 +247,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,beam=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0,beam=1,empty3=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port3" outgoingLinks="//@childEntities.0/@childLinks.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="1170.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -259,7 +260,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[pul={1,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[pul=1,beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[pul = 32, beam = 7, rg = 185]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="CovarCalculation">
@@ -271,6 +271,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[65.0, 410.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.8">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -280,9 +281,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[rg=3,ant=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1},rg={10,1},pul={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.1 //@childEntities.0/@childLinks.2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -293,7 +294,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[mx = 8, my = 8]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Weight_Calculation">
@@ -305,6 +305,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[285.0, 380.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{7}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.11">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -314,9 +315,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,beam=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.3">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -327,9 +328,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[ant = 8, beam = 7]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port3" incomingLinks="//@childEntities.0/@childLinks.6">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 340.0" type="ptolemy.kernel.util.Location"/>
@@ -339,7 +340,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[mx=0,my=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="ApplyFilter">
@@ -351,6 +351,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[325.0, 245.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{32}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.7">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -360,9 +361,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[rg=0,ant=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[pul=1,empty2=0,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.4">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -373,9 +374,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[pul={1,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[pul=1,beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[pul = 32, beam = 7, rg = 185]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port3" incomingLinks="//@childEntities.0/@childLinks.10">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 285.0" type="ptolemy.kernel.util.Location"/>
@@ -385,7 +386,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,beam=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0,beam=1,empty3=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Matrix_invert">
@@ -397,6 +397,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[185.0, 395.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.1">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -406,9 +407,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[mx=0,my=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.5 //@childEntities.0/@childLinks.6">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -419,7 +420,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[mx = 8, my = 8]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="PulseCompression">
@@ -431,6 +431,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-35.0, 330.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{185}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.16">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -440,9 +441,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,rg=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[rg={16,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[rg=1,ant=1,pul=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.7 //@childEntities.0/@childLinks.8 //@childEntities.0/@childLinks.9">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -453,9 +454,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[rg={1,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[rg=1,ant=1,pul=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[rg = 185, ant = 8, pul = 32]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port3" incomingLinks="//@childEntities.0/@childLinks.17">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 495.0" type="ptolemy.kernel.util.Location"/>
@@ -465,7 +466,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[t=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[t={16,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0,empty2=0,empty3=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="SteerVectCalc">
@@ -477,6 +477,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[195.0, 300.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" outgoingLinks="//@childEntities.0/@childLinks.10 //@childEntities.0/@childLinks.11">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 210.0" type="ptolemy.kernel.util.Location"/>
@@ -487,7 +488,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1},beam={7,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[ant = 8, beam = 7]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="DopplerFiltering">
@@ -499,6 +499,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[425.0, 245.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.4">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -508,9 +509,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[pul=0,rg=0,beam=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[pul={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="565.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -520,7 +521,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[f=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[f={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="GenPulseX4">
@@ -532,6 +532,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-365.0, 335.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" outgoingLinks="//@childEntities.0/@childLinks.12 //@childEntities.0/@childLinks.13">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="900.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -542,7 +543,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[t={64,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[t = 64]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Gen_Echo">
@@ -554,6 +554,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-275.0, 275.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{32}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.12">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -563,9 +564,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[t=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[t={64,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.14">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="900.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -576,7 +577,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1},rg={200,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[pul=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[ant = 8, rg = 200, pul = 32]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Add_Noise">
@@ -588,6 +588,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-195.0, 275.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{8,200}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.14">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -597,9 +598,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,rg=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={1,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[ant=1,rg=1,pul=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.15">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="900.0, 160.0" type="ptolemy.kernel.util.Location"/>
@@ -610,7 +611,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={1,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[ant=1,rg=1,pul=1]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[ant = 8, rg = 200, pul = 32]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="AddJammer">
@@ -622,6 +622,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-115.0, 275.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.15">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -631,9 +632,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[ant=0,rg=0,pul=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1},rg={200,1},pul={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.16">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="1170.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -644,7 +645,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[ant={8,1},rg={200,1},pul={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[ant = 8, rg = 200, pul = 32]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Decim">
@@ -656,6 +656,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[-195.0, 340.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.13">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -665,9 +666,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[t=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[t={64,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2" outgoingLinks="//@childEntities.0/@childLinks.17">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="1170.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -678,7 +679,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[t={16,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="size" value="[t = 16]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="Check_Inv">
@@ -690,6 +690,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[245.0, 505.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -699,9 +700,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[mx=0,my=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="1170.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -711,9 +712,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[mx=0,my=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port3" incomingLinks="//@childEntities.0/@childLinks.5">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 1085.0" type="ptolemy.kernel.util.Location"/>
@@ -723,7 +724,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[mx=0,my=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[mx={8,1},my={8,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[empty1=0]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="EnhancedDoppler">
@@ -735,6 +735,7 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[535.0, 350.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="internalRepetitions" value="{}" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="port" incomingLinks="//@childEntities.0/@childLinks.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="20.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -744,9 +745,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[pul=0,rg=0,beam=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[pul={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="port2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="1170.0, 375.0" type="ptolemy.kernel.util.Location"/>
@@ -756,7 +757,6 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="base" value="[v=0]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="pattern" value="[v={32,1}]" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tiling" value="[beam=1,rg=1]" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="PThales Director">

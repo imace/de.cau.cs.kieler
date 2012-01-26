@@ -4,7 +4,7 @@
 <entity name="PtidesClockSynchronizationError" class="ptolemy.actor.TypedCompositeActor">
     <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="8.1.devel">
     </property>
-    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={278, 120, 823, 514}, maximized=false}">
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={278, 120, 814, 515}, maximized=false}">
     </property>
     <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[600, 400]">
     </property>
@@ -62,16 +62,16 @@
             </property>
             <property name="highlightModelTimeDelay" class="ptolemy.data.expr.Parameter" value="false">
             </property>
-            <property name="AssumedSynchronizationErrorBound" class="ptolemy.data.expr.Parameter" value="0.0">
-            </property>
             <property name="schedulerExecutionTime" class="ptolemy.data.expr.Parameter" value="0.0">
+            </property>
+            <property name="AssumedSynchronizationErrorBound" class="ptolemy.data.expr.Parameter" value="0.0">
             </property>
             <property name="initializePlatformSynchronizationError" class="ptolemy.data.expr.Parameter" value="0.0">
             </property>
             <property name="_location" class="ptolemy.kernel.util.Location" value="[105.0, 90.0]">
             </property>
         </property>
-        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={105, 235, 823, 514}, maximized=false}">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={105, 235, 814, 515}, maximized=false}">
         </property>
         <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[600, 400]">
         </property>
@@ -91,7 +91,7 @@
             <property name="networkPort" class="ptolemy.data.expr.Parameter" value="true">
             </property>
         </port>
-        <entity name="NetworkOutputDevice" class="ptolemy.domains.ptides.lib.NetworkOutputDevice">
+        <entity name="NetworkTransmitter" class="ptolemy.domains.ptides.lib.NetworkTransmitter">
             <property name="_location" class="ptolemy.kernel.util.Location" value="300.0, 200.0">
             </property>
             <port name="input" class="ptolemy.actor.TypedIOPort">
@@ -119,8 +119,8 @@
         </relation>
         <link port="port" relation="relation3"/>
         <link port="port2" relation="relation2"/>
-        <link port="NetworkOutputDevice.input" relation="relation"/>
-        <link port="NetworkOutputDevice.output" relation="relation2"/>
+        <link port="NetworkTransmitter.input" relation="relation"/>
+        <link port="NetworkTransmitter.output" relation="relation2"/>
         <link port="MasterClock.output" relation="relation"/>
         <link port="MasterClock.input" relation="relation3"/>
     </entity>
@@ -161,16 +161,18 @@
             </property>
             <property name="highlightModelTimeDelay" class="ptolemy.data.expr.Parameter" value="false">
             </property>
-            <property name="AssumedSynchronizationErrorBound" class="ptolemy.data.expr.Parameter" value="0.0">
+            <property name="platformClockDrift" class="ptolemy.data.expr.Parameter" value="1.1">
             </property>
             <property name="schedulerExecutionTime" class="ptolemy.data.expr.Parameter" value="0.0">
+            </property>
+            <property name="AssumedSynchronizationErrorBound" class="ptolemy.data.expr.Parameter" value="0.0">
             </property>
             <property name="initializePlatformSynchronizationError" class="ptolemy.data.expr.Parameter" value="0.0">
             </property>
             <property name="_location" class="ptolemy.kernel.util.Location" value="[110.0, 85.0]">
             </property>
         </property>
-        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={191, 176, 823, 514}, maximized=false}">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={191, 176, 814, 515}, maximized=false}">
         </property>
         <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[600, 400]">
         </property>
@@ -196,7 +198,7 @@
             <property name="networkPort" class="ptolemy.data.expr.Parameter" value="true">
             </property>
         </port>
-        <entity name="NetworkInputDevice" class="ptolemy.domains.ptides.lib.NetworkInputDevice">
+        <entity name="NetworkReceiver" class="ptolemy.domains.ptides.lib.NetworkReceiver">
             <property name="_location" class="ptolemy.kernel.util.Location" value="[115.0, 240.0]">
             </property>
             <port name="input" class="ptolemy.actor.TypedIOPort">
@@ -226,13 +228,13 @@
         </relation>
         <link port="port2" relation="relation3"/>
         <link port="port3" relation="relation2"/>
-        <link port="NetworkInputDevice.input" relation="relation2"/>
-        <link port="NetworkInputDevice.output" relation="relation"/>
+        <link port="NetworkReceiver.input" relation="relation2"/>
+        <link port="NetworkReceiver.output" relation="relation"/>
         <link port="SlaveClock.input" relation="relation"/>
         <link port="SlaveClock.output" relation="relation3"/>
     </entity>
     <entity name="TimedPlotter" class="ptolemy.actor.lib.gui.TimedPlotter">
-        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={382, 219, 730, 581}, maximized=false}">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={382, 219, 722, 571}, maximized=false}">
         </property>
         <property name="_plotSize" class="ptolemy.actor.gui.SizeAttribute" value="[714, 524]">
         </property>
@@ -246,7 +248,8 @@
 <xLabel></xLabel>
 <yLabel></yLabel>
 <xRange min="0.5" max="9.5"/>
-<yRange min="0.7000000000000001" max="9.5"/>
+<yRange min="0.55" max="9.25"/>
+<default marks="dots"/>
 </plot>?>
         </configure>
     </entity>
