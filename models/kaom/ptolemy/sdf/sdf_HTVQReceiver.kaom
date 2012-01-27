@@ -40,18 +40,26 @@
       </annotations>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="50.0, 190.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="returnAddress">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
       </childPorts>
       <childPorts name="returnSocketNumber">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
       </childPorts>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.0">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
       </childPorts>
       <childPorts name="trigger">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
@@ -62,6 +70,8 @@
       <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.sdf.lib.vq.ImageDisplay"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="515.0, 200.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="input" incomingLinks="//@childEntities.0/@childLinks.1">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="multiport"/>
@@ -76,6 +86,9 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="partitionRows" value="blockHeight" type="ptolemy.data.expr.Parameter"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="370.0, 200.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="input" incomingLinks="//@childEntities.0/@childLinks.2">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" value="3168" type="ptolemy.data.expr.Parameter"/>
@@ -83,6 +96,8 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" value="0" type="ptolemy.data.expr.Parameter"/>
       </childPorts>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.1">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" value="0" type="ptolemy.data.expr.Parameter"/>
@@ -99,6 +114,9 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="blockHeight" value="blockHeight" type="ptolemy.data.expr.Parameter"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="270.0, 200.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="input" incomingLinks="//@childEntities.0/@childLinks.3">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" value="3168" type="ptolemy.data.expr.Parameter"/>
@@ -106,6 +124,9 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" value="0" type="ptolemy.data.expr.Parameter"/>
       </childPorts>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.2">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" value="3168" type="ptolemy.data.expr.Parameter"/>
@@ -120,6 +141,9 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="enforceArrayLength" value="true" type="ptolemy.data.expr.Parameter"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="165.0, 200.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="input" incomingLinks="//@childEntities.0/@childLinks.0">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" value="1" type="ptolemy.data.expr.Parameter"/>
@@ -127,6 +151,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" value="0" type="ptolemy.data.expr.Parameter"/>
       </childPorts>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.3">
+        <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenProductionRate" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenInitProduction" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" value="0" type="ptolemy.data.expr.Parameter"/>

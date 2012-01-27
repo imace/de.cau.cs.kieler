@@ -18,8 +18,13 @@
       <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.Const"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="value" value="1" type="ptolemy.data.expr.Parameter"/>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.0">
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childPorts>
+      <childPorts name="trigger">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="GiottoDirector">
