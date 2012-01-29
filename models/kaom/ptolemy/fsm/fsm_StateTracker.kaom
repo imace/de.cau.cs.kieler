@@ -32,8 +32,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_paneSize" type="ptolemy.actor.gui.SizeAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="415.0, 170.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="input" incomingLinks="//@childEntities.0/@childLinks.0">
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="modal model">
@@ -147,13 +147,14 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="displayWidth" value="40" type="ptolemy.data.expr.Parameter"/>
           </annotations>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="215.0, 165.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.1">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.2">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
-          <childPorts name="trigger" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.2">
+          <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.3">
+            <annotations name="input"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-            <annotations name="output"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           </childPorts>
         </childEntities>
         <childEntities name="DE Director">
@@ -170,13 +171,16 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="145.0, 65.0" type="ptolemy.kernel.util.Location"/>
           </annotations>
         </childEntities>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childPorts.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childLinks>
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.1/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.0 //@childEntities.0/@childEntities.1/@childLinks.4">
@@ -184,12 +188,15 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="380.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.5 //@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.2">
+        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.1 //@childEntities.0/@childEntities.1/@childLinks.5">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="50.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.1">
+        <childRelations name="relation" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.3">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childRelations>
+        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.1/@childLinks.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
       </childEntities>
@@ -205,13 +212,14 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="displayWidth" value="40" type="ptolemy.data.expr.Parameter"/>
           </annotations>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="215.0, 165.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.1">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.2">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
-          <childPorts name="trigger" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.2">
+          <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.3">
+            <annotations name="input"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-            <annotations name="output"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           </childPorts>
         </childEntities>
         <childEntities name="DE Director">
@@ -228,13 +236,16 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="145.0, 65.0" type="ptolemy.kernel.util.Location"/>
           </annotations>
         </childEntities>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childPorts.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childLinks>
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.2/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.2/@childEntities.0/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.0 //@childEntities.0/@childEntities.1/@childLinks.6">
@@ -242,12 +253,15 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="340.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.7 //@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.2">
+        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.1 //@childEntities.0/@childEntities.1/@childLinks.7">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="100.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.1">
+        <childRelations name="relation" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.3">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childRelations>
+        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.2/@childLinks.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
       </childEntities>
@@ -263,26 +277,31 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="displayWidth" value="40" type="ptolemy.data.expr.Parameter"/>
           </annotations>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="215.0, 165.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.2">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.3">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
-          <childPorts name="trigger" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.3">
+          <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.4">
+            <annotations name="input"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-            <annotations name="output"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           </childPorts>
         </childEntities>
         <childEntities name="AddSubtract">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.AddSubtract"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="305.0, 285.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="plus" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.4 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.2">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="plus" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.5 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.3">
             <annotations name="input"/>
-          </childPorts>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.5">
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          </childPorts>
+          <childPorts name="minus">
+            <annotations name="input"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          </childPorts>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.6">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
         </childEntities>
         <childEntities name="DE Director">
@@ -299,22 +318,25 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="145.0, 65.0" type="ptolemy.kernel.util.Location"/>
           </annotations>
         </childEntities>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.1" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childLinks>
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.1/@childPorts.0">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childPorts.2">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.0/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.1/@childPorts.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.1" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.1/@childPorts.0">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.3/@childEntities.1/@childPorts.2" target="//@childEntities.0/@childEntities.1/@childEntities.3/@childRelations.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.0 //@childEntities.0/@childEntities.1/@childLinks.8">
@@ -327,15 +349,18 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="70.0, 275.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.10 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.3">
+        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.2 //@childEntities.0/@childEntities.1/@childLinks.10">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="70.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childRelations name="relation2" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.4">
+        <childRelations name="relation" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.2 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.4">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
-        <childRelations name="relation4" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.5">
+        <childRelations name="relation2" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.5">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childRelations>
+        <childRelations name="relation4" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.3/@childLinks.6">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
       </childEntities>
@@ -346,13 +371,17 @@
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.AddSubtract"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="305.0, 285.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="plus" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.2 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.4">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="plus" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.3 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.5">
             <annotations name="input"/>
-          </childPorts>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.3">
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          </childPorts>
+          <childPorts name="minus">
+            <annotations name="input"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          </childPorts>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.4">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
         </childEntities>
         <childEntities name="Const">
@@ -364,13 +393,14 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="displayWidth" value="40" type="ptolemy.data.expr.Parameter"/>
           </annotations>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="215.0, 165.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.4">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.5">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
-          <childPorts name="trigger" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.5">
+          <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.6">
+            <annotations name="input"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-            <annotations name="output"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           </childPorts>
         </childEntities>
         <childEntities name="DE Director">
@@ -387,22 +417,25 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="145.0, 65.0" type="ptolemy.kernel.util.Location"/>
           </annotations>
         </childEntities>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.1" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.0/@childPorts.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.1" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.0/@childPorts.0">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childLinks>
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.0/@childPorts.2" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.0/@childPorts.0">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childPorts.2">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.4/@childEntities.1/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.0 //@childEntities.0/@childEntities.1/@childLinks.11">
@@ -415,15 +448,18 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="125.0, 275.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.13 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.5">
+        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.2 //@childEntities.0/@childEntities.1/@childLinks.13">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="125.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childRelations name="relation3" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.2">
+        <childRelations name="relation2" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.2 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.6">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
-        <childRelations name="relation4" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.3">
+        <childRelations name="relation3" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.3">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childRelations>
+        <childRelations name="relation4" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.4/@childLinks.4">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
       </childEntities>
@@ -439,13 +475,14 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="displayWidth" value="40" type="ptolemy.data.expr.Parameter"/>
           </annotations>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="215.0, 165.0" type="ptolemy.kernel.util.Location"/>
-          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.1">
-            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.2">
             <annotations name="output"/>
+            <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
-          <childPorts name="trigger" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.2">
+          <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.3">
+            <annotations name="input"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-            <annotations name="output"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           </childPorts>
         </childEntities>
         <childEntities name="DE Director">
@@ -462,13 +499,16 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="145.0, 65.0" type="ptolemy.kernel.util.Location"/>
           </annotations>
         </childEntities>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.0">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
-        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childPorts.1">
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.1">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childLinks>
+        <childLinks source="//@childEntities.0/@childEntities.1/@childEntities.5/@childRelations.0" target="//@childEntities.0/@childEntities.1/@childEntities.5/@childEntities.0/@childPorts.1">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childLinks>
         <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.0 //@childEntities.0/@childEntities.1/@childLinks.14">
@@ -476,12 +516,15 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="360.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childLinks.15 //@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.2">
+        <childPorts name="in" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.1 //@childEntities.0/@childEntities.1/@childLinks.15">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="105.0, 165.0" type="ptolemy.kernel.util.Location"/>
         </childPorts>
-        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.1">
+        <childRelations name="relation" outgoingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.1 //@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.3">
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        </childRelations>
+        <childRelations name="relation2" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.0 //@childEntities.0/@childEntities.1/@childEntities.5/@childLinks.2">
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childRelations>
       </childEntities>
@@ -555,8 +598,21 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="stopTime" value="Infinity" type="ptolemy.data.expr.Parameter"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="40.0, 170.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.1">
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="signalType" type="ptolemy.data.expr.Parameter"/>
+      </childPorts>
+      <childPorts name="trigger">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="signalType" type="ptolemy.data.expr.Parameter"/>
+      </childPorts>
+      <childPorts name="period">
+        <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="Pulse">
@@ -567,12 +623,13 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="repeat" value="true" type="ptolemy.data.expr.Parameter"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="170.0, 170.0" type="ptolemy.kernel.util.Location"/>
       <childPorts name="output" outgoingLinks="//@childEntities.0/@childLinks.2">
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="trigger" incomingLinks="//@childEntities.0/@childLinks.1">
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="DE Director">
