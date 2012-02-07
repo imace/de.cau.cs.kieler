@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="de.cau.cs.kieler.sim.kart.visualSignals" name="Visualization for validation errors concerning signals" schema="schema/de.cau.cs.kieler.sim.kart.visualSignals.exsd"/>
-   <extension-point id="de.cau.cs.kieler.sim.kart.visualStates" name="Visualization of State validation errors" schema="schema/de.cau.cs.kieler.sim.kart.visualStates.exsd"/>
    <extension
          point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
       <content
             class="de.cau.cs.kieler.sim.kart.DataValidationComponent"
             id="de.cau.cs.kieler.sim.kart.validation"
-            name="ESO Validation">
+            name="KART - Validate/Record Output">
       </content>
    </extension>
    <extension
@@ -16,7 +14,7 @@
       <content
             class="de.cau.cs.kieler.sim.kart.DataReplayComponent"
             id="de.cau.cs.kieler.sim.kart.replay"
-            name="ESO Replay">
+            name="KART - Replay/Record Input">
       </content>
    </extension>
 
