@@ -29,7 +29,9 @@ import java.util.Random;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +55,7 @@ import de.cau.cs.kieler.synccharts.codegen.sc.WorkflowGenerator;
  * 
  * @kieler.rating 2010-06-14 proposed yellow
  * 
- * @author tam
+ * @author tam, cmot
  * 
  */
 public class SCDataComponent extends AbstractAutomatedProducer {
@@ -75,6 +77,43 @@ public class SCDataComponent extends AbstractAutomatedProducer {
     // - because the model has not changed for the validation - otherwise true
     private boolean newValidation;
     private String fileLocation;
+    
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
+     * #checkModelValidation (org.eclipse.emf.ecore.EObject)
+     */
+    @Override
+    public boolean checkModelValidation(final EObject rootEObject) throws KiemInitializationException {
+        // Enable SC checks in possibly open GMF SyncCharts editor
+        ValidationManager
+                .enableCheck("de.cau.cs.kieler.synccharts.ScChecks");
+        ValidationManager.validateActiveEditor();
+        
+        if (!(rootEObject instanceof Region)) {
+    		throw new KiemInitializationException(
+                    "SyncCharts SC Simulator can only be used with a SyncCharts editor.\n\n"
+                            ,
+                    true, null);
+        }
+
+        // We don't want a dependency to synccharts diagram (custom) for
+        // validation
+        // because we might want to simulate head less!!!
+        // Check if the model conforms to all check files and no warnings left!
+        Diagnostician diagnostician = Diagnostician.INSTANCE;
+        Region syncChart = (de.cau.cs.kieler.synccharts.Region) rootEObject;
+        Diagnostic diagnostic = diagnostician.validate(syncChart);
+        int serenity = diagnostic.getSeverity();
+        boolean ok = (serenity == Diagnostic.OK);
+
+        return ok;
+    }    
+
+    // -------------------------------------------------------------------------
 
     /**
      * 
@@ -85,10 +124,6 @@ public class SCDataComponent extends AbstractAutomatedProducer {
      * {@inheritDoc}
      */
     public void initialize() throws KiemInitializationException {
-        // Enable SC checks in possibly open GMF SyncCharts editor
-        ValidationManager.enableCheck("de.cau.cs.kieler.synccharts.ScChecks");
-        ValidationManager.validateActiveEditor();
-
         // building path to bundle
         Bundle bundle = Platform.getBundle("de.cau.cs.kieler.synccharts.codegen.sc");
 
@@ -113,7 +148,7 @@ public class SCDataComponent extends AbstractAutomatedProducer {
             if (!validation || (validation && newValidation)) {
                 // compile
                 // -m32 = 32 bit compatibility mode. Otherwise compiler errors in 64bit archs
-                String compiler = (getProperties()[PROP_COMPILER]).getValue();
+                String compiler = (getProperties()[PROP_COMPILER+2]).getValue();
 
                 String compile = compiler
                         + " "
@@ -205,6 +240,7 @@ public class SCDataComponent extends AbstractAutomatedProducer {
         JSONObject out = null;
         try {
             jSONObject.remove("state");
+            jSONObject.remove("transition");
             // boolToInt converts true and t to 1, false and f to 0
             String jSONString = boolToInt(jSONObject).toString();
             toSC.write(jSONString + "\n");
@@ -228,6 +264,12 @@ public class SCDataComponent extends AbstractAutomatedProducer {
             e.printStackTrace();
             process.destroy();
         }
+        
+        // the stateName is the second KIEM property
+        String stateName = this.getProperties()[1].getValue();
+
+        // the transitionName is the third KIEM property
+        String transitionName = this.getProperties()[2].getValue();        
 
         try {
             if (out.has("state")) {
@@ -239,15 +281,34 @@ public class SCDataComponent extends AbstractAutomatedProducer {
                 }
                 allStates = allStates.substring(0, allStates.length() - 1);
                 out.remove("state");
-                out.put("state", allStates);
+                out.put(stateName, allStates);
             } else {
-                out.put("state", "");
+                out.put(stateName, "");
             }
         } catch (JSONException e) {
             System.err.println(e.getMessage());
             process.destroy();
         }
 
+        try {
+            if (out.has("transition")) {
+                JSONArray stateArray = out.getJSONArray("transition");
+                String allTransitions = "";
+
+                for (int i = 0; i < stateArray.length(); i++) {
+                	allTransitions += stateArray.opt(i) + ",";
+                }
+                allTransitions = allTransitions.substring(0, allTransitions.length() - 1);
+                out.remove("transition");
+                out.put(transitionName, allTransitions);
+            } else {
+                out.put(transitionName, "");
+            }
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+            process.destroy();
+        }
+        
         return out;
     }
 
@@ -267,16 +328,20 @@ public class SCDataComponent extends AbstractAutomatedProducer {
 
     public KiemProperty[] doProvideProperties() {
 
-        KiemProperty[] properties = new KiemProperty[NUM_PROPERTIES];
+        KiemProperty[] properties = new KiemProperty[NUM_PROPERTIES+2];
         KiemPropertyTypeFile compilerFile = new KiemPropertyTypeFile(true);
-        properties[PROP_COMPILER - 1] = new KiemProperty("Compiler", compilerFile, "gcc");
-        properties[PROP_PATH - 1] = new KiemProperty("File Location", "");
+
+        properties[0] = new KiemProperty("State Name", "state");
+        properties[1] = new KiemProperty("Transition Name", "transition");
+        
+        properties[PROP_COMPILER + 1] = new KiemProperty("Compiler", compilerFile, "gcc");
+        properties[PROP_PATH + 1] = new KiemProperty("File Location", "");
         // String[] items = { "complete hierarchie", "shortest hierarchie",
         // "unique incremental name" };
         // TODO: only complete hierarchie is supported yet
         String[] items = { "Complete Hierarchie" };
         KiemPropertyTypeChoice choice = new KiemPropertyTypeChoice(items);
-        properties[2] = new KiemProperty("Label Names for SC Code", choice, items[0]);
+        properties[4] = new KiemProperty("Label Names for SC Code", choice, items[0]);
 
         return properties;
     }
@@ -316,7 +381,7 @@ public class SCDataComponent extends AbstractAutomatedProducer {
 
         JSONObject returnObj = new JSONObject();
 
-        if ((getProperties()[PROP_PATH]).getValue().equals("")) {
+        if ((getProperties()[PROP_PATH+2]).getValue().equals("")) {
             String tempDir = System.getProperty("java.io.tmpdir");
             // for Windows (tmpdir ends with backslash)
             if (tempDir.endsWith("\\")) {
@@ -324,7 +389,7 @@ public class SCDataComponent extends AbstractAutomatedProducer {
             }
             outPath = tempDir + File.separator + randomString() + File.separator;
         } else {
-            outPath = (getProperties()[PROP_PATH]).getValue();
+            outPath = (getProperties()[PROP_PATH+2]).getValue();
             if (!outPath.endsWith(File.separator)) {
                 outPath += File.separator;
             }

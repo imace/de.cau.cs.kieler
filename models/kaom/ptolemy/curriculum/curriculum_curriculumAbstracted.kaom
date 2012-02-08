@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/annotations java://de.cau.cs.kieler.core.annotations.AnnotationsPackage http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage">
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
   <childEntities name="curriculumAbstracted">
     <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.TypedCompositeActor"/>
@@ -1526,7 +1526,7 @@
     <childRelations name="relation4" outgoingLinks="//@childEntities.0/@childLinks.13 //@childEntities.0/@childLinks.70" incomingLinks="//@childEntities.0/@childLinks.11">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
-    <childRelations name="relation" outgoingLinks="//@childEntities.0/@childLinks.83 //@childEntities.0/@childLinks.20 //@childEntities.0/@childLinks.21 //@childEntities.0/@childLinks.23 //@childEntities.0/@childLinks.26 //@childEntities.0/@childLinks.27 //@childEntities.0/@childLinks.28 //@childEntities.0/@childLinks.29 //@childEntities.0/@childLinks.30" incomingLinks="//@childEntities.0/@childLinks.6">
+    <childRelations name="relation" outgoingLinks="//@childEntities.0/@childLinks.20 //@childEntities.0/@childLinks.21 //@childEntities.0/@childLinks.23 //@childEntities.0/@childLinks.26 //@childEntities.0/@childLinks.27 //@childEntities.0/@childLinks.28 //@childEntities.0/@childLinks.29 //@childEntities.0/@childLinks.30 //@childEntities.0/@childLinks.83" incomingLinks="//@childEntities.0/@childLinks.6">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
     <childRelations name="relation6" outgoingLinks="//@childEntities.0/@childLinks.14 //@childEntities.0/@childLinks.67" incomingLinks="//@childEntities.0/@childLinks.83">
@@ -1538,7 +1538,7 @@
     <childRelations name="relation3" outgoingLinks="//@childEntities.0/@childLinks.19 //@childEntities.0/@childLinks.22 //@childEntities.0/@childLinks.25" incomingLinks="//@childEntities.0/@childLinks.10">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
-    <childRelations name="relation13" outgoingLinks="//@childEntities.0/@childLinks.84 //@childEntities.0/@childLinks.4 //@childEntities.0/@childLinks.36" incomingLinks="//@childEntities.0/@childLinks.33">
+    <childRelations name="relation13" outgoingLinks="//@childEntities.0/@childLinks.4 //@childEntities.0/@childLinks.36 //@childEntities.0/@childLinks.84" incomingLinks="//@childEntities.0/@childLinks.33">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
     <childRelations name="relation15" outgoingLinks="//@childEntities.0/@childLinks.1 //@childEntities.0/@childLinks.3 //@childEntities.0/@childLinks.16 //@childEntities.0/@childLinks.18 //@childEntities.0/@childLinks.32 //@childEntities.0/@childLinks.35 //@childEntities.0/@childLinks.75" incomingLinks="//@childEntities.0/@childLinks.41">
@@ -1559,7 +1559,7 @@
     <childRelations name="relation22" outgoingLinks="//@childEntities.0/@childLinks.51 //@childEntities.0/@childLinks.52 //@childEntities.0/@childLinks.53 //@childEntities.0/@childLinks.54 //@childEntities.0/@childLinks.64 //@childEntities.0/@childLinks.69 //@childEntities.0/@childLinks.78 //@childEntities.0/@childLinks.79" incomingLinks="//@childEntities.0/@childLinks.48">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
-    <childRelations name="relation28" outgoingLinks="//@childEntities.0/@childLinks.82 //@childEntities.0/@childLinks.39 //@childEntities.0/@childLinks.44 //@childEntities.0/@childLinks.46 //@childEntities.0/@childLinks.59 //@childEntities.0/@childLinks.60 //@childEntities.0/@childLinks.65 //@childEntities.0/@childLinks.66 //@childEntities.0/@childLinks.68 //@childEntities.0/@childLinks.73" incomingLinks="//@childEntities.0/@childLinks.2">
+    <childRelations name="relation28" outgoingLinks="//@childEntities.0/@childLinks.39 //@childEntities.0/@childLinks.44 //@childEntities.0/@childLinks.46 //@childEntities.0/@childLinks.59 //@childEntities.0/@childLinks.60 //@childEntities.0/@childLinks.65 //@childEntities.0/@childLinks.66 //@childEntities.0/@childLinks.68 //@childEntities.0/@childLinks.73 //@childEntities.0/@childLinks.82" incomingLinks="//@childEntities.0/@childLinks.2">
       <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     </childRelations>
     <childRelations name="relation26" outgoingLinks="//@childEntities.0/@childLinks.7 //@childEntities.0/@childLinks.9" incomingLinks="//@childEntities.0/@childLinks.5">

@@ -34,10 +34,13 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.ui.IEditorPart;
@@ -47,6 +50,7 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtend.util.stdlib.CloningExtensions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,7 +62,9 @@ import de.cau.cs.kieler.core.kexpressions.Input;
 import de.cau.cs.kieler.core.kexpressions.InterfaceSignalDecl;
 import de.cau.cs.kieler.core.kexpressions.Output;
 import de.cau.cs.kieler.core.kexpressions.Signal;
+import de.cau.cs.kieler.core.model.validation.ValidationManager;
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
+import de.cau.cs.kieler.esterel.xtend.InterfaceDeclarationFix;
 import de.cau.cs.kieler.esterel.cec.CEC;
 import de.cau.cs.kieler.esterel.cec.sim.xtend.Esterel2Simulation;
 import de.cau.cs.kieler.esterel.esterel.Module;
@@ -153,7 +159,27 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	private LinkedList<String> outputSignalList = null;
 
-	// -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
+     * #checkModelValidation (org.eclipse.emf.ecore.EObject)
+     */
+    @Override
+    public boolean checkModelValidation(final EObject rootEObject) throws KiemInitializationException {
+        if (!(rootEObject instanceof Program)) {
+    		throw new KiemInitializationException(
+                    "CEC Esterel Simulator can only be used with an Esterel editor.\n\n"
+                            ,
+                    true, null);
+        }
+        
+        return true;
+    }    
+
+    // -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
@@ -232,8 +258,21 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 				// Then add normal output signals
 				for (String outputSignal : outputSignalList) {
 					if (esterelOutput.has(outputSignal)) {
-						returnObj.accumulate(outputSignal,
-								JSONSignalValues.newValue(true));
+						
+						// retrieve jsonSignal
+						JSONObject jsonSignal = esterelOutput.getJSONObject(outputSignal);
+						
+						if (jsonSignal.has("value")) {
+							Object value = jsonSignal.get("value");
+							// valued signals
+							returnObj.accumulate(outputSignal,
+									JSONSignalValues.newValue(value, true));
+						}
+						else {
+							// pure signals
+							returnObj.accumulate(outputSignal,
+									JSONSignalValues.newValue(true));
+						}
 					} else {
 						returnObj.accumulate(outputSignal,
 								JSONSignalValues.newValue(false));
@@ -447,7 +486,6 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 		File executable = null;
 		String compile = "";
-		int blablabla = 0 ;
 		
 		try {
 			// get active editor
@@ -471,7 +509,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 			URI esterelOutput = URI.createURI("");
 			// By default there is no additional transformation necessary
 			Program transformedProgram = myModel;
-
+			
 			// If 'Full Debug Mode' is turned on then the user wants to have
 			// also states visualized.
 			// Hence some pre-processing is needed and done by the
@@ -514,8 +552,18 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 					CEC.getDefaultOutFile(), esterelSimulationProgressMonitor)
 					.toURL();
 
+			
+			// Cannot be done before because otherwise the new model cannot be serialized (24.01.2012)
+			// Do this on a copy to not destroy original program;
+			// Make Esterel Interface delcration consistent
+			InterfaceDeclarationFix interfaceDeclarationFix = Guice.createInjector()
+					.getInstance(InterfaceDeclarationFix.class);
+			Program fixedTransformedProgram = (Program) CloningExtensions.clone(transformedProgram); 
+			interfaceDeclarationFix.fix(fixedTransformedProgram);
+			
+			
 			// Generate data.c
-			URL data = generateCSimulationInterface(transformedProgram,
+			URL data = generateCSimulationInterface(fixedTransformedProgram,
 					esterelOutput);
 
 			// Compile C code
@@ -566,7 +614,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 		} catch (Exception e) {
 			throw new KiemInitializationException(
-					"Error "+blablabla+"compiling Esterel file:\n\n " + e.getMessage() + "\n\n" + compile,
+					"Error compiling Esterel file:\n\n " + e.getMessage() + "\n\n" + compile,
 					true, e);
 		}
 	}
@@ -604,9 +652,12 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 		JSONObject res = new JSONObject();
 		try {
 			if (myModel != null) {
-				for (Module mod : myModel.getModules()) {
-					if (mod.getInterface() != null && mod.getInterface().getIntSignalDecls() != null) {
-						for (InterfaceSignalDecl sig : mod.getInterface()
+				// only do this for the first module as it is the main module
+				if (myModel.getModules() != null && myModel.getModules().size() > 0) {
+					Module module = myModel.getModules().get(0);
+
+					if (module.getInterface() != null && module.getInterface().getIntSignalDecls() != null) {
+						for (InterfaceSignalDecl sig : module.getInterface()
 								.getIntSignalDecls()) {
 							if (sig instanceof Input) {
 								for (Signal s : sig.getSignals()) {
