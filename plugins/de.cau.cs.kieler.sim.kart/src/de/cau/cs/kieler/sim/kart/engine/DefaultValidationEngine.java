@@ -66,20 +66,24 @@ public class DefaultValidationEngine implements IValidationEngine {
      * 
      * {@inheritDoc}
      */
-    public void validateVariable(Pair<String,String> variable, String recValue, String simValue, boolean isHistoryStep, JSONObject retval) {
+    public void validateVariable(Pair<String,String> variable, Object recValue, Object simValue, boolean isHistoryStep, JSONObject retval) {
         if (simValue == null) {
             KiemPlugin.getDefault().showError(
                     "The simulation step did not generate a variable \"" + variable.getFirst() + "\". "
                             + "No validation for this variable will take place in this step!", Constants.PLUGINID, null, Constants.ERR_SILENT);
-        } else if (!(recValue.equals(simValue))) {
+        } else if (recValue == null) {
+            KiemPlugin.getDefault().showError(
+                    "The trace file did not contain a variable \"" + variable.getFirst() + "\"."
+                    + "No validation for this variable will take place in this step!", Constants.PLUGINID, null, Constants.ERR_SILENT);
+        } else if(!Utilities.compareVariables(editor, recValue, simValue)){
             try {
                 if(!isHistoryStep) {
                     List<EObject> isStates = Utilities.getStates(editor, simValue);
                     List<EObject> shallStates = Utilities.getStates(editor, recValue);
                     
                     // Get meaningful names for the states
-                    String stateNamesTree = Utilities.buildTree(new Tree(null), shallStates).toString();
-                    String simStateNamesTree = Utilities.buildTree(new Tree(null), isStates).toString();
+                    String stateNamesTree = Utilities.buildTree(new Tree(), shallStates).toString();
+                    String simStateNamesTree = Utilities.buildTree(new Tree(), isStates).toString();
 
                     // Display an error message
                     String errorMessage = "Validation error: The simulation should have generated the "
@@ -90,7 +94,7 @@ public class DefaultValidationEngine implements IValidationEngine {
                             + simStateNamesTree;
                     
                     try {
-                        retval.accumulate(variable.getSecond(), recValue);
+                        retval.accumulate(variable.getSecond().toString(), recValue);
                     } catch (JSONException e) {
                         // do nothing
                     }
@@ -102,7 +106,7 @@ public class DefaultValidationEngine implements IValidationEngine {
             } catch (Exception e) {
                 // something went terribly wrong when trying to get real names, just print that string
                 try {
-                    retval.accumulate(variable.getSecond(), recValue);
+                    retval.accumulate(variable.getSecond().toString(), recValue);
                 } catch (JSONException j) {
                     // do nothing
                 }
@@ -113,7 +117,7 @@ public class DefaultValidationEngine implements IValidationEngine {
             }
         } else {
             try {
-                retval.accumulate(variable.getSecond(), "");
+                retval.accumulate(variable.getSecond().toString(), "");
             } catch (JSONException e) {
                 // do nothing
             }
