@@ -14,8 +14,10 @@
 package de.cau.cs.kieler.sim.kart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,7 +37,6 @@ import de.cau.cs.kieler.sim.esi.esi.impl.EsoJsonImpl;
 import de.cau.cs.kieler.sim.esi.esi.impl.EsoStringImpl;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.signals.JSONSignalValues;
-import de.cau.cs.kieler.synccharts.Scope;
 
 /**
  * Provides utility methods used by the validation component and the validation engine.
@@ -100,7 +101,11 @@ public class Utilities {
         } else if (var.getValue() instanceof EsoStringImpl) {
             return ((EsoStringImpl)var.getValue()).getValue();
         } else if (var.getValue() instanceof EsoJsonImpl) {
-            return ((EsoJsonImpl)var.getValue()).getValue();
+            try {
+                return new JSONObject(((EsoJsonImpl)var.getValue()).getValue());
+            } catch (JSONException e) {
+                return ((EsoJsonImpl)var.getValue()).getValue();
+            }
         } else {
             return null;
         }
@@ -121,33 +126,31 @@ public class Utilities {
             EObject itemObject = states.get(0);
             states.remove(0);
 
-            if (itemObject instanceof Scope) {
-                boolean breakIf = false;
-                Scope item = (Scope) itemObject;
-                Tree itemTree = new Tree(item);
+            boolean breakIf = false;
+            EObject item = (EObject) itemObject;
+            Tree itemTree = new Tree(item);
 
-                while (item.eContainer() != null) {
-                    if (states.contains(item.eContainer())) {
-                        states.remove(item.eContainer());
-                        Tree parentTree = new Tree((Scope) item.eContainer());
+            while (item.eContainer() != null) {
+                if (states.contains(item.eContainer())) {
+                    states.remove(item.eContainer());
+                    Tree parentTree = new Tree((EObject) item.eContainer());
+                    parentTree.addChild(itemTree);
+                    itemTree = parentTree;
+                } else {
+                    Tree parentTree = root.findValue((EObject) item.eContainer());
+                    if (parentTree != null) {
                         parentTree.addChild(itemTree);
-                        itemTree = parentTree;
-                    } else {
-                        Tree parentTree = root.findValue((Scope) item.eContainer());
-                        if (parentTree != null) {
-                            parentTree.addChild(itemTree);
-                            breakIf = true;
-                            break;
-                        }
+                        breakIf = true;
+                        break;
                     }
-                    item = (Scope) item.eContainer();
                 }
-
-                if (!breakIf) {
-                    root.addChild(itemTree);
-                }
-
+                item = (EObject) item.eContainer();
             }
+
+            if (!breakIf) {
+                root.addChild(itemTree);
+            }
+
         }
 
         return root;
@@ -159,15 +162,15 @@ public class Utilities {
      * @param split the array of Strings
      * @return a set including all String from the parameter
      */
-    public static Set<Pair<String,Object>> makeSetOfPairs(String string) throws KiemInitializationException {
+    public static Set<Pair<String,String>> makeSetOfPairs(String string) throws KiemInitializationException {
         try {
             String[] strPairs = string.split("\\)\\s*,\\s*\\(|\\(|\\)");
-            HashSet<Pair<String,Object>> retval = new HashSet<Pair<String,Object>>();
+            HashSet<Pair<String,String>> retval = new HashSet<Pair<String,String>>();
     
             for (String strPair : strPairs) {
                 if(!strPair.equals("")) {
                     String[] pair = strPair.split(",");
-                    retval.add(new Pair<String,Object>(pair[0].trim(), pair[1].trim()));
+                    retval.add(new Pair<String,String>(pair[0].trim(), pair[1].trim()));
                 } else {
                 }
             }
@@ -200,6 +203,54 @@ public class Utilities {
             }
         }
         
+        return retval;
+    }
+
+    /**
+     * Compare two variables, normally one taken from an ESO file and one taken from the simulation.
+     * 
+     * @param recValue first value
+     * @param simValue second value
+     * @return true if both values are of the same type and represent the same value, false otherwise
+     */
+    public static boolean compareVariables(DiagramEditor ed, Object a, Object b) {
+        if(a.getClass().equals(b.getClass())) {
+            if (a instanceof Integer && b instanceof Integer) {
+                return ((Integer)a).equals((Integer)b);
+            } else if (a instanceof Float && b instanceof Float) {
+                return ((Float)a).equals((Float)b);
+            } else if (a instanceof Boolean && b instanceof Boolean) {
+                return ((Boolean)a).equals((Boolean)b);
+            } else if (a instanceof JSONObject && b instanceof JSONObject) {
+                return ((JSONObject)a).equals((JSONObject)b);
+            } else if(a instanceof String && b instanceof String) {
+                try {
+                    List<String> aS = getStrings(getStates(ed, a));
+                    List<String> bS = getStrings(getStates(ed, b));
+                    Collections.sort(aS);
+                    Collections.sort(bS);
+                    return aS.equals(bS);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return ((String)a).equals((String)b);
+                }
+            } else {
+                return a.equals(b);
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param states
+     * @return
+     */
+    private static List<String> getStrings(List<EObject> states) {
+        List<String> retval = new LinkedList<String>();
+        for(EObject s : states) {
+            retval.add(s.toString());
+        }
         return retval;
     }
 }
