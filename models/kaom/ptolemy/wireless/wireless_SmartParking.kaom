@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/annotations java://de.cau.cs.kieler.core.annotations.AnnotationsPackage http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage">
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
   <childEntities name="SmartParking">
     <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.TypedCompositeActor"/>
@@ -35,11 +35,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -48,12 +45,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -62,13 +61,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -77,6 +76,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="ArrivalChannel">
@@ -86,12 +89,12 @@
       <childPorts name="_channelPort">
         <annotations name="input"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="LeaveChannel">
@@ -101,12 +104,12 @@
       <childPorts name="_channelPort">
         <annotations name="input"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="ReportChannel">
@@ -116,12 +119,12 @@
       <childPorts name="_channelPort">
         <annotations name="input"/>
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
     </childEntities>
     <childEntities name="car model">
@@ -220,28 +223,28 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="lowerBound" value="1.0" type="ptolemy.actor.parameters.PortParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="upperBound" value="60.0" type="ptolemy.actor.parameters.PortParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="{315.0, 275.0}" type="ptolemy.kernel.util.Location"/>
-        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.1">
+        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.2">
           <annotations name="output"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
-        <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.2">
+        <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.3">
           <annotations name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         </childPorts>
         <childPorts name="lowerBound">
           <annotations name="input"/>
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
-          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="upperBound">
           <annotations name="input"/>
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
-          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
       </childEntities>
       <childEntities name="VariableDelay">
@@ -252,30 +255,30 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilSize" value="[600, 400]" type="ptolemy.actor.gui.SizeAttribute"/>
         </annotations>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[455.0, 255.0]" type="ptolemy.kernel.util.Location"/>
-        <childPorts name="input" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.3">
+        <childPorts name="input" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.4">
           <annotations name="input"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
-        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.4">
+        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.5">
           <annotations name="output"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
-        <childPorts name="delay" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.1">
+        <childPorts name="delay" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.2">
           <annotations name="input"/>
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
       </childEntities>
       <childEntities name="ParkingClient">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.wireless.demo.SmartParking.ParkingClient"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[170.0, 155.0]" type="ptolemy.kernel.util.Location"/>
-        <childPorts name="carArrival" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.6">
+        <childPorts name="carArrival" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.7">
           <annotations name="input"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
-        <childPorts name="parkingTo" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.5">
+        <childPorts name="parkingTo" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.6">
           <annotations name="output"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -291,14 +294,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="values" value="{1}" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="fireAtStart" value="false" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="{60.0, 155.0}" type="ptolemy.kernel.util.Location"/>
-        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.6">
+        <childPorts name="output" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.7">
           <annotations name="output"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="trigger">
           <annotations name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         </childPorts>
       </childEntities>
       <childEntities name="DEDirector">
@@ -315,7 +318,10 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="{70.0, 40.0}" type="ptolemy.kernel.util.Location"/>
         </annotations>
       </childEntities>
-      <childLinks source="//@childEntities.0/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.4/@childPorts.0">
+      <childLinks source="//@childEntities.0/@childEntities.4/@childPorts.0" target="//@childEntities.0/@childEntities.4/@childRelations.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childLinks>
+      <childLinks source="//@childEntities.0/@childEntities.4/@childPorts.1" target="//@childEntities.0/@childEntities.4/@childRelations.1">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
       <childLinks source="//@childEntities.0/@childEntities.4/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childEntities.4/@childEntities.1/@childPorts.2">
@@ -327,7 +333,7 @@
       <childLinks source="//@childEntities.0/@childEntities.4/@childRelations.0" target="//@childEntities.0/@childEntities.4/@childEntities.1/@childPorts.0">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
-      <childLinks source="//@childEntities.0/@childEntities.4/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childEntities.4/@childPorts.1">
+      <childLinks source="//@childEntities.0/@childEntities.4/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childEntities.4/@childRelations.1">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
       <childLinks source="//@childEntities.0/@childEntities.4/@childEntities.2/@childPorts.1" target="//@childEntities.0/@childEntities.4/@childRelations.0">
@@ -336,24 +342,27 @@
       <childLinks source="//@childEntities.0/@childEntities.4/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childEntities.4/@childEntities.2/@childPorts.0">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
-      <childPorts name="out" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.0">
+      <childPorts name="out" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.0">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_type" value="unknown" type="ptolemy.actor.TypeAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[470.0, 145.0]" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
-      <childPorts name="out2" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.4">
+      <childPorts name="out2" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.1">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_type" value="unknown" type="ptolemy.actor.TypeAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[565.0, 265.0]" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
-      <childRelations name="relation3" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.0 //@childEntities.0/@childEntities.4/@childLinks.2 //@childEntities.0/@childEntities.4/@childLinks.3" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.5">
+      <childRelations name="relation3" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.3 //@childEntities.0/@childEntities.4/@childLinks.4" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.0 //@childEntities.0/@childEntities.4/@childLinks.6">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+      </childRelations>
+      <childRelations name="relation4" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.1 //@childEntities.0/@childEntities.4/@childLinks.5">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childRelations>
     </childEntities>
@@ -364,21 +373,21 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[438.0, 78.0]" type="ptolemy.kernel.util.Location"/>
       <childPorts name="properties">
         <annotations name="output"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
       <childPorts name="input">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
       <childPorts name="payload" outgoingLinks="//@childEntities.0/@childLinks.0">
         <annotations name="output"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="Display">
@@ -418,11 +427,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -431,12 +437,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -445,13 +453,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -460,6 +468,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor3">
@@ -471,11 +483,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -484,12 +493,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -498,13 +509,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -513,6 +524,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor4">
@@ -524,11 +539,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -537,12 +549,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -551,13 +565,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -566,6 +580,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor5">
@@ -577,11 +595,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -590,12 +605,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -604,13 +621,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -619,6 +636,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor6">
@@ -630,11 +651,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -643,12 +661,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -657,13 +677,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -672,6 +692,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor7">
@@ -683,11 +707,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -696,12 +717,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -710,13 +733,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -725,6 +748,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor8">
@@ -736,11 +763,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -749,12 +773,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -763,13 +789,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -778,6 +804,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor9">
@@ -789,11 +819,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -802,12 +829,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -816,13 +845,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -831,6 +860,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor10">
@@ -842,11 +875,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -855,12 +885,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -869,13 +901,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -884,6 +916,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor11">
@@ -895,11 +931,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -908,12 +941,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -922,13 +957,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -937,6 +972,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor12">
@@ -948,11 +987,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -961,12 +997,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -975,13 +1013,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -990,6 +1028,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor13">
@@ -1001,11 +1043,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1014,12 +1053,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1028,13 +1069,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1043,6 +1084,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor14">
@@ -1054,11 +1099,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1067,12 +1109,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1081,13 +1125,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1096,6 +1140,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor15">
@@ -1107,11 +1155,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1120,12 +1165,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1134,13 +1181,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1149,6 +1196,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor16">
@@ -1160,11 +1211,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1173,12 +1221,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1187,13 +1237,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1202,6 +1252,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor17">
@@ -1213,11 +1267,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1226,12 +1277,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1240,13 +1293,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1255,6 +1308,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor18">
@@ -1266,11 +1323,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1279,12 +1333,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1293,13 +1349,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1308,6 +1364,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor19">
@@ -1319,11 +1379,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1332,12 +1389,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1346,13 +1405,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1361,6 +1420,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor20">
@@ -1372,11 +1435,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1385,12 +1445,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1399,13 +1461,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1414,6 +1476,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor21">
@@ -1425,11 +1491,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1438,12 +1501,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1452,13 +1517,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1467,6 +1532,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor22">
@@ -1478,11 +1547,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1491,12 +1557,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1505,13 +1573,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1520,6 +1588,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor23">
@@ -1531,11 +1603,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1544,12 +1613,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1558,13 +1629,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1573,6 +1644,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor24">
@@ -1584,11 +1659,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1597,12 +1669,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1611,13 +1685,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1626,6 +1700,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor25">
@@ -1637,11 +1715,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1650,12 +1725,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1664,13 +1741,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1679,6 +1756,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor26">
@@ -1690,11 +1771,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1703,12 +1781,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1717,13 +1797,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1732,6 +1812,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor27">
@@ -1743,11 +1827,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1756,12 +1837,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1770,13 +1853,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1785,6 +1868,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor28">
@@ -1796,11 +1883,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1809,12 +1893,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1823,13 +1909,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1838,6 +1924,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor29">
@@ -1849,11 +1939,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1862,12 +1949,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1876,13 +1965,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1891,6 +1980,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor30">
@@ -1902,11 +1995,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1915,12 +2005,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1929,13 +2021,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1944,6 +2036,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor31">
@@ -1955,11 +2051,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1968,12 +2061,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1982,13 +2077,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -1997,6 +2092,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="LotSensor32">
@@ -2008,11 +2107,8 @@
       <annotations xsi:type="ann:TypedStringAnnotation" name="_hideName" type="ptolemy.kernel.util.SingletonAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_expertMode" type="ptolemy.kernel.util.SingletonAttribute"/>
       <childPorts name="arrival">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -2021,12 +2117,14 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="report">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="ArrivalChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="report">
         <annotations name="output"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -2035,13 +2133,13 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-      </childPorts>
-      <childPorts name="leave">
-        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="output"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
+      </childPorts>
+      <childPorts name="leave">
         <annotations name="input"/>
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" type="ptolemy.data.expr.StringParameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="outsideTransmitProperties" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="insideChannel" type="ptolemy.data.expr.StringParameter"/>
@@ -2050,6 +2148,10 @@
         <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="outsideChannel" value="LeaveChannel" type="ptolemy.data.expr.StringParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" value="false" type="ptolemy.data.expr.SingletonParameter"/>
+        <annotations xsi:type="ann:TypedStringAnnotation" name="_hide" value="true" type="ptolemy.data.expr.SingletonParameter"/>
       </childPorts>
     </childEntities>
     <childEntities name="signal light">
@@ -2113,11 +2215,12 @@
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.39/@childLinks.2">
-          <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
           <annotations name="input"/>
+          <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
         </childPorts>
         <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.39/@childLinks.3">
           <annotations name="output"/>
@@ -2175,6 +2278,7 @@
         <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.39/@childLinks.3">
           <annotations name="input"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         </childPorts>
       </childEntities>
       <childEntities name="Const2">
@@ -2193,11 +2297,12 @@
         <childPorts name="trigger" incomingLinks="//@childEntities.0/@childEntities.39/@childLinks.4">
           <annotations name="input"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_showName" type="ptolemy.data.expr.SingletonParameter"/>
         </childPorts>
       </childEntities>
       <childEntities name="SingleEvent">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
-        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.de.lib.SingleEvent"/>
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.lib.SingleEvent"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="time" value="0.0" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="value" value="{0.0, 1.0, 0.0, 1.0}" type="ptolemy.data.expr.Parameter"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="SingleEventIcon" type="ptolemy.vergil.icon.EditorIcon">
@@ -2229,7 +2334,7 @@
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="{55, 65}" type="ptolemy.kernel.util.Location"/>
         </annotations>
       </childEntities>
-      <childLinks source="//@childEntities.0/@childEntities.39/@childPorts.0" target="//@childEntities.0/@childEntities.39/@childRelations.0">
+      <childLinks source="//@childEntities.0/@childEntities.39/@childRelations.0" target="//@childEntities.0/@childEntities.39/@childPorts.0">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
       <childLinks source="//@childEntities.0/@childEntities.39/@childRelations.0" target="//@childEntities.0/@childEntities.39/@childEntities.0/@childPorts.0">
@@ -2259,13 +2364,13 @@
       <childLinks source="//@childEntities.0/@childEntities.39/@childRelations.0" target="//@childEntities.0/@childEntities.39/@childEntities.6/@childPorts.0">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childLinks>
-      <childPorts name="isFull" outgoingLinks="//@childEntities.0/@childEntities.39/@childLinks.0" incomingLinks="//@childEntities.0/@childLinks.2">
+      <childPorts name="isFull" incomingLinks="//@childEntities.0/@childEntities.39/@childLinks.0 //@childEntities.0/@childLinks.2">
+        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_type" value="unknown" type="ptolemy.actor.TypeAttribute"/>
         <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[105.0, 190.0]" type="ptolemy.kernel.util.Location"/>
-        <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childPorts>
-      <childRelations name="relation2" outgoingLinks="//@childEntities.0/@childEntities.39/@childLinks.1 //@childEntities.0/@childEntities.39/@childLinks.2 //@childEntities.0/@childEntities.39/@childLinks.9" incomingLinks="//@childEntities.0/@childEntities.39/@childLinks.0">
+      <childRelations name="relation2" outgoingLinks="//@childEntities.0/@childEntities.39/@childLinks.0 //@childEntities.0/@childEntities.39/@childLinks.1 //@childEntities.0/@childEntities.39/@childLinks.2 //@childEntities.0/@childEntities.39/@childLinks.9">
         <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
       </childRelations>
     </childEntities>
