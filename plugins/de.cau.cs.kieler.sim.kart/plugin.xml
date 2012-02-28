@@ -2,6 +2,8 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="de.cau.cs.kieler.sim.kart.MessageDialog" name="KART Message Dialog" schema="schema/de.cau.cs.kieler.sim.kart.MessageDialog.exsd"/>
+   <extension-point id="de.cau.cs.kieler.sim.kart.NamingSuggestion" name="KART Naming suggestion" schema="schema/de.cau.cs.kieler.sim.kart.NamingSuggestion.exsd"/>
+   <extension-point id="de.cau.cs.kieler.sim.kart.Refresh" name="Refresh" schema="schema/de.cau.cs.kieler.sim.kart.Refresh.exsd"/>
    <extension
          point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
       <content
@@ -38,6 +40,33 @@
          point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
       <executionFile
             file="execution/synccharts_sc_kart.execution">
+         <editor
+               id="de.cau.cs.kieler.synccharts.diagram.part.SyncchartsDiagramEditorID"
+               name="SyncChart Diagram Editor"
+               priority="7">
+         </editor>
+      </executionFile>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
+      <executionFile
+            file="execution/esterel_kart.execution">
+         <editor
+               id="de.cau.cs.kieler.esterel.Esterel"
+               name="Esterel Editor"
+               priority="7">
+         </editor>
+      </executionFile>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
+      <executionFile
+            file="execution/synccharts_ptolemy_kart.execution">
+         <editor
+               id="de.cau.cs.kieler.synccharts.diagram.part.SyncchartsDiagramEditorID"
+               name="SyncChart Diagram Editor"
+               priority="7">
+         </editor>
       </executionFile>
    </extension>
 
