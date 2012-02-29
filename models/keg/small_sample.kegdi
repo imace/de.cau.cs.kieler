@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:layoutoptions="http://kieler.cs.cau.de/LayoutOptions" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_RqwQsVPBEeCGzs2vloDEBw" type="Graphs" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_RqwQsVPBEeCGzs2vloDEBw" type="Graphs" measurementUnit="Pixel">
   <children xmi:type="notation:Node" xmi:id="_S1WbkFPBEeCGzs2vloDEBw" type="2001">
     <children xmi:type="notation:DecorationNode" xmi:id="_S1YQwFPBEeCGzs2vloDEBw" type="5003"/>
     <children xmi:type="notation:DecorationNode" xmi:id="_S1YQwVPBEeCGzs2vloDEBw" type="7001"/>
@@ -377,11 +377,6 @@
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_S1wEMlPBEeCGzs2vloDEBw" x="1072" y="1112"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_RqwQslPBEeCGzs2vloDEBw"/>
-  <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_WqW-QFPBEeCGzs2vloDEBw">
-    <options xmi:type="layoutoptions:KOption" xmi:id="_WqmO0FPBEeCGzs2vloDEBw" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.graphviz.neato"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_opGbwFPBEeCGzs2vloDEBw" key="de.cau.cs.kieler.spacing" value="200.0"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_ssyToFPBEeCGzs2vloDEBw" key="de.cau.cs.kieler.randomSeed" value="0"/>
-  </styles>
   <element xmi:type="keg:Node" href="small_sample.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_S6L4QFPBEeCGzs2vloDEBw" type="4001" source="_S1WbkFPBEeCGzs2vloDEBw" target="_S1b7JlPBEeCGzs2vloDEBw">
     <children xmi:type="notation:DecorationNode" xmi:id="_S6L4RFPBEeCGzs2vloDEBw" type="6001">

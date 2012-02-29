@@ -22,7 +22,7 @@
         </elements>
         <elements xsi:type="xtext:Keyword" value=")"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="signals" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="+" feature="states" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -34,23 +34,55 @@
         <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="State"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value=":"/>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="SIGNALS"/>
+          <elements xsi:type="xtext:Keyword" value="Signals"/>
           <elements xsi:type="xtext:Assignment" cardinality="*" feature="signals" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Assignment" feature="instructions" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Thread">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Thread"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Thread"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="Signals"/>
+          <elements xsi:type="xtext:Assignment" cardinality="*" feature="signals" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="states" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Signal">
@@ -101,23 +133,129 @@
         <elements xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
     </rules>
+    <rules xsi:type="xtext:ParserRule" name="Continuation">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+      </alternatives>
+    </rules>
     <rules xsi:type="xtext:ParserRule" name="Instruction">
       <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Instruction"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Prio">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Prio"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Prio"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" feature="priority" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.13"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+            </terminal>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Trans">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Trans"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Trans"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Fork">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Fork"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Fork"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" feature="thread" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=","/>
+        <elements xsi:type="xtext:Assignment" feature="priority" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.13"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+            </terminal>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Join">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Join"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.1">
+            <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Join"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="Join"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Pause">
@@ -130,12 +268,12 @@
             <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Pause"/>
           </type>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="PAUSE"/>
+        <elements xsi:type="xtext:Keyword" value="Pause"/>
         <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
@@ -153,12 +291,12 @@
             <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Term"/>
           </type>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="TERM"/>
+        <elements xsi:type="xtext:Keyword" value="Term"/>
         <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
@@ -181,7 +319,7 @@
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
@@ -189,25 +327,31 @@
         <elements xsi:type="xtext:Keyword" value=")"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="Join">
+    <rules xsi:type="xtext:ParserRule" name="Emit">
       <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Join"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Emit"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.1">
-            <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Join"/>
-          </type>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="JOIN"/>
+        <elements xsi:type="xtext:Keyword" value="Emit"/>
         <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="signal" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://kieler.cs.cau.de/kexpressions/0.1.2#//Signal"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
+            </terminal>
+          </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value=")"/>
       </alternatives>
@@ -222,12 +366,12 @@
             <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Abort"/>
           </type>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="ABORT"/>
+        <elements xsi:type="xtext:Keyword" value="Abort"/>
         <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="continuation" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
@@ -240,7 +384,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//If"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="IF"/>
+        <elements xsi:type="xtext:Keyword" value="If"/>
         <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
@@ -250,7 +394,7 @@
           <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
             </terminal>
@@ -260,131 +404,11 @@
         <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Assignment" feature="instructions" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
           </elements>
           <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Goto">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Goto"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="GOTO"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="state" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-          </terminal>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value=","/>
-          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Fork">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Fork"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="FORK"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="state" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-          </terminal>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=","/>
-        <elements xsi:type="xtext:Assignment" feature="priority" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.13"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value=","/>
-          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Forke">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Forke"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="FORKE"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="state" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-          </terminal>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value=","/>
-          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Emit">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Emit"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="EMIT"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="signal" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://kieler.cs.cau.de/kexpressions/0.1.2#//Signal"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-          </terminal>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value=","/>
-          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Await">
@@ -392,7 +416,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Await"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="AWAIT"/>
+        <elements xsi:type="xtext:Keyword" value="Await"/>
         <elements xsi:type="xtext:Keyword" value="("/>
         <elements xsi:type="xtext:Assignment" feature="signal" operator="=">
           <terminal xsi:type="xtext:CrossReference">
@@ -407,31 +431,7 @@
           <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
-              </type>
-              <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-            </terminal>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Prio">
-      <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Prio"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="PRIO"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="priority" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.13"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value=","/>
-          <elements xsi:type="xtext:Assignment" feature="continuation" operator="=">
-            <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/0/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//State"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.cau.de/cs/kieler/s#//Continuation"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
             </terminal>
