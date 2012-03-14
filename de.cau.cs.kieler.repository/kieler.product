@@ -48,11 +48,11 @@ openFile</programArgsMac>
       startupMessageRect="7,252,445,20"
       startupForegroundColor="000000" />
    <launcher name="kieler">
-      <linux icon="/de.cau.cs.kieler.core.product/icons/kiel_64.xpm"/>
-      <macosx icon="/de.cau.cs.kieler.core.product/icons/kiel.icns"/>
+      <linux icon="/icons/kiel_64.xpm"/>
+      <macosx icon="/icons/kiel.icns"/>
       <solaris/>
       <win useIco="true">
-         <ico path="/de.cau.cs.kieler.core.product/icons/kiel.ico"/>
+         <ico path="/icons/kiel.ico"/>
          <bmp/>
       </win>
    </launcher>
