@@ -12,6 +12,7 @@
     <groupId>de.cau.cs.kieler</groupId>
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../de.cau.cs.kieler.parent/pom.xml</relativePath>
   </parent>
 
   <build>
@@ -34,6 +35,17 @@
             </goals>
           </execution>
         </executions>
+	<!--        <configuration>
+          <products>
+            <product>
+              <id>de.cau.cs.kieler.core.product.product</id>
+            </product>
+            <product>
+              <id>de.cau.cs.kieler.kwebs.server.Product</id>
+              <attachId>kwebs</attachId>
+            </product>
+          </products>
+	</configuration> -->
       </plugin>
     </plugins>
   </build>
