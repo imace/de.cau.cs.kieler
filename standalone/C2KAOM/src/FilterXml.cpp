@@ -36,11 +36,10 @@ int FilterXml::filter() {
 	cout << " -- Found " << set_comment_.size() / 2 << " Objects with labeled comments --" << endl;
 
 	//if nothing was found except the file name, there's nothing to do here.
-	if (set_comment_.size() < 2) {
+	if ((set_comment_.size() < 2) || (xpathtoQueue() == 1)) {
 		return 1;
 	}
 	//then the xpath node set is evaluated to a queue
-	xpathtoQueue();
 	return 0;
 
 }
@@ -64,7 +63,6 @@ int FilterXml::xmltoXpath() {
 int FilterXml::xpathtoQueue() {
 	//local variable used to store methods name witch are not explicit set
 
-
 	//evaluate all other entries in set_comment
 	for (unsigned int i = 1; i < set_comment_.size(); ++i) {
 
@@ -74,7 +72,6 @@ int FilterXml::xpathtoQueue() {
 		//the second entry is the briefdescription
 		comment_.append(set_comment_[++i].node().first_child().value());
 
-		//todo rename
 		//add the type information to the entity
 		entity_.append("kind: " + backupName_ + ";");
 
@@ -102,18 +99,26 @@ int FilterXml::xpathtoQueue() {
 		startPos_ = comment_.find("toplevel:");
 		if (string::npos == startPos_) {
 
-		}else {
+		} else {
 			buildResult("toplevel:");
 		}
 
-		//store the finished entity in the queue
-		result_.push(entity_);
+		if (!entity_.empty()) {
+			//store the finished entity in the queue
+			result_.push(entity_);
+		} else {
+			cerr << "Found annotation without content for " << backupName_ << " ->skipping" << endl;
+		}
 
 		//clear global entries for new use
 		comment_.clear();
 		entity_.clear();
 	}
-	return 0;
+	if (!result_.empty()) {
+		return 0;
+	} else {
+		return 1;
+	}
 }
 
 int FilterXml::buildResult(string keyword) {
@@ -123,11 +128,11 @@ int FilterXml::buildResult(string keyword) {
 	endPos = comment_.find(";", startPos_);
 
 	if (endPos == string::npos) {
-		cerr << "Missing semicolon after " << keyword << " in " << backupName_ << endl;
+		cerr << "Missing semicolon after " << keyword << " in the annotation of " << backupName_ << endl;
 	}
 
 	//compute length of content
-	endPos -= startPos_ ;
+	endPos -= startPos_;
 	endPos++;
 
 	//append content to the entity
