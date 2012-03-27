@@ -24,21 +24,19 @@
 
 using namespace std;
 
+/*
+ * The class BuilderXml realize the invocation of Doxygen
+ * and thus the conversion from source code to XML.
+ */
 class BuilderXml {
 public:
 
+	//simple constructor with source and  target directory
+	//it calls all other methods
 	BuilderXml(string inputPath, string outputPath);
 
 	//simple destructor
 	virtual ~BuilderXml();
-
-	int loadDoxyfile();
-
-	int fillDoxyfile();
-
-	int callDoxygen();
-
-	int buildFileQueue();
 
 	//getter inputFiles
 	inline queue<string> GetInput() {
@@ -46,6 +44,19 @@ public:
 	}
 
 private:
+
+	//load the configuration for Doxygen
+	int loadDoxyfile();
+
+	//sets the source and the target directory in the configuration
+	int fillDoxyfile();
+
+	//runs Doxygen
+	int callDoxygen();
+
+	//lists the XML-files in the subdirectory "xml"
+	int buildFileQueue();
+
 	queue<string> inputFiles_;
 	string inputPath_, outputPath_, content_;
 
