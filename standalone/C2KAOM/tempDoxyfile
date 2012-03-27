@@ -645,7 +645,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written 
 # to stderr.
 
-WARN_LOGFILE           = 
+WARN_LOGFILE           = logfile
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -1810,5 +1810,5 @@ GENERATE_LEGEND        = YES
 
 DOT_CLEANUP            = YES
 
-INPUT                  = C:/Programme/eclipseCPlusPlus/git/standalone/C2KAOM/input
+INPUT                  = C:\Programme\eclipseCPlusPlus\git\mainline\standalone\C2KAOM\input
 OUTPUT_DIRECTORY       = E:/workspace/runtime-EclipseApplication/generateDiagramm/auto
