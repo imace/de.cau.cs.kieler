@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.cau.cs.kieler.klots"
+      id="de.cau.cs.kieler.klots.feature"
       label="KIELER Lego On-Line Testing System"
       version="0.1.0.qualifier"
-      provider-name="Christian-Albrechts-Universität zu Kiel">
+      provider-name="Christian-Albrechts-Universität zu Kiel"
+      plugin="de.cau.cs.kieler.klots">
 
    <description url="http://www.informatik.uni-kiel.de/rtsys/kieler">
       KIELER Lego Online Testing System

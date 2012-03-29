@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.sim.kart.MessageDialog">
+      <content
+            class="de.cau.cs.kieler.sim.kart.ui.MessageDialog"
+            id="de.cau.cs.kieler.sim.kart.ui.MessageDialog"
+            name="MessageDialog">
+      </content>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.sim.kart.NamingSuggestion">
+      <content
+            class="de.cau.cs.kieler.sim.kart.ui.NamingSuggestion"
+            id="de.cau.cs.kieler.sim.kart.ui.NamingSuggestion"
+            name="NamingSuggestion">
+      </content>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.sim.kart.Refresh">
+      <content
+            class="de.cau.cs.kieler.sim.kart.ui.Refresh"
+            id="de.cau.cs.kieler.sim.kart.ui.Refresh"
+            name="Refresh">
+      </content>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.cau.cs.kieler.sim.kart.ui.KartProxyEditor"
+            default="false"
+            extensions="eso"
+            id="de.cau.cs.kieler.sim.kart.ui.EsoEditor"
+            name="Validate with KART">
+      </editor>
+   </extension>
+
+</plugin>

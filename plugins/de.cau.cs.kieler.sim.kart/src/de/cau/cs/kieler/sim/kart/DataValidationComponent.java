@@ -20,6 +20,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import java.io.File;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +32,13 @@ import de.cau.cs.kieler.core.util.Pair;
 import de.cau.cs.kieler.sim.kart.engine.DefaultValidationEngine;
 import de.cau.cs.kieler.sim.kart.engine.IValidationEngine;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
+import de.cau.cs.kieler.sim.kiem.IKiemEventListener;
 import de.cau.cs.kieler.sim.kiem.KiemEvent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
+import de.cau.cs.kieler.sim.kiem.KiemPlugin;
+import de.cau.cs.kieler.sim.kiem.execution.TimeoutThread;
+import de.cau.cs.kieler.sim.kiem.internal.DataComponentWrapper;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyException;
 import de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent;
@@ -48,9 +56,9 @@ import de.cau.cs.kieler.sim.signals.JSONSignalValues;
  * 
  */
 public class DataValidationComponent extends JSONObjectSimulationDataComponent implements
-        IJSONObjectDataComponent {
+        IJSONObjectDataComponent, IKiemEventListener {
     /** The number of the current step */
-    private long step;
+    private static volatile long step;
 
     /** The name of the ESI/ESO file the trace shall be read/written from/to */
     private String filename;
@@ -68,12 +76,12 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
     private List<HashMap<String, Object>> esoOutputs;
 
     /** A map of all values of all previously recorded special signals in each step */
-    private List<HashMap<String, String>> esoVariables;
+    private List<HashMap<String, Object>> esoVariables;
     
     /** In training mode, this list will hold all simulated output signals and their values
      * for each step
      */
-    private List<HashMap<String, Object>> simOutputs;
+    private List<HashMap<String, String>> simOutputs;
     
     /** In training mode, this list will hold all simulated output variables and their values
      * for each step
@@ -132,6 +140,7 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
         step = 0;
         eot = false;
         filename = "";
+        trainingMode = false;
         ignoreAdditionalSignals = false;
         configVarName = Constants.DEF_CONFIGVAR;
         outputVarName = Constants.DEF_OUTPUTVAR;
@@ -142,12 +151,16 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
         KiemProperty[] properties = this.getProperties();
 
         esoOutputs = new LinkedList<HashMap<String, Object>>();
-        esoVariables = new LinkedList<HashMap<String, String>>();
-        simOutputs = new LinkedList<HashMap<String, Object>>();
+        esoVariables = new LinkedList<HashMap<String, Object>>();
+        simOutputs = new LinkedList<HashMap<String, String>>();
         simVariables = new LinkedList<HashMap<String,String>>();
         recInputs = new LinkedList<HashMap<String, Object>>();
 
-        editor = (DiagramEditor) getActivePage().getActiveEditor();
+        try {
+            editor = (DiagramEditor) getActivePage().getActiveEditor();
+        } catch (Exception e) {
+            editor = null;
+        }
 
         // load properties
         variables = new HashSet<Pair<String, String>>();
@@ -183,8 +196,49 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
      */
     public void wrapup() throws KiemInitializationException {
         if (trainingMode) {
+            // Ask the user if he wants to overwrite the ESO file, if it exists
+            File file = new File(filename);
+            if(file.exists()) {
+                IConfigurationElement[] contributors = Platform.getExtensionRegistry()
+                        .getConfigurationElementsFor("de.cau.cs.kieler.sim.kart.MessageDialog");
+    
+                if (contributors.length > 0) {
+                    try {
+                        TimeoutThread.setAwaitUserRepsonse(true);
+                        IMessageDialog msg = (IMessageDialog) (contributors[0]
+                                .createExecutableExtension("class"));
+                        if (msg.question(Constants.OVERWRITE_TITLE, Constants.OVERWRITE)) {
+                            file.delete();
+                        } 
+                    } catch (CoreException e0) {
+                        // TODO Auto-generated catch block
+                        e0.printStackTrace();
+                    } finally {
+                        // MUST enable timeout again
+                        TimeoutThread.setAwaitUserRepsonse(false);
+                    }
+                }
+            }
+
             TraceWriter writer = new TraceWriter(recInputs, simOutputs, simVariables, filename);
             writer.doWrite();
+            
+            // Set training mode flag to false
+            List<DataComponentWrapper> components = KiemPlugin.getDefault().getDataComponentWrapperList();
+            Iterator<DataComponentWrapper> it = components.iterator();
+            
+            while(it.hasNext()) {
+                DataComponentWrapper c = it.next();
+
+                if(c.getDataComponent().getClass().getName().equals("de.cau.cs.kieler.sim.kart.DataReplayComponent")) {
+                    KiemProperty[] props = c.getProperties();
+                    for(KiemProperty p : props) {
+                        if(p.getKey().equals(Constants.TRAINMODE)) {
+                            p.setValue("false");
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -288,10 +342,8 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
             recordDataPool(obj);
         }
         
-        JSONObject retval = null;
+        JSONObject retval = new JSONObject();
         if (!trainingMode && !eot) {
-            retval = new JSONObject();
-    
             for (Pair<String, String> variable : variables) {
                 valEngine.validateVariable(variable,
                         esoVariables.get((int) step - 1).get(variable.getFirst()),
@@ -299,6 +351,20 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
             }
             
             valEngine.validateSignals(esoOutputs.get((int) step - 1), simOutputs.get((int) step - 1), isHistoryStep(), errSignalVar, retval);
+        } else {
+            for (Pair<String, String> variable : variables) {
+                try {
+                    retval.accumulate(variable.getSecond(), "");
+                } catch (JSONException e) {
+                    // Nothing
+                }
+            }
+            
+            try {
+                retval.accumulate(errSignalVar, "");
+            } catch (JSONException e) {
+                // Nothing
+            }
         }
         return retval;
     }
@@ -317,13 +383,22 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
             trainingMode = ((Boolean) config.get(Constants.VAR_TRAINMODE)).booleanValue();
             eot = ((Boolean) config.get(Constants.VAR_EOT)).booleanValue();
         } catch (JSONException e) {
-            throw new KiemExecutionException("Could not update configuration", true, e);
+            throw new KiemExecutionException("Could not update configuration. Are the KART components positioned correctly in the schedule? " +
+                                            "I. e., the Replay component directly before the simulator and the Validation component " +
+                                            "directly after the simulator.", true, e);
         }
     }
     
+    /**
+     * Save the contents of the data pool, i. e. signals and variables, for later use.
+     * This method automatically filters out KART-internal data pool variables.
+     * 
+     * @param json the data pool JSON object
+     * @throws KiemExecutionException when reading the data pool fails
+     */
     private void recordDataPool(JSONObject json) throws KiemExecutionException {
         String[] fieldNames = JSONObject.getNames(json);
-        HashMap<String,Object> signals = new HashMap<String,Object>();
+        HashMap<String,String> signals = new HashMap<String,String>();
         HashMap<String,String> vars = new HashMap<String,String>();
         
         for(String field : fieldNames) {
@@ -332,7 +407,12 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
                 if(obj instanceof JSONObject && JSONSignalValues.isSignalValue(obj)) {
                     // it's a signal
                     if(JSONSignalValues.isPresent(obj) && !recInputs.get((int) step - 1).containsKey(field)) {
-                        signals.put(field, JSONSignalValues.getSignalValue(obj));
+                        if(JSONSignalValues.getSignalValue(obj) == null) {
+                            signals.put(field, null);
+                        } else {
+                            signals.put(field, JSONSignalValues.getSignalValue(obj).toString());
+                        }
+                        
                     }
                 } else {
                     // we do not want to record our internal variables to the ESO file, that
@@ -354,6 +434,13 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
         simVariables.add(vars);
     }
     
+    /**
+     * Extract the data read from the ESO trace file by the Replay component from the
+     * data pool and save it for later use.
+     * 
+     * @param json the data pool JSON object
+     * @throws KiemExecutionException when reading the data pool fails
+     */
     private void getEsoData(JSONObject json) throws KiemExecutionException {
         try {
             /*
@@ -379,7 +466,7 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
                  * Record output signals and variables
                  */
                 HashMap<String,Object> outputSignals = new HashMap<String,Object>();
-                HashMap<String,String> outputVariables = new HashMap<String,String>();
+                HashMap<String,Object> outputVariables = new HashMap<String,Object>();
                 JSONObject output = json.getJSONObject(outputVarName);
                 
                 // again, this is necessary because the JSON library returns an unparameterized Iterator.
@@ -397,7 +484,7 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
                         }
                     } catch (JSONException e) {
                         // it probably is a variable
-                        outputVariables.put(outputKey, output.optString(outputKey));
+                        outputVariables.put(outputKey, output.opt(outputKey));
                     }
                 }
                 

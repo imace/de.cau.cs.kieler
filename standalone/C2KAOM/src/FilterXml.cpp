@@ -19,43 +19,61 @@ FilterXml::~FilterXml() {
 	// nothing
 }
 
+map<string, string> FilterXml::globalMap_=map<string, string>();
+
 FilterXml::FilterXml(string filename) :
 		fileName_(filename) {
 }
 
 int FilterXml::filter() {
-	//First the xml document is evaluated to a xpath node set
-	xmltoXpath();
-
-	// todo debug
-	//the leading entry is the filename tag
-	outputFileName_ = set_comment_[0].node().first_child().value();
-	cout << outputFileName_;
-	outputFileName_ = outputFileName_.substr(0, outputFileName_.rfind(".")) + ".kaot";
-	cout << "->" << outputFileName_ << endl;
-	//each method has two entries
-	cout << "Found " << set_comment_.size() / 2 << " Methods with labeled comments." << endl;
-
-	//if nothing was found except the file name, there's nothing to do here.
-	if (set_comment_.size() < 2) {
+	//check if it is a subfiles from a header file
+	//if so store the result in the static globalMap and do not build kaom model fpr this XML-file
+	xpathCompound();
+	if ((set_comment_.size() > 1)) {
+		xpathtoMap();
 		return 1;
-	}
-	//then the xpath node set is evaluated to a queue
-	xpathtoQueue();
-	return 0;
+	} else {
+		//check if a annotation was found
+		//and if so evaluate the xpath node set to a queue
+		xpathMember();
+		if ((set_comment_.size() > 1) && (xpathtoQueue() == 0)) {
 
+			//the leading entry is the filename
+			//print the file name and the number of annotations found on the console
+			outputFileName_ = set_comment_[0].node().first_child().value();
+			cout << outputFileName_;
+			outputFileName_ = outputFileName_.substr(0, outputFileName_.rfind(".")) + ".kaot";
+			cout << "->" << outputFileName_ << " -- Found " << result_.size() << " Objects with labeled comments --" << endl;
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 }
 
 bool FilterXml::loadFile() {
-	//load file specified in fileName_
+	//load file specified XML-file with pugixml
 	pugi::xml_parse_result result = doc_.load_file(fileName_.c_str());
 	return result.operator bool();
 }
 
-int FilterXml::xmltoXpath() {
-	//search for name and briefdescription tags in the definition of methods
+int FilterXml::xpathCompound() {
+	//search for object names and briefdescription tags in the definition of the object
 	//comments marked with @kaom are stored in briefdescription tags
-	pugi::xpath_query query_comment("//memberdef/briefdescription/para | //memberdef/briefdescription/para/preceding::name[1] | //compoundname");
+	//the object name is stored in compoundname
+	pugi::xpath_query query_comment("//compounddef/briefdescription/para | //compoundname");
+
+	//store the result in a node set
+	set_comment_ = query_comment.evaluate_node_set(doc_);
+	return 0;
+}
+
+int FilterXml::xpathMember() {
+	//search for function names and briefdescription tags in the definition of methods
+	//comments marked with @kaom are stored in briefdescription tags
+	//the filename is stored in compoundname
+	pugi::xpath_query query_comment(
+			"//memberdef/briefdescription/para | //memberdef/briefdescription/para/preceding::name[1] | //compoundname | //compounddef/innerclass");
 
 	//store the result in a node set
 	set_comment_ = query_comment.evaluate_node_set(doc_);
@@ -63,69 +81,133 @@ int FilterXml::xmltoXpath() {
 }
 
 int FilterXml::xpathtoQueue() {
-	//local variable used to store methods name witch are not explicit set
-	string backupName;
+	unsigned int i = 1, max = set_comment_.size();
 
-	//evaluate all other entries in set_comment
-	for (unsigned int i = 1; i < set_comment_.size(); ++i) {
+	//look for external entries in set_comment_
+	while ((i < max) && (string(set_comment_[i].node().name()) == "innerclass")) {
+		//check if the object is listed
+		if (globalMap_.count(string(set_comment_[i].node().first_child().value())) > 0) {
+			result_.push(globalMap_[string(set_comment_[i].node().first_child().value())]);
+		}
+		i++;
+	}
 
-		//the first entry is the name tag
-		backupName = set_comment_[i].node().first_child().value();
+	//analyze the inner entries in set_comment_
+	for (; i < max; ++i) {
+		//add the type information to the entity
+		backupName_ = set_comment_[i].node().first_child().value();
+		entity_.append("kind: " + backupName_ + ";");
 
-		//the second entry is the briefdescription
+		//search in the briefdescription value for the keywords
+		//and add every found keyword to the entity
 		comment_.append(set_comment_[++i].node().first_child().value());
-
-		//todo rename
-		//at the type information to the entity
-		entity_.append("kind: " + backupName + ";");
-
-		//if a input value is found append it to the entity else do nothing
 		startPos_ = comment_.find("input:");
 		if (string::npos != startPos_) {
 			buildResult("input:");
 		}
-		//if a output value is found append it to the entity else do nothing
 		startPos_ = comment_.find("output:");
 		if (string::npos != startPos_) {
 			buildResult("output:");
 		}
-		//if a link value is found append it to the entity else do nothing
 		startPos_ = comment_.find("link:");
 		if (string::npos != startPos_) {
 			buildResult("link:");
 		}
-		//if a container value is found append it to the entity else do nothing
 		startPos_ = comment_.find("content:");
 		if (string::npos != startPos_) {
 			buildResult("content:");
 		}
-		//if a toplevel value is found append toplevel to the entity else do nothing
+		//normaly there is no toplevel
 		startPos_ = comment_.find("toplevel:");
 		if (string::npos == startPos_) {
-
-		}else {
+		} else {
 			buildResult("toplevel:");
 		}
 
-		//store the finished entity in the queue
-		result_.push(entity_);
+		//store the entity in the queue
+		if (!entity_.empty()) {
+			result_.push(entity_);
+		} else {
+			cerr << "Found annotation without content for " << backupName_ << " ->skipping" << endl;
+		}
 
-		//clear global entries for new use
+		//clear global variables for next round
 		comment_.clear();
 		entity_.clear();
 	}
+
+	//test if a entity with annotations were found
+	if (!result_.empty()) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
+int FilterXml::xpathtoMap() {
+	//add the object names as type information for entity
+	backupName_ = set_comment_[0].node().first_child().value();
+	entity_.append("kind: " + backupName_ + ";");
+
+	//compose the value of the briefdescription which is stored in the child tags
+	for (pugi::xml_node content = set_comment_[1].node().first_child(); content; content = content.next_sibling()) {
+		comment_.append(content.value());
+		for (pugi::xml_node subContent = content.first_child(); subContent; subContent = subContent.next_sibling()) {
+			comment_.append(subContent.value());
+		}
+	}
+
+	//search in the briefdescription value for the keywords
+	//and add every found keyword to the entity
+	startPos_ = comment_.find("input:");
+	if (string::npos != startPos_) {
+		buildResult("input:");
+	}
+	startPos_ = comment_.find("output:");
+	if (string::npos != startPos_) {
+		buildResult("output:");
+	}
+	startPos_ = comment_.find("link:");
+	if (string::npos != startPos_) {
+		buildResult("link:");
+	}
+	startPos_ = comment_.find("content:");
+	if (string::npos != startPos_) {
+		buildResult("content:");
+	}
+	//normaly there is no toplevel
+	startPos_ = comment_.find("toplevel:");
+	if (string::npos == startPos_) {
+	} else {
+		buildResult("toplevel:");
+	}
+
+	//check if there is already a entity with the same key
+	//and then store the entity in the map
+	if (!entity_.empty()) {
+		if (globalMap_.count(backupName_) > 0) {
+			cerr << "Found two annotations for " << backupName_ << " -> skip first annotation" << endl;
+		}
+		globalMap_[backupName_] = entity_;
+	} else {
+		cerr << "Found annotation without content for " << backupName_ << " ->skipping" << endl;
+	}
+
 	return 0;
 }
 
 int FilterXml::buildResult(string keyword) {
-	//local variables for append command
+	//local ending position
 	unsigned int endPos;
 
-	//todo !; -> warning
+	//find the marked ending
 	endPos = comment_.find(";", startPos_);
+	if (endPos == string::npos) {
+		cerr << "Missing semicolon after " << keyword << " in the annotation of " << backupName_ << endl;
+	}
 
 	//compute length of content
-	endPos -= startPos_ ;
+	endPos -= startPos_;
 	endPos++;
 
 	//append content to the entity

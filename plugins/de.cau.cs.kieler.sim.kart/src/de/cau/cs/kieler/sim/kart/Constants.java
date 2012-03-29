@@ -14,8 +14,10 @@
 package de.cau.cs.kieler.sim.kart;
 
 /**
- * @author ssc
- *
+ * Contains nearly all Strings KART uses internally for configuration or to interact with the user
+ * 
+ * @author Sebastian Schäfer - ssc AT informatik.uni-kiel.de
+ * @kieler.rating 2012-02-23 red
  */
 public class Constants {
     public static final String PLUGINID = "de.cau.cs.kieler.sim.kart";
@@ -33,11 +35,16 @@ public class Constants {
     public static final String[] FILEEXTNAMES = { "ESO", "ESI" };
     
     public static final String ERR_NOTESO = "The replay file provided is not an .esi or .eso file";
+    public static final String ERR_NEEDESO = "You must set an ESO filename!";
     public static final String ERR_NOTRACE = "The trace file does not contain a trace number ";
     public static final String ERR_JSON = "Could not build JSON object with signals read from ESO file";
     public static final String ERR_EMPTYESO = "Trace file is empty or does not exist.";
     public static final String ERR_WRITE = "An error occurred when writing the ESO trace file";
-    public static final String ERR_READ = "An error occurred when reading the ESO trace file";
+    public static final String ERR_READ = "An error occurred when reading the ESO trace file, maybe the file is empty or corrupted. Please check the file and maybe record fresh.";
+    public static final String ERR_NOTFOUND_TITLE = "Trace file could not be found";
+    public static final String ERR_NOTFOUND = "The trace file could not be found. Do you want to switch to training mode?";
+    public static final String OVERWRITE_TITLE = "Overwrite trace file?";
+    public static final String OVERWRITE = "Do you want to replace the current trace file with this trace? If not, the current trace will be appended to the existing trace file";
     public static final boolean ERR_SILENT = true;
     
     public static final String VAL_TITLE = "Validation error";

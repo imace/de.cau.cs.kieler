@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.sim.trace;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,10 +38,10 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.cau.cs.kieler.sim.esi.ISignal;
-import de.cau.cs.kieler.sim.esi.ITick;
-import de.cau.cs.kieler.sim.esi.ITrace;
-import de.cau.cs.kieler.sim.esi.ITraceProvider;
+import de.cau.cs.kieler.sim.eso.ISignal;
+import de.cau.cs.kieler.sim.eso.ITick;
+import de.cau.cs.kieler.sim.eso.ITrace;
+import de.cau.cs.kieler.sim.eso.ITraceProvider;
 import de.cau.cs.kieler.sim.signals.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
@@ -271,7 +272,11 @@ public class TraceReader extends AbstractAutomatedProducer  {
 
                 for (Entry<String, ITraceProvider> i : provider.entrySet()) {
                     if (new File(name + "." + i.getKey()).exists()) {
-                        tracelist = i.getValue().loadTrace(name + "." + i.getKey());
+                        try {
+                            tracelist = i.getValue().loadTrace(name + "." + i.getKey());
+                        } catch (FileNotFoundException e) {
+                            throw new KiemInitializationException(e.getMessage(), true, e);
+                        }
                         current = tracelist.get(0);
                         break;
                     }
