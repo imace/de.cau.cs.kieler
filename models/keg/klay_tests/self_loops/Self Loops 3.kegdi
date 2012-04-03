@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_nG198GXMEeC1Ze_RS4D1bw" type="Graphs" name="Self Loops 3.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_nfBNYGXMEeC1Ze_RS4D1bw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_nfB0cGXMEeC1Ze_RS4D1bw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_nfB0cWXMEeC1Ze_RS4D1bw" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_qNe-wGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_qNe-xGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qNfl0GXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_qNe-wWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_qNe-wmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qNe-w2XMEeC1Ze_RS4D1bw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_vbAzkGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_vbBaoGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vbBaoWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_vbAzkWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_vbAzkmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.0/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vbAzk2XMEeC1Ze_RS4D1bw" x="7" y="39"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_0fUa8GXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_0fVCAGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0fVCAWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_0fUa8WXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_0fUa8mXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.0/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0fUa82XMEeC1Ze_RS4D1bw" x="28" y="39"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_nfBNYWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_nfBNYmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Self Loops 3.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nfBNY2XMEeC1Ze_RS4D1bw" x="157" y="129"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_n9q4QGXMEeC1Ze_RS4D1bw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_n9rfUGXMEeC1Ze_RS4D1bw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_n9rfUWXMEeC1Ze_RS4D1bw" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_q2SrMGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_q2TSQGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_q2TSQWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_q2SrMWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_q2SrMmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.1/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_q2SrM2XMEeC1Ze_RS4D1bw" x="-7" y="18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_u8HREGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_u8H4IWXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_u8H4ImXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_u8HREWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_u8HREmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.1/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_u8H4IGXMEeC1Ze_RS4D1bw" x="26" y="39"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_yzDtcGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_yzEUgGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yzEUgWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_yzDtcWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_yzDtcmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.1/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yzDtc2XMEeC1Ze_RS4D1bw" x="5" y="39"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_n9q4QWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_n9q4QmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Self Loops 3.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_n9q4Q2XMEeC1Ze_RS4D1bw" x="451" y="129"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_otqKwGXMEeC1Ze_RS4D1bw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_otqx0GXMEeC1Ze_RS4D1bw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_otqx0WXMEeC1Ze_RS4D1bw" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_rr2aMGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_rr3BQGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rr3BQWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_rr2aMWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_rr2aMmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.2/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rr2aM2XMEeC1Ze_RS4D1bw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wAs6kGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_wAthoGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wAthoWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_wAs6kWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_wAs6kmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.2/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wAs6k2XMEeC1Ze_RS4D1bw" x="7" y="-7"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_2rO44GXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_2rO45GXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2rPf8GXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_2rO44WXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_2rO44mXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.2/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2rO442XMEeC1Ze_RS4D1bw" x="27" y="-7"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_otqKwWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_otqKwmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Self Loops 3.keg#//@children.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_otqKw2XMEeC1Ze_RS4D1bw" x="157" y="297"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_pOwssGXMEeC1Ze_RS4D1bw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_pOxTwGXMEeC1Ze_RS4D1bw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_pOxTwWXMEeC1Ze_RS4D1bw" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_sI1RIGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_sI14MmXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_sI2fQGXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_sI1RIWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_sI14MGXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.3/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sI14MWXMEeC1Ze_RS4D1bw" x="-7" y="18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uSY-oGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_uSZlsGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uSZlsWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_uSY-oWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_uSY-omXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.3/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uSY-o2XMEeC1Ze_RS4D1bw" x="26" y="-7"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_1rX-YGXMEeC1Ze_RS4D1bw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_1rYlcGXMEeC1Ze_RS4D1bw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1rYlcWXMEeC1Ze_RS4D1bw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_1rX-YWXMEeC1Ze_RS4D1bw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_1rX-YmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Self Loops 3.keg#//@children.3/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1rX-Y2XMEeC1Ze_RS4D1bw" x="6" y="-7"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_pOwssWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_pOwssmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Self Loops 3.keg#//@children.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pOwss2XMEeC1Ze_RS4D1bw" x="461" y="307"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_nG198WXMEeC1Ze_RS4D1bw"/>
+  <element xmi:type="keg:Node" href="Self Loops 3.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_tifLsGXMEeC1Ze_RS4D1bw" type="4003" source="_qNe-wGXMEeC1Ze_RS4D1bw" target="_q2SrMGXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_tifywGXMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_tifywWXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_tigZ0GXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_tigZ0WXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_tigZ0mXMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_tigZ02XMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_tifLsWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_tifLsmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_tifLs2XMEeC1Ze_RS4D1bw" points="[4, -1, -244, 1]$[246, -6, -2, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_t8MsMGXMEeC1Ze_RS4D1bw" type="4003" source="_rr2aMGXMEeC1Ze_RS4D1bw" target="_sI1RIGXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_t8NTQGXMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_t8NTQWXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_t8NTQmXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_t8N6UGXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_t8N6UWXMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_t8N6UmXMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_t8MsMWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_t8MsMmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.2/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_t8MsM2XMEeC1Ze_RS4D1bw" points="[5, 0, -254, -11]$[259, 11, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t8RksGXMEeC1Ze_RS4D1bw" id="(0.375,0.125)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_4IKw8GXMEeC1Ze_RS4D1bw" type="4003" source="_vbAzkGXMEeC1Ze_RS4D1bw" target="_0fUa8GXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_4ILYAGXMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4ILYAWXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_4IL_EGXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4IL_EWXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_4IL_EmXMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4IL_E2XMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_4IKw8WXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_4IKw8mXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.0/@outgoingEdges.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4IKw82XMEeC1Ze_RS4D1bw" points="[4, 0, -17, 0]$[21, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_4-3IYGXMEeC1Ze_RS4D1bw" type="4003" source="_u8HREGXMEeC1Ze_RS4D1bw" target="_yzDtcGXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_4-3vc2XMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4-4WgGXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_4-4WgWXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4-4WgmXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_4-4Wg2XMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4-49kGXMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_4-3vcGXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_4-3vcWXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4-3vcmXMEeC1Ze_RS4D1bw" points="[-4, -1, 17, -1]$[-21, -4, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5etGEGXMEeC1Ze_RS4D1bw" type="4003" source="_wAs6kGXMEeC1Ze_RS4D1bw" target="_2rO44GXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_5ettIGXMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5ettIWXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_5ettImXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5euUMGXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_5euUMWXMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5euUMmXMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5etGEWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5etGEmXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.2/@outgoingEdges.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5etGE2XMEeC1Ze_RS4D1bw" points="[4, -2, -16, -2]$[20, -4, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_6BseYGXMEeC1Ze_RS4D1bw" type="4003" source="_uSY-oGXMEeC1Ze_RS4D1bw" target="_1rX-YGXMEeC1Ze_RS4D1bw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_6BtFcmXMEeC1Ze_RS4D1bw" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6BtsgGXMEeC1Ze_RS4D1bw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_6BtsgWXMEeC1Ze_RS4D1bw" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6BtsgmXMEeC1Ze_RS4D1bw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_6Btsg2XMEeC1Ze_RS4D1bw" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6BtshGXMEeC1Ze_RS4D1bw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_6BseYWXMEeC1Ze_RS4D1bw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_6BtFcGXMEeC1Ze_RS4D1bw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Self Loops 3.keg#//@children.3/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6BtFcWXMEeC1Ze_RS4D1bw" points="[-4, -2, 16, -2]$[-22, -4, -2, -4]"/>
+  </edges>
+</notation:Diagram>
