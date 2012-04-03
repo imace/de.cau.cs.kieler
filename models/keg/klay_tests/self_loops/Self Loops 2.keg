@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keg:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:keg="http://kieler.cs.cau.de/KEG">
+  <children xsi:type="keg:Node" nodeLabel="N1">
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.0/@ports.0" targetPort="//@children.1/@ports.0" directed="true" type="Port2Port"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.0/@ports.1" targetPort="//@children.0/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N2">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.1/@ports.1" targetPort="//@children.1/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N3">
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.2/@ports.0" targetPort="//@children.3/@ports.0" directed="true" type="Port2Port"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.2/@ports.1" targetPort="//@children.2/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N4">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.3/@ports.1" targetPort="//@children.3/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N5">
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.4/@ports.0" targetPort="//@children.5/@ports.0" directed="true" type="Port2Port"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.4/@ports.1" targetPort="//@children.4/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N6">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.5/@ports.1" targetPort="//@children.5/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N7">
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.6/@ports.0" targetPort="//@children.7/@ports.0" directed="true" type="Port2Port"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.6/@ports.1" targetPort="//@children.6/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N8">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.7/@ports.1" targetPort="//@children.7/@ports.2" directed="true" type="Port2Port"/>
+  </children>
+</keg:Node>
