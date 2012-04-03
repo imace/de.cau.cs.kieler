@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_ReOnwGRZEeGzX_gcQ-cXHw" type="Graphs" name="Connected Components 08.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_R5r0sGRZEeGzX_gcQ-cXHw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_R5sbwGRZEeGzX_gcQ-cXHw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_R5sbwWRZEeGzX_gcQ-cXHw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_TATegGRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TAUFkGRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_TAUFkWRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_TATegWRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_TATegmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TATeg2RZEeGzX_gcQ-cXHw" x="148" y="97"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TwJnEGRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TwKOIGRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_TwKOIWRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_TwJnEWRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_TwJnEmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TwJnE2RZEeGzX_gcQ-cXHw" x="273" y="109"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_UW9vcGRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_UW-WgGRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_UW-WgWRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_UW9vcWRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_UW9vcmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UW9vc2RZEeGzX_gcQ-cXHw" x="402" y="108"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_U0fY8GRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_U0fY9GRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_U0gAAGRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_U0fY8WRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_U0fY8mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U0fY82RZEeGzX_gcQ-cXHw" x="517" y="119"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VTQYkGRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_VTQ_oGRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_VTQ_oWRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_VTQYkWRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_VTQYkmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.4"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VTQYk2RZEeGzX_gcQ-cXHw" x="159" y="179"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XlVI4GRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_XlVv8GRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_XlVv8WRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_XlVI4WRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_XlVI4mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.5"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XlVI42RZEeGzX_gcQ-cXHw" x="156" y="299"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YETj4GRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_YEUK8GRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_YEUK8WRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_YETj4WRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_YETj4mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.6"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YETj42RZEeGzX_gcQ-cXHw" x="259" y="305"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YkCz4GRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_YkDa8GRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_YkDa8WRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_YkCz4WRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_YkCz4mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.7"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YkCz42RZEeGzX_gcQ-cXHw" x="397" y="314"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZBj2UGRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_ZBkdYGRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_ZBkdYWRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_ZBj2UWRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_ZBj2UmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.8"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZBj2U2RZEeGzX_gcQ-cXHw" x="489" y="332"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZgJ20GRZEeGzX_gcQ-cXHw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_ZgKd4GRZEeGzX_gcQ-cXHw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_ZgKd4WRZEeGzX_gcQ-cXHw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_ZgJ20WRZEeGzX_gcQ-cXHw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_ZgJ20mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0/@children.9"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZgJ202RZEeGzX_gcQ-cXHw" x="620" y="331"/>
+      </children>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_be8ewGRZEeGzX_gcQ-cXHw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_be8exGRZEeGzX_gcQ-cXHw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_be8exWRZEeGzX_gcQ-cXHw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_be8ewWRZEeGzX_gcQ-cXHw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_be8ewmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Connected Components 08.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_be8ew2RZEeGzX_gcQ-cXHw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bx3awGRZEeGzX_gcQ-cXHw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_bx3axGRZEeGzX_gcQ-cXHw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bx3axWRZEeGzX_gcQ-cXHw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_bx3awWRZEeGzX_gcQ-cXHw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_bx3awmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Connected Components 08.keg#//@children.0/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bx3aw2RZEeGzX_gcQ-cXHw" x="-7" y="385"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b_EJQGRZEeGzX_gcQ-cXHw" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_b_EwUGRZEeGzX_gcQ-cXHw" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_b_EwUWRZEeGzX_gcQ-cXHw" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_b_EJQWRZEeGzX_gcQ-cXHw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_b_EJQmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Connected Components 08.keg#//@children.0/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b_EJQ2RZEeGzX_gcQ-cXHw" x="462" y="517"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_R5r0sWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_R5r0smRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Connected Components 08.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R5r0s2RZEeGzX_gcQ-cXHw" x="220" y="44" width="826" height="518"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_ReOnwWRZEeGzX_gcQ-cXHw"/>
+  <element xmi:type="keg:Node" href="Connected Components 08.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_WDY1AGRZEeGzX_gcQ-cXHw" type="4001" source="_TATegGRZEeGzX_gcQ-cXHw" target="_TwJnEGRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WDZcEGRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WDZcEWRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WDZcEmRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WDaDIGRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WDaDIWRZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WDaDImRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_WDY1AWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WDY1AmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDY1A2RZEeGzX_gcQ-cXHw" points="[19, 2, -106, -10]$[143, 20, 18, 8]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_WYcfAGRZEeGzX_gcQ-cXHw" type="4001" source="_TwJnEGRZEeGzX_gcQ-cXHw" target="_UW9vcGRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WYdGEWRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WYdGEmRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WYdtIGRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WYdtIWRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WYdtImRZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WYdtI2RZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_WYcfAWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WYcfAmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WYdGEGRZEeGzX_gcQ-cXHw" points="[19, -4, -110, -3]$[133, -21, 4, -20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_WtC2AGRZEeGzX_gcQ-cXHw" type="4001" source="_UW9vcGRZEeGzX_gcQ-cXHw" target="_U0fY8GRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WtC2BGRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WtDdEGRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WtDdEWRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WtDdEmRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WtDdE2RZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WtDdFGRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_WtC2AWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WtC2AmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.2/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WtC2A2RZEeGzX_gcQ-cXHw" points="[19, 2, -96, -9]$[119, 30, 4, 19]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_aJqt4GRZEeGzX_gcQ-cXHw" type="4001" source="_XlVI4GRZEeGzX_gcQ-cXHw" target="_YETj4GRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_aJrU8GRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_aJrU8WRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_aJrU8mRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_aJr8AGRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_aJr8AWRZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_aJr8AmRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_aJqt4WRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_aJqt4mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.5/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aJqt42RZEeGzX_gcQ-cXHw" points="[20, 0, -83, -6]$[99, -14, -4, -20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_adRmYGRZEeGzX_gcQ-cXHw" type="4001" source="_YETj4GRZEeGzX_gcQ-cXHw" target="_YkCz4GRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_adSNcGRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_adSNcWRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_adSNcmRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_adSNc2RZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_adSNdGRZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_adS0gGRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_adRmYWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_adRmYmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.6/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_adRmY2RZEeGzX_gcQ-cXHw" points="[19, 2, -119, -7]$[136, 28, -2, 19]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_axzE4GRZEeGzX_gcQ-cXHw" type="4001" source="_YkCz4GRZEeGzX_gcQ-cXHw" target="_ZBj2UGRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_axzr8GRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_axzr8WRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_axzr8mRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_axzr82RZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_ax0TAGRZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_ax0TAWRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_axzE4WRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_axzE4mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.7/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_axzE42RZEeGzX_gcQ-cXHw" points="[19, 4, -73, -14]$[96, 37, 4, 19]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_bEL1YGRZEeGzX_gcQ-cXHw" type="4001" source="_ZBj2UGRZEeGzX_gcQ-cXHw" target="_ZgJ20GRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_bEL1ZGRZEeGzX_gcQ-cXHw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bEMccGRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_bEMccWRZEeGzX_gcQ-cXHw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bEMccmRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_bEMcc2RZEeGzX_gcQ-cXHw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bEMcdGRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_bEL1YWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bEL1YmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.8/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bEL1Y2RZEeGzX_gcQ-cXHw" points="[19, -4, -112, -3]$[137, -21, 6, -20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_eatsUGRZEeGzX_gcQ-cXHw" type="4007" source="_ZgJ20GRZEeGzX_gcQ-cXHw" target="_be8ewGRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_eatsVGRZEeGzX_gcQ-cXHw" type="6031">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_eauTYGRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_eauTYWRZEeGzX_gcQ-cXHw" type="6032">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_eauTYmRZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_eauTY2RZEeGzX_gcQ-cXHw" type="6033">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_eauTZGRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_eatsUWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_eatsUmRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.9/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eatsU2RZEeGzX_gcQ-cXHw" points="[15, -13, -144, 113]$[155, -126, -4, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_e695sGRZEeGzX_gcQ-cXHw" type="4007" source="_YkCz4GRZEeGzX_gcQ-cXHw" target="_b_EJQGRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_e6-gwGRZEeGzX_gcQ-cXHw" type="6031">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_e6-gwWRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_e6-gwmRZEeGzX_gcQ-cXHw" type="6032">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_e6-gw2RZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_e6-gxGRZEeGzX_gcQ-cXHw" type="6033">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_e6-gxWRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_e695sWRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_e695smRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@children.7/@outgoingEdges.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_e695s2RZEeGzX_gcQ-cXHw" points="[2, 19, -17, -130]$[19, 145, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_faHT0GRZEeGzX_gcQ-cXHw" type="4005" source="_bx3awGRZEeGzX_gcQ-cXHw" target="_XlVI4GRZEeGzX_gcQ-cXHw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_faH64GRZEeGzX_gcQ-cXHw" type="6021">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_faH64WRZEeGzX_gcQ-cXHw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_faH64mRZEeGzX_gcQ-cXHw" type="6022">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_faH642RZEeGzX_gcQ-cXHw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_faIh8GRZEeGzX_gcQ-cXHw" type="6023">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_faIh8WRZEeGzX_gcQ-cXHw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_faHT0WRZEeGzX_gcQ-cXHw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_faHT0mRZEeGzX_gcQ-cXHw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Connected Components 08.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_faHT02RZEeGzX_gcQ-cXHw" points="[4, -1, -205, 31]$[208, -13, -1, 19]"/>
+  </edges>
+</notation:Diagram>

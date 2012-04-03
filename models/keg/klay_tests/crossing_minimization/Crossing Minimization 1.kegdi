@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_zbtEkEQcEeC3GtO7-LRRVA" type="Graphs" name="Crossing Minimization 1.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_z0L2AEQcEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_z0MdEEQcEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_z0MdEUQcEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_19V64EQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_19V65EQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_19Wh8EQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_19V64UQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_19V64kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_19V640QcEeC3GtO7-LRRVA" x="60" y="9"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_3Jx40EQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_3Jyf4EQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3Jyf4UQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_3Jx40UQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_3Jx40kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3Jx400QcEeC3GtO7-LRRVA" x="60" y="49"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_6jrz4EQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_6jsa8EQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6jsa8UQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_6jrz4UQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_6jrz4kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6jrz40QcEeC3GtO7-LRRVA" x="60" y="29"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_HTuX4EQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_HTu-8EQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HTu-8UQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_HTuX4UQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_HTuX4kQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.3"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HTuX40QdEeC3GtO7-LRRVA" x="-7" y="10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ITDG4EQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_ITDt8EQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ITDt8UQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_ITDG4UQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_ITDG4kQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.4"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ITDG40QdEeC3GtO7-LRRVA" x="-7" y="50"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_JVVqUEQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_JVWRYEQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JVWRYUQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_JVVqUUQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_JVVqUkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.0/@ports.5"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JVVqU0QdEeC3GtO7-LRRVA" x="-7" y="30"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_z0L2AUQcEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_z0L2AkQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z0L2A0QcEeC3GtO7-LRRVA" x="315" y="160" width="61" height="65"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_0ScfUEQcEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_0SdGYEQcEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_0SdGYUQcEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_-HCl4EQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_-HCl5EQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-HCl5UQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-HCl4UQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_-HCl4kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.1/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-HCl40QcEeC3GtO7-LRRVA" x="-7" y="15"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_0ScfUUQcEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_0ScfUkQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0ScfU0QcEeC3GtO7-LRRVA" x="506" y="105"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_01Kx4EQcEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_01LY8EQcEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_01LY8UQcEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_-sL6UEQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_-sMhYEQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-sMhYUQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-sL6UUQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_-sL6UkQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.2/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-sL6U0QcEeC3GtO7-LRRVA" x="-7" y="14"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_01Kx4UQcEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_01Kx4kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_01Kx40QcEeC3GtO7-LRRVA" x="514" y="201"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_1bxe4EQcEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1byF8EQcEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1byF8UQcEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="__Gq24EQcEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="__Grd8EQcEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__Grd8UQcEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="__Gq24UQcEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="__Gq24kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.3/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="__Gq240QcEeC3GtO7-LRRVA" x="-7" y="16"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_1bxe4UQcEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1bxe4kQcEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1bxe40QcEeC3GtO7-LRRVA" x="510" y="299"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_Cdb-YEQdEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_CdclcEQdEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_CdclcUQdEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_F5ZH4EQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_F5Zu8EQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_F5Zu8UQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_F5ZH4UQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_F5ZH4kQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.4/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_F5ZH40QdEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_Cdb-YUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Cdb-YkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.4"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Cdb-Y0QdEeC3GtO7-LRRVA" x="74" y="95"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_Er4L4EQdEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_Er4y8EQdEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Er4y8UQdEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_GWJ8YEQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_GWJ8ZEQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GWJ8ZUQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_GWJ8YUQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_GWJ8YkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.5/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GWJ8Y0QdEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_Er4L4UQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Er4L4kQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.5"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Er4L40QdEeC3GtO7-LRRVA" x="82" y="193"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_FVdUYEQdEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_FVdUZEQdEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_FVd7cEQdEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_GyhvUEQdEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_GyiWYEQdEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GyiWYUQdEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_GyhvUUQdEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_GyhvUkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="Crossing Minimization 1.keg#//@children.6/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GyhvU0QdEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_FVdUYUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_FVdUYkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#//@children.6"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FVdUY0QdEeC3GtO7-LRRVA" x="77" y="307"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_zbtEkUQcEeC3GtO7-LRRVA"/>
+  <element xmi:type="keg:Node" href="Crossing Minimization 1.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_BUXdgEQdEeC3GtO7-LRRVA" type="4003" source="_19V64EQcEeC3GtO7-LRRVA" target="__Gq24EQcEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_BUYEkEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_BUYEkUQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_BUYEkkQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_BUYEk0QdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_BUYElEQdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_BUYroEQdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_BUXdgUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_BUXdgkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BUXdg0QdEeC3GtO7-LRRVA" points="[4, 4, -124, -142]$[130, 142, 2, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Bp96EEQdEeC3GtO7-LRRVA" type="4003" source="_6jrz4EQcEeC3GtO7-LRRVA" target="_-sL6UEQcEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_Bp-hIEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Bp-hIUQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Bp-hIkQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Bp-hI0QdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Bp-hJEQdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Bp-hJUQdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_Bp96EUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Bp96EkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.0/@outgoingEdges.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Bp96E0QdEeC3GtO7-LRRVA" points="[4, 0, -128, -26]$[131, 22, -1, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_CDXRgEQdEeC3GtO7-LRRVA" type="4003" source="_3Jx40EQcEeC3GtO7-LRRVA" target="_-HCl4EQcEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_CDXRhEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_CDXRhUQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_CDX4kEQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_CDX4kUQdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_CDX4kkQdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_CDX4k0QdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_CDXRgUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_CDXRgkQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.0/@outgoingEdges.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CDXRg0QdEeC3GtO7-LRRVA" points="[4, -3, -120, 86]$[128, -89, 4, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_K1o_cEQdEeC3GtO7-LRRVA" type="4003" source="_GyhvUEQdEeC3GtO7-LRRVA" target="_HTuX4EQdEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_K1pmgEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_K1pmgUQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_K1pmgkQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_K1pmg0QdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_K1qNkEQdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_K1qNkUQdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_K1o_cUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_K1o_ckQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.6/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_K1o_c0QdEeC3GtO7-LRRVA" points="[4, -4, -184, 153]$[192, -157, 4, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_LSGR8EQdEeC3GtO7-LRRVA" type="4003" source="_GWJ8YEQdEeC3GtO7-LRRVA" target="_JVVqUEQdEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_LSG5AEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LSG5AUQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_LSG5AkQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LSG5A0QdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_LSG5BEQdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LSHgEEQdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_LSGR8UQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_LSGR8kQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.5/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LSGR80QdEeC3GtO7-LRRVA" points="[7, -1, -179, 22]$[190, -23, 4, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LSKjYEQdEeC3GtO7-LRRVA" id="(0.125,0.5)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_LrMucEQdEeC3GtO7-LRRVA" type="4003" source="_F5ZH4EQdEeC3GtO7-LRRVA" target="_ITDG4EQdEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_LrMudEQdEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LrNVgEQdEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_LrNVgUQdEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LrNVgkQdEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_LrNVg0QdEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LrNVhEQdEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_LrMucUQdEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_LrMuckQdEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="Crossing Minimization 1.keg#//@children.4/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LrMuc0QdEeC3GtO7-LRRVA" points="[4, 1, -187, -94]$[193, 91, 2, -4]"/>
+  </edges>
+</notation:Diagram>
