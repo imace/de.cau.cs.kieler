@@ -58,6 +58,7 @@
     </children>
     <styles xmi:type="notation:DescriptionStyle" xmi:id="_SPOFMO88EeCRueMFU22AdA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_SPOFMe88EeCRueMFU22AdA" fontName="Lucida Grande"/>
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_AACAgH5NEeGmK5wVN1Dfug" name="layout:de.cau.cs.kieler.portConstraints" stringValue="FIXED_SIDE"/>
     <element xmi:type="keg:Node" href="Externe Ports 2.keg#//@children.0"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SPOFMu88EeCRueMFU22AdA" x="27" y="162" width="557" height="442"/>
   </children>
