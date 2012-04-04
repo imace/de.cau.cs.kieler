@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keg:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:keg="http://kieler.cs.cau.de/KEG">
+  <children xsi:type="keg:Node" nodeLabel="N1">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.0/@ports.1" targetPort="//@children.0/@ports.0" directed="true" type="Port2Port"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="N2">
+    <ports xsi:type="keg:Port" portLabel="in"/>
+    <ports xsi:type="keg:Port" portLabel="out"/>
+    <outgoingEdges xsi:type="keg:Edge" sourcePort="//@children.1/@ports.1" targetPort="//@children.1/@ports.0" directed="true" type="Port2Port"/>
+  </children>
+</keg:Node>

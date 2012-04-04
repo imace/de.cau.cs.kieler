@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_7bHlwK4VEeCZr4-yAzQf7w" type="Graphs" name="Crossing Minmization 2.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_8mkFMK4VEeCZr4-yAzQf7w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_8mksQK4VEeCZr4-yAzQf7w" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_8mlTUK4VEeCZr4-yAzQf7w" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_-bC6kK4VEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_-bC6lK4VEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-bDhoK4VEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-bC6ka4VEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_-bC6kq4VEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-bC6k64VEeCZr4-yAzQf7w" x="-7" y="18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="__tfZ4K4VEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="__tgA8K4VEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__tgA8a4VEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="__tfZ4a4VEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="__tfZ4q4VEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.0/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="__tfZ464VEeCZr4-yAzQf7w" x="39" y="8"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_A6eKYK4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_A6excK4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_A6exca4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_A6eKYa4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_A6eKYq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.0/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_A6eKY64WEeCZr4-yAzQf7w" x="39" y="26"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_8mkFMa4VEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_8mkFMq4VEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Crossing Minmization 2.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8mkFM64VEeCZr4-yAzQf7w" x="156" y="126"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_9FutcK4VEeCZr4-yAzQf7w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_9FvUgK4VEeCZr4-yAzQf7w" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_9FvUga4VEeCZr4-yAzQf7w" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_FscroK4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_FsdSsK4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FsdSsa4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_Fscroa4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_Fscroq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.1/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Fscro64WEeCZr4-yAzQf7w" x="-7" y="18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_GmvJoK4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_GmvJpK4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GmvwsK4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_GmvJoa4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_GmvJoq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.1/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GmvJo64WEeCZr4-yAzQf7w" x="39" y="10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_S1_70K4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_S2Ai4K4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_S2Ai4a4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_S1_70a4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_S1_70q4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.1/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_S1_7064WEeCZr4-yAzQf7w" x="39" y="28"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9Futca4VEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_9Futcq4VEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Crossing Minmization 2.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9Futc64VEeCZr4-yAzQf7w" x="494" y="118"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_LiCmAK4WEeCZr4-yAzQf7w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_LiDNEK4WEeCZr4-yAzQf7w" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_LiDNEa4WEeCZr4-yAzQf7w" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_MFvI8K4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_MFvwAK4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MFvwAa4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_MFvI8a4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_MFvI8q4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.2/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MFvI864WEeCZr4-yAzQf7w" x="-7" y="18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_UHVA0K4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_UHVA1K4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UHVA1a4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_UHVA0a4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_UHVA0q4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.2/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UHVA064WEeCZr4-yAzQf7w"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_LiCmAa4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_LiCmAq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Crossing Minmization 2.keg#//@children.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LiCmA64WEeCZr4-yAzQf7w" x="500" y="241"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_RsiZYK4WEeCZr4-yAzQf7w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_RsjAcK4WEeCZr4-yAzQf7w" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_RsjAca4WEeCZr4-yAzQf7w" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_UronwK4WEeCZr4-yAzQf7w" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_UrpO0K4WEeCZr4-yAzQf7w" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UrpO0a4WEeCZr4-yAzQf7w" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_Uronwa4WEeCZr4-yAzQf7w"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_Uronwq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="Crossing Minmization 2.keg#//@children.3/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Uronw64WEeCZr4-yAzQf7w" x="-7" y="19"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_RsiZYa4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_RsiZYq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Crossing Minmization 2.keg#//@children.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RsiZY64WEeCZr4-yAzQf7w" x="688" y="188"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_7bHlwa4VEeCZr4-yAzQf7w"/>
+  <element xmi:type="keg:Node" href="Crossing Minmization 2.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_IJJ-oK4WEeCZr4-yAzQf7w" type="4003" source="__tfZ4K4VEeCZr4-yAzQf7w" target="_FscroK4WEeCZr4-yAzQf7w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_IJKlsK4WEeCZr4-yAzQf7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_IJKlsa4WEeCZr4-yAzQf7w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_IJKlsq4WEeCZr4-yAzQf7w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_IJKls64WEeCZr4-yAzQf7w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_IJKltK4WEeCZr4-yAzQf7w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_IJKlta4WEeCZr4-yAzQf7w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_IJJ-oa4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_IJJ-oq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Crossing Minmization 2.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IJJ-o64WEeCZr4-yAzQf7w" points="[4, 0, -294, -12]$[297, 12, -1, 0]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_IJO3IK4WEeCZr4-yAzQf7w" id="(0.125,0.625)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_NupngK4WEeCZr4-yAzQf7w" type="4003" source="_A6eKYK4WEeCZr4-yAzQf7w" target="_MFvI8K4WEeCZr4-yAzQf7w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_NuqOkK4WEeCZr4-yAzQf7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NuqOka4WEeCZr4-yAzQf7w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_NuqOkq4WEeCZr4-yAzQf7w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NuqOk64WEeCZr4-yAzQf7w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_NuqOlK4WEeCZr4-yAzQf7w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Nuq1oK4WEeCZr4-yAzQf7w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_Nupnga4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Nupngq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Crossing Minmization 2.keg#//@children.0/@outgoingEdges.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Nupng64WEeCZr4-yAzQf7w" points="[4, 1, -294, -106]$[302, 107, 4, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_OSgigK4WEeCZr4-yAzQf7w" type="4003" source="_-bC6kK4VEeCZr4-yAzQf7w" target="_GmvJoK4WEeCZr4-yAzQf7w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_OShJkK4WEeCZr4-yAzQf7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_OShJka4WEeCZr4-yAzQf7w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_OShJkq4WEeCZr4-yAzQf7w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_OShJk64WEeCZr4-yAzQf7w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_OShJlK4WEeCZr4-yAzQf7w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_OShwoK4WEeCZr4-yAzQf7w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_OSgiga4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_OSgigq4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Crossing Minmization 2.keg#//@children.0/@outgoingEdges.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OSgig64WEeCZr4-yAzQf7w" points="[7, 0, -389, -3]$[400, 3, 4, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OSkz8K4WEeCZr4-yAzQf7w" id="(0.125,0.5)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_VySt0K4WEeCZr4-yAzQf7w" type="4003" source="_S1_70K4WEeCZr4-yAzQf7w" target="_UronwK4WEeCZr4-yAzQf7w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VySt1K4WEeCZr4-yAzQf7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_VyTU4K4WEeCZr4-yAzQf7w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_VyTU4a4WEeCZr4-yAzQf7w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_VyTU4q4WEeCZr4-yAzQf7w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_VyTU464WEeCZr4-yAzQf7w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_VyTU5K4WEeCZr4-yAzQf7w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_VySt0a4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_VySt0q4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Crossing Minmization 2.keg#//@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VySt064WEeCZr4-yAzQf7w" points="[4, 1, -144, -60]$[148, 57, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Wabr4K4WEeCZr4-yAzQf7w" type="4003" source="_UHVA0K4WEeCZr4-yAzQf7w" target="_UronwK4WEeCZr4-yAzQf7w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WacS8K4WEeCZr4-yAzQf7w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WacS8a4WEeCZr4-yAzQf7w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WacS8q4WEeCZr4-yAzQf7w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WacS864WEeCZr4-yAzQf7w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WacS9K4WEeCZr4-yAzQf7w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Wac6AK4WEeCZr4-yAzQf7w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_Wabr4a4WEeCZr4-yAzQf7w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Wabr4q4WEeCZr4-yAzQf7w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="Crossing Minmization 2.keg#//@children.2/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Wabr464WEeCZr4-yAzQf7w" points="[4, -2, -138, 52]$[143, -58, 1, -4]"/>
+  </edges>
+</notation:Diagram>
