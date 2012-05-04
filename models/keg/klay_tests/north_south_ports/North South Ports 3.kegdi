@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_sLk4IEQXEeC3GtO7-LRRVA" type="Graphs" name="North South Ports 3.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_sshpEEQXEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_ssiQIEQXEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_ssiQIUQXEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_8_W-YEQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_8_Xlc0QXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8_XldEQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_8_XlcEQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_8_XlcUQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8_XlckQXEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_sshpEUQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_sshpEkQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="North South Ports 3.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sshpE0QXEeC3GtO7-LRRVA" x="41" y="59"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_tNExYEQXEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_tNFYcEQXEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_tNFYcUQXEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_9oyV4EQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_9oy88EQXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9oy88UQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_9oyV4UQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_9oyV4kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.1/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9oyV40QXEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_tNExYUQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_tNExYkQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="North South Ports 3.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tNExY0QXEeC3GtO7-LRRVA" x="60" y="159"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_tvVJ4EQXEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_tvVw8EQXEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_tvVw8UQXEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_-I-44EQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_-I_f8EQXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-I_f8UQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-I-44UQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_-I-44kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.2/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-I-440QXEeC3GtO7-LRRVA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_tvVJ4UQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_tvVJ4kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="North South Ports 3.keg#//@children.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tvVJ40QXEeC3GtO7-LRRVA" x="97" y="265"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ua-H4EQXEeC3GtO7-LRRVA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_ua-H5EQXEeC3GtO7-LRRVA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_ua-H5UQXEeC3GtO7-LRRVA" type="7001"/>
+    <children xmi:type="notation:Node" xmi:id="_vAIqcEQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_vAIqdEQXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vAJRgEQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_vAIqcUQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_vAIqckQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.3/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vAIqc0QXEeC3GtO7-LRRVA" x="8" y="39"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v8Ul4EQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_v8VM8EQXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_v8VM8UQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_v8Ul4UQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_v8Ul4kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.3/@ports.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_v8Ul40QXEeC3GtO7-LRRVA" x="28" y="39"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xZP24EQXEeC3GtO7-LRRVA" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_xZP25EQXEeC3GtO7-LRRVA" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xZP25UQXEeC3GtO7-LRRVA" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_xZP24UQXEeC3GtO7-LRRVA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_xZP24kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+      <element xmi:type="keg:Port" href="North South Ports 3.keg#//@children.3/@ports.2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xZP240QXEeC3GtO7-LRRVA" x="48" y="39"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_ua-H4UQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_ua-H4kQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Node" href="North South Ports 3.keg#//@children.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ua-H40QXEeC3GtO7-LRRVA" x="332" y="22" width="64"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_sLk4IUQXEeC3GtO7-LRRVA"/>
+  <element xmi:type="keg:Node" href="North South Ports 3.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_-8RXAEQXEeC3GtO7-LRRVA" type="4003" source="_-I-44EQXEeC3GtO7-LRRVA" target="_vAIqcEQXEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-8R-EEQXEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_-8R-EUQXEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_-8R-EkQXEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_-8R-E0QXEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_-8R-FEQXEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_-8R-FUQXEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_-8RXAUQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_-8RXAkQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="North South Ports 3.keg#//@children.2/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-8RXA0QXEeC3GtO7-LRRVA" points="[4, -5, -196, 219]$[200, -228, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="__kRLIEQXEeC3GtO7-LRRVA" type="4003" source="_9oyV4EQXEeC3GtO7-LRRVA" target="_v8Ul4EQXEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="__kRLJEQXEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__kRLJUQXEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="__kRyMEQXEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__kRyMUQXEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="__kRyMkQXEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__kRyM0QXEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="__kRLIUQXEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__kRLIkQXEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="North South Ports 3.keg#//@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__kRLI0QXEeC3GtO7-LRRVA" points="[4, -2, -253, 116]$[257, -122, 0, -4]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_AD_NAEQYEeC3GtO7-LRRVA" type="4003" source="_8_W-YEQXEeC3GtO7-LRRVA" target="_xZP24EQXEeC3GtO7-LRRVA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_AD_0EEQYEeC3GtO7-LRRVA" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_AD_0EUQYEeC3GtO7-LRRVA" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_AD_0EkQYEeC3GtO7-LRRVA" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_AD_0E0QYEeC3GtO7-LRRVA" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_AD_0FEQYEeC3GtO7-LRRVA" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_AD_0FUQYEeC3GtO7-LRRVA" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_AD_NAUQYEeC3GtO7-LRRVA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_AD_NAkQYEeC3GtO7-LRRVA" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="North South Ports 3.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AD_NA0QYEeC3GtO7-LRRVA" points="[4, -1, -292, 17]$[296, -22, 0, -4]"/>
+  </edges>
+</notation:Diagram>
