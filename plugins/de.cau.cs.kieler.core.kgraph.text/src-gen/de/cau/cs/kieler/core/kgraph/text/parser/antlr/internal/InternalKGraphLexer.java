@@ -74,9 +74,7 @@ public class InternalKGraphLexer extends Lexer {
     public static final int T__65=65;
     public static final int T__62=62;
     public static final int T__63=63;
-    public static final int T__118=118;
     public static final int T__116=116;
-    public static final int T__117=117;
     public static final int T__114=114;
     public static final int T__115=115;
     public static final int T__61=61;
@@ -1108,10 +1106,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:57:7: ( 'horizontalIndent' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:57:9: 'horizontalIndent'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:57:7: ( 'insetRight' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:57:9: 'insetRight'
             {
-            match("horizontalIndent"); 
+            match("insetRight"); 
 
 
             }
@@ -1129,10 +1127,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:58:7: ( 'verticalIndent' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:58:9: 'verticalIndent'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:58:7: ( 'insetBottom' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:58:9: 'insetBottom'
             {
-            match("verticalIndent"); 
+            match("insetBottom"); 
 
 
             }
@@ -1150,10 +1148,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:59:7: ( 'StackPlacementData' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:59:9: 'StackPlacementData'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:59:7: ( 'insetLeft' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:59:9: 'insetLeft'
             {
-            match("StackPlacementData"); 
+            match("insetLeft"); 
 
 
             }
@@ -1171,10 +1169,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:60:7: ( 'insetRight' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:60:9: 'insetRight'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:60:7: ( 'insetTop' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:60:9: 'insetTop'
             {
-            match("insetRight"); 
+            match("insetTop"); 
 
 
             }
@@ -1192,10 +1190,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:61:7: ( 'insetBottom' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:61:9: 'insetBottom'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:61:7: ( 'StackPlacementData' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:61:9: 'StackPlacementData'
             {
-            match("insetBottom"); 
+            match("StackPlacementData"); 
 
 
             }
@@ -1213,10 +1211,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:62:7: ( 'insetLeft' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:62:9: 'insetLeft'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:62:7: ( 'DirectPlacementData' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:62:9: 'DirectPlacementData'
             {
-            match("insetLeft"); 
+            match("DirectPlacementData"); 
 
 
             }
@@ -1234,10 +1232,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:63:7: ( 'insetTop' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:63:9: 'insetTop'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:63:7: ( 'topLeft' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:63:9: 'topLeft'
             {
-            match("insetTop"); 
+            match("topLeft"); 
 
 
             }
@@ -1255,10 +1253,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:64:7: ( 'DirectPlacementData' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:64:9: 'DirectPlacementData'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:64:7: ( 'bottomRight' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:64:9: 'bottomRight'
             {
-            match("DirectPlacementData"); 
+            match("bottomRight"); 
 
 
             }
@@ -1276,10 +1274,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:65:7: ( 'topLeft' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:65:9: 'topLeft'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:65:7: ( 'PolylinePlacementData' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:65:9: 'PolylinePlacementData'
             {
-            match("topLeft"); 
+            match("PolylinePlacementData"); 
 
 
             }
@@ -1297,10 +1295,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:66:7: ( 'bottomRight' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:66:9: 'bottomRight'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:66:7: ( 'points' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:66:9: 'points'
             {
-            match("bottomRight"); 
+            match("points"); 
 
 
             }
@@ -1318,10 +1316,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:67:7: ( 'PolylinePlacementData' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:67:9: 'PolylinePlacementData'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:67:7: ( 'detailedPlacementData' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:67:9: 'detailedPlacementData'
             {
-            match("PolylinePlacementData"); 
+            match("detailedPlacementData"); 
 
 
             }
@@ -1339,11 +1337,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:68:7: ( 'points' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:68:9: 'points'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:68:7: ( '/' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:68:9: '/'
             {
-            match("points"); 
-
+            match('/'); 
 
             }
 
@@ -1360,10 +1357,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:69:7: ( 'detailedPlacementData' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:69:9: 'detailedPlacementData'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:69:7: ( 'left' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:69:9: 'left'
             {
-            match("detailedPlacementData"); 
+            match("left"); 
 
 
             }
@@ -1381,10 +1378,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:70:7: ( '/' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:70:9: '/'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:70:7: ( 'right' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:70:9: 'right'
             {
-            match('/'); 
+            match("right"); 
+
 
             }
 
@@ -1401,10 +1399,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:71:7: ( 'left' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:71:9: 'left'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:71:7: ( 'top' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:71:9: 'top'
             {
-            match("left"); 
+            match("top"); 
 
 
             }
@@ -1422,10 +1420,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:72:7: ( 'right' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:72:9: 'right'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:72:7: ( 'bottom' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:72:9: 'bottom'
             {
-            match("right"); 
+            match("bottom"); 
 
 
             }
@@ -1443,10 +1441,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:73:7: ( 'top' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:73:9: 'top'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:73:7: ( 'ForegroundColor' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:73:9: 'ForegroundColor'
             {
-            match("top"); 
+            match("ForegroundColor"); 
 
 
             }
@@ -1464,11 +1462,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:74:7: ( 'bottom' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:74:9: 'bottom'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:74:7: ( '!' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:74:9: '!'
             {
-            match("bottom"); 
-
+            match('!'); 
 
             }
 
@@ -1485,10 +1482,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:75:7: ( 'ForegroundColor' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:75:9: 'ForegroundColor'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:75:7: ( 'BackgroundColor' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:75:9: 'BackgroundColor'
             {
-            match("ForegroundColor"); 
+            match("BackgroundColor"); 
 
 
             }
@@ -1506,10 +1503,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:76:7: ( '!' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:76:9: '!'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:76:7: ( 'LineWidth' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:76:9: 'LineWidth'
             {
-            match('!'); 
+            match("LineWidth"); 
+
 
             }
 
@@ -1526,10 +1524,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:77:7: ( 'BackgroundColor' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:77:9: 'BackgroundColor'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:77:7: ( 'ForegroundVisibility' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:77:9: 'ForegroundVisibility'
             {
-            match("BackgroundColor"); 
+            match("ForegroundVisibility"); 
 
 
             }
@@ -1547,10 +1545,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:78:7: ( 'LineWidth' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:78:9: 'LineWidth'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:78:7: ( 'BackgroundVisibility' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:78:9: 'BackgroundVisibility'
             {
-            match("LineWidth"); 
+            match("BackgroundVisibility"); 
 
 
             }
@@ -1568,10 +1566,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:79:7: ( 'ForegroundVisibility' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:79:9: 'ForegroundVisibility'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:79:7: ( 'LineStyle' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:79:9: 'LineStyle'
             {
-            match("ForegroundVisibility"); 
+            match("LineStyle"); 
 
 
             }
@@ -1589,10 +1587,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:80:7: ( 'BackgroundVisibility' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:80:9: 'BackgroundVisibility'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:80:7: ( 'bold' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:80:9: 'bold'
             {
-            match("BackgroundVisibility"); 
+            match("bold"); 
 
 
             }
@@ -1610,10 +1608,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:81:7: ( 'LineStyle' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:81:9: 'LineStyle'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:81:7: ( 'italic' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:81:9: 'italic'
             {
-            match("LineStyle"); 
+            match("italic"); 
 
 
             }
@@ -1631,10 +1629,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:82:7: ( 'bold' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:82:9: 'bold'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:82:7: ( 'font' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:82:9: 'font'
             {
-            match("bold"); 
+            match("font"); 
 
 
             }
@@ -1652,10 +1650,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:83:7: ( 'italic' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:83:9: 'italic'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:83:7: ( 'fontSize' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:83:9: 'fontSize'
             {
-            match("italic"); 
+            match("fontSize"); 
 
 
             }
@@ -1673,10 +1671,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:84:7: ( 'font' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:84:9: 'font'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:84:7: ( 'VerticalAlignment' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:84:9: 'VerticalAlignment'
             {
-            match("font"); 
+            match("VerticalAlignment"); 
 
 
             }
@@ -1694,10 +1692,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:85:7: ( 'fontSize' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:85:9: 'fontSize'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:85:7: ( 'HorizontalAlignment' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:85:9: 'HorizontalAlignment'
             {
-            match("fontSize"); 
+            match("HorizontalAlignment"); 
 
 
             }
@@ -1715,10 +1713,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:86:7: ( 'VerticalAlignment' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:86:9: 'VerticalAlignment'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:86:7: ( 'GridPlacement' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:86:9: 'GridPlacement'
             {
-            match("VerticalAlignment"); 
+            match("GridPlacement"); 
 
 
             }
@@ -1736,10 +1734,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__87;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:87:7: ( 'HorizontalAlignment' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:87:9: 'HorizontalAlignment'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:87:7: ( 'StackPlacement' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:87:9: 'StackPlacement'
             {
-            match("HorizontalAlignment"); 
+            match("StackPlacement"); 
 
 
             }
@@ -1757,11 +1755,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__88;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:88:7: ( 'GridPlacement' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:88:9: 'GridPlacement'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:88:7: ( '.' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:88:9: '.'
             {
-            match("GridPlacement"); 
-
+            match('.'); 
 
             }
 
@@ -1778,11 +1775,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__89;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:89:7: ( 'StackPlacement' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:89:9: 'StackPlacement'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:89:7: ( 'E' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:89:9: 'E'
             {
-            match("StackPlacement"); 
-
+            match('E'); 
 
             }
 
@@ -1799,10 +1795,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__90;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:90:7: ( '.' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:90:9: '.'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:90:7: ( 'e' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:90:9: 'e'
             {
-            match('.'); 
+            match('e'); 
 
             }
 
@@ -1819,10 +1815,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__91;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:91:7: ( 'E' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:91:9: 'E'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:91:7: ( 'true' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:91:9: 'true'
             {
-            match('E'); 
+            match("true"); 
+
 
             }
 
@@ -1839,10 +1836,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:92:7: ( 'e' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:92:9: 'e'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:92:7: ( 'false' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:92:9: 'false'
             {
-            match('e'); 
+            match("false"); 
+
 
             }
 
@@ -1859,10 +1857,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:93:7: ( 'true' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:93:9: 'true'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:93:7: ( 'KShapeLayout' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:93:9: 'KShapeLayout'
             {
-            match("true"); 
+            match("KShapeLayout"); 
 
 
             }
@@ -1880,10 +1878,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__94;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:94:7: ( 'false' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:94:9: 'false'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:94:7: ( 'xpos' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:94:9: 'xpos'
             {
-            match("false"); 
+            match("xpos"); 
 
 
             }
@@ -1901,10 +1899,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__95;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:95:7: ( 'KShapeLayout' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:95:9: 'KShapeLayout'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:95:7: ( 'ypos' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:95:9: 'ypos'
             {
-            match("KShapeLayout"); 
+            match("ypos"); 
 
 
             }
@@ -1922,10 +1920,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__96;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:96:7: ( 'xpos' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:96:9: 'xpos'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:96:7: ( 'insets' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:96:9: 'insets'
             {
-            match("xpos"); 
+            match("insets"); 
 
 
             }
@@ -1943,10 +1941,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__97;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:97:7: ( 'ypos' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:97:9: 'ypos'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:97:7: ( 'mapProperties' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:97:9: 'mapProperties'
             {
-            match("ypos"); 
+            match("mapProperties"); 
 
 
             }
@@ -1964,10 +1962,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__98;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:98:7: ( 'insets' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:98:9: 'insets'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:98:7: ( 'KInsets' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:98:9: 'KInsets'
             {
-            match("insets"); 
+            match("KInsets"); 
 
 
             }
@@ -1985,10 +1983,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__99;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:99:7: ( 'mapProperties' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:99:9: 'mapProperties'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:99:7: ( 'KEdgeLayout' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:99:9: 'KEdgeLayout'
             {
-            match("mapProperties"); 
+            match("KEdgeLayout"); 
 
 
             }
@@ -2006,10 +2004,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__100;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:100:8: ( 'KInsets' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:100:10: 'KInsets'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:100:8: ( 'sourcePoint' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:100:10: 'sourcePoint'
             {
-            match("KInsets"); 
+            match("sourcePoint"); 
 
 
             }
@@ -2027,10 +2025,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__101;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:101:8: ( 'KEdgeLayout' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:101:10: 'KEdgeLayout'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:101:8: ( 'targetPoint' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:101:10: 'targetPoint'
             {
-            match("KEdgeLayout"); 
+            match("targetPoint"); 
 
 
             }
@@ -2048,10 +2046,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__102;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:102:8: ( 'sourcePoint' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:102:10: 'sourcePoint'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:102:8: ( 'bendPoints' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:102:10: 'bendPoints'
             {
-            match("sourcePoint"); 
+            match("bendPoints"); 
 
 
             }
@@ -2069,10 +2067,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__103;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:103:8: ( 'targetPoint' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:103:10: 'targetPoint'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:103:8: ( 'KPoint' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:103:10: 'KPoint'
             {
-            match("targetPoint"); 
+            match("KPoint"); 
 
 
             }
@@ -2090,11 +2088,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__104;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:104:8: ( 'bendPoints' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:104:10: 'bendPoints'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:104:8: ( 'x' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:104:10: 'x'
             {
-            match("bendPoints"); 
-
+            match('x'); 
 
             }
 
@@ -2111,11 +2108,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__105;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:105:8: ( 'KPoint' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:105:10: 'KPoint'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:105:8: ( 'y' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:105:10: 'y'
             {
-            match("KPoint"); 
-
+            match('y'); 
 
             }
 
@@ -2132,10 +2128,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__106;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:106:8: ( 'x' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:106:10: 'x'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:106:8: ( '=' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:106:10: '='
             {
-            match('x'); 
+            match('='); 
 
             }
 
@@ -2152,10 +2148,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__107;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:107:8: ( 'y' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:107:10: 'y'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:107:8: ( 'SOLID' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:107:10: 'SOLID'
             {
-            match('y'); 
+            match("SOLID"); 
+
 
             }
 
@@ -2172,10 +2169,11 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__108;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:108:8: ( '=' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:108:10: '='
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:108:8: ( 'DASH' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:108:10: 'DASH'
             {
-            match('='); 
+            match("DASH"); 
+
 
             }
 
@@ -2192,10 +2190,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__109;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:109:8: ( 'SOLID' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:109:10: 'SOLID'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:109:8: ( 'DOT' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:109:10: 'DOT'
             {
-            match("SOLID"); 
+            match("DOT"); 
 
 
             }
@@ -2213,10 +2211,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__110;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:110:8: ( 'DASH' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:110:10: 'DASH'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:110:8: ( 'DASHDOT' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:110:10: 'DASHDOT'
             {
-            match("DASH"); 
+            match("DASHDOT"); 
 
 
             }
@@ -2234,10 +2232,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__111;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:111:8: ( 'DOT' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:111:10: 'DOT'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:111:8: ( 'DASHDOTDOT' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:111:10: 'DASHDOTDOT'
             {
-            match("DOT"); 
+            match("DASHDOTDOT"); 
 
 
             }
@@ -2255,10 +2253,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__112;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:112:8: ( 'DASHDOT' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:112:10: 'DASHDOT'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:112:8: ( 'TOP' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:112:10: 'TOP'
             {
-            match("DASHDOT"); 
+            match("TOP"); 
 
 
             }
@@ -2276,10 +2274,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__113;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:113:8: ( 'DASHDOTDOT' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:113:10: 'DASHDOTDOT'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:113:8: ( 'CENTER' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:113:10: 'CENTER'
             {
-            match("DASHDOTDOT"); 
+            match("CENTER"); 
 
 
             }
@@ -2297,10 +2295,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__114;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:114:8: ( 'TOP' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:114:10: 'TOP'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:114:8: ( 'BOTTOM' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:114:10: 'BOTTOM'
             {
-            match("TOP"); 
+            match("BOTTOM"); 
 
 
             }
@@ -2318,10 +2316,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__115;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:115:8: ( 'CENTER' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:115:10: 'CENTER'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:115:8: ( 'LEFT' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:115:10: 'LEFT'
             {
-            match("CENTER"); 
+            match("LEFT"); 
 
 
             }
@@ -2339,50 +2337,8 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = T__116;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:116:8: ( 'BOTTOM' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:116:10: 'BOTTOM'
-            {
-            match("BOTTOM"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__116"
-
-    // $ANTLR start "T__117"
-    public final void mT__117() throws RecognitionException {
-        try {
-            int _type = T__117;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:117:8: ( 'LEFT' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:117:10: 'LEFT'
-            {
-            match("LEFT"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__117"
-
-    // $ANTLR start "T__118"
-    public final void mT__118() throws RecognitionException {
-        try {
-            int _type = T__118;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:118:8: ( 'RIGHT' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:118:10: 'RIGHT'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:116:8: ( 'RIGHT' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:116:10: 'RIGHT'
             {
             match("RIGHT"); 
 
@@ -2395,17 +2351,17 @@ public class InternalKGraphLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__118"
+    // $ANTLR end "T__116"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6352:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6352:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6396:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6396:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6352:11: ( '^' )?
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6396:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -2414,7 +2370,7 @@ public class InternalKGraphLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6352:11: '^'
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6396:11: '^'
                     {
                     match('^'); 
 
@@ -2432,7 +2388,7 @@ public class InternalKGraphLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6352:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6396:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -2481,10 +2437,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6354:10: ( ( '0' .. '9' )+ )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6354:12: ( '0' .. '9' )+
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6398:10: ( ( '0' .. '9' )+ )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6398:12: ( '0' .. '9' )+
             {
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6354:12: ( '0' .. '9' )+
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6398:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -2498,7 +2454,7 @@ public class InternalKGraphLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6354:13: '0' .. '9'
+            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6398:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2530,10 +2486,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -2551,10 +2507,10 @@ public class InternalKGraphLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -2570,7 +2526,7 @@ public class InternalKGraphLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2586,7 +2542,7 @@ public class InternalKGraphLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2611,10 +2567,10 @@ public class InternalKGraphLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -2630,7 +2586,7 @@ public class InternalKGraphLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2646,7 +2602,7 @@ public class InternalKGraphLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6356:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6400:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2689,12 +2645,12 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6358:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6358:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6402:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6402:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6358:24: ( options {greedy=false; } : . )*
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6402:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -2719,7 +2675,7 @@ public class InternalKGraphLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6358:52: .
+            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6402:52: .
             	    {
             	    matchAny(); 
 
@@ -2749,12 +2705,12 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -2767,7 +2723,7 @@ public class InternalKGraphLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2787,7 +2743,7 @@ public class InternalKGraphLexer extends Lexer {
                 }
             } while (true);
 
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:40: ( ( '\\r' )? '\\n' )?
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2796,9 +2752,9 @@ public class InternalKGraphLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:41: ( '\\r' )? '\\n'
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:41: ( '\\r' )? '\\n'
                     {
-                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:41: ( '\\r' )?
+                    // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -2807,7 +2763,7 @@ public class InternalKGraphLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6360:41: '\\r'
+                            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6404:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2839,10 +2795,10 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6362:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6362:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6406:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6406:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6362:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6406:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -2896,8 +2852,8 @@ public class InternalKGraphLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6364:16: ( . )
-            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6364:18: .
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6408:16: ( . )
+            // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:6408:18: .
             {
             matchAny(); 
 
@@ -2912,8 +2868,8 @@ public class InternalKGraphLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=115;
+        // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=113;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -3659,63 +3615,49 @@ public class InternalKGraphLexer extends Lexer {
                 }
                 break;
             case 107 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:663: T__117
-                {
-                mT__117(); 
-
-                }
-                break;
-            case 108 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:670: T__118
-                {
-                mT__118(); 
-
-                }
-                break;
-            case 109 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:677: RULE_ID
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:663: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 110 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:685: RULE_INT
+            case 108 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:671: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 111 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:694: RULE_STRING
+            case 109 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:680: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 112 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:706: RULE_ML_COMMENT
+            case 110 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:692: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 113 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:722: RULE_SL_COMMENT
+            case 111 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:708: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 114 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:738: RULE_WS
+            case 112 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:724: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 115 :
-                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:746: RULE_ANY_OTHER
+            case 113 :
+                // ../de.cau.cs.kieler.core.kgraph.text/src-gen/de/cau/cs/kieler/core/kgraph/text/parser/antlr/internal/InternalKGraph.g:1:732: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -3729,321 +3671,315 @@ public class InternalKGraphLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\70\1\uffff\1\70\1\uffff\1\70\1\uffff\1\70\1\uffff\1\104"+
-        "\1\70\1\111\3\70\1\123\11\70\1\152\1\155\5\70\1\167\1\70\1\uffff"+
-        "\5\70\1\uffff\1\70\1\uffff\1\61\2\uffff\2\61\2\uffff\6\70\2\uffff"+
-        "\2\70\1\uffff\2\70\1\uffff\2\70\1\uffff\1\70\1\uffff\3\70\2\uffff"+
-        "\11\70\1\uffff\26\70\1\uffff\2\70\1\uffff\7\70\3\uffff\1\70\1\uffff"+
-        "\10\70\1\uffff\1\70\4\uffff\23\70\1\u00e3\12\70\1\u00ee\4\70\1\u00f3"+
-        "\12\70\1\u00fe\41\70\1\u0120\2\70\1\u0123\4\70\1\u0128\2\70\1\uffff"+
-        "\1\u012b\11\70\1\uffff\3\70\1\u0139\1\uffff\2\70\1\u013c\6\70\1"+
-        "\u0144\1\uffff\3\70\1\u0148\1\70\1\u014a\13\70\1\u0157\1\u0159\4"+
-        "\70\1\u015e\1\70\1\u0160\4\70\1\u0165\2\70\1\uffff\2\70\1\uffff"+
-        "\1\70\1\u016c\2\70\1\uffff\2\70\1\uffff\5\70\1\u0176\3\70\1\u017a"+
-        "\3\70\1\uffff\2\70\1\uffff\3\70\1\u0183\3\70\1\uffff\1\70\1\u0188"+
-        "\1\70\1\uffff\1\70\1\uffff\1\u018c\13\70\1\uffff\1\70\1\uffff\1"+
-        "\u019d\3\70\1\uffff\1\u01a1\1\uffff\1\u01a2\3\70\1\uffff\1\u01a6"+
-        "\5\70\1\uffff\1\u01ac\1\70\1\u01af\2\70\1\u01b2\3\70\1\uffff\3\70"+
-        "\1\uffff\2\70\1\u01bb\1\70\1\u01be\1\70\1\u01c0\1\70\1\uffff\4\70"+
-        "\1\uffff\3\70\1\uffff\1\u01ca\7\70\1\u01d2\1\u01d3\2\70\1\u01d6"+
-        "\3\70\1\uffff\3\70\2\uffff\1\70\1\u01de\1\70\1\uffff\5\70\1\uffff"+
-        "\2\70\1\uffff\1\u01e7\1\70\1\uffff\3\70\1\u01ec\1\70\1\u01ee\2\70"+
-        "\1\uffff\2\70\1\uffff\1\70\1\uffff\3\70\1\u01f8\1\70\1\u01fa\1\u01fb"+
-        "\2\70\1\uffff\7\70\2\uffff\2\70\1\uffff\7\70\1\uffff\3\70\1\u0211"+
-        "\2\70\1\u0214\1\70\1\uffff\4\70\1\uffff\1\u021d\1\uffff\11\70\1"+
-        "\uffff\1\u0227\2\uffff\10\70\1\u0230\4\70\1\u0235\7\70\1\uffff\1"+
-        "\70\1\u023e\1\uffff\5\70\1\u0245\2\70\1\uffff\1\u0248\10\70\1\uffff"+
-        "\1\u0251\6\70\1\u0258\1\uffff\2\70\1\u025b\1\u025c\1\uffff\10\70"+
-        "\1\uffff\1\u0265\1\70\1\u0267\3\70\1\uffff\2\70\1\uffff\1\70\1\u026e"+
-        "\1\70\1\u0270\3\70\1\u0274\1\uffff\1\u0275\3\70\1\u0279\1\70\1\uffff"+
-        "\2\70\2\uffff\4\70\1\u0283\3\70\1\uffff\1\u0287\1\uffff\1\u0288"+
-        "\5\70\1\uffff\1\u028e\1\uffff\3\70\2\uffff\3\70\1\uffff\1\u0295"+
-        "\7\70\1\u029d\1\uffff\3\70\2\uffff\1\70\1\u02a2\3\70\1\uffff\6\70"+
-        "\1\uffff\7\70\1\uffff\1\u02b3\3\70\1\uffff\7\70\1\u02bf\7\70\1\u02c7"+
-        "\1\uffff\1\70\1\u02c9\4\70\1\u02cf\4\70\1\uffff\1\u02d4\6\70\1\uffff"+
-        "\1\70\1\uffff\3\70\1\u02df\1\70\1\uffff\4\70\1\uffff\1\u02e5\1\70"+
-        "\1\u02e7\4\70\1\u02ec\1\u02ed\1\70\1\uffff\3\70\1\u02f2\1\70\1\uffff"+
-        "\1\70\1\uffff\4\70\2\uffff\4\70\1\uffff\1\u02fd\2\70\1\u0300\3\70"+
-        "\1\u0304\2\70\1\uffff\2\70\1\uffff\3\70\1\uffff\1\70\1\u030d\2\70"+
-        "\1\u0310\3\70\1\uffff\1\u0314\1\u0315\1\uffff\1\u0316\1\u0317\1"+
-        "\70\4\uffff\1\u0319\1\uffff";
+        "\1\uffff\1\67\1\uffff\1\67\1\uffff\1\67\1\uffff\1\67\1\uffff\1\103"+
+        "\1\67\1\110\3\67\1\122\11\67\1\151\1\154\4\67\1\164\1\67\1\uffff"+
+        "\5\67\1\uffff\1\67\1\uffff\1\60\2\uffff\2\60\2\uffff\6\67\2\uffff"+
+        "\2\67\1\uffff\2\67\1\uffff\2\67\1\uffff\1\67\1\uffff\3\67\2\uffff"+
+        "\11\67\1\uffff\26\67\1\uffff\2\67\1\uffff\5\67\3\uffff\1\67\1\uffff"+
+        "\10\67\1\uffff\1\67\4\uffff\23\67\1\u00de\12\67\1\u00e9\4\67\1\u00ee"+
+        "\12\67\1\u00f9\37\67\1\u0119\2\67\1\u011c\4\67\1\u0121\2\67\1\uffff"+
+        "\1\u0124\11\67\1\uffff\3\67\1\u0132\1\uffff\2\67\1\u0135\6\67\1"+
+        "\u013d\1\uffff\3\67\1\u0141\1\67\1\u0143\11\67\1\u014e\1\u0150\4"+
+        "\67\1\u0155\1\67\1\u0157\4\67\1\u015c\2\67\1\uffff\2\67\1\uffff"+
+        "\1\67\1\u0163\2\67\1\uffff\2\67\1\uffff\5\67\1\u016d\3\67\1\u0171"+
+        "\3\67\1\uffff\2\67\1\uffff\3\67\1\u017a\3\67\1\uffff\1\67\1\u017f"+
+        "\1\67\1\uffff\1\67\1\uffff\1\u0183\11\67\1\uffff\1\67\1\uffff\1"+
+        "\u0192\3\67\1\uffff\1\u0196\1\uffff\1\u0197\3\67\1\uffff\1\u019b"+
+        "\5\67\1\uffff\1\u01a1\1\67\1\u01a4\2\67\1\u01a7\3\67\1\uffff\3\67"+
+        "\1\uffff\2\67\1\u01b0\1\67\1\u01b3\1\67\1\u01b5\1\67\1\uffff\4\67"+
+        "\1\uffff\3\67\1\uffff\1\u01bf\5\67\1\u01c5\1\u01c6\2\67\1\u01c9"+
+        "\3\67\1\uffff\3\67\2\uffff\1\67\1\u01d1\1\67\1\uffff\5\67\1\uffff"+
+        "\2\67\1\uffff\1\u01da\1\67\1\uffff\3\67\1\u01df\1\67\1\u01e1\2\67"+
+        "\1\uffff\2\67\1\uffff\1\67\1\uffff\3\67\1\u01eb\1\67\1\u01ed\1\u01ee"+
+        "\2\67\1\uffff\5\67\2\uffff\2\67\1\uffff\7\67\1\uffff\3\67\1\u0202"+
+        "\2\67\1\u0205\1\67\1\uffff\4\67\1\uffff\1\u020e\1\uffff\11\67\1"+
+        "\uffff\1\u0218\2\uffff\6\67\1\u021f\4\67\1\u0224\7\67\1\uffff\1"+
+        "\67\1\u022d\1\uffff\5\67\1\u0234\2\67\1\uffff\1\u0237\10\67\1\uffff"+
+        "\1\u0240\4\67\1\u0245\1\uffff\2\67\1\u0248\1\u0249\1\uffff\10\67"+
+        "\1\uffff\1\u0252\1\67\1\u0254\3\67\1\uffff\2\67\1\uffff\1\67\1\u025b"+
+        "\1\67\1\u025d\3\67\1\u0261\1\uffff\1\u0262\1\67\1\u0264\1\67\1\uffff"+
+        "\2\67\2\uffff\4\67\1\u026e\3\67\1\uffff\1\u0272\1\uffff\1\u0273"+
+        "\5\67\1\uffff\1\u0279\1\uffff\3\67\2\uffff\1\67\1\uffff\1\u027e"+
+        "\7\67\1\u0286\1\uffff\3\67\2\uffff\1\67\1\u028b\3\67\1\uffff\4\67"+
+        "\1\uffff\7\67\1\uffff\1\u029a\3\67\1\uffff\6\67\1\u02a5\6\67\1\u02ac"+
+        "\1\uffff\1\67\1\u02ae\4\67\1\u02b4\3\67\1\uffff\6\67\1\uffff\1\67"+
+        "\1\uffff\3\67\1\u02c2\1\67\1\uffff\3\67\1\u02c7\1\67\1\u02c9\4\67"+
+        "\1\u02ce\1\u02cf\1\67\1\uffff\4\67\1\uffff\1\67\1\uffff\4\67\2\uffff"+
+        "\4\67\1\u02de\2\67\1\u02e1\3\67\1\u02e5\2\67\1\uffff\2\67\1\uffff"+
+        "\3\67\1\uffff\1\67\1\u02ee\2\67\1\u02f1\3\67\1\uffff\1\u02f5\1\u02f6"+
+        "\1\uffff\1\u02f7\1\u02f8\1\67\4\uffff\1\u02fa\1\uffff";
     static final String DFA12_eofS =
-        "\u031a\uffff";
+        "\u02fb\uffff";
     static final String DFA12_minS =
         "\1\0\1\105\1\uffff\1\154\1\uffff\1\141\1\uffff\1\150\1\uffff\1\60"+
         "\1\141\1\55\1\141\1\157\1\111\1\60\1\157\1\155\1\162\1\105\1\117"+
-        "\1\145\1\117\1\101\1\145\2\60\1\151\1\145\1\162\1\145\1\156\1\52"+
-        "\1\157\1\uffff\1\117\1\105\1\141\1\145\1\157\1\uffff\1\141\1\uffff"+
-        "\1\101\2\uffff\2\0\2\uffff\1\157\1\141\1\157\1\150\1\156\1\144\2"+
-        "\uffff\1\151\1\141\1\uffff\2\164\1\uffff\1\151\1\141\1\uffff\1\147"+
-        "\1\uffff\1\142\1\143\1\146\2\uffff\1\162\1\160\2\165\1\171\1\143"+
-        "\1\165\1\107\1\154\1\uffff\1\154\1\141\1\143\1\151\1\163\1\116\1"+
-        "\170\1\120\1\156\1\154\1\156\1\154\1\141\1\114\1\143\1\162\1\123"+
-        "\1\124\1\154\1\147\1\146\1\157\1\uffff\1\146\1\157\1\uffff\1\144"+
-        "\1\151\1\162\1\151\1\162\1\163\1\141\3\uffff\1\162\1\uffff\1\143"+
-        "\1\124\1\156\1\106\1\156\1\154\2\162\1\uffff\1\160\4\uffff\1\144"+
-        "\1\142\1\151\1\141\1\163\1\147\1\164\1\156\1\143\2\141\1\154\1\160"+
-        "\1\163\2\145\1\141\1\164\1\147\1\60\1\145\1\162\1\154\1\144\1\164"+
-        "\1\156\1\110\1\151\1\171\1\147\1\60\1\154\1\164\1\124\1\164\1\60"+
-        "\1\144\1\164\2\144\1\151\1\143\1\111\1\157\1\145\1\110\1\60\1\141"+
-        "\1\150\1\146\1\163\1\146\1\163\1\164\1\147\1\151\1\144\1\164\1\145"+
-        "\1\154\1\145\1\153\1\124\1\145\1\124\1\164\1\163\1\164\1\151\1\120"+
-        "\2\145\1\164\1\156\1\160\2\145\1\163\1\164\1\145\1\60\1\151\1\144"+
-        "\1\60\2\163\1\154\1\164\1\60\2\145\1\uffff\1\60\1\143\2\145\1\141"+
-        "\1\144\1\124\1\160\1\147\1\145\1\uffff\1\144\1\157\1\105\1\60\1"+
-        "\uffff\1\154\1\157\1\60\1\120\1\156\1\153\1\104\1\162\1\143\1\60"+
-        "\1\uffff\2\164\1\163\1\60\1\163\1\60\2\150\1\172\1\120\1\151\1\164"+
-        "\1\151\2\147\1\117\1\123\2\60\1\145\1\151\1\172\1\162\1\60\1\154"+
-        "\1\60\1\164\1\145\1\164\1\114\1\60\1\163\1\155\1\uffff\1\154\1\120"+
-        "\1\uffff\1\116\1\60\1\163\1\151\1\uffff\1\164\1\146\1\uffff\1\145"+
-        "\1\163\1\162\1\156\1\145\1\60\1\163\1\151\1\157\1\60\1\101\1\155"+
-        "\1\122\1\uffff\1\145\1\155\1\uffff\1\157\1\145\1\120\1\60\1\141"+
-        "\1\164\1\117\1\uffff\1\151\1\60\1\145\1\uffff\1\145\1\uffff\1\60"+
-        "\1\164\1\157\1\154\1\143\1\102\1\143\2\162\1\115\1\151\1\164\1\uffff"+
-        "\1\151\1\uffff\1\60\1\143\2\157\1\uffff\1\60\1\uffff\1\60\1\114"+
-        "\1\163\1\141\1\uffff\1\60\3\145\1\154\1\141\1\uffff\1\60\1\157\1"+
-        "\60\1\164\1\120\1\60\1\151\1\147\1\144\1\uffff\1\145\2\156\1\uffff"+
-        "\1\162\1\122\1\60\1\116\1\60\1\151\1\60\1\154\1\uffff\1\164\1\120"+
-        "\1\124\1\166\1\uffff\2\164\1\151\1\uffff\1\60\1\156\2\141\1\151"+
-        "\1\157\1\145\1\157\2\60\2\157\1\60\1\144\1\171\1\172\1\uffff\1\141"+
-        "\1\156\1\160\2\uffff\1\141\1\60\1\171\1\uffff\1\156\1\144\1\156"+
-        "\1\141\1\155\1\uffff\1\156\1\157\1\uffff\1\60\1\157\1\uffff\1\156"+
-        "\1\154\1\122\1\60\1\145\1\60\2\145\1\uffff\1\141\1\151\1\uffff\1"+
-        "\156\1\uffff\1\141\1\157\1\154\1\60\1\145\2\60\1\156\1\151\1\uffff"+
-        "\1\164\1\143\1\154\1\147\1\164\1\146\1\160\2\uffff\2\165\1\uffff"+
-        "\1\164\1\154\1\145\1\154\1\164\1\145\1\171\1\uffff\1\157\1\164\1"+
-        "\120\1\60\1\143\1\145\1\60\1\151\1\uffff\1\151\1\147\2\145\1\uffff"+
-        "\1\60\1\uffff\1\141\1\156\1\155\1\147\1\164\1\143\1\162\1\141\1"+
-        "\117\1\uffff\1\60\2\uffff\1\164\1\156\1\141\1\145\1\111\1\150\2"+
-        "\164\1\60\2\156\1\150\1\145\1\60\1\101\1\141\1\162\1\157\1\165\1"+
-        "\104\1\154\1\uffff\1\145\1\60\1\uffff\1\164\1\156\1\164\1\156\1"+
-        "\114\1\60\1\143\1\154\1\uffff\1\60\1\144\1\145\1\150\1\163\1\145"+
-        "\1\120\1\143\1\124\1\uffff\1\60\1\164\1\154\1\155\1\156\1\164\1"+
-        "\157\1\60\1\uffff\2\144\2\60\1\uffff\2\154\1\164\1\165\1\164\2\141"+
-        "\1\155\1\uffff\1\60\1\164\1\60\1\164\1\151\1\145\1\uffff\1\164\1"+
-        "\141\1\uffff\1\145\1\60\1\164\1\60\1\155\1\154\1\145\1\60\1\uffff"+
-        "\1\60\1\111\1\145\1\144\1\60\1\155\1\uffff\2\103\2\uffff\1\151\1"+
-        "\101\1\151\1\164\1\60\1\164\1\143\1\145\1\uffff\1\60\1\uffff\1\60"+
-        "\1\142\1\146\1\141\1\143\1\162\1\uffff\1\60\1\uffff\1\145\1\141"+
-        "\1\155\2\uffff\2\156\1\145\1\uffff\1\60\1\157\1\151\1\157\1\151"+
-        "\1\147\1\154\1\145\1\60\1\uffff\1\141\1\145\1\156\2\uffff\1\162"+
-        "\1\60\1\156\1\145\1\151\1\uffff\1\156\1\143\1\145\1\144\1\164\1"+
-        "\156\1\uffff\1\154\1\163\1\154\1\163\1\156\1\151\1\163\1\uffff\1"+
-        "\60\1\155\1\164\1\141\1\uffff\1\147\1\155\1\156\1\164\1\145\1\156"+
-        "\1\145\1\60\1\164\1\157\1\151\1\157\1\151\1\155\1\147\1\60\1\uffff"+
-        "\1\145\1\60\1\162\1\154\1\145\1\147\1\60\1\155\1\164\1\156\1\141"+
-        "\1\uffff\1\60\1\162\1\142\1\162\1\142\1\145\1\156\1\uffff\1\156"+
-        "\1\uffff\1\171\1\145\1\156\1\60\1\141\1\uffff\1\145\1\104\2\164"+
-        "\1\uffff\1\60\1\151\1\60\1\151\1\156\1\155\1\164\2\60\1\164\1\uffff"+
-        "\1\164\1\156\1\141\1\60\1\141\1\uffff\1\154\1\uffff\1\154\1\164"+
-        "\1\145\1\104\2\uffff\1\104\1\141\2\164\1\uffff\1\60\2\151\1\60\1"+
-        "\156\2\141\1\60\1\104\1\141\1\uffff\2\164\1\uffff\3\164\1\uffff"+
+        "\1\145\1\117\1\101\1\145\2\60\1\151\1\145\1\162\1\156\1\52\1\157"+
+        "\1\uffff\1\117\1\105\1\141\1\145\1\157\1\uffff\1\141\1\uffff\1\101"+
+        "\2\uffff\2\0\2\uffff\1\157\1\141\1\157\1\150\1\156\1\144\2\uffff"+
+        "\1\151\1\141\1\uffff\2\164\1\uffff\1\151\1\141\1\uffff\1\147\1\uffff"+
+        "\1\142\1\143\1\146\2\uffff\1\162\1\160\2\165\1\171\1\143\1\165\1"+
+        "\107\1\154\1\uffff\1\154\1\141\1\143\1\151\1\163\1\116\1\170\1\120"+
+        "\1\156\1\154\1\156\1\154\1\141\1\114\1\143\1\162\1\123\1\124\1\154"+
+        "\1\147\1\146\1\157\1\uffff\1\146\1\157\1\uffff\1\144\2\151\1\163"+
+        "\1\141\3\uffff\1\162\1\uffff\1\143\1\124\1\156\1\106\1\156\1\154"+
+        "\2\162\1\uffff\1\160\4\uffff\1\144\1\142\1\151\1\141\1\163\1\147"+
+        "\1\164\1\156\1\143\2\141\1\154\1\160\1\163\2\145\1\141\1\164\1\147"+
+        "\1\60\1\145\1\162\1\154\1\144\1\164\1\156\1\110\1\151\1\171\1\147"+
+        "\1\60\1\154\1\164\1\124\1\164\1\60\1\144\1\164\2\144\1\151\1\143"+
+        "\1\111\1\157\1\145\1\110\1\60\1\141\1\150\1\146\1\163\1\146\1\163"+
+        "\1\164\1\147\1\144\1\145\1\154\1\145\1\153\1\124\1\145\1\124\1\164"+
+        "\1\163\1\164\1\151\1\120\2\145\1\164\1\156\1\160\2\145\1\163\1\164"+
+        "\1\145\1\60\1\151\1\144\1\60\2\163\1\154\1\164\1\60\2\145\1\uffff"+
+        "\1\60\1\143\2\145\1\141\1\144\1\124\1\160\1\147\1\145\1\uffff\1"+
+        "\144\1\157\1\105\1\60\1\uffff\1\154\1\157\1\60\1\120\1\156\1\153"+
+        "\1\104\1\162\1\143\1\60\1\uffff\2\164\1\163\1\60\1\163\1\60\2\150"+
+        "\1\120\1\164\1\151\2\147\1\117\1\123\2\60\1\145\1\151\1\172\1\162"+
+        "\1\60\1\154\1\60\1\164\1\145\1\164\1\114\1\60\1\163\1\155\1\uffff"+
+        "\1\154\1\120\1\uffff\1\116\1\60\1\163\1\151\1\uffff\1\164\1\146"+
+        "\1\uffff\1\145\1\163\1\162\1\156\1\145\1\60\1\163\1\151\1\157\1"+
+        "\60\1\101\1\155\1\122\1\uffff\1\145\1\155\1\uffff\1\157\1\145\1"+
+        "\120\1\60\1\141\1\164\1\117\1\uffff\1\151\1\60\1\145\1\uffff\1\145"+
+        "\1\uffff\1\60\1\164\1\154\1\102\1\143\2\162\1\115\1\151\1\164\1"+
+        "\uffff\1\151\1\uffff\1\60\1\143\2\157\1\uffff\1\60\1\uffff\1\60"+
+        "\1\114\1\163\1\141\1\uffff\1\60\3\145\1\154\1\141\1\uffff\1\60\1"+
+        "\157\1\60\1\164\1\120\1\60\1\151\1\147\1\144\1\uffff\1\145\2\156"+
+        "\1\uffff\1\162\1\122\1\60\1\116\1\60\1\151\1\60\1\154\1\uffff\1"+
+        "\164\1\120\1\124\1\166\1\uffff\2\164\1\151\1\uffff\1\60\1\141\1"+
+        "\151\1\157\1\145\1\157\2\60\2\157\1\60\1\144\1\171\1\172\1\uffff"+
+        "\1\141\1\156\1\160\2\uffff\1\141\1\60\1\171\1\uffff\1\156\1\144"+
+        "\1\156\1\141\1\155\1\uffff\1\156\1\157\1\uffff\1\60\1\157\1\uffff"+
+        "\1\156\1\154\1\122\1\60\1\145\1\60\2\145\1\uffff\1\141\1\151\1\uffff"+
+        "\1\156\1\uffff\1\141\1\157\1\154\1\60\1\145\2\60\1\156\1\151\1\uffff"+
+        "\1\143\1\147\1\164\1\146\1\160\2\uffff\2\165\1\uffff\1\164\1\154"+
+        "\1\145\1\154\1\164\1\145\1\171\1\uffff\1\157\1\164\1\120\1\60\1"+
+        "\143\1\145\1\60\1\151\1\uffff\1\151\1\147\2\145\1\uffff\1\60\1\uffff"+
+        "\1\141\1\156\1\155\1\147\1\164\1\143\1\162\1\141\1\117\1\uffff\1"+
+        "\60\2\uffff\1\164\1\156\1\145\1\150\2\164\1\60\2\156\1\150\1\145"+
+        "\1\60\1\101\1\141\1\162\1\157\1\165\1\104\1\154\1\uffff\1\145\1"+
+        "\60\1\uffff\1\164\1\156\1\164\1\156\1\114\1\60\1\143\1\154\1\uffff"+
+        "\1\60\1\144\1\145\1\150\1\163\1\145\1\120\1\143\1\124\1\uffff\1"+
+        "\60\1\164\1\155\1\164\1\157\1\60\1\uffff\2\144\2\60\1\uffff\2\154"+
+        "\1\164\1\165\1\164\2\141\1\155\1\uffff\1\60\1\164\1\60\1\164\1\151"+
+        "\1\145\1\uffff\1\164\1\141\1\uffff\1\145\1\60\1\164\1\60\1\155\1"+
+        "\154\1\145\1\60\1\uffff\1\60\1\145\1\60\1\155\1\uffff\2\103\2\uffff"+
+        "\1\151\1\101\1\151\1\164\1\60\1\164\1\143\1\145\1\uffff\1\60\1\uffff"+
+        "\1\60\1\142\1\146\1\141\1\143\1\162\1\uffff\1\60\1\uffff\1\145\1"+
+        "\141\1\155\2\uffff\1\156\1\uffff\1\60\1\157\1\151\1\157\1\151\1"+
+        "\147\1\154\1\145\1\60\1\uffff\1\141\1\145\1\156\2\uffff\1\162\1"+
+        "\60\1\156\1\145\1\151\1\uffff\1\156\1\143\1\145\1\164\1\uffff\1"+
+        "\154\1\163\1\154\1\163\1\156\1\151\1\163\1\uffff\1\60\1\155\1\164"+
+        "\1\141\1\uffff\1\147\1\155\1\156\1\164\1\145\1\156\1\60\1\157\1"+
+        "\151\1\157\1\151\1\155\1\147\1\60\1\uffff\1\145\1\60\1\162\1\154"+
+        "\1\145\1\147\1\60\1\155\1\164\1\141\1\uffff\1\162\1\142\1\162\1"+
+        "\142\1\145\1\156\1\uffff\1\156\1\uffff\1\171\1\145\1\156\1\60\1"+
+        "\141\1\uffff\1\145\1\104\1\164\1\60\1\151\1\60\1\151\1\156\1\155"+
+        "\1\164\2\60\1\164\1\uffff\1\164\1\156\2\141\1\uffff\1\154\1\uffff"+
+        "\1\154\1\164\1\145\1\104\2\uffff\1\104\1\141\2\164\1\60\2\151\1"+
+        "\60\1\156\2\141\1\60\1\104\1\141\1\uffff\2\164\1\uffff\3\164\1\uffff"+
         "\1\141\1\60\2\171\1\60\2\141\1\164\1\uffff\2\60\1\uffff\2\60\1\141"+
         "\4\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
         "\1\uffff\1\123\1\uffff\1\157\1\uffff\1\145\1\uffff\1\154\1\uffff"+
         "\1\172\1\157\1\55\1\162\1\164\1\157\1\172\1\157\1\155\1\162\1\165"+
-        "\1\145\1\165\1\164\2\151\2\172\1\151\1\157\1\162\1\145\1\164\1\57"+
-        "\1\157\1\uffff\1\141\1\151\1\157\1\145\1\157\1\uffff\1\141\1\uffff"+
-        "\1\172\2\uffff\2\uffff\2\uffff\1\157\1\141\1\157\1\150\1\156\1\144"+
-        "\2\uffff\1\162\1\141\1\uffff\2\164\1\uffff\2\151\1\uffff\1\147\1"+
-        "\uffff\1\142\1\143\1\146\2\uffff\1\162\1\160\2\165\1\171\1\156\1"+
-        "\165\1\107\1\154\1\uffff\1\154\1\141\1\143\1\151\1\163\1\116\1\170"+
-        "\1\120\1\156\1\164\1\156\1\154\1\141\1\114\1\143\1\162\1\123\1\124"+
-        "\1\154\1\147\1\146\1\157\1\uffff\1\146\1\157\1\uffff\1\144\1\151"+
-        "\1\162\1\151\1\162\1\163\1\141\3\uffff\1\162\1\uffff\1\143\1\124"+
-        "\1\156\1\106\1\156\1\154\2\162\1\uffff\1\160\4\uffff\1\144\1\142"+
-        "\1\162\1\141\1\163\1\147\1\164\1\156\1\143\2\141\1\154\1\160\1\163"+
-        "\2\145\1\141\1\164\1\147\1\172\1\145\1\162\1\154\1\144\1\164\1\156"+
-        "\1\110\1\151\1\171\1\147\1\172\1\154\1\164\1\124\1\164\1\172\1\144"+
-        "\1\164\2\144\1\151\1\143\1\111\1\157\1\145\1\110\1\172\1\141\1\150"+
-        "\1\146\1\163\1\146\1\163\1\164\1\147\1\151\1\144\1\164\1\145\1\154"+
-        "\1\145\1\153\1\124\1\145\1\124\1\164\1\163\1\164\1\151\1\120\2\145"+
-        "\1\164\1\156\1\160\2\145\1\163\1\164\1\145\1\172\1\151\1\144\1\172"+
-        "\2\163\1\154\1\164\1\172\2\145\1\uffff\1\172\1\143\2\145\1\141\1"+
-        "\144\1\124\1\160\1\154\1\145\1\uffff\1\144\1\157\1\105\1\172\1\uffff"+
-        "\1\154\1\157\1\172\1\120\1\156\1\153\1\104\1\162\1\143\1\172\1\uffff"+
-        "\2\164\1\163\1\172\1\163\1\172\2\150\1\172\1\120\1\151\1\164\1\151"+
-        "\2\147\1\117\1\127\2\172\1\145\1\151\1\172\1\162\1\172\1\154\1\172"+
-        "\1\164\1\145\1\164\1\114\1\172\1\163\1\155\1\uffff\1\154\1\162\1"+
-        "\uffff\1\116\1\172\1\163\1\151\1\uffff\1\164\1\146\1\uffff\1\145"+
-        "\1\163\1\162\1\156\1\145\1\172\1\163\1\151\1\157\1\172\1\101\1\155"+
-        "\1\122\1\uffff\1\145\1\155\1\uffff\1\157\1\145\1\120\1\172\1\141"+
-        "\1\164\1\117\1\uffff\1\151\1\172\1\145\1\uffff\1\145\1\uffff\1\172"+
-        "\1\164\1\157\1\154\1\143\1\163\1\143\2\162\1\115\1\151\1\164\1\uffff"+
-        "\1\151\1\uffff\1\172\1\143\2\157\1\uffff\1\172\1\uffff\1\172\1\114"+
-        "\1\163\1\141\1\uffff\1\172\3\145\1\154\1\141\1\uffff\1\172\1\157"+
-        "\1\172\1\164\1\120\1\172\1\151\1\147\1\144\1\uffff\1\145\2\156\1"+
-        "\uffff\1\162\1\122\1\172\1\116\1\172\1\151\1\172\1\154\1\uffff\1"+
-        "\164\1\120\1\124\1\166\1\uffff\2\164\1\151\1\uffff\1\172\1\156\2"+
-        "\141\1\151\1\157\1\145\1\157\2\172\2\157\1\172\1\144\1\171\1\172"+
+        "\1\145\1\165\1\164\2\151\2\172\1\151\1\145\1\162\1\164\1\57\1\157"+
+        "\1\uffff\1\141\1\151\1\157\1\145\1\157\1\uffff\1\141\1\uffff\1\172"+
+        "\2\uffff\2\uffff\2\uffff\1\157\1\141\1\157\1\150\1\156\1\144\2\uffff"+
+        "\1\162\1\141\1\uffff\2\164\1\uffff\2\151\1\uffff\1\147\1\uffff\1"+
+        "\142\1\143\1\146\2\uffff\1\162\1\160\2\165\1\171\1\156\1\165\1\107"+
+        "\1\154\1\uffff\1\154\1\141\1\143\1\151\1\163\1\116\1\170\1\120\1"+
+        "\156\1\164\1\156\1\154\1\141\1\114\1\143\1\162\1\123\1\124\1\154"+
+        "\1\147\1\146\1\157\1\uffff\1\146\1\157\1\uffff\1\144\2\151\1\163"+
+        "\1\141\3\uffff\1\162\1\uffff\1\143\1\124\1\156\1\106\1\156\1\154"+
+        "\2\162\1\uffff\1\160\4\uffff\1\144\1\142\1\162\1\141\1\163\1\147"+
+        "\1\164\1\156\1\143\2\141\1\154\1\160\1\163\2\145\1\141\1\164\1\147"+
+        "\1\172\1\145\1\162\1\154\1\144\1\164\1\156\1\110\1\151\1\171\1\147"+
+        "\1\172\1\154\1\164\1\124\1\164\1\172\1\144\1\164\2\144\1\151\1\143"+
+        "\1\111\1\157\1\145\1\110\1\172\1\141\1\150\1\146\1\163\1\146\1\163"+
+        "\1\164\1\147\1\144\1\145\1\154\1\145\1\153\1\124\1\145\1\124\1\164"+
+        "\1\163\1\164\1\151\1\120\2\145\1\164\1\156\1\160\2\145\1\163\1\164"+
+        "\1\145\1\172\1\151\1\144\1\172\2\163\1\154\1\164\1\172\2\145\1\uffff"+
+        "\1\172\1\143\2\145\1\141\1\144\1\124\1\160\1\154\1\145\1\uffff\1"+
+        "\144\1\157\1\105\1\172\1\uffff\1\154\1\157\1\172\1\120\1\156\1\153"+
+        "\1\104\1\162\1\143\1\172\1\uffff\2\164\1\163\1\172\1\163\1\172\2"+
+        "\150\1\120\1\164\1\151\2\147\1\117\1\127\2\172\1\145\1\151\1\172"+
+        "\1\162\1\172\1\154\1\172\1\164\1\145\1\164\1\114\1\172\1\163\1\155"+
+        "\1\uffff\1\154\1\162\1\uffff\1\116\1\172\1\163\1\151\1\uffff\1\164"+
+        "\1\146\1\uffff\1\145\1\163\1\162\1\156\1\145\1\172\1\163\1\151\1"+
+        "\157\1\172\1\101\1\155\1\122\1\uffff\1\145\1\155\1\uffff\1\157\1"+
+        "\145\1\120\1\172\1\141\1\164\1\117\1\uffff\1\151\1\172\1\145\1\uffff"+
+        "\1\145\1\uffff\1\172\1\164\1\154\1\163\1\143\2\162\1\115\1\151\1"+
+        "\164\1\uffff\1\151\1\uffff\1\172\1\143\2\157\1\uffff\1\172\1\uffff"+
+        "\1\172\1\114\1\163\1\141\1\uffff\1\172\3\145\1\154\1\141\1\uffff"+
+        "\1\172\1\157\1\172\1\164\1\120\1\172\1\151\1\147\1\144\1\uffff\1"+
+        "\145\2\156\1\uffff\1\162\1\122\1\172\1\116\1\172\1\151\1\172\1\154"+
+        "\1\uffff\1\164\1\120\1\124\1\166\1\uffff\2\164\1\151\1\uffff\1\172"+
+        "\1\141\1\151\1\157\1\145\1\157\2\172\2\157\1\172\1\144\1\171\1\172"+
         "\1\uffff\1\141\1\156\1\160\2\uffff\1\141\1\172\1\171\1\uffff\1\156"+
         "\1\144\1\156\1\141\1\155\1\uffff\1\156\1\157\1\uffff\1\172\1\157"+
         "\1\uffff\1\156\1\154\1\122\1\172\1\145\1\172\2\145\1\uffff\1\141"+
         "\1\151\1\uffff\1\156\1\uffff\1\141\1\157\1\154\1\172\1\145\2\172"+
-        "\1\156\1\151\1\uffff\1\164\1\143\1\154\1\147\1\164\1\146\1\160\2"+
-        "\uffff\2\165\1\uffff\1\164\1\154\1\145\1\154\1\164\1\145\1\171\1"+
-        "\uffff\1\157\1\164\1\120\1\172\1\143\1\145\1\172\1\162\1\uffff\1"+
-        "\162\1\147\2\145\1\uffff\1\172\1\uffff\1\141\1\156\1\155\1\147\1"+
-        "\164\1\143\1\162\1\141\1\117\1\uffff\1\172\2\uffff\1\164\1\156\1"+
-        "\141\1\145\1\111\1\150\2\164\1\172\2\156\1\150\1\145\1\172\1\101"+
-        "\1\141\1\162\1\157\1\165\1\104\1\154\1\uffff\1\145\1\172\1\uffff"+
-        "\1\164\1\156\1\164\1\156\1\122\1\172\1\143\1\154\1\uffff\1\172\1"+
-        "\144\1\145\1\150\1\163\1\145\1\120\1\143\1\124\1\uffff\1\172\1\164"+
-        "\1\154\1\155\1\156\1\164\1\157\1\172\1\uffff\2\144\2\172\1\uffff"+
-        "\2\154\1\164\1\165\1\164\2\141\1\155\1\uffff\1\172\1\164\1\172\1"+
-        "\164\1\151\1\145\1\uffff\1\164\1\141\1\uffff\1\145\1\172\1\164\1"+
-        "\172\1\155\1\154\1\145\1\172\1\uffff\1\172\1\111\1\145\1\144\1\172"+
-        "\1\155\1\uffff\2\126\2\uffff\1\151\1\101\1\151\1\164\1\172\1\164"+
-        "\1\143\1\145\1\uffff\1\172\1\uffff\1\172\1\142\1\146\1\141\1\143"+
-        "\1\162\1\uffff\1\172\1\uffff\1\145\1\141\1\155\2\uffff\2\156\1\145"+
-        "\1\uffff\1\172\1\157\1\151\1\157\1\151\1\147\1\154\1\145\1\172\1"+
-        "\uffff\1\141\1\145\1\156\2\uffff\1\162\1\172\1\156\1\145\1\151\1"+
-        "\uffff\1\156\1\143\1\145\1\144\1\164\1\156\1\uffff\1\154\1\163\1"+
-        "\154\1\163\1\156\1\151\1\163\1\uffff\1\172\1\155\1\164\1\141\1\uffff"+
-        "\1\147\1\155\1\156\1\164\1\145\1\156\1\145\1\172\1\164\1\157\1\151"+
-        "\1\157\1\151\1\155\1\147\1\172\1\uffff\1\145\1\172\1\162\1\154\1"+
-        "\145\1\147\1\172\1\155\1\164\1\156\1\141\1\uffff\1\172\1\162\1\142"+
-        "\1\162\1\142\1\145\1\156\1\uffff\1\156\1\uffff\1\171\1\145\1\156"+
-        "\1\172\1\141\1\uffff\1\145\1\104\2\164\1\uffff\1\172\1\151\1\172"+
-        "\1\151\1\156\1\155\1\164\2\172\1\164\1\uffff\1\164\1\156\1\141\1"+
-        "\172\1\141\1\uffff\1\154\1\uffff\1\154\1\164\1\145\1\104\2\uffff"+
-        "\1\104\1\141\2\164\1\uffff\1\172\2\151\1\172\1\156\2\141\1\172\1"+
-        "\104\1\141\1\uffff\2\164\1\uffff\3\164\1\uffff\1\141\1\172\2\171"+
-        "\1\172\2\141\1\164\1\uffff\2\172\1\uffff\2\172\1\141\4\uffff\1\172"+
-        "\1\uffff";
+        "\1\156\1\151\1\uffff\1\143\1\147\1\164\1\146\1\160\2\uffff\2\165"+
+        "\1\uffff\1\164\1\154\1\145\1\154\1\164\1\145\1\171\1\uffff\1\157"+
+        "\1\164\1\120\1\172\1\143\1\145\1\172\1\162\1\uffff\1\162\1\147\2"+
+        "\145\1\uffff\1\172\1\uffff\1\141\1\156\1\155\1\147\1\164\1\143\1"+
+        "\162\1\141\1\117\1\uffff\1\172\2\uffff\1\164\1\156\1\145\1\150\2"+
+        "\164\1\172\2\156\1\150\1\145\1\172\1\101\1\141\1\162\1\157\1\165"+
+        "\1\104\1\154\1\uffff\1\145\1\172\1\uffff\1\164\1\156\1\164\1\156"+
+        "\1\122\1\172\1\143\1\154\1\uffff\1\172\1\144\1\145\1\150\1\163\1"+
+        "\145\1\120\1\143\1\124\1\uffff\1\172\1\164\1\155\1\164\1\157\1\172"+
+        "\1\uffff\2\144\2\172\1\uffff\2\154\1\164\1\165\1\164\2\141\1\155"+
+        "\1\uffff\1\172\1\164\1\172\1\164\1\151\1\145\1\uffff\1\164\1\141"+
+        "\1\uffff\1\145\1\172\1\164\1\172\1\155\1\154\1\145\1\172\1\uffff"+
+        "\1\172\1\145\1\172\1\155\1\uffff\2\126\2\uffff\1\151\1\101\1\151"+
+        "\1\164\1\172\1\164\1\143\1\145\1\uffff\1\172\1\uffff\1\172\1\142"+
+        "\1\146\1\141\1\143\1\162\1\uffff\1\172\1\uffff\1\145\1\141\1\155"+
+        "\2\uffff\1\156\1\uffff\1\172\1\157\1\151\1\157\1\151\1\147\1\154"+
+        "\1\145\1\172\1\uffff\1\141\1\145\1\156\2\uffff\1\162\1\172\1\156"+
+        "\1\145\1\151\1\uffff\1\156\1\143\1\145\1\164\1\uffff\1\154\1\163"+
+        "\1\154\1\163\1\156\1\151\1\163\1\uffff\1\172\1\155\1\164\1\141\1"+
+        "\uffff\1\147\1\155\1\156\1\164\1\145\1\156\1\172\1\157\1\151\1\157"+
+        "\1\151\1\155\1\147\1\172\1\uffff\1\145\1\172\1\162\1\154\1\145\1"+
+        "\147\1\172\1\155\1\164\1\141\1\uffff\1\162\1\142\1\162\1\142\1\145"+
+        "\1\156\1\uffff\1\156\1\uffff\1\171\1\145\1\156\1\172\1\141\1\uffff"+
+        "\1\145\1\104\1\164\1\172\1\151\1\172\1\151\1\156\1\155\1\164\2\172"+
+        "\1\164\1\uffff\1\164\1\156\2\141\1\uffff\1\154\1\uffff\1\154\1\164"+
+        "\1\145\1\104\2\uffff\1\104\1\141\2\164\1\172\2\151\1\172\1\156\2"+
+        "\141\1\172\1\104\1\141\1\uffff\2\164\1\uffff\3\164\1\uffff\1\141"+
+        "\1\172\2\171\1\172\2\141\1\164\1\uffff\2\172\1\uffff\2\172\1\141"+
+        "\4\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\uffff\1\4\1\uffff\1\6\1\uffff\1\10\31\uffff\1\102"+
-        "\5\uffff\1\120\1\uffff\1\142\1\uffff\1\155\1\156\2\uffff\1\162\1"+
-        "\163\6\uffff\1\155\1\2\2\uffff\1\4\2\uffff\1\6\2\uffff\1\10\1\uffff"+
-        "\1\122\3\uffff\1\15\1\34\11\uffff\1\121\26\uffff\1\140\2\uffff\1"+
-        "\141\7\uffff\1\160\1\161\1\74\1\uffff\1\102\10\uffff\1\120\1\uffff"+
-        "\1\142\1\156\1\157\1\162\133\uffff\1\77\12\uffff\1\35\4\uffff\1"+
-        "\150\12\uffff\1\145\41\uffff\1\5\2\uffff\1\40\4\uffff\1\75\2\uffff"+
-        "\1\123\15\uffff\1\37\2\uffff\1\110\7\uffff\1\144\3\uffff\1\126\1"+
-        "\uffff\1\127\14\uffff\1\153\1\uffff\1\112\4\uffff\1\1\1\uffff\1"+
-        "\12\4\uffff\1\3\6\uffff\1\13\11\uffff\1\154\3\uffff\1\33\10\uffff"+
-        "\1\143\4\uffff\1\76\3\uffff\1\52\20\uffff\1\124\3\uffff\1\11\1\137"+
-        "\3\uffff\1\72\5\uffff\1\14\2\uffff\1\16\2\uffff\1\24\10\uffff\1"+
-        "\151\2\uffff\1\100\1\uffff\1\44\11\uffff\1\53\7\uffff\1\130\1\111"+
-        "\2\uffff\1\152\7\uffff\1\132\10\uffff\1\67\4\uffff\1\25\1\uffff"+
-        "\1\32\11\uffff\1\146\1\uffff\1\50\1\51\25\uffff\1\7\2\uffff\1\47"+
-        "\10\uffff\1\31\11\uffff\1\46\10\uffff\1\65\4\uffff\1\113\10\uffff"+
-        "\1\42\6\uffff\1\27\2\uffff\1\36\10\uffff\1\55\6\uffff\1\64\2\uffff"+
-        "\1\104\1\107\10\uffff\1\20\1\uffff\1\17\6\uffff\1\43\1\uffff\1\136"+
-        "\3\uffff\1\147\1\56\3\uffff\1\62\11\uffff\1\133\3\uffff\1\135\1"+
-        "\134\5\uffff\1\70\6\uffff\1\63\7\uffff\1\125\4\uffff\1\22\20\uffff"+
-        "\1\23\13\uffff\1\116\7\uffff\1\131\1\uffff\1\26\5\uffff\1\117\4"+
-        "\uffff\1\60\12\uffff\1\41\5\uffff\1\101\1\uffff\1\103\4\uffff\1"+
-        "\21\1\30\4\uffff\1\57\12\uffff\1\54\2\uffff\1\114\3\uffff\1\61\10"+
-        "\uffff\1\66\2\uffff\1\115\3\uffff\1\105\1\106\1\73\1\71\1\uffff"+
-        "\1\45";
+        "\2\uffff\1\2\1\uffff\1\4\1\uffff\1\6\1\uffff\1\10\30\uffff\1\100"+
+        "\5\uffff\1\116\1\uffff\1\140\1\uffff\1\153\1\154\2\uffff\1\160\1"+
+        "\161\6\uffff\1\153\1\2\2\uffff\1\4\2\uffff\1\6\2\uffff\1\10\1\uffff"+
+        "\1\120\3\uffff\1\15\1\34\11\uffff\1\117\26\uffff\1\136\2\uffff\1"+
+        "\137\5\uffff\1\156\1\157\1\72\1\uffff\1\100\10\uffff\1\116\1\uffff"+
+        "\1\140\1\154\1\155\1\160\131\uffff\1\75\12\uffff\1\35\4\uffff\1"+
+        "\146\12\uffff\1\143\37\uffff\1\5\2\uffff\1\40\4\uffff\1\73\2\uffff"+
+        "\1\121\15\uffff\1\37\2\uffff\1\106\7\uffff\1\142\3\uffff\1\124\1"+
+        "\uffff\1\125\12\uffff\1\151\1\uffff\1\110\4\uffff\1\1\1\uffff\1"+
+        "\12\4\uffff\1\3\6\uffff\1\13\11\uffff\1\152\3\uffff\1\33\10\uffff"+
+        "\1\141\4\uffff\1\74\3\uffff\1\52\16\uffff\1\122\3\uffff\1\11\1\135"+
+        "\3\uffff\1\70\5\uffff\1\14\2\uffff\1\16\2\uffff\1\24\10\uffff\1"+
+        "\147\2\uffff\1\76\1\uffff\1\44\11\uffff\1\53\5\uffff\1\126\1\107"+
+        "\2\uffff\1\150\7\uffff\1\130\10\uffff\1\65\4\uffff\1\25\1\uffff"+
+        "\1\32\11\uffff\1\144\1\uffff\1\50\1\51\23\uffff\1\7\2\uffff\1\47"+
+        "\10\uffff\1\31\11\uffff\1\46\6\uffff\1\62\4\uffff\1\111\10\uffff"+
+        "\1\42\6\uffff\1\27\2\uffff\1\36\10\uffff\1\55\4\uffff\1\61\2\uffff"+
+        "\1\102\1\105\10\uffff\1\20\1\uffff\1\17\6\uffff\1\43\1\uffff\1\134"+
+        "\3\uffff\1\145\1\56\1\uffff\1\57\11\uffff\1\131\3\uffff\1\133\1"+
+        "\132\5\uffff\1\66\4\uffff\1\60\7\uffff\1\123\4\uffff\1\22\16\uffff"+
+        "\1\23\12\uffff\1\114\6\uffff\1\127\1\uffff\1\26\5\uffff\1\115\15"+
+        "\uffff\1\41\4\uffff\1\77\1\uffff\1\101\4\uffff\1\21\1\30\16\uffff"+
+        "\1\54\2\uffff\1\112\3\uffff\1\63\10\uffff\1\64\2\uffff\1\113\3\uffff"+
+        "\1\103\1\104\1\71\1\67\1\uffff\1\45";
     static final String DFA12_specialS =
-        "\1\2\55\uffff\1\0\1\1\u02ea\uffff}>";
+        "\1\0\54\uffff\1\1\1\2\u02cc\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\61\2\60\2\61\1\60\22\61\1\60\1\42\1\56\4\61\1\57\4\61\1"+
-            "\4\1\13\1\50\1\40\12\55\1\6\2\61\1\52\3\61\1\22\1\43\1\23\1"+
-            "\27\1\17\1\41\1\35\1\47\1\21\1\54\1\1\1\44\3\54\1\20\1\54\1"+
-            "\16\1\26\1\24\1\54\1\46\4\54\3\61\1\53\1\54\1\61\1\54\1\25\1"+
-            "\7\1\5\1\11\1\45\1\54\1\34\1\37\2\54\1\12\1\51\2\54\1\3\1\54"+
-            "\1\30\1\15\1\14\1\54\1\36\1\33\1\31\1\32\1\54\1\2\1\61\1\10"+
-            "\uff82\61",
-            "\1\67\3\uffff\1\66\2\uffff\1\63\1\uffff\1\62\1\uffff\1\64\2"+
-            "\uffff\1\65",
+            "\11\60\2\57\2\60\1\57\22\60\1\57\1\41\1\55\4\60\1\56\4\60\1"+
+            "\4\1\13\1\47\1\37\12\54\1\6\2\60\1\51\3\60\1\22\1\42\1\23\1"+
+            "\27\1\17\1\40\1\35\1\46\1\21\1\53\1\1\1\43\3\53\1\20\1\53\1"+
+            "\16\1\26\1\24\1\53\1\45\4\53\3\60\1\52\1\53\1\60\1\53\1\25\1"+
+            "\7\1\5\1\11\1\44\1\53\1\34\1\36\2\53\1\12\1\50\2\53\1\3\1\53"+
+            "\1\30\1\15\1\14\2\53\1\33\1\31\1\32\1\53\1\2\1\60\1\10\uff82"+
+            "\60",
+            "\1\66\3\uffff\1\65\2\uffff\1\62\1\uffff\1\61\1\uffff\1\63\2"+
+            "\uffff\1\64",
             "",
-            "\1\73\2\uffff\1\72",
+            "\1\72\2\uffff\1\71",
             "",
-            "\1\75\3\uffff\1\76",
+            "\1\74\3\uffff\1\75",
             "",
-            "\1\100\3\uffff\1\101",
+            "\1\77\3\uffff\1\100",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\3\70\1\103\26\70",
-            "\1\105\3\uffff\1\107\11\uffff\1\106",
-            "\1\110",
-            "\1\112\15\uffff\1\113\2\uffff\1\114",
-            "\1\115\4\uffff\1\116",
-            "\1\121\33\uffff\1\117\11\uffff\1\120",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\13\70\1\122\16\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\3\67\1\102\26\67",
+            "\1\104\3\uffff\1\106\11\uffff\1\105",
+            "\1\107",
+            "\1\111\15\uffff\1\112\2\uffff\1\113",
+            "\1\114\4\uffff\1\115",
+            "\1\120\33\uffff\1\116\11\uffff\1\117",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\13\67\1\121\16\67",
+            "\1\123",
             "\1\124",
             "\1\125",
-            "\1\126",
-            "\1\131\42\uffff\1\127\14\uffff\1\130",
-            "\1\133\25\uffff\1\132",
-            "\1\136\11\uffff\1\135\5\uffff\1\134",
-            "\1\141\40\uffff\1\137\3\uffff\1\140",
-            "\1\144\15\uffff\1\145\25\uffff\1\142\3\uffff\1\143",
-            "\1\146\3\uffff\1\147",
-            "\12\70\7\uffff\16\70\1\150\13\70\4\uffff\1\70\1\uffff\17\70"+
-            "\1\151\12\70",
-            "\12\70\7\uffff\16\70\1\153\13\70\4\uffff\1\70\1\uffff\17\70"+
-            "\1\154\12\70",
+            "\1\130\42\uffff\1\126\14\uffff\1\127",
+            "\1\132\25\uffff\1\131",
+            "\1\135\11\uffff\1\134\5\uffff\1\133",
+            "\1\140\40\uffff\1\136\3\uffff\1\137",
+            "\1\143\15\uffff\1\144\25\uffff\1\141\3\uffff\1\142",
+            "\1\145\3\uffff\1\146",
+            "\12\67\7\uffff\16\67\1\147\13\67\4\uffff\1\67\1\uffff\17\67"+
+            "\1\150\12\67",
+            "\12\67\7\uffff\16\67\1\152\13\67\4\uffff\1\67\1\uffff\17\67"+
+            "\1\153\12\67",
+            "\1\155",
             "\1\156",
-            "\1\157\11\uffff\1\160",
-            "\1\161",
-            "\1\162",
-            "\1\163\5\uffff\1\164",
-            "\1\165\4\uffff\1\166",
-            "\1\170",
+            "\1\157",
+            "\1\160\5\uffff\1\161",
+            "\1\162\4\uffff\1\163",
+            "\1\165",
             "",
-            "\1\173\21\uffff\1\172",
-            "\1\175\43\uffff\1\174",
-            "\1\177\15\uffff\1\176",
+            "\1\170\21\uffff\1\167",
+            "\1\172\43\uffff\1\171",
+            "\1\174\15\uffff\1\173",
+            "\1\175",
+            "\1\176",
+            "",
             "\1\u0080",
-            "\1\u0081",
             "",
-            "\1\u0083",
-            "",
-            "\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
             "",
-            "\0\u0086",
-            "\0\u0086",
+            "\0\u0083",
+            "\0\u0083",
             "",
             "",
+            "\1\u0085",
+            "\1\u0086",
+            "\1\u0087",
             "\1\u0088",
             "\1\u0089",
             "\1\u008a",
-            "\1\u008b",
-            "\1\u008c",
+            "",
+            "",
+            "\1\u008c\10\uffff\1\u008b",
             "\1\u008d",
             "",
+            "\1\u008e",
+            "\1\u008f",
             "",
-            "\1\u008f\10\uffff\1\u008e",
             "\1\u0090",
-            "",
-            "\1\u0091",
-            "\1\u0092",
+            "\1\u0092\7\uffff\1\u0091",
             "",
             "\1\u0093",
-            "\1\u0095\7\uffff\1\u0094",
             "",
+            "\1\u0094",
+            "\1\u0095",
             "\1\u0096",
+            "",
             "",
             "\1\u0097",
             "\1\u0098",
             "\1\u0099",
-            "",
-            "",
             "\1\u009a",
             "\1\u009b",
-            "\1\u009c",
-            "\1\u009d",
+            "\1\u009d\12\uffff\1\u009c",
             "\1\u009e",
-            "\1\u00a0\12\uffff\1\u009f",
+            "\1\u009f",
+            "\1\u00a0",
+            "",
             "\1\u00a1",
             "\1\u00a2",
             "\1\u00a3",
-            "",
             "\1\u00a4",
             "\1\u00a5",
             "\1\u00a6",
             "\1\u00a7",
             "\1\u00a8",
             "\1\u00a9",
-            "\1\u00aa",
-            "\1\u00ab",
+            "\1\u00ab\7\uffff\1\u00aa",
             "\1\u00ac",
-            "\1\u00ae\7\uffff\1\u00ad",
+            "\1\u00ad",
+            "\1\u00ae",
             "\1\u00af",
             "\1\u00b0",
             "\1\u00b1",
@@ -4053,42 +3989,42 @@ public class InternalKGraphLexer extends Lexer {
             "\1\u00b5",
             "\1\u00b6",
             "\1\u00b7",
+            "",
             "\1\u00b8",
             "\1\u00b9",
-            "\1\u00ba",
             "",
+            "\1\u00ba",
             "\1\u00bb",
             "\1\u00bc",
-            "",
             "\1\u00bd",
             "\1\u00be",
+            "",
+            "",
+            "",
             "\1\u00bf",
+            "",
             "\1\u00c0",
             "\1\u00c1",
             "\1\u00c2",
             "\1\u00c3",
-            "",
-            "",
-            "",
             "\1\u00c4",
-            "",
             "\1\u00c5",
             "\1\u00c6",
             "\1\u00c7",
+            "",
             "\1\u00c8",
+            "",
+            "",
+            "",
+            "",
             "\1\u00c9",
             "\1\u00ca",
-            "\1\u00cb",
-            "\1\u00cc",
-            "",
+            "\1\u00cc\10\uffff\1\u00cb",
             "\1\u00cd",
-            "",
-            "",
-            "",
-            "",
             "\1\u00ce",
             "\1\u00cf",
-            "\1\u00d1\10\uffff\1\u00d0",
+            "\1\u00d0",
+            "\1\u00d1",
             "\1\u00d2",
             "\1\u00d3",
             "\1\u00d4",
@@ -4100,40 +4036,40 @@ public class InternalKGraphLexer extends Lexer {
             "\1\u00da",
             "\1\u00db",
             "\1\u00dc",
-            "\1\u00dd",
-            "\1\u00de",
+            "\12\67\7\uffff\13\67\1\u00dd\16\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u00df",
             "\1\u00e0",
             "\1\u00e1",
-            "\12\70\7\uffff\13\70\1\u00e2\16\70\4\uffff\1\70\1\uffff\32"+
-            "\70",
+            "\1\u00e2",
+            "\1\u00e3",
             "\1\u00e4",
             "\1\u00e5",
             "\1\u00e6",
             "\1\u00e7",
             "\1\u00e8",
-            "\1\u00e9",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u00ea",
             "\1\u00eb",
             "\1\u00ec",
             "\1\u00ed",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u00ef",
             "\1\u00f0",
             "\1\u00f1",
             "\1\u00f2",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u00f3",
             "\1\u00f4",
             "\1\u00f5",
             "\1\u00f6",
             "\1\u00f7",
             "\1\u00f8",
-            "\1\u00f9",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u00fa",
             "\1\u00fb",
             "\1\u00fc",
             "\1\u00fd",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u00fe",
             "\1\u00ff",
             "\1\u0100",
             "\1\u0101",
@@ -4160,345 +4096,348 @@ public class InternalKGraphLexer extends Lexer {
             "\1\u0116",
             "\1\u0117",
             "\1\u0118",
-            "\1\u0119",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u011a",
             "\1\u011b",
-            "\1\u011c",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u011d",
             "\1\u011e",
             "\1\u011f",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0121",
+            "\1\u0120",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0122",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0124",
+            "\1\u0123",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0125",
             "\1\u0126",
             "\1\u0127",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0128",
             "\1\u0129",
             "\1\u012a",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u012c",
-            "\1\u012d",
+            "\1\u012b",
+            "\1\u012d\4\uffff\1\u012c",
             "\1\u012e",
+            "",
             "\1\u012f",
             "\1\u0130",
             "\1\u0131",
-            "\1\u0132",
-            "\1\u0134\4\uffff\1\u0133",
-            "\1\u0135",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
+            "\1\u0133",
+            "\1\u0134",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0136",
             "\1\u0137",
             "\1\u0138",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
+            "\1\u0139",
             "\1\u013a",
             "\1\u013b",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u013d",
+            "\12\67\7\uffff\3\67\1\u013c\26\67\4\uffff\1\67\1\uffff\32\67",
+            "",
             "\1\u013e",
             "\1\u013f",
             "\1\u0140",
-            "\1\u0141",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0142",
-            "\12\70\7\uffff\3\70\1\u0143\26\70\4\uffff\1\70\1\uffff\32\70",
-            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0144",
             "\1\u0145",
             "\1\u0146",
             "\1\u0147",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0148",
             "\1\u0149",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u014a",
             "\1\u014b",
-            "\1\u014c",
-            "\1\u014d",
-            "\1\u014e",
-            "\1\u014f",
-            "\1\u0150",
+            "\1\u014d\3\uffff\1\u014c",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\22\67\1\u014f\7\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0151",
             "\1\u0152",
             "\1\u0153",
             "\1\u0154",
-            "\1\u0156\3\uffff\1\u0155",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\22\70\1\u0158\7\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0156",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0158",
+            "\1\u0159",
             "\1\u015a",
             "\1\u015b",
-            "\1\u015c",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u015d",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u015e",
+            "",
             "\1\u015f",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0161",
+            "\1\u0161\41\uffff\1\u0160",
+            "",
             "\1\u0162",
-            "\1\u0163",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0164",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0165",
+            "",
             "\1\u0166",
             "\1\u0167",
             "",
             "\1\u0168",
-            "\1\u016a\41\uffff\1\u0169",
-            "",
+            "\1\u0169",
+            "\1\u016a",
             "\1\u016b",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u016d",
+            "\1\u016c",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u016e",
-            "",
             "\1\u016f",
             "\1\u0170",
-            "",
-            "\1\u0171",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0172",
             "\1\u0173",
             "\1\u0174",
+            "",
             "\1\u0175",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0176",
+            "",
             "\1\u0177",
             "\1\u0178",
             "\1\u0179",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u017b",
             "\1\u017c",
             "\1\u017d",
             "",
             "\1\u017e",
-            "\1\u017f",
-            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0180",
+            "",
             "\1\u0181",
-            "\1\u0182",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "",
+            "\12\67\7\uffff\7\67\1\u0182\22\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0184",
             "\1\u0185",
-            "\1\u0186",
-            "",
-            "\1\u0187",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0189",
-            "",
-            "\1\u018a",
-            "",
-            "\12\70\7\uffff\7\70\1\u018b\22\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0187\11\uffff\1\u0188\5\uffff\1\u0186\1\uffff\1\u0189\36"+
+            "\uffff\1\u018a",
+            "\1\u018b",
+            "\1\u018c",
             "\1\u018d",
             "\1\u018e",
             "\1\u018f",
             "\1\u0190",
-            "\1\u0192\11\uffff\1\u0193\5\uffff\1\u0191\1\uffff\1\u0194\36"+
-            "\uffff\1\u0195",
-            "\1\u0196",
-            "\1\u0197",
+            "",
+            "\1\u0191",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0193",
+            "\1\u0194",
+            "\1\u0195",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0198",
             "\1\u0199",
             "\1\u019a",
-            "\1\u019b",
             "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u019c",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u019d",
             "\1\u019e",
             "\1\u019f",
             "\1\u01a0",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01a3",
-            "\1\u01a4",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01a2",
+            "\12\67\7\uffff\17\67\1\u01a3\12\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u01a5",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01a7",
+            "\1\u01a6",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01a8",
             "\1\u01a9",
             "\1\u01aa",
+            "",
             "\1\u01ab",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u01ac",
             "\1\u01ad",
-            "\12\70\7\uffff\17\70\1\u01ae\12\70\4\uffff\1\70\1\uffff\32"+
-            "\70",
-            "\1\u01b0",
-            "\1\u01b1",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01b3",
-            "\1\u01b4",
-            "\1\u01b5",
             "",
+            "\1\u01ae",
+            "\1\u01af",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01b1",
+            "\12\67\7\uffff\21\67\1\u01b2\10\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\u01b4",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01b6",
+            "",
             "\1\u01b7",
             "\1\u01b8",
-            "",
             "\1\u01b9",
             "\1\u01ba",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01bc",
-            "\12\70\7\uffff\21\70\1\u01bd\10\70\4\uffff\1\70\1\uffff\32"+
-            "\70",
-            "\1\u01bf",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01c1",
             "",
+            "\1\u01bb",
+            "\1\u01bc",
+            "\1\u01bd",
+            "",
+            "\12\67\7\uffff\7\67\1\u01be\22\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01c0",
+            "\1\u01c1",
             "\1\u01c2",
             "\1\u01c3",
             "\1\u01c4",
-            "\1\u01c5",
-            "",
-            "\1\u01c6",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01c7",
             "\1\u01c8",
-            "",
-            "\12\70\7\uffff\7\70\1\u01c9\22\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01ca",
             "\1\u01cb",
             "\1\u01cc",
+            "",
             "\1\u01cd",
             "\1\u01ce",
             "\1\u01cf",
+            "",
+            "",
             "\1\u01d0",
-            "\1\u01d1",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01d2",
+            "",
+            "\1\u01d3",
             "\1\u01d4",
             "\1\u01d5",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u01d6",
             "\1\u01d7",
+            "",
             "\1\u01d8",
             "\1\u01d9",
             "",
-            "\1\u01da",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01db",
+            "",
             "\1\u01dc",
-            "",
-            "",
             "\1\u01dd",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01df",
-            "",
+            "\1\u01de",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01e0",
-            "\1\u01e1",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01e2",
             "\1\u01e3",
-            "\1\u01e4",
             "",
+            "\1\u01e4",
             "\1\u01e5",
+            "",
             "\1\u01e6",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u01e7",
             "\1\u01e8",
-            "",
             "\1\u01e9",
-            "\1\u01ea",
-            "\1\u01eb",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u01ed",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\3\67\1\u01ea\26\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u01ec",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u01ef",
             "\1\u01f0",
             "",
             "\1\u01f1",
             "\1\u01f2",
-            "",
             "\1\u01f3",
-            "",
             "\1\u01f4",
             "\1\u01f5",
+            "",
+            "",
             "\1\u01f6",
-            "\12\70\7\uffff\3\70\1\u01f7\26\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u01f7",
+            "",
+            "\1\u01f8",
             "\1\u01f9",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u01fa",
+            "\1\u01fb",
             "\1\u01fc",
             "\1\u01fd",
-            "",
             "\1\u01fe",
+            "",
             "\1\u01ff",
             "\1\u0200",
             "\1\u0201",
-            "\1\u0202",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0203",
             "\1\u0204",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0207\10\uffff\1\u0206",
             "",
-            "",
-            "\1\u0205",
-            "\1\u0206",
-            "",
-            "\1\u0207",
-            "\1\u0208",
-            "\1\u0209",
+            "\1\u0209\10\uffff\1\u0208",
             "\1\u020a",
             "\1\u020b",
             "\1\u020c",
-            "\1\u020d",
             "",
-            "\1\u020e",
+            "\12\67\7\uffff\17\67\1\u020d\12\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "",
             "\1\u020f",
             "\1\u0210",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0211",
             "\1\u0212",
             "\1\u0213",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0216\10\uffff\1\u0215",
+            "\1\u0214",
+            "\1\u0215",
+            "\1\u0216",
+            "\1\u0217",
             "",
-            "\1\u0218\10\uffff\1\u0217",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
+            "",
             "\1\u0219",
             "\1\u021a",
             "\1\u021b",
-            "",
-            "\12\70\7\uffff\17\70\1\u021c\12\70\4\uffff\1\70\1\uffff\32"+
-            "\70",
-            "",
+            "\1\u021c",
+            "\1\u021d",
             "\1\u021e",
-            "\1\u021f",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0220",
             "\1\u0221",
             "\1\u0222",
             "\1\u0223",
-            "\1\u0224",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0225",
             "\1\u0226",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
-            "",
+            "\1\u0227",
             "\1\u0228",
             "\1\u0229",
             "\1\u022a",
             "\1\u022b",
+            "",
             "\1\u022c",
-            "\1\u022d",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
             "\1\u022e",
             "\1\u022f",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0230",
             "\1\u0231",
-            "\1\u0232",
-            "\1\u0233",
-            "\1\u0234",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0232\5\uffff\1\u0233",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0235",
             "\1\u0236",
-            "\1\u0237",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0238",
             "\1\u0239",
             "\1\u023a",
             "\1\u023b",
             "\1\u023c",
-            "",
             "\1\u023d",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
+            "\1\u023e",
             "\1\u023f",
-            "\1\u0240",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0241",
             "\1\u0242",
-            "\1\u0243\5\uffff\1\u0244",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0243",
+            "\1\u0244",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
             "\1\u0246",
             "\1\u0247",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0249",
             "\1\u024a",
             "\1\u024b",
             "\1\u024c",
@@ -4506,248 +4445,212 @@ public class InternalKGraphLexer extends Lexer {
             "\1\u024e",
             "\1\u024f",
             "\1\u0250",
+            "\1\u0251",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0252",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0253",
-            "\1\u0254",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0255",
             "\1\u0256",
             "\1\u0257",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
+            "\1\u0258",
             "\1\u0259",
-            "\1\u025a",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
-            "\1\u025d",
+            "\1\u025a",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u025c",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u025e",
             "\1\u025f",
             "\1\u0260",
-            "\1\u0261",
-            "\1\u0262",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u0263",
-            "\1\u0264",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0265",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0266",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0268",
-            "\1\u0269",
+            "\1\u0266\22\uffff\1\u0267",
+            "\1\u0268\22\uffff\1\u0269",
+            "",
+            "",
             "\1\u026a",
-            "",
             "\1\u026b",
             "\1\u026c",
-            "",
             "\1\u026d",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u026f",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0270",
             "\1\u0271",
-            "\1\u0272",
-            "\1\u0273",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u0274",
+            "\1\u0275",
             "\1\u0276",
             "\1\u0277",
             "\1\u0278",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "",
             "\1\u027a",
+            "\1\u027b",
+            "\1\u027c",
             "",
-            "\1\u027b\22\uffff\1\u027c",
-            "\1\u027d\22\uffff\1\u027e",
             "",
+            "\1\u027d",
             "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u027f",
             "\1\u0280",
             "\1\u0281",
             "\1\u0282",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0283",
             "\1\u0284",
             "\1\u0285",
-            "\1\u0286",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0287",
+            "\1\u0288",
             "\1\u0289",
+            "",
+            "",
             "\1\u028a",
-            "\1\u028b",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u028c",
             "\1\u028d",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u028e",
             "",
             "\1\u028f",
             "\1\u0290",
             "\1\u0291",
-            "",
-            "",
             "\1\u0292",
+            "",
             "\1\u0293",
             "\1\u0294",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u0295",
             "\1\u0296",
             "\1\u0297",
             "\1\u0298",
             "\1\u0299",
-            "\1\u029a",
+            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u029b",
             "\1\u029c",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u029d",
             "",
             "\1\u029e",
             "\1\u029f",
             "\1\u02a0",
-            "",
-            "",
             "\1\u02a1",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u02a2",
             "\1\u02a3",
-            "\1\u02a4",
-            "\1\u02a5",
-            "",
+            "\12\67\7\uffff\3\67\1\u02a4\26\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02a6",
             "\1\u02a7",
             "\1\u02a8",
             "\1\u02a9",
             "\1\u02aa",
             "\1\u02ab",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
-            "\1\u02ac",
             "\1\u02ad",
-            "\1\u02ae",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02af",
             "\1\u02b0",
             "\1\u02b1",
             "\1\u02b2",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u02b4",
+            "\12\67\7\uffff\3\67\1\u02b3\26\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02b5",
             "\1\u02b6",
-            "",
             "\1\u02b7",
+            "",
             "\1\u02b8",
             "\1\u02b9",
             "\1\u02ba",
             "\1\u02bb",
             "\1\u02bc",
             "\1\u02bd",
-            "\12\70\7\uffff\3\70\1\u02be\26\70\4\uffff\1\70\1\uffff\32\70",
+            "",
+            "\1\u02be",
+            "",
+            "\1\u02bf",
             "\1\u02c0",
             "\1\u02c1",
-            "\1\u02c2",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02c3",
+            "",
             "\1\u02c4",
             "\1\u02c5",
             "\1\u02c6",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02c8",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02ca",
             "\1\u02cb",
             "\1\u02cc",
             "\1\u02cd",
-            "\12\70\7\uffff\3\70\1\u02ce\26\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02d0",
+            "",
             "\1\u02d1",
             "\1\u02d2",
             "\1\u02d3",
+            "\1\u02d4",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
             "\1\u02d5",
+            "",
             "\1\u02d6",
             "\1\u02d7",
             "\1\u02d8",
             "\1\u02d9",
+            "",
+            "",
             "\1\u02da",
-            "",
             "\1\u02db",
-            "",
             "\1\u02dc",
             "\1\u02dd",
-            "\1\u02de",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u02df",
             "\1\u02e0",
-            "",
-            "\1\u02e1",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02e2",
             "\1\u02e3",
             "\1\u02e4",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02e6",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\1\u02e7",
+            "",
             "\1\u02e8",
             "\1\u02e9",
+            "",
             "\1\u02ea",
             "\1\u02eb",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u02ee",
+            "\1\u02ec",
             "",
+            "\1\u02ed",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02ef",
             "\1\u02f0",
-            "\1\u02f1",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\u02f2",
             "\1\u02f3",
-            "",
             "\1\u02f4",
             "",
-            "\1\u02f5",
-            "\1\u02f6",
-            "\1\u02f7",
-            "\1\u02f8",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
-            "",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "\1\u02f9",
-            "\1\u02fa",
-            "\1\u02fb",
-            "\1\u02fc",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u02fe",
-            "\1\u02ff",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0301",
-            "\1\u0302",
-            "\1\u0303",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0305",
-            "\1\u0306",
-            "",
-            "\1\u0307",
-            "\1\u0308",
-            "",
-            "\1\u0309",
-            "\1\u030a",
-            "\1\u030b",
-            "",
-            "\1\u030c",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u030e",
-            "\1\u030f",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0311",
-            "\1\u0312",
-            "\1\u0313",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
-            "\1\u0318",
             "",
             "",
             "",
             "",
-            "\12\70\7\uffff\32\70\4\uffff\1\70\1\uffff\32\70",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             ""
     };
 
@@ -4781,33 +4684,13 @@ public class InternalKGraphLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_46 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_46>='\u0000' && LA12_46<='\uFFFF')) ) {s = 134;}
-
-                        else s = 49;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_47 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_47>='\u0000' && LA12_47<='\uFFFF')) ) {s = 134;}
-
-                        else s = 49;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -4869,45 +4752,63 @@ public class InternalKGraphLexer extends Lexer {
 
                         else if ( (LA12_0=='G') ) {s = 29;}
 
-                        else if ( (LA12_0=='v') ) {s = 30;}
+                        else if ( (LA12_0=='i') ) {s = 30;}
 
-                        else if ( (LA12_0=='i') ) {s = 31;}
+                        else if ( (LA12_0=='/') ) {s = 31;}
 
-                        else if ( (LA12_0=='/') ) {s = 32;}
+                        else if ( (LA12_0=='F') ) {s = 32;}
 
-                        else if ( (LA12_0=='F') ) {s = 33;}
+                        else if ( (LA12_0=='!') ) {s = 33;}
 
-                        else if ( (LA12_0=='!') ) {s = 34;}
+                        else if ( (LA12_0=='B') ) {s = 34;}
 
-                        else if ( (LA12_0=='B') ) {s = 35;}
+                        else if ( (LA12_0=='L') ) {s = 35;}
 
-                        else if ( (LA12_0=='L') ) {s = 36;}
+                        else if ( (LA12_0=='f') ) {s = 36;}
 
-                        else if ( (LA12_0=='f') ) {s = 37;}
+                        else if ( (LA12_0=='V') ) {s = 37;}
 
-                        else if ( (LA12_0=='V') ) {s = 38;}
+                        else if ( (LA12_0=='H') ) {s = 38;}
 
-                        else if ( (LA12_0=='H') ) {s = 39;}
+                        else if ( (LA12_0=='.') ) {s = 39;}
 
-                        else if ( (LA12_0=='.') ) {s = 40;}
+                        else if ( (LA12_0=='m') ) {s = 40;}
 
-                        else if ( (LA12_0=='m') ) {s = 41;}
+                        else if ( (LA12_0=='=') ) {s = 41;}
 
-                        else if ( (LA12_0=='=') ) {s = 42;}
+                        else if ( (LA12_0=='^') ) {s = 42;}
 
-                        else if ( (LA12_0=='^') ) {s = 43;}
+                        else if ( (LA12_0=='J'||(LA12_0>='M' && LA12_0<='O')||LA12_0=='Q'||LA12_0=='U'||(LA12_0>='W' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='a'||LA12_0=='g'||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='n' && LA12_0<='o')||LA12_0=='q'||(LA12_0>='u' && LA12_0<='v')||LA12_0=='z') ) {s = 43;}
 
-                        else if ( (LA12_0=='J'||(LA12_0>='M' && LA12_0<='O')||LA12_0=='Q'||LA12_0=='U'||(LA12_0>='W' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='a'||LA12_0=='g'||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='n' && LA12_0<='o')||LA12_0=='q'||LA12_0=='u'||LA12_0=='z') ) {s = 44;}
+                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 44;}
 
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 45;}
+                        else if ( (LA12_0=='\"') ) {s = 45;}
 
-                        else if ( (LA12_0=='\"') ) {s = 46;}
+                        else if ( (LA12_0=='\'') ) {s = 46;}
 
-                        else if ( (LA12_0=='\'') ) {s = 47;}
+                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 47;}
 
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 48;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||(LA12_0>=';' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 48;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||(LA12_0>=';' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 49;}
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_45 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_45>='\u0000' && LA12_45<='\uFFFF')) ) {s = 131;}
+
+                        else s = 48;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_46 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_46>='\u0000' && LA12_46<='\uFFFF')) ) {s = 131;}
+
+                        else s = 48;
 
                         if ( s>=0 ) return s;
                         break;

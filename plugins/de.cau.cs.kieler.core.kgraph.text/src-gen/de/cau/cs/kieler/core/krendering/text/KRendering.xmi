@@ -800,7 +800,7 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="DecoratorPlacementData"/>
         <elements xsi:type="xtext:Keyword" value="{"/>
-        <elements xsi:type="xtext:Assignment" feature="relative" operator="?=">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="relative" operator="?=">
           <terminal xsi:type="xtext:Keyword" value="relative"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="location"/>
@@ -849,12 +849,20 @@
         <elements xsi:type="xtext:Assignment" feature="heightHint" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="horizontalIndent"/>
-        <elements xsi:type="xtext:Assignment" feature="horizontalIndent" operator="=">
+        <elements xsi:type="xtext:Keyword" value="insetRight"/>
+        <elements xsi:type="xtext:Assignment" feature="insetRight" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="verticalIndent"/>
-        <elements xsi:type="xtext:Assignment" feature="verticalIndent" operator="=">
+        <elements xsi:type="xtext:Keyword" value="insetBottom"/>
+        <elements xsi:type="xtext:Assignment" feature="insetBottom" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="insetLeft"/>
+        <elements xsi:type="xtext:Assignment" feature="insetLeft" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="insetTop"/>
+        <elements xsi:type="xtext:Assignment" feature="insetTop" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>

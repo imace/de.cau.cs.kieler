@@ -1049,7 +1049,7 @@ public class KGraphGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KDecoratorPlacementData:
-	//	"DecoratorPlacementData" "{" relative?="relative" "location" location=EFloat ("xOffset" xOffset=EFloat)? ("yOffset"
+	//	"DecoratorPlacementData" "{" relative?="relative"? "location" location=EFloat ("xOffset" xOffset=EFloat)? ("yOffset"
 	//	yOffset=EFloat)? ("width" width=EFloat)? ("height" height=EFloat)? "}";
 	public KRenderingGrammarAccess.KDecoratorPlacementDataElements getKDecoratorPlacementDataAccess() {
 		return gaKRendering.getKDecoratorPlacementDataAccess();
@@ -1060,8 +1060,8 @@ public class KGraphGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KGridPlacementData:
-	//	"GridPlacementData" "{" "widthHint" widthHint=EFloat "heightHint" heightHint=EFloat "horizontalIndent"
-	//	horizontalIndent=EFloat "verticalIndent" verticalIndent=EFloat "}";
+	//	"GridPlacementData" "{" "widthHint" widthHint=EFloat "heightHint" heightHint=EFloat "insetRight" insetRight=EFloat
+	//	"insetBottom" insetBottom=EFloat "insetLeft" insetLeft=EFloat "insetTop" insetTop=EFloat "}";
 	public KRenderingGrammarAccess.KGridPlacementDataElements getKGridPlacementDataAccess() {
 		return gaKRendering.getKGridPlacementDataAccess();
 	}
