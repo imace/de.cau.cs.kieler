@@ -54,11 +54,11 @@ def Expression getTrueBooleanValue() {
 
 
 	// convert transition effects
-	def dispatch void convertToSEffect(Emission effect, de.cau.cs.kieler.s.s.State sState) {
+	def dispatch void convertToSEffect(Emission effect, List<de.cau.cs.kieler.s.s.Instruction> instructions) {
 		val sEmit = SFactory::eINSTANCE.createEmit;
 		val sSignal = TraceComponent::getSingleTraceTarget(effect.signal, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
 		sEmit.setSignal(sSignal);
-		sState.instructions.add(sEmit);
+		instructions.add(sEmit);
 	}
 	def dispatch void convertToSEffect(Assignment effect, de.cau.cs.kieler.s.s.State sState) {
 		// todo
@@ -140,6 +140,12 @@ def String getStatePathAsName(State state) {
    def de.cau.cs.kieler.s.s.State getDepthSState(State state) {
    	 TraceComponent::getSingleTraceTarget(state, "Depth") as de.cau.cs.kieler.s.s.State
    }
+   def de.cau.cs.kieler.s.s.State getMainSurfaceSState(State state) {
+   	 TraceComponent::getSingleTraceTarget(state, "MainSurface") as de.cau.cs.kieler.s.s.State
+   }
+   def de.cau.cs.kieler.s.s.State getMainDepthSState(State state) {
+   	 TraceComponent::getSingleTraceTarget(state, "MainDepth") as de.cau.cs.kieler.s.s.State
+   }
 
 // ======================================================================================================
 	
@@ -178,11 +184,22 @@ def String getStatePathAsName(State state) {
 	}	
 
 
+	// get the highest priority for all strong nodes of this state
 	def Node getDependencyStrongNode(State state) {
-		TraceComponent::getSingleTraceTarget(state, "DependencyStrong") as Node		
+		val nodes = (TraceComponent::getTraceTargets(state, "DependencyStrong") as List<Node>);
+		if (nodes.empty) {
+			return null;
+		}
+		nodes.sort(e1, e2 | compareDependencyPriority(e1,e2)).get(0);
 	}
+	
+	// get the highest priority for all weak nodes of this state
 	def Node getDependencyWeakNode(State state) {
-		TraceComponent::getSingleTraceTarget(state, "DependencyWeak") as Node		
+		val nodes = (TraceComponent::getTraceTargets(state, "DependencyWeak") as List<Node>);
+		if (nodes.empty) {
+			return null;
+		}
+		nodes.sort(e1, e2 | compareDependencyPriority(e1,e2)).get(0);
 	}
 
 
@@ -195,6 +212,9 @@ def String getStatePathAsName(State state) {
 		if (e1.priority < e2.priority) {-1} else {1}	
 	}
 
+	def int compareDependencyPriority(Node e1, Node e2) {
+		if (e1.priority < e2.priority) {-1} else {1}	
+	}
 
 
 

@@ -34,6 +34,9 @@ class Synccharts2S {
 		val dependencies = DependencyFactory::eINSTANCE.createDependencies();
 		Synccharts2Dependenies.transform(dependencies, rootRegion);
 		
+		// set highest priority
+		target.setPriority(dependencies.nodes.size);
+		
 		// create mapping from SyncChart states to dependency nodes
 		for (node : dependencies.nodes) {
 			if (node.type == DependencyType::WEAK) {
@@ -62,10 +65,13 @@ class Synccharts2S {
 				val sStateMainSurface = state.createSStateSurface(state.isRootState, true);
 				val sStateMainDepth   = state.createSStateDepth(state.isRootState, true);
 				// create traces for all created surface and depth s states
-				TraceComponent::createTrace(state, sStateSurface, "MainSurface" );
-				TraceComponent::createTrace(sStateSurface, state, "MainSurfaceBack" );
-				TraceComponent::createTrace(state, sStateDepth, "MainDepth" );
-				TraceComponent::createTrace(sStateDepth, state, "MainDepthBack" );
+				TraceComponent::createTrace(state, sStateMainSurface, "MainSurface" );
+				TraceComponent::createTrace(sStateMainSurface, state, "MainSurfaceBack" );
+				TraceComponent::createTrace(state, sStateMainDepth, "MainDepth" );
+				TraceComponent::createTrace(sStateMainDepth, state, "MainDepthBack" );
+				// add new s states to program
+				target.states.add(sStateMainSurface);
+				target.states.add(sStateMainDepth);
 			}
 			// create traces for all created surface and depth s states
 			TraceComponent::createTrace(state, sStateSurface, "Surface" );
@@ -79,8 +85,8 @@ class Synccharts2S {
 		
 		// handle transitions (as states are created now and gotos can be mapped)
 		for (state : rootRegion.getAllStates) {
-			val sStateSurface = TraceComponent::getSingleTraceTarget(state, "Surface") as de.cau.cs.kieler.s.s.State
-			val sStateDepth = TraceComponent::getSingleTraceTarget(state, "Depth") as de.cau.cs.kieler.s.s.State
+			val sStateSurface = state.surfaceSState
+			val sStateDepth = state.depthSState
 			state.fillSStateSurface(sStateSurface);
 			state.fillSStateDepth(sStateDepth); 
 		}
@@ -114,7 +120,7 @@ class Synccharts2S {
 	
 
 	// ======================================================================================================
-	// ==                             H A N D L E   S   S T A T E   F I L L I N G                          ==
+	// ==                             H A N D L E   S   S T A T E   S U R F A C E                          ==
 	// ======================================================================================================
 	
 	def fillSStateSurface (State state, de.cau.cs.kieler.s.s.State sState) {
@@ -134,34 +140,48 @@ class Synccharts2S {
 			transition.handleTransition(sState);
 		}
 		
+		// parallel regions
+		if (state.regions.size > 1) {
+			// fork inner regions
+			for (region : state.regions) {
+				val initialState = region.initialState;
+				val sfork = SFactory::eINSTANCE.createFork();
+				sfork.setThread(initialState.surfaceSState)
+				sfork.setPriority(initialState.dependencyStrongNode.priority);
+				sState.instructions.add(sfork);
+			}
+			// fork main thread
+			val sfork = SFactory::eINSTANCE.createFork();
+			sfork.setThread(state.mainSurfaceSState)
+			sfork.setPriority(state.dependencyStrongNode.priority);
+			sState.instructions.add(sfork);
+		}
+		
 		// continue with depth
 		val scontinuation = state.depthSState
 		val strans = SFactory::eINSTANCE.createTrans();
 		strans.setContinuation(scontinuation);
 		sState.instructions.add(strans);
-		
-		// parallel regions
-		if (state.regions.size > 1) {
-			//fork
-			for (region : state.regions) {
-				val initialState = region.initialState;
-				val sfork = SFactory::eINSTANCE.createFork();
-				sfork.setThread(initialState.surfaceSState)
-				
-			}
-			
-		}
 	}	
+
 	
+	// ======================================================================================================
+	// ==                              H A N D L E   S   S T A T E   D E P T H                             ==
 	// ======================================================================================================
 	
 	def fillSStateDepth (State state, de.cau.cs.kieler.s.s.State sState) {
 		val regardedTransitionListStrong = state.strongTransitionsOrdered
 		val regardedTransitionListWeak = state.weakTransitionsOrdered
+		
+		// optimization: of halt or term before then exit
+		if (    !sState.instructions.filter(typeof(de.cau.cs.kieler.s.s.Halt)).empty 
+		     || !sState.instructions.filter(typeof(de.cau.cs.kieler.s.s.Term)).empty) {
+			return null;
+		}
 
 	    // before the pause statement possibly raise priority
-	    // optimization: do this only if the priority might be lowered (weak prio exist)
 	    if (state.getDependencyWeakNode != null) {
+		    // optimization: do this only if the priority might be lowered (weak prio exist)
 		    sState.addStrongPrio(state);
 	    } 
 	    
@@ -187,7 +207,7 @@ class Synccharts2S {
 		}
 		
 		// if this a final state wait for join otherwise continue in the next tick to possibly handle strong and weak transitions
-		if (!state.isFinal) {
+		if (!state.finalState) {
 			var strans = SFactory::eINSTANCE.createTrans();
 			strans.setContinuation(sState);
 			sState.instructions.add(strans);
@@ -214,7 +234,7 @@ class Synccharts2S {
 			// handle transition effect - convert to s-effect
 			if (!transition.effects.nullOrEmpty) {
 				for (effect : transition.effects) {
-					effect.convertToSEffect(sState);
+					effect.convertToSEffect(sif.instructions);
 				}
 			}
 			
@@ -228,7 +248,8 @@ class Synccharts2S {
 	// ==                          H A N D L E   S   S  T A T E   C R E A T I O N                          ==
 	// ======================================================================================================
 	
-	def create target : SFactory::eINSTANCE.createState() createSStateSurface (State state, Boolean root, Boolean main) {
+	def de.cau.cs.kieler.s.s.State createSStateSurface (State state, Boolean root, Boolean main) {
+		val target = SFactory::eINSTANCE.createState(); 
 		target.name = state.getStatePathAsName;
 		if (root) {
 			target.name = "L_root";
@@ -242,9 +263,11 @@ class Synccharts2S {
 			// add root state signals to program only (not to the state itself)
 			target.signals.addAll(state.getStateSignals)
 		}
+		target;
 	}	
 	
-	def create target : SFactory::eINSTANCE.createState() createSStateDepth (State state, Boolean root, Boolean main) {
+	def de.cau.cs.kieler.s.s.State createSStateDepth (State state, Boolean root, Boolean main) {
+		val target = SFactory::eINSTANCE.createState(); 
 		target.name = state.getStatePathAsName;
 		if (root) {
 			target.name = "L_root";
@@ -264,6 +287,8 @@ class Synccharts2S {
 			target.instructions.addAll(SFactory::eINSTANCE.createTerm)
 		if (noTransitions && !state.isFinal)
 			target.instructions.addAll(SFactory::eINSTANCE.createHalt)
+			
+		target;
 	}
 
 	
