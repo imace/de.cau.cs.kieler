@@ -236,13 +236,22 @@ public interface DependencyPackage extends EPackage {
 	int CONTROLFLOW_DEPENDENCY__TARGET_NODE = DEPENDENCY__TARGET_NODE;
 
 	/**
+	 * The feature id for the '<em><b>Immediate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLFLOW_DEPENDENCY__IMMEDIATE = DEPENDENCY_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Controlflow Dependency</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLFLOW_DEPENDENCY_FEATURE_COUNT = DEPENDENCY_FEATURE_COUNT + 0;
+	int CONTROLFLOW_DEPENDENCY_FEATURE_COUNT = DEPENDENCY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.TransitionDependencyImpl <em>Transition Dependency</em>}' class.
@@ -410,14 +419,14 @@ public interface DependencyPackage extends EPackage {
 	int NODE_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE <em>DEPENDENCYTYPE</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType <em>Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE
-	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.DependencyPackageImpl#getDEPENDENCYTYPE()
+	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType
+	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.DependencyPackageImpl#getDependencyType()
 	 * @generated
 	 */
-	int DEPENDENCYTYPE = 7;
+	int DEPENDENCY_TYPE = 7;
 
 
 	/**
@@ -492,6 +501,17 @@ public interface DependencyPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getControlflowDependency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.ControlflowDependency#isImmediate <em>Immediate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Immediate</em>'.
+	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.ControlflowDependency#isImmediate()
+	 * @see #getControlflowDependency()
+	 * @generated
+	 */
+	EAttribute getControlflowDependency_Immediate();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.TransitionDependency <em>Transition Dependency</em>}'.
@@ -623,14 +643,14 @@ public interface DependencyPackage extends EPackage {
 	EAttribute getNode_Id();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE <em>DEPENDENCYTYPE</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>DEPENDENCYTYPE</em>'.
-	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE
+	 * @return the meta object for enum '<em>Type</em>'.
+	 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType
 	 * @generated
 	 */
-	EEnum getDEPENDENCYTYPE();
+	EEnum getDependencyType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -717,6 +737,14 @@ public interface DependencyPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CONTROLFLOW_DEPENDENCY = eINSTANCE.getControlflowDependency();
+
+		/**
+		 * The meta object literal for the '<em><b>Immediate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROLFLOW_DEPENDENCY__IMMEDIATE = eINSTANCE.getControlflowDependency_Immediate();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.TransitionDependencyImpl <em>Transition Dependency</em>}' class.
@@ -821,14 +849,14 @@ public interface DependencyPackage extends EPackage {
 		EAttribute NODE__ID = eINSTANCE.getNode_Id();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE <em>DEPENDENCYTYPE</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType <em>Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DEPENDENCYTYPE
-		 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.DependencyPackageImpl#getDEPENDENCYTYPE()
+		 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType
+		 * @see de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.impl.DependencyPackageImpl#getDependencyType()
 		 * @generated
 		 */
-		EEnum DEPENDENCYTYPE = eINSTANCE.getDEPENDENCYTYPE();
+		EEnum DEPENDENCY_TYPE = eINSTANCE.getDependencyType();
 
 	}
 

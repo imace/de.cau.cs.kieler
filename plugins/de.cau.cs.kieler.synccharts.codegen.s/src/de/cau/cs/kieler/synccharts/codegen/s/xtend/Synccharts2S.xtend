@@ -8,17 +8,41 @@ import de.cau.cs.kieler.core.kexpressions.*
 import java.util.*
 import com.google.inject.Inject
 import org.eclipse.xtend.util.stdlib.TraceComponent
-
+import com.google.inject.Guice
+import de.cau.cs.kieler.synccharts.codegen.dependencies.xtend.Synccharts2Dependenies
+import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyFactory
+import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.Dependency
+import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.DependencyType
+import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.Node
 
 class Synccharts2S {
 
-	@Inject extension Helper helper
+	extension de.cau.cs.kieler.synccharts.codegen.dependencies.xtend.Synccharts2Dependenies Synccharts2Dependenies = Guice::createInjector().getInstance(typeof(Synccharts2Dependenies));
+	extension de.cau.cs.kieler.synccharts.codegen.s.xtend.Helper Helper = Guice::createInjector().getInstance(typeof(Helper));
 
-	def create target : SFactory::eINSTANCE.createProgram() transform (Region root) {
-		var rootState = root.states.head();
+	// ======================================================================================================
+	// ==                                        M A I N   T R A N S F O R M A T I O N                     ==
+	// ======================================================================================================
+
+	def create target : SFactory::eINSTANCE.createProgram() transform (Region rootRegion) {
+		val rootState = rootRegion.states.head();
 
 		// clear traces
 		TraceComponent::clearTrace();
+		
+		// dependency analysis
+		val dependencies = DependencyFactory::eINSTANCE.createDependencies();
+		Synccharts2Dependenies.transform(dependencies, rootRegion);
+		
+		// create mapping from SyncChart states to dependency nodes
+		for (node : dependencies.nodes) {
+			if (node.type == DependencyType::WEAK) {
+				TraceComponent::createTrace(node.state, node, "DependencyWeak");
+			}
+			else {
+				TraceComponent::createTrace(node.state, node, "DependencyStrong");
+			}
+		}
 		
 		// set s program name (as the root state's name)
 		target.setName(rootState.id)
@@ -26,14 +50,17 @@ class Synccharts2S {
 		// add interface signals to s program (as the root state's signals)
 		target.signals.addAll(rootState.getStateSignals);
 		
+		// order SyncChart states according to their dependency priority (strong nodes)
+		val dependencyPrioritySortedStates = rootRegion.getAllStates.sort(e1, e2 | compareTraceDependencyPriority(e1, e2));
+		
 		// create all states and their mapping
-		for (state : root.getAllStates) {
-			var sStateSurface = state.state2SStateSurface(state.isRootState, false);
-			var sStateDepth   = state.state2SStateDepth(state.isRootState, false);
+		for (state : dependencyPrioritySortedStates) {
+			val sStateSurface = state.createSStateSurface(state.isRootState, false);
+			val sStateDepth   = state.createSStateDepth(state.isRootState, false);
 			// possibly parallel regions
 			if (state.regions.size > 1) {
-				var sStateMainSurface = state.state2SStateSurface(state.isRootState, true);
-				var sStateMainDepth   = state.state2SStateDepth(state.isRootState, true);
+				val sStateMainSurface = state.createSStateSurface(state.isRootState, true);
+				val sStateMainDepth   = state.createSStateDepth(state.isRootState, true);
 				// create traces for all created surface and depth s states
 				TraceComponent::createTrace(state, sStateSurface, "MainSurface" );
 				TraceComponent::createTrace(sStateSurface, state, "MainSurfaceBack" );
@@ -51,15 +78,20 @@ class Synccharts2S {
 		}
 		
 		// handle transitions (as states are created now and gotos can be mapped)
-		for (state : root.getAllStates) {
-			var sStateSurface = TraceComponent::getSingleTraceTarget(state, "Surface") as de.cau.cs.kieler.s.s.State
-			var sStateDepth = TraceComponent::getSingleTraceTarget(state, "Depth") as de.cau.cs.kieler.s.s.State
+		for (state : rootRegion.getAllStates) {
+			val sStateSurface = TraceComponent::getSingleTraceTarget(state, "Surface") as de.cau.cs.kieler.s.s.State
+			val sStateDepth = TraceComponent::getSingleTraceTarget(state, "Depth") as de.cau.cs.kieler.s.s.State
 			state.fillSStateSurface(sStateSurface);
 			state.fillSStateDepth(sStateDepth); 
 		}
 		 
 		
 	}		
+
+
+	// ======================================================================================================
+	// ==                   T R A V E R S E   A L L   S T A T E S   A N D   R E G I O N S                  ==
+	// ======================================================================================================
 
 	def List<State> getAllStates(Region region) {
 		var List<State> stateList = new ArrayList()
@@ -79,70 +111,124 @@ class Synccharts2S {
 	def List<Region> getAllRegionsOfState (State state) {
 		state.regions
 	}
+	
 
 	// ======================================================================================================
-	
-	// HANDLE S STATE FILLING
+	// ==                             H A N D L E   S   S T A T E   F I L L I N G                          ==
+	// ======================================================================================================
 	
 	def fillSStateSurface (State state, de.cau.cs.kieler.s.s.State sState) {
-		var regardedTransitionList = state.outgoingTransitions.filter(e|e.isImmediate).sort(e1, e2 | if (e1.priority < e2.priority) {-1} else {1});
-		var noTransitions = regardedTransitionList.isEmpty;
-		var finalState = state.isFinal;
+		val regardedTransitionListStrong = state.strongTransitionsOrdered.filter(e|e.isImmediate);
+		val regardedTransitionListWeak = state.weakTransitionsOrdered.filter(e|e.isImmediate);
 
-		// outgoing immediate transitions
-		for (transition : regardedTransitionList) {
-			var sif = SFactory::eINSTANCE.createIf();
-			var scontinuation = TraceComponent::getSingleTraceTarget(transition.targetState, "Surface") as de.cau.cs.kieler.s.s.State
-			sif.setExpression(transition.trigger);
-			sif.setContinuation(scontinuation);
-			sState.instructions.add(sif);
+		// first handle all strong preemptions
+		for (transition : regardedTransitionListStrong) {
+			transition.handleTransition(sState);
 		}
+		
+		// lower priority (to allow a possible body to be executed)
+		sState.addWeakPrio(state);
+		
+		// then handle all weak preemptions
+		for (transition : regardedTransitionListWeak) {
+			transition.handleTransition(sState);
+		}
+		
+		// continue with depth
+		val scontinuation = state.depthSState
+		val strans = SFactory::eINSTANCE.createTrans();
+		strans.setContinuation(scontinuation);
+		sState.instructions.add(strans);
 		
 		// parallel regions
 		if (state.regions.size > 1) {
 			//fork
-			
+			for (region : state.regions) {
+				val initialState = region.initialState;
+				val sfork = SFactory::eINSTANCE.createFork();
+				sfork.setThread(initialState.surfaceSState)
+				
+			}
 			
 		}
 	}	
 	
+	// ======================================================================================================
+	
 	def fillSStateDepth (State state, de.cau.cs.kieler.s.s.State sState) {
-		var regardedTransitionList = state.outgoingTransitions.filter(e|!e.isImmediate).sort(e1, e2 | if (e1.priority < e2.priority) {-1} else {1});
-		var noTransitions = regardedTransitionList.isEmpty;
-		var isFinal = state.isFinal;
-		
-		for (transition : regardedTransitionList) {
-			var sif = SFactory::eINSTANCE.createIf();
-			var strans = SFactory::eINSTANCE.createTrans();
-			var scontinuation = TraceComponent::getSingleTraceTarget(transition.targetState, "Surface") as de.cau.cs.kieler.s.s.State
-			
-			if (transition.trigger != null) {
-				sif.setExpression(transition.trigger.convertToSExpression());
-			}
-			else {
-				sif.setExpression(getTrueBooleanValue());
-			}
-			
-			strans.setContinuation(scontinuation);
-			sif.instructions.add(strans);
-			
-			//sif.setContinuation(scontinuation);
-			sState.instructions.add(sif);
+		val regardedTransitionListStrong = state.strongTransitionsOrdered
+		val regardedTransitionListWeak = state.weakTransitionsOrdered
+
+	    // before the pause statement possibly raise priority
+	    // optimization: do this only if the priority might be lowered (weak prio exist)
+	    if (state.getDependencyWeakNode != null) {
+		    sState.addStrongPrio(state);
+	    } 
+	    
+	    // create a pause instruction only iff no HALT or TERM instruction
+	    // halt == no outgoing transition
+	    // term == final state
+		if (!state.finalState) {
+			sState.instructions.add(SFactory::eINSTANCE.createPause());
+		}
+
+
+		// first handle all strong preemptions
+		for (transition : regardedTransitionListStrong) {
+			transition.handleTransition(sState);
 		}
 		
-		if (!(noTransitions || isFinal)) {
+		// lower priority (to allow a possible body to be executed)
+		sState.addWeakPrio(state);
+		
+		// then handle all weak preemptions
+		for (transition : regardedTransitionListWeak) {
+			transition.handleTransition(sState);
+		}
+		
+		// if this a final state wait for join otherwise continue in the next tick to possibly handle strong and weak transitions
+		if (!state.isFinal) {
 			var strans = SFactory::eINSTANCE.createTrans();
 			strans.setContinuation(sState);
 			sState.instructions.add(strans);
 		}
 		
 	}	
-
+	
+	// ======================================================================================================
+	// ==                                   H A N D L E   T R A N S I T I O N                              ==
 	// ======================================================================================================
 	
-	// HANDLE S STATE CREATION
+	def void handleTransition(Transition transition, de.cau.cs.kieler.s.s.State sState) {
+			val sif = SFactory::eINSTANCE.createIf();
+			val strans = SFactory::eINSTANCE.createTrans();
+			
+			// handle transition trigger - convert to s-expression
+			if (transition.trigger != null) {
+				sif.setExpression(transition.trigger.convertToSExpression);
+			}
+			else {
+				sif.setExpression(getTrueBooleanValue());
+			}
+			
+			// handle transition effect - convert to s-effect
+			if (!transition.effects.nullOrEmpty) {
+				for (effect : transition.effects) {
+					effect.convertToSEffect(sState);
+				}
+			}
+			
+			strans.setContinuation(transition.targetState.surfaceSState);
+			sif.instructions.add(strans);
+			
+			sState.instructions.add(sif);
+	}	
+
+	// ======================================================================================================
+	// ==                          H A N D L E   S   S  T A T E   C R E A T I O N                          ==
+	// ======================================================================================================
 	
-	def create target : SFactory::eINSTANCE.createState() state2SStateSurface (State state, Boolean root, Boolean main) {
+	def create target : SFactory::eINSTANCE.createState() createSStateSurface (State state, Boolean root, Boolean main) {
 		target.name = state.getStatePathAsName;
 		if (root) {
 			target.name = "L_root";
@@ -158,7 +244,7 @@ class Synccharts2S {
 		}
 	}	
 	
-	def create target : SFactory::eINSTANCE.createState() state2SStateDepth (State state, Boolean root, Boolean main) {
+	def create target : SFactory::eINSTANCE.createState() createSStateDepth (State state, Boolean root, Boolean main) {
 		target.name = state.getStatePathAsName;
 		if (root) {
 			target.name = "L_root";
@@ -172,35 +258,19 @@ class Synccharts2S {
 			// add root state signals to program only (not to the state itself)
 			target.signals.addAll(state.getStateSignals)
 		}
-		var regardedTransitionList = state.outgoingTransitions.filter(e|!e.isImmediate).sort(e1, e2 | if (e1.priority < e2.priority) {-1} else {1});
-		var noTransitions = regardedTransitionList.isEmpty;
-		var isFinal = state.isFinal;
-		
+
+		val noTransitions = state.outgoingTransitions.filter(e|!e.isImmediate).isEmpty;
 		if (noTransitions && state.isFinal) 
-			target.instructions.addAll(state.getTermInstruction)
+			target.instructions.addAll(SFactory::eINSTANCE.createTerm)
 		if (noTransitions && !state.isFinal)
-			target.instructions.addAll(state.getHaltInstruction)
-		if (!(noTransitions || isFinal))
-			target.instructions.addAll(state.getPauseInstruction)
+			target.instructions.addAll(SFactory::eINSTANCE.createHalt)
 	}
+
 	
 	// ======================================================================================================
+	// ==                                XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                             ==
+	// ======================================================================================================
 	
-	// HANDLE BASIC STATES
-			
-	def create target : SFactory::eINSTANCE.createTerm getTermInstruction (State state) {
-		target
-	}			
-			
-	def create target : SFactory::eINSTANCE.createHalt getHaltInstruction (State state) {
-		target.setContinuation(target.eContainer as de.cau.cs.kieler.s.s.State);
-		target
-	}			
-
-	def create target : SFactory::eINSTANCE.createPause getPauseInstruction (State state) {
-		target
-	}			 
-			
 	// ======================================================================================================
 	
 }

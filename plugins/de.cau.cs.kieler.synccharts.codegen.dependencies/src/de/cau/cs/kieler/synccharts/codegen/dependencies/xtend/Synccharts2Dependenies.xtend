@@ -11,16 +11,23 @@ import org.eclipse.emf.ecore.EClass
 //import org.eclipse.xtend.util.stdlib.TraceComponent
 import org.eclipse.xtend.util.stdlib.*
 import org.eclipse.emf.common.util.BasicEList
-
+import java.lang.System
+import de.cau.cs.kieler.synccharts.Transition
+import com.google.common.collect.Lists
 
 class Synccharts2Dependenies {
-	
+	 
 	// ======================================================================================================
 	// ==                                 T R A V E R S E    S Y N C C H A R T                             ==
 	// ======================================================================================================
 	
 	def create dependencies : DependencyFactory::eINSTANCE.createDependencies() transform (Region root) {
+		dependencies.transform(root);
+	}		
+	
+	def Dependencies transform( Dependencies dependencies, Region root) {
 		var rootState = root.states.head();
+		//System::out.println("Hierarchical8 "+ state.id + ", ");
 
 		// create nodes for all states 
 		for (state : root.getAllStates(dependencies)) {
@@ -38,7 +45,7 @@ class Synccharts2Dependenies {
 			dependencies.handleTransitionDependency(state);
 			
 			for (transition : state.outgoingTransitions) {
-				var firstNode  = dependencies.getNode(transition.sourceState, transition, DEPENDENCYTYPE::STRONG);
+				var firstNode  = dependencies.getNode(transition.sourceState, transition, DependencyType::STRONG);
 				
 				if (transition.targetState.outgoingTransitions.size == 0) {
 					dependencies.handleControlFlowDependency(firstNode, state, transition, null);
@@ -53,8 +60,9 @@ class Synccharts2Dependenies {
 		
 		// topological sort
 		dependencies.topologicalSort();
-		
-	}		
+
+		return dependencies;
+	}
 	
 	// -----------------------------------------------------------------------------------------------------
 
@@ -85,22 +93,51 @@ class Synccharts2Dependenies {
 	// ======================================================================================================
 	// ==                                 H A N D L E    D E P E N D E N C Y                               ==
 	// ======================================================================================================
+
+	def handleHierarchyDependencyHelper(Dependencies dependencies, State childState, Node PW, Node PS, Transition childStateTransition) {
+			val CS = dependencies.getNode(childState, childStateTransition, DependencyType::STRONG);
+			dependencies.getHierarchyDependency(PW, CS);
+			dependencies.getHierarchyDependency(CS, PS);
+			if (childState.hierarchical) {
+				val CW = dependencies.getNode(childState, childStateTransition, DependencyType::WEAK);
+				dependencies.getHierarchyDependency(PW, CW);
+				dependencies.getHierarchyDependency(CW, PS);
+			}
+	}
+	
+	def handleHierarchyDependencyHelper(Dependencies dependencies, State childState, State state, Transition stateTransition) {
+		val PS = dependencies.getNode(state, stateTransition, DependencyType::STRONG);
+		var PW = PS;
+		if (state.hierarchical) {
+			PW = dependencies.getNode(state, stateTransition, DependencyType::WEAK);
+		}
+		else {
+			PW = null;
+		}
+		// if state has no outgoing transitions, do with dummy self-transition
+		val childStateTransitions = childState.outgoingTransitions.toList(); 
+		if (childStateTransitions.empty) { 
+			dependencies.handleHierarchyDependencyHelper(childState, PW, PS, null);
+		}
+		else {
+			for (childStateTransition : childStateTransitions) {
+				 dependencies.handleHierarchyDependencyHelper(childState, PW, PS, childStateTransition);
+			}
+		}
+	}
+	
 	
 	// Weak dependencies from parentWeak to (childWeak and childStrong)
 	// Strong dependencies from (childWeak and childStrong) to parentStrong
 	def handleHierarchyDependency(Dependencies dependencies, State childState, State state) {
-		for (stateTransition : state.outgoingTransitions) {
-			var PS = dependencies.getNode(state, stateTransition, DEPENDENCYTYPE::STRONG);
-			var PW = dependencies.getNode(state, stateTransition, DEPENDENCYTYPE::WEAK);
-			for (childStateTransition : childState.outgoingTransitions) {
-				var CS = dependencies.getNode(childState, childStateTransition, DEPENDENCYTYPE::STRONG);
-				dependencies.getHierarchyDependency(PW, CS);
-				dependencies.getHierarchyDependency(CS, PS);
-				if (childState.hierarchical) {
-					var CW = dependencies.getNode(childState, childStateTransition, DEPENDENCYTYPE::WEAK);
-					dependencies.getHierarchyDependency(PW, CW);
-					dependencies.getHierarchyDependency(CW, PS);
-				}
+		var stateTransitions = state.outgoingTransitions.toList();
+		if (stateTransitions.empty) {
+			// if state has no outgoing transitions, do with dummy self-transition
+			dependencies.handleHierarchyDependencyHelper(childState, state, null);
+		}
+		else {
+			for (stateTransition : stateTransitions) {
+				dependencies.handleHierarchyDependencyHelper(childState, state, stateTransition);
 			}
 		}
 		
@@ -113,15 +150,15 @@ class Synccharts2Dependenies {
  			if (i < orderedTransitions.size) {
 				var nextTransition = orderedTransitions.get(i);
 				if (nextTransition != null) {
-					var sourceNode = dependencies.getNode(state, transition, DEPENDENCYTYPE::STRONG);
-					var targetNode = dependencies.getNode(state, nextTransition, DEPENDENCYTYPE::STRONG);
+					var sourceNode = dependencies.getNode(state, transition, DependencyType::STRONG);
+					var targetNode = dependencies.getNode(state, nextTransition, DependencyType::STRONG);
 					dependencies.getTransitionDependency(sourceNode, targetNode);
 					if (state.hierarchical) {
-						var sourceNodeW = dependencies.getNode(state, transition, DEPENDENCYTYPE::WEAK);
-						var targetNodeW = dependencies.getNode(state, nextTransition, DEPENDENCYTYPE::WEAK);
+						var sourceNodeW = dependencies.getNode(state, transition, DependencyType::WEAK);
+						var targetNodeW = dependencies.getNode(state, nextTransition, DependencyType::WEAK);
 						dependencies.getTransitionDependency(sourceNodeW, targetNodeW);
-						dependencies.getTransitionDependency(sourceNodeW, targetNode)  //TODO: necessary or correct???
-						dependencies.getTransitionDependency(sourceNode, targetNodeW)  //TODO: necessary or correct???
+						//dependencies.getTransitionDependency(sourceNodeW, targetNode)  //TODO: necessary or correct???
+						//dependencies.getTransitionDependency(sourceNode, targetNodeW)  //TODO: necessary or correct???
 					}
 				}
 				i=i+1;
@@ -130,16 +167,21 @@ class Synccharts2Dependenies {
 	}
 	
 	def handleControlFlowDependency(Dependencies dependencies, Node firstNode, State state, Transition transition, Transition targetTransition) {
-					var secondNode = dependencies.getNode(transition.targetState, targetTransition, DEPENDENCYTYPE::STRONG);
-					dependencies.getControlFlowDependency(firstNode, secondNode)
+			var secondNode = dependencies.getNode(transition.targetState, targetTransition, DependencyType::STRONG);
+			if (firstNode != secondNode) {
+					dependencies.getControlFlowDependency(firstNode, secondNode, transition.isImmediate)
 				
-					if (state.hierarchical) {
-						var firstNodeW  = dependencies.getNode(transition.sourceState, transition, DEPENDENCYTYPE::WEAK);
-						var secondNodeW = dependencies.getNode(transition.targetState, targetTransition, DEPENDENCYTYPE::WEAK);
-						dependencies.getControlFlowDependency(firstNodeW, secondNodeW)
-						dependencies.getControlFlowDependency(firstNodeW, secondNode)  //TODO: necessary or correct???
-						dependencies.getControlFlowDependency(firstNode, secondNodeW)  //TODO: necessary or correct???
+					if (transition.sourceState.hierarchical) {
+						var firstNodeW  = dependencies.getNode(transition.sourceState, transition, DependencyType::WEAK);
+						dependencies.getControlFlowDependency(firstNodeW, secondNode, transition.isImmediate)  //TODO: necessary or correct???
+						
+						if (transition.targetState.hierarchical) {
+							var secondNodeW = dependencies.getNode(transition.targetState, targetTransition, DependencyType::WEAK);
+							dependencies.getControlFlowDependency(firstNodeW, secondNodeW, transition.isImmediate)
+							dependencies.getControlFlowDependency(firstNode, secondNodeW, transition.isImmediate)  //TODO: necessary or correct???
+						}
 					}
+			}
 	}
 	
 	def handleSignalDependency(Dependencies dependencies, Transition transition, State rootState) {
@@ -161,21 +203,21 @@ class Synccharts2Dependenies {
 						var emitterState = transition.sourceState;
 						var triggerState = (triggeredTransition as Transition).sourceState;
 						
-						var emitterNode = dependencies.getNode(emitterState, transition, DEPENDENCYTYPE::STRONG);
-						var triggerNode = dependencies.getNode(triggerState, triggeredTransition, DEPENDENCYTYPE::STRONG);
+						var emitterNode = dependencies.getNode(emitterState, transition, DependencyType::STRONG);
+						var triggerNode = dependencies.getNode(triggerState, triggeredTransition, DependencyType::STRONG);
 						dependencies.getSignalDependency(emitterNode, triggerNode);
 						//TODO: all the following necessary/correct???
 						if (emitterState.hierarchical) {
-							var emitterNodeW = dependencies.getNode(emitterState, transition, DEPENDENCYTYPE::WEAK);
+							var emitterNodeW = dependencies.getNode(emitterState, transition, DependencyType::WEAK);
 							dependencies.getSignalDependency(emitterNodeW, triggerNode);
 						}
 						if (triggerState.hierarchical) {
-							var triggerNodeW = dependencies.getNode(triggerState, triggeredTransition, DEPENDENCYTYPE::WEAK);
+							var triggerNodeW = dependencies.getNode(triggerState, triggeredTransition, DependencyType::WEAK);
 							dependencies.getSignalDependency(emitterNode, triggerNodeW);
 						}
 						if (emitterState.hierarchical && triggerState.hierarchical) {
-							var emitterNodeW = dependencies.getNode(emitterState, transition, DEPENDENCYTYPE::WEAK);
-							var triggerNodeW = dependencies.getNode(triggerState, triggeredTransition, DEPENDENCYTYPE::WEAK);
+							var emitterNodeW = dependencies.getNode(emitterState, transition, DependencyType::WEAK);
+							var triggerNodeW = dependencies.getNode(triggerState, triggeredTransition, DependencyType::WEAK);
 							dependencies.getSignalDependency(emitterNodeW, triggerNodeW);
 						}
 					}										
@@ -192,8 +234,9 @@ class Synccharts2Dependenies {
 		dependencies.getDependency(triggerNode, emitterNode, newDependency);
 	}
 
-	def Dependency getControlFlowDependency(Dependencies dependencies, Node firstNode, Node secondNode) {
+	def Dependency getControlFlowDependency(Dependencies dependencies, Node firstNode, Node secondNode, boolean isImmediate) {
 		var newDependency = DependencyFactory::eINSTANCE.createControlflowDependency();
+		newDependency.setImmediate(isImmediate);
 		dependencies.getDependency(secondNode, firstNode, newDependency);
 	}
 
@@ -230,15 +273,15 @@ class Synccharts2Dependenies {
 	
 	def void createSimpleOrStrongAndWeakNoedes(Dependencies dependencies, State state, Transition transition) {
 		if (state.hierarchical) {
-				dependencies.getNode(state, transition, DEPENDENCYTYPE::STRONG);
-				dependencies.getNode(state, transition, DEPENDENCYTYPE::WEAK);
+				dependencies.getNode(state, transition, DependencyType::STRONG);
+				dependencies.getNode(state, transition, DependencyType::WEAK);
 		}
 		else {
-				dependencies.getNode(state, transition, DEPENDENCYTYPE::STRONG);
+				dependencies.getNode(state, transition, DependencyType::STRONG);
 		}
 	}
 
-	def Node getNode(Dependencies dependencies, State state, Transition transition, DEPENDENCYTYPE type) {
+	def Node getNode(Dependencies dependencies, State state, Transition transition, DependencyType type) {
 		var node = dependencies.nodes.filter(e|(e.type == type) && (e.state == state) && (e.transition == transition));
 		if (node.size > 0) {
 			return node.head;
@@ -246,11 +289,15 @@ class Synccharts2Dependenies {
 		// not yet found newNode => add it
 		var newNode = DependencyFactory::eINSTANCE.createNode();
 		newNode.setState(state);
-		if (type == DEPENDENCYTYPE::STRONG) {
-			newNode.setId(state.id + "_S");
+		var stateId = state.id;
+		if (transition != null) {
+			stateId = stateId + transition.priority;
+		}
+		if (type == DependencyType::WEAK) {
+			newNode.setId(stateId + "_W");
 		}
 		else {
-			newNode.setId(state.id + "_W");
+			newNode.setId(stateId + "_S");
 		} 
 		newNode.setTransition(transition);
 		newNode.setType(type);
@@ -307,7 +354,7 @@ class Synccharts2Dependenies {
 		}
 		
 		var nodesWithoutOutgoingEdges = dependencies.nodes.filter(e | e.outgoingDependencies == null || e.outgoingDependencies.size == 0);
-		var tmpPrio = 1;
+		var tmpPrio = 0;
 		for (node : nodesWithoutOutgoingEdges) {
 			tmpPrio = node.visit(tmpPrio);
 		}
@@ -316,12 +363,18 @@ class Synccharts2Dependenies {
 	
 	def int visit(Node node, int priority) {
 		if (node.priority == -1) {
-			node.setPriority(priority);
-			var tmpPrio = priority + 1;
+			node.setPriority(-2);
+			var tmpPrio = priority;
 			for (incomingDependency : node.incomingDependencies) {
-				tmpPrio = incomingDependency.sourceNode.visit(tmpPrio);
+				val nextNode = incomingDependency.sourceNode;
+				if (nextNode != node) {
+//					System::out.println("At "+ node.id + " visit next " + nextNode.id);
+					tmpPrio = nextNode.visit(tmpPrio);
+				}
 			}
-			return tmpPrio;
+//			node.setPriority(1 + (node.eContainer as Dependencies).nodes.size - (tmpPrio + 1));
+			node.setPriority((tmpPrio + 1));
+			return tmpPrio + 1;
 		}
 		else {
 			return priority;

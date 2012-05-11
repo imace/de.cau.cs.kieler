@@ -7,6 +7,8 @@ import java.util.*
 import com.google.inject.Inject
 import org.eclipse.xtend.util.stdlib.TraceComponent
 import org.eclipse.xtend.util.stdlib.CloningExtensions
+import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.Node
+import de.cau.cs.kieler.s.s.Prio
 
 
 class Helper {
@@ -39,8 +41,8 @@ def dispatch Expression convertToSExpression(Expression expression) {
 
 //ValuedObjectReference - added by cmot for handleIfSingle() function (present tests of simple triggers)
 def dispatch Expression convertToSExpression(ValuedObjectReference expression) {
- 	var ssignal = TraceComponent::getSingleTraceTarget(expression.valuedObject, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
-	expression.setValuedObject(ssignal);
+ 	var sSignal = TraceComponent::getSingleTraceTarget(expression.valuedObject, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
+	expression.setValuedObject(sSignal);
  	expression; 
 }
 
@@ -50,6 +52,23 @@ def Expression getTrueBooleanValue() {
 	 booleanValue	
 }
 
+
+	// convert transition effects
+	def dispatch void convertToSEffect(Emission effect, de.cau.cs.kieler.s.s.State sState) {
+		val sEmit = SFactory::eINSTANCE.createEmit;
+		val sSignal = TraceComponent::getSingleTraceTarget(effect.signal, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
+		sEmit.setSignal(sSignal);
+		sState.instructions.add(sEmit);
+	}
+	def dispatch void convertToSEffect(Assignment effect, de.cau.cs.kieler.s.s.State sState) {
+		// todo
+	}
+	def dispatch void convertToSEffect(TextEffect effect, de.cau.cs.kieler.s.s.State sState) {
+		// todo
+	}
+	def dispatch void convertToSEffect(Effect effect, de.cau.cs.kieler.s.s.State sState) {
+		// todo
+	}
 
 	// ======================================================================================================
 	
@@ -61,7 +80,7 @@ def Expression getTrueBooleanValue() {
 			var ssignal = signal.transform;
 			signalList.add(ssignal)
 			// 	create traces for all created signals
-			TraceComponent::createTrace(signal, ssignal, "Ssignal" );
+			TraceComponent::createTrace(signal, ssignal, "Signal" );
 			TraceComponent::createTrace(ssignal, signal, "SignalBack" );
 		}
 		signalList 
@@ -108,6 +127,75 @@ def String getStatePathAsName(State state) {
 		getStatePathAsName(state.parentRegion.parentState) + regionString + "_" + state.id
 	}
 }
+
+
+   def State getInitialState(Region region) {
+   	  region.states.filter(e | e.isInitial).toList.get(0);   	
+   }
+
+
+   def de.cau.cs.kieler.s.s.State getSurfaceSState(State state) {
+   	 TraceComponent::getSingleTraceTarget(state, "Surface") as de.cau.cs.kieler.s.s.State
+   }
+   def de.cau.cs.kieler.s.s.State getDepthSState(State state) {
+   	 TraceComponent::getSingleTraceTarget(state, "Depth") as de.cau.cs.kieler.s.s.State
+   }
+
+// ======================================================================================================
+	
+	def List<Transition> getWeakTransitionsOrdered(State state) {
+		state.outgoingTransitions.filter(e|e.type == TransitionType::WEAKABORT).sort(e1, e2 | compareTransitionPriority(e1,e2));
+	}
+	def List<Transition> getStrongTransitionsOrdered(State state) {
+		state.outgoingTransitions.filter(e|e.type == TransitionType::STRONGABORT).sort(e1, e2 | compareTransitionPriority(e1,e2));
+	}
+	
+	def boolean finalState(State state) {
+		return (state.outgoingTransitions.filter(e|!e.isImmediate).nullOrEmpty || state.isFinal);
+	}
+
+
+// ======================================================================================================
+
+	def void addWeakPrio(de.cau.cs.kieler.s.s.State sState, State state) {
+		val prioStatement = SFactory::eINSTANCE.createPrio();
+		val dependencyNode = state.dependencyWeakNode
+		if (dependencyNode != null) {
+			val priority = dependencyNode.priority;
+			prioStatement.setPriority(priority);
+			sState.instructions.add(prioStatement)
+		}
+	}
+	
+	def void addStrongPrio(de.cau.cs.kieler.s.s.State sState, State state) {
+		var prioStatement = SFactory::eINSTANCE.createPrio();
+		val dependencyNode = state.dependencyStrongNode
+		if (dependencyNode != null) {
+			var priority = dependencyNode.priority;
+			prioStatement.setPriority(priority);
+			sState.instructions.add(prioStatement)
+		}
+	}	
+
+
+	def Node getDependencyStrongNode(State state) {
+		TraceComponent::getSingleTraceTarget(state, "DependencyStrong") as Node		
+	}
+	def Node getDependencyWeakNode(State state) {
+		TraceComponent::getSingleTraceTarget(state, "DependencyWeak") as Node		
+	}
+
+
+	def int compareTraceDependencyPriority(State e1, State e2) {
+		if (e1.getDependencyStrongNode.priority > 
+		    e2.getDependencyStrongNode.priority) {-1} else {1}
+	}
+
+	def int compareTransitionPriority(Transition e1, Transition e2) {
+		if (e1.priority < e2.priority) {-1} else {1}	
+	}
+
+
 
 
 
