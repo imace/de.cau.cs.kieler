@@ -135,22 +135,22 @@ ruleProgram returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getProgramAccess().getSignalsSignalParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getProgramAccess().getProgramInterfaceProgramInterfaceParserRuleCall_5_0()); 
 	    }
-		lv_signals_5_0=ruleSignal		{
+		lv_programInterface_5_0=ruleProgramInterface		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getProgramRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"signals",
-        		lv_signals_5_0, 
-        		"Signal");
+       			"programInterface",
+        		lv_programInterface_5_0, 
+        		"ProgramInterface");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*(
+)?(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getProgramAccess().getStatesStateParserRuleCall_6_0()); 
@@ -169,6 +169,45 @@ ruleProgram returns [EObject current=null]
 
 )
 )+)
+;
+
+
+
+
+
+// Entry rule entryRuleProgramInterface
+entryRuleProgramInterface returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getProgramInterfaceRule()); }
+	 iv_ruleProgramInterface=ruleProgramInterface 
+	 { $current=$iv_ruleProgramInterface.current; } 
+	 EOF 
+;
+
+// Rule ProgramInterface
+ruleProgramInterface returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getProgramInterfaceAccess().getInterfaceSignalDeclsInterfaceSignalDeclParserRuleCall_0()); 
+	    }
+		lv_interfaceSignalDecls_0_0=ruleInterfaceSignalDecl		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getProgramInterfaceRule());
+	        }
+       		add(
+       			$current, 
+       			"interfaceSignalDecls",
+        		lv_interfaceSignalDecls_0_0, 
+        		"InterfaceSignalDecl");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)+
 ;
 
 
@@ -245,7 +284,7 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)*	otherlv_7=';' 
+)+	otherlv_7=';' 
     {
     	newLeafNode(otherlv_7, grammarAccess.getStateAccess().getSemicolonKeyword_5_2());
     }
@@ -352,7 +391,7 @@ ruleThread returns [EObject current=null]
 	    }
 
 )
-)*	otherlv_7=';' 
+)+	otherlv_7=';' 
     {
     	newLeafNode(otherlv_7, grammarAccess.getThreadAccess().getSemicolonKeyword_5_2());
     }
@@ -1499,7 +1538,7 @@ ruleExpression returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
+(((	ruleBooleanExpression)=>
 	{ 
 	  /* */ 
 	}
@@ -1511,7 +1550,7 @@ ruleExpression returns [EObject current=null]
         $current = $this_BooleanExpression_0.current; 
         afterParserOrEnumRuleCall();
     }
-
+)
     |
 	{ 
 	  /* */ 
@@ -1734,7 +1773,7 @@ ruleCompareOperation returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+((((	ruleNotOrValuedExpression)=>
 	{ 
 	  /* */ 
 	}
@@ -1746,7 +1785,7 @@ ruleCompareOperation returns [EObject current=null]
         $current = $this_NotOrValuedExpression_0.current; 
         afterParserOrEnumRuleCall();
     }
-((
+)((
 	{ 
 	  /* */ 
 	}
@@ -1825,7 +1864,7 @@ ruleNotOrValuedExpression returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
+(((	ruleValuedExpression)=>
 	{ 
 	  /* */ 
 	}
@@ -1837,7 +1876,7 @@ ruleNotOrValuedExpression returns [EObject current=null]
         $current = $this_ValuedExpression_0.current; 
         afterParserOrEnumRuleCall();
     }
-
+)
     |
 	{ 
 	  /* */ 
@@ -2558,11 +2597,12 @@ ruleAtomicValuedExpression returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |(	otherlv_2='(' 
+    |(((	'(' 
+)=>	otherlv_2='(' 
     {
     	newLeafNode(otherlv_2, grammarAccess.getAtomicValuedExpressionAccess().getLeftParenthesisKeyword_2_0());
     }
-
+)
 	{ 
 	  /* */ 
 	}
@@ -3859,6 +3899,8 @@ ruleAnnotation returns [EObject current=null]
     }
 )
 ;
+
+
 
 
 
