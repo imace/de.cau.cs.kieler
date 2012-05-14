@@ -19,10 +19,14 @@ Program :
 //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
 //	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
 //	('Signals' (signals += Signal) (',' signals += Signal)*';')?
-	(signals += Signal)*
+	(programInterface=ProgramInterface)?
+//	(signals += Signal)*
 	(states += State)+
 ;
 
+
+ProgramInterface:
+	(interfaceSignalDecls+=InterfaceSignalDecl)+;
 
 
 //Annotation:
@@ -37,7 +41,7 @@ Program :
 
 State:
 	'State' '(' name = ID ')' '{'
-	('Signals' (signals+=Signal)* ';')? 
+	('Signals' (signals+=Signal)+ ';')? 
 	(instructions+=Instruction';')*
 	'}'
 ;
@@ -45,14 +49,14 @@ State:
 
 Thread:
 	'Thread' '(' name = ID ')' '{'
-	('Signals' (signals+=Signal)* ';')? 
+	('Signals' (signals+=Signal)+ ';')? 
 	(states+=State';')*
 	'}'
 ;
 
 
 Signal returns expressions::Signal:
-(isInput?='input')?
+    (isInput?='input')?
 	(isOutput?='output')?
 	'signal'
 	(name=EString)

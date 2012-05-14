@@ -28,8 +28,8 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cPriorityAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cPriorityINTTerminalRuleCall_3_0 = (RuleCall)cPriorityAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cSignalsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cSignalsSignalParserRuleCall_5_0 = (RuleCall)cSignalsAssignment_5.eContents().get(0);
+		private final Assignment cProgramInterfaceAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cProgramInterfaceProgramInterfaceParserRuleCall_5_0 = (RuleCall)cProgramInterfaceAssignment_5.eContents().get(0);
 		private final Assignment cStatesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
@@ -37,13 +37,15 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		//	"Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
 		//	//	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
 		//	//	('Signals' (signals += Signal) (',' signals += Signal)*';')?
-		//	signals+=Signal* states+=State+;
+		//	programInterface=ProgramInterface? //	(signals += Signal)*
+		//	states+=State+;
 		public ParserRule getRule() { return rule; }
 
 		//"Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
 		////	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
 		////	('Signals' (signals += Signal) (',' signals += Signal)*';')?
-		//signals+=Signal* states+=State+
+		//programInterface=ProgramInterface? //	(signals += Signal)*
+		//states+=State+
 		public Group getGroup() { return cGroup; }
 
 		//"Synchronous Program"
@@ -67,17 +69,33 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//signals+=Signal*
-		public Assignment getSignalsAssignment_5() { return cSignalsAssignment_5; }
+		//programInterface=ProgramInterface?
+		public Assignment getProgramInterfaceAssignment_5() { return cProgramInterfaceAssignment_5; }
 
-		//Signal
-		public RuleCall getSignalsSignalParserRuleCall_5_0() { return cSignalsSignalParserRuleCall_5_0; }
+		//ProgramInterface
+		public RuleCall getProgramInterfaceProgramInterfaceParserRuleCall_5_0() { return cProgramInterfaceProgramInterfaceParserRuleCall_5_0; }
 
 		//states+=State+
 		public Assignment getStatesAssignment_6() { return cStatesAssignment_6; }
 
 		//State
 		public RuleCall getStatesStateParserRuleCall_6_0() { return cStatesStateParserRuleCall_6_0; }
+	}
+
+	public class ProgramInterfaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ProgramInterface");
+		private final Assignment cInterfaceSignalDeclsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cInterfaceSignalDeclsInterfaceSignalDeclParserRuleCall_0 = (RuleCall)cInterfaceSignalDeclsAssignment.eContents().get(0);
+		
+		//ProgramInterface:
+		//	interfaceSignalDecls+=InterfaceSignalDecl+;
+		public ParserRule getRule() { return rule; }
+
+		//interfaceSignalDecls+=InterfaceSignalDecl+
+		public Assignment getInterfaceSignalDeclsAssignment() { return cInterfaceSignalDeclsAssignment; }
+
+		//InterfaceSignalDecl
+		public RuleCall getInterfaceSignalDeclsInterfaceSignalDeclParserRuleCall_0() { return cInterfaceSignalDeclsInterfaceSignalDeclParserRuleCall_0; }
 	}
 
 	public class StateElements extends AbstractParserRuleElementFinder {
@@ -108,10 +126,10 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		////Annotatable returns annotations::Annotatable:
 		//// 	State | Instruction;
 		//State:
-		//	"State" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (instructions+=Instruction ";")* "}";
+		//	"State" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (instructions+=Instruction ";")* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"State" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (instructions+=Instruction ";")* "}"
+		//"State" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (instructions+=Instruction ";")* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"State"
@@ -132,13 +150,13 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//("Signals" signals+=Signal* ";")?
+		//("Signals" signals+=Signal+ ";")?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"Signals"
 		public Keyword getSignalsKeyword_5_0() { return cSignalsKeyword_5_0; }
 
-		//signals+=Signal*
+		//signals+=Signal+
 		public Assignment getSignalsAssignment_5_1() { return cSignalsAssignment_5_1; }
 
 		//Signal
@@ -184,10 +202,10 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Thread:
-		//	"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (states+=State ";")* "}";
+		//	"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (states+=State ";")* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (states+=State ";")* "}"
+		//"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (states+=State ";")* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"Thread"
@@ -208,13 +226,13 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//("Signals" signals+=Signal* ";")?
+		//("Signals" signals+=Signal+ ";")?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"Signals"
 		public Keyword getSignalsKeyword_5_0() { return cSignalsKeyword_5_0; }
 
-		//signals+=Signal*
+		//signals+=Signal+
 		public Assignment getSignalsAssignment_5_1() { return cSignalsAssignment_5_1; }
 
 		//Signal
@@ -1027,6 +1045,7 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	private ProgramElements pProgram;
+	private ProgramInterfaceElements pProgramInterface;
 	private StateElements pState;
 	private ThreadElements pThread;
 	private SignalElements pSignal;
@@ -1069,13 +1088,24 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
 	//	//	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
 	//	//	('Signals' (signals += Signal) (',' signals += Signal)*';')?
-	//	signals+=Signal* states+=State+;
+	//	programInterface=ProgramInterface? //	(signals += Signal)*
+	//	states+=State+;
 	public ProgramElements getProgramAccess() {
 		return (pProgram != null) ? pProgram : (pProgram = new ProgramElements());
 	}
 	
 	public ParserRule getProgramRule() {
 		return getProgramAccess().getRule();
+	}
+
+	//ProgramInterface:
+	//	interfaceSignalDecls+=InterfaceSignalDecl+;
+	public ProgramInterfaceElements getProgramInterfaceAccess() {
+		return (pProgramInterface != null) ? pProgramInterface : (pProgramInterface = new ProgramInterfaceElements());
+	}
+	
+	public ParserRule getProgramInterfaceRule() {
+		return getProgramInterfaceAccess().getRule();
 	}
 
 	////Annotation:
@@ -1086,7 +1116,7 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 	////Annotatable returns annotations::Annotatable:
 	//// 	State | Instruction;
 	//State:
-	//	"State" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (instructions+=Instruction ";")* "}";
+	//	"State" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (instructions+=Instruction ";")* "}";
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -1096,7 +1126,7 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Thread:
-	//	"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal* ";")? (states+=State ";")* "}";
+	//	"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (states+=State ";")* "}";
 	public ThreadElements getThreadAccess() {
 		return (pThread != null) ? pThread : (pThread = new ThreadElements());
 	}
@@ -1812,6 +1842,17 @@ public class SGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getAnnotationRule() {
 		return getAnnotationAccess().getRule();
+	}
+
+	//ValuedAnnotation returns Annotation:
+	//	CommentAnnotation | KeyStringValueAnnotation | TypedKeyStringValueAnnotation | KeyBooleanValueAnnotation |
+	//	KeyIntValueAnnotation | KeyFloatValueAnnotation;
+	public AnnotationsGrammarAccess.ValuedAnnotationElements getValuedAnnotationAccess() {
+		return gaKExpressions.getValuedAnnotationAccess();
+	}
+	
+	public ParserRule getValuedAnnotationRule() {
+		return getValuedAnnotationAccess().getRule();
 	}
 
 	//// e.g.: / ** semantic comment * /

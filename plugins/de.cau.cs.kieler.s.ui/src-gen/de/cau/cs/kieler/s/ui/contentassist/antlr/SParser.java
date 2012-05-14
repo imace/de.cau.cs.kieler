@@ -57,6 +57,7 @@ public class SParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeIdentifierAccess().getAlternatives(), "rule__TypeIdentifier__Alternatives");
 					put(grammarAccess.getTypeIdentifierAccess().getAlternatives_2_1(), "rule__TypeIdentifier__Alternatives_2_1");
 					put(grammarAccess.getAnnotationAccess().getAlternatives(), "rule__Annotation__Alternatives");
+					put(grammarAccess.getValuedAnnotationAccess().getAlternatives(), "rule__ValuedAnnotation__Alternatives");
 					put(grammarAccess.getEStringAccess().getAlternatives(), "rule__EString__Alternatives");
 					put(grammarAccess.getCompareOperatorAccess().getAlternatives(), "rule__CompareOperator__Alternatives");
 					put(grammarAccess.getValueTypeAccess().getAlternatives(), "rule__ValueType__Alternatives");
@@ -149,8 +150,9 @@ public class SParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExtendedIDAccess().getGroup_1(), "rule__ExtendedID__Group_1__0");
 					put(grammarAccess.getProgramAccess().getNameAssignment_1(), "rule__Program__NameAssignment_1");
 					put(grammarAccess.getProgramAccess().getPriorityAssignment_3(), "rule__Program__PriorityAssignment_3");
-					put(grammarAccess.getProgramAccess().getSignalsAssignment_5(), "rule__Program__SignalsAssignment_5");
+					put(grammarAccess.getProgramAccess().getProgramInterfaceAssignment_5(), "rule__Program__ProgramInterfaceAssignment_5");
 					put(grammarAccess.getProgramAccess().getStatesAssignment_6(), "rule__Program__StatesAssignment_6");
+					put(grammarAccess.getProgramInterfaceAccess().getInterfaceSignalDeclsAssignment(), "rule__ProgramInterface__InterfaceSignalDeclsAssignment");
 					put(grammarAccess.getStateAccess().getNameAssignment_2(), "rule__State__NameAssignment_2");
 					put(grammarAccess.getStateAccess().getSignalsAssignment_5_1(), "rule__State__SignalsAssignment_5_1");
 					put(grammarAccess.getStateAccess().getInstructionsAssignment_6_0(), "rule__State__InstructionsAssignment_6_0");
