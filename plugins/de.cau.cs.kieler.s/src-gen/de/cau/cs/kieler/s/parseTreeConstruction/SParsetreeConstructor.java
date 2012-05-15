@@ -98,17 +98,21 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Program ****************
  *
  * Program:
- * 	"Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
- * 	//	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
- * 	//	('Signals' (signals += Signal) (',' signals += Signal)*';')?
- * 	signals+=Signal* states+=State+;
+ * 	"Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (inputSignals += Signal) (',' inputSignals += Signal)*';')?
+ * 	//	('Outputs' (outputSignals += Signal) (',' outputSignals += Signal)*';')?
+ * 	//	(programInterface=ProgramInterface)? 
+ * 	//	(signals += Signal)*
+ * 	//	((signals += Signal) (',' signals += Signal)*';')?
+ * 	(signals+=Signal signals+=Signal*)? states+=State+;
  *
  **/
 
-// "Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (signals += Signal) (',' signals += Signal)*';')?
-// //	('Outputs' (signals += Signal) (',' signals += Signal)*';')?
-// //	('Signals' (signals += Signal) (',' signals += Signal)*';')?
-// signals+=Signal* states+=State+
+// "Synchronous Program" name=ID "(" priority=INT ")" //	('Inputs' (inputSignals += Signal) (',' inputSignals += Signal)*';')?
+// //	('Outputs' (outputSignals += Signal) (',' outputSignals += Signal)*';')?
+// //	(programInterface=ProgramInterface)? 
+// //	(signals += Signal)*
+// //	((signals += Signal) (',' signals += Signal)*';')?
+// (signals+=Signal signals+=Signal*)? states+=State+
 protected class Program_Group extends GroupToken {
 	
 	public Program_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -270,16 +274,85 @@ protected class Program_RightParenthesisKeyword_4 extends KeywordToken  {
 
 }
 
-// signals+=Signal*
-protected class Program_SignalsAssignment_5 extends AssignmentToken  {
+// (signals+=Signal signals+=Signal*)?
+protected class Program_Group_5 extends GroupToken {
 	
-	public Program_SignalsAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Program_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getProgramAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Program_SignalsAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Program_SignalsAssignment_5_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// signals+=Signal
+protected class Program_SignalsAssignment_5_0 extends AssignmentToken  {
+	
+	public Program_SignalsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getProgramAccess().getSignalsAssignment_5();
+		return grammarAccess.getProgramAccess().getSignalsAssignment_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Signal_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("signals",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("signals");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSignalRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getProgramAccess().getSignalsSignalParserRuleCall_5_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Program_RightParenthesisKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// signals+=Signal*
+protected class Program_SignalsAssignment_5_1 extends AssignmentToken  {
+	
+	public Program_SignalsAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getProgramAccess().getSignalsAssignment_5_1();
 	}
 
     @Override
@@ -298,7 +371,7 @@ protected class Program_SignalsAssignment_5 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSignalRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getProgramAccess().getSignalsSignalParserRuleCall_5_0(); 
+				element = grammarAccess.getProgramAccess().getSignalsSignalParserRuleCall_5_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -310,12 +383,13 @@ protected class Program_SignalsAssignment_5 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Program_SignalsAssignment_5(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Program_RightParenthesisKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Program_SignalsAssignment_5_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Program_SignalsAssignment_5_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
+
 
 // states+=State+
 protected class Program_StatesAssignment_6 extends AssignmentToken  {
@@ -358,7 +432,7 @@ protected class Program_StatesAssignment_6 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Program_StatesAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Program_SignalsAssignment_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Program_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
 			case 2: return new Program_RightParenthesisKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
@@ -371,6 +445,8 @@ protected class Program_StatesAssignment_6 extends AssignmentToken  {
 
 /************ begin Rule State ****************
  *
+ * //ProgramInterface:
+ * //	(interfaceSignalDecls+=InterfaceSignalDecl)+;
  * //Annotation:
  * //	'@' key = ID ':'
  * //	value = STRING
@@ -379,11 +455,11 @@ protected class Program_StatesAssignment_6 extends AssignmentToken  {
  * //Annotatable returns annotations::Annotatable:
  * // 	State | Instruction;
  * State:
- * 	"State" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (instructions+=Instruction ";")* "}";
+ * 	"State" "(" name=ID ")" "{" (signals+=Signal+ ";")? (instructions+=Instruction ";")* "}";
  *
  **/
 
-// "State" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (instructions+=Instruction ";")* "}"
+// "State" "(" name=ID ")" "{" (signals+=Signal+ ";")? (instructions+=Instruction ";")* "}"
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -533,7 +609,7 @@ protected class State_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 
 }
 
-// ("Signals" signals+=Signal+ ";")?
+// (signals+=Signal+ ";")?
 protected class State_Group_5 extends GroupToken {
 	
 	public State_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -548,29 +624,7 @@ protected class State_Group_5 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_SemicolonKeyword_5_2(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// "Signals"
-protected class State_SignalsKeyword_5_0 extends KeywordToken  {
-	
-	public State_SignalsKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getStateAccess().getSignalsKeyword_5_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new State_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_SemicolonKeyword_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -578,15 +632,15 @@ protected class State_SignalsKeyword_5_0 extends KeywordToken  {
 }
 
 // signals+=Signal+
-protected class State_SignalsAssignment_5_1 extends AssignmentToken  {
+protected class State_SignalsAssignment_5_0 extends AssignmentToken  {
 	
-	public State_SignalsAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_SignalsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getSignalsAssignment_5_1();
+		return grammarAccess.getStateAccess().getSignalsAssignment_5_0();
 	}
 
     @Override
@@ -605,7 +659,7 @@ protected class State_SignalsAssignment_5_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSignalRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStateAccess().getSignalsSignalParserRuleCall_5_1_0(); 
+				element = grammarAccess.getStateAccess().getSignalsSignalParserRuleCall_5_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -617,29 +671,29 @@ protected class State_SignalsAssignment_5_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new State_SignalsAssignment_5_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new State_SignalsKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new State_SignalsAssignment_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new State_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ";"
-protected class State_SemicolonKeyword_5_2 extends KeywordToken  {
+protected class State_SemicolonKeyword_5_1 extends KeywordToken  {
 	
-	public State_SemicolonKeyword_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_SemicolonKeyword_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getStateAccess().getSemicolonKeyword_5_2();
+		return grammarAccess.getStateAccess().getSemicolonKeyword_5_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_SignalsAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_SignalsAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -771,11 +825,11 @@ protected class State_RightCurlyBracketKeyword_7 extends KeywordToken  {
 /************ begin Rule Thread ****************
  *
  * Thread:
- * 	"Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (states+=State ";")* "}";
+ * 	"Thread" "(" name=ID ")" "{" (signals+=Signal+ ";")? (states+=State ";")* "}";
  *
  **/
 
-// "Thread" "(" name=ID ")" "{" ("Signals" signals+=Signal+ ";")? (states+=State ";")* "}"
+// "Thread" "(" name=ID ")" "{" (signals+=Signal+ ";")? (states+=State ";")* "}"
 protected class Thread_Group extends GroupToken {
 	
 	public Thread_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -925,7 +979,7 @@ protected class Thread_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 
 }
 
-// ("Signals" signals+=Signal+ ";")?
+// (signals+=Signal+ ";")?
 protected class Thread_Group_5 extends GroupToken {
 	
 	public Thread_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -940,29 +994,7 @@ protected class Thread_Group_5 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Thread_SemicolonKeyword_5_2(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// "Signals"
-protected class Thread_SignalsKeyword_5_0 extends KeywordToken  {
-	
-	public Thread_SignalsKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getThreadAccess().getSignalsKeyword_5_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Thread_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Thread_SemicolonKeyword_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -970,15 +1002,15 @@ protected class Thread_SignalsKeyword_5_0 extends KeywordToken  {
 }
 
 // signals+=Signal+
-protected class Thread_SignalsAssignment_5_1 extends AssignmentToken  {
+protected class Thread_SignalsAssignment_5_0 extends AssignmentToken  {
 	
-	public Thread_SignalsAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Thread_SignalsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getThreadAccess().getSignalsAssignment_5_1();
+		return grammarAccess.getThreadAccess().getSignalsAssignment_5_0();
 	}
 
     @Override
@@ -997,7 +1029,7 @@ protected class Thread_SignalsAssignment_5_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSignalRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getThreadAccess().getSignalsSignalParserRuleCall_5_1_0(); 
+				element = grammarAccess.getThreadAccess().getSignalsSignalParserRuleCall_5_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1009,29 +1041,29 @@ protected class Thread_SignalsAssignment_5_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Thread_SignalsAssignment_5_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Thread_SignalsKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Thread_SignalsAssignment_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Thread_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ";"
-protected class Thread_SemicolonKeyword_5_2 extends KeywordToken  {
+protected class Thread_SemicolonKeyword_5_1 extends KeywordToken  {
 	
-	public Thread_SemicolonKeyword_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Thread_SemicolonKeyword_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getThreadAccess().getSemicolonKeyword_5_2();
+		return grammarAccess.getThreadAccess().getSemicolonKeyword_5_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Thread_SignalsAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Thread_SignalsAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
