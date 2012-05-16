@@ -10,6 +10,7 @@ import org.eclipse.xtend.util.stdlib.CloningExtensions
 import de.cau.cs.kieler.synccharts.codegen.dependencies.dependency.Node
 import de.cau.cs.kieler.s.s.Prio
 import de.cau.cs.kieler.s.s.Instruction
+import de.cau.cs.kieler.core.kexpressions.KExpressionsFactory
 
 
 class Helper {
@@ -36,19 +37,22 @@ def Boolean isHierarchical(State state) {
 
 // apply conversion on children
 def dispatch Expression convertToSExpression(Expression expression) {
+	var newExpression = KExpressionsFactory::eINSTANCE.createExpression;
 	if (expression instanceof ComplexExpression) {
+		newExpression = KExpressionsFactory::eINSTANCE.createComplexExpression;
 		for (subExpression : (expression as ComplexExpression).subExpressions) {
-			subExpression.convertToSExpression();
+			(newExpression as ComplexExpression).subExpressions.add(subExpression.convertToSExpression());
 		} 
 	}
-	expression;
+	newExpression;
 }
 
 //ValuedObjectReference - added by cmot for handleIfSingle() function (present tests of simple triggers)
 def dispatch Expression convertToSExpression(ValuedObjectReference expression) {
- 	var sSignal = TraceComponent::getSingleTraceTarget(expression.valuedObject, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
-	expression.setValuedObject(sSignal);
- 	expression; 
+ 	val sSignal = TraceComponent::getSingleTraceTarget(expression.valuedObject, "Signal") as de.cau.cs.kieler.core.kexpressions.Signal
+	val newExpression = KExpressionsFactory::eINSTANCE.createValuedObjectReference;
+	newExpression.setValuedObject(sSignal);
+ 	newExpression; 
 }
 
 def Expression getTrueBooleanValue() {
@@ -82,11 +86,16 @@ def Expression getTrueBooleanValue() {
 	def List<Signal> getStateSignals (State state){
 		var List<Signal> signalList = new ArrayList()
 		for (signal : state.signals) {
+//			val isignal = KExpressionsFactory::eINSTANCE.createISignal();
 			var ssignal = signal.transform;
-			signalList.add(ssignal)
-			// 	create traces for all created signals
-			TraceComponent::createTrace(signal, ssignal, "Signal" );
-			TraceComponent::createTrace(ssignal, signal, "SignalBack" );
+//				isignal.setName(ssignal.name);
+//				isignal.setIsInput(signal.isInput);
+//				isignal.setIsOutput(signal.isOutput);
+//				isignal.setType(ValueType::PURE);
+				signalList.add(ssignal)
+				// 	create traces for all created signals
+				TraceComponent::createTrace(signal, ssignal, "Signal" );
+				TraceComponent::createTrace(ssignal, signal, "SignalBack" );
 		}
 		signalList 
 	}		
@@ -166,7 +175,7 @@ def String getStatePathAsName(State state) {
 	}
 	
 	def boolean finalState(State state) {
-		return (state.outgoingTransitions.filter(e|!e.isImmediate).nullOrEmpty || state.isFinal);
+		return (state.outgoingTransitions.nullOrEmpty || state.isFinal);
 	}
 
 
@@ -175,16 +184,34 @@ def String getStatePathAsName(State state) {
  // Only add the prio statement if the last one was not the same
  def void addOptimized(List<Instruction> instructions, Prio prioStatement) {
  	val lastPrioStatementList = instructions.filter(typeof(Prio)).toList()
+ 	// check if PRIO has not changed
  	if (!lastPrioStatementList.nullOrEmpty) {
  		val lastPrioStatement = lastPrioStatementList.last;
 	 	if (lastPrioStatement.priority == prioStatement.priority) {
  			return
  		}
  	}
+ 	// check if a PRIO instruction just before is higher or equal
+ 	val lastInstruction = instructions.toList.last;
+ 	if ((lastInstruction instanceof Prio) && ((lastInstruction as Prio).priority > prioStatement.priority)) {
+ 		// lower last prio statement
+ 		(lastInstruction as Prio).setPriority(prioStatement.priority);
+ 		return;
+ 	}
 	instructions.add(prioStatement);
  }
 
 // ======================================================================================================
+
+	def void addLowestWeakPrio(de.cau.cs.kieler.s.s.State sState, State state) {
+		var prioStatement = SFactory::eINSTANCE.createPrio();
+		var dependencyNode = state.getLowestDependencyWeakNode(null)
+		if (dependencyNode != null) {
+			val priority = dependencyNode.priority;
+			prioStatement.setPriority(priority);
+			sState.instructions.addOptimized(prioStatement)
+		}
+	}
 
 	def void addHighestWeakPrio(de.cau.cs.kieler.s.s.State sState, State state) {
 		addWeakPrio(sState, state, null);
@@ -196,7 +223,7 @@ def String getStatePathAsName(State state) {
 	
 	def void addWeakPrio(de.cau.cs.kieler.s.s.State sState, State state, Transition transition) {
 		var prioStatement = SFactory::eINSTANCE.createPrio();
-		var dependencyNode = state.getDependencyWeakNode(transition)
+		var dependencyNode = state.getHighestDependencyWeakNode(transition)
 		if (dependencyNode != null) {
 			val priority = dependencyNode.priority;
 			prioStatement.setPriority(priority);
@@ -206,7 +233,7 @@ def String getStatePathAsName(State state) {
 	
 	def void addStrongPrio(de.cau.cs.kieler.s.s.State sState, State state, Transition transition) {
 		var prioStatement = SFactory::eINSTANCE.createPrio();
-		var dependencyNode = state.getDependencyStrongNode(transition)
+		var dependencyNode = state.getHighestDependencyStrongNode(transition)
 		if (dependencyNode != null) {
 			val priority = dependencyNode.priority;
 			prioStatement.setPriority(priority);
@@ -216,21 +243,33 @@ def String getStatePathAsName(State state) {
 	
 	
 	def Node getHighestDependencyStrongNode(State state) {
-		return  getDependencyStrongNode(state, null);	
+		return  getHighestDependencyStrongNode(state, null);	
 	}
 	
 	def Node getHighestDependencyWeakNode(State state) {
 		if (!state.hierarchical) {
 			// for simple states, weak priorities are the same as strong priorities
-			return getDependencyStrongNode(state, null);
+			return getHighestDependencyStrongNode(state, null);
 		}
-		return  getDependencyWeakNode(state, null);	
+		return  getHighestDependencyWeakNode(state, null);	
 	}
+	
+	def Node getLowestDependencyStrongNode(State state) {
+		return  getLowestDependencyStrongNode(state, null);	
+	}
+	
+	def Node getLowestDependencyWeakNode(State state) {
+		if (!state.hierarchical) {
+			// for simple states, weak priorities are the same as strong priorities
+			return getLowestDependencyStrongNode(state, null);
+		}
+		return  getLowestDependencyWeakNode(state, null);	
+	}	
 
 
 	// Get the highest priority for all strong nodes of this state in case transition is null
 	// or the strong dependency node linked to this transition.
-	def Node getDependencyStrongNode(State state, Transition transition) {
+	def Node getHighestDependencyStrongNode(State state, Transition transition) {
 		val nodes = (TraceComponent::getTraceTargets(state, "DependencyStrong") as List<Node>);
 		if (nodes.empty) {
 			return null;
@@ -241,12 +280,25 @@ def String getStatePathAsName(State state) {
 		return nodes.filter(e|e.transition == transition).toList().get(0);
 	}
 	
+	// Get the highest priority for all strong nodes of this state in case transition is null
+	// or the strong dependency node linked to this transition.
+	def Node getLowestDependencyStrongNode(State state, Transition transition) {
+		val nodes = (TraceComponent::getTraceTargets(state, "DependencyStrong") as List<Node>);
+		if (nodes.empty) {
+			return null;
+		}
+		if (transition == null) {
+			return	nodes.sort(e1, e2 | compareDependencyPriority(e2,e1)).toList.last;
+		}
+		return nodes.filter(e|e.transition == transition).toList().get(0);
+	}
+		
 	// Get the highest priority for all weak nodes of this state in case transition is null
 	// or the weak dependency node linked to this transition.
-	def Node getDependencyWeakNode(State state, Transition transition) {
+	def Node getHighestDependencyWeakNode(State state, Transition transition) {
 		if (!state.hierarchical) {
 			// for simple states, weak priorities are the same as strong priorities
-			return getDependencyStrongNode(state, transition)
+			return getHighestDependencyStrongNode(state, transition)
 		}
 		val nodes = (TraceComponent::getTraceTargets(state, "DependencyWeak") as List<Node>);
 		if (nodes.empty) {
@@ -258,9 +310,26 @@ def String getStatePathAsName(State state) {
 		return nodes.filter(e|e.transition == transition).toList().get(0);
 	}
 
+	// Get the lowest priority for all weak nodes of this state in case transition is null
+	// or the weak dependency node linked to this transition.
+	def Node getLowestDependencyWeakNode(State state, Transition transition) {
+		if (!state.hierarchical) {
+			// for simple states, weak priorities are the same as strong priorities
+			return getLowestDependencyStrongNode(state, transition)
+		}
+		val nodes = (TraceComponent::getTraceTargets(state, "DependencyWeak") as List<Node>);
+		if (nodes.empty) {
+			return null;
+		}
+		if (transition == null) {
+			return nodes.sort(e1, e2 | compareDependencyPriority(e2,e1)).toList.last;
+		}
+		return nodes.filter(e|e.transition == transition).toList().get(0);
+	}
+
 	def int compareTraceDependencyPriority(State e1, State e2) {
-		if (e1.getDependencyStrongNode(null).priority > 
-		    e2.getDependencyStrongNode(null).priority) {-1} else {1}
+		if (e1.getHighestDependencyStrongNode(null).priority > 
+		    e2.getHighestDependencyStrongNode(null).priority) {-1} else {1}
 	}
 
 	def int compareTransitionPriority(Transition e1, Transition e2) {

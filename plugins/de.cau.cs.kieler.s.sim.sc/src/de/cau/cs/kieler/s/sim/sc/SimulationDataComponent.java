@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -17,14 +18,30 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import com.google.inject.Guice;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFileState;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IPathVariableManager;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResourceProxy;
+import org.eclipse.core.resources.IResourceProxyVisitor;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.core.runtime.content.IContentDescription;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -45,8 +62,12 @@ import de.cau.cs.kieler.core.kexpressions.InterfaceSignalDecl;
 import de.cau.cs.kieler.core.kexpressions.Output;
 import de.cau.cs.kieler.core.kexpressions.Signal;
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
-import de.cau.cs.kieler.s.s.Program;
+import de.cau.cs.kieler.s.s.Program; 
+import de.cau.cs.kieler.s.sc.S2SCPlugin;
+import de.cau.cs.kieler.s.sc.xtend.S2SC;
+import de.cau.cs.kieler.s.sc.xtend.S2SC;
 import de.cau.cs.kieler.s.sim.sc.xtend.S2Simulation;
+import de.cau.cs.kieler.sc.SCExecution;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
@@ -128,12 +149,8 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 	
 
 	private Program myModel = null;
-	private Process process = null;
-	private PrintWriter toS = null;
-	private BufferedReader fromS = null;
-	private BufferedReader error = null;
 
-	private File simFile = null;
+	private SCExecution scExecution = null;
 
 	private LinkedList<String> outputSignalList = null;
 
@@ -164,7 +181,6 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 	 * {@inheritDoc}
 	 */
 	public void initialize() throws KiemInitializationException {
-
 	}
 
 	// -------------------------------------------------------------------------
@@ -180,29 +196,30 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 		// Collect active statements
 		String activeStatements = "";
 
-		if (process == null) {
+		if (!scExecution.isStarted()) {
 			throw new KiemExecutionException(
 					"No s simulation is running", true, null);
 		}
 		try {
 
-			toS.write(jSONObject.toString() + "\n");
-			toS.flush();
-			while (error.ready()) {
-				System.out.print(error.read());
+			scExecution.getExecutionInterfaceToSC().write(jSONObject.toString() + "\n");
+			scExecution.getExecutionInterfaceToSC().flush();
+			while (scExecution.getExecutionInterfaceError().ready()) {
+				System.out.print(scExecution.getExecutionInterfaceError().read());
 			}
 
-			String receivedMessage = fromS.readLine();
+			String receivedMessage = scExecution.getExecutionInterfaceFromSC().readLine();
 
 			if (receivedMessage != null) {
-				JSONObject esterelOutput = new JSONObject(receivedMessage);
-				JSONArray esterelOutputArray = esterelOutput.names();
+				JSONObject sSignalOutput = new JSONObject(receivedMessage);
+				JSONArray sSignalOutputArray = sSignalOutput.names();
 
-				if (esterelOutputArray != null) {
+				if (sSignalOutputArray != null) {
 					// First add auxiliary signals
-					for (int i = 0; i < esterelOutputArray.length(); i++) {
-						String esterelOutputName = esterelOutputArray
+					for (int i = 0; i < sSignalOutputArray.length(); i++) {
+						String sSignalOutputName = sSignalOutputArray
 								.getString(i);
+						boolean sSignalIsPresent = JSONSignalValues.isPresent(sSignalOutput.getJSONObject(sSignalOutputName));
 
 						// Test if the output variable is an auxiliary signal
 						// that is only there to mark the current S
@@ -211,10 +228,10 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 						// These auxiliary signals must be encapsulated in a
 						// state
 						// variable.
-						if (esterelOutputName
-								.startsWith(SSimSCPlugin.AUXILIARY_VARIABLE_TAG)) {
+						if (sSignalOutputName
+								.startsWith(SSimSCPlugin.AUXILIARY_VARIABLE_TAG) && sSignalIsPresent) {
 							try {
-								String statementWithoutAuxiliaryVariableTag = esterelOutputName
+								String statementWithoutAuxiliaryVariableTag = sSignalOutputName
 										.substring(SSimSCPlugin.AUXILIARY_VARIABLE_TAG
 												.length());
 
@@ -223,7 +240,6 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 									activeStatements += ",";
 								}
 
-								// Add active statement to string.
 								activeStatements += statementWithoutAuxiliaryVariableTag;
 
 							} catch (Exception e) {
@@ -236,10 +252,11 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
 				// Then add normal output signals
 				for (String outputSignal : outputSignalList) {
-					if (esterelOutput.has(outputSignal)) {
+					if (sSignalOutput.has(outputSignal)) {
 						
 						// retrieve jsonSignal
-						JSONObject jsonSignal = esterelOutput.getJSONObject(outputSignal);
+						JSONObject jsonSignal = sSignalOutput.getJSONObject(outputSignal);
+						boolean sSignalIsPresent = JSONSignalValues.isPresent(jsonSignal);
 						
 						if (jsonSignal.has("value")) {
 							Object value = jsonSignal.get("value");
@@ -250,7 +267,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 						else {
 							// pure signals
 							returnObj.accumulate(outputSignal,
-									JSONSignalValues.newValue(true));
+									JSONSignalValues.newValue(sSignalIsPresent));
 						}
 					} else {
 						returnObj.accumulate(outputSignal,
@@ -270,10 +287,10 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
-			process.destroy();
+			scExecution.stopExecution();
 		} catch (JSONException e) {
 			e.printStackTrace();
-			process.destroy();
+			scExecution.stopExecution();
 		}
 
 		return returnObj;
@@ -318,28 +335,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 	 * {@inheritDoc}
 	 */
 	public void wrapup() throws KiemInitializationException {
-		if (process != null) {
-			process.destroy();
-		}
-		// boolean ok = true;
-		//
-		// if (strlFile != null && strlFile.exists()) {
-		// ok &= strlFile.delete();
-		// }
-		// if (dataFile != null && dataFile.exists()) {
-		// ok &= dataFile.delete();
-		// }
-		// if (simFile != null && simFile.exists()) {
-		// ok &= simFile.delete();
-		// }
-		// strlFile = null;
-		// dataFile = null;
-		// simFile = null;
-		//
-		// if (!ok) {
-		// throw new KiemInitializationException(
-		// "Could not delete temp files", false, null);
-		// }
+		scExecution.stopExecution();
 	}
 
 	// -------------------------------------------------------------------------
@@ -367,41 +363,8 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Compile S to SC using the s.codegen.sc plugin.
-	 * 
-	 * @param strlFile
-	 *            the strl file
-	 * @param outFile
-	 *            the out file
-	 * @param monitor
-	 *            the monitor
-	 * @return the java.net. uri
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException
-	 *             the uRI syntax exception
+	 * {@inheritDoc}
 	 */
-	private java.net.URI compileSToSC(final URI strlFile,
-			final File outFile, SSimulationProgressMonitor monitor)
-			throws IOException, URISyntaxException {
-
-		monitor.subTask("Reading Esterel file");
-		java.net.URI inputURI = convertURI(strlFile);
-		monitor.worked(1);
-		if (monitor.isCanceled()) {
-			return null;
-		}
-		
-		//TODO: sc code generation and c code compilation here
-
-		monitor.subTask("Generating C code");
-		java.net.URI uri = null; 
-		monitor.worked(1);
-		return uri;
-	}
-
-	// -------------------------------------------------------------------------
-
 	public void doModel2ModelTransform(final KielerProgressMonitor monitor)
 			throws KiemInitializationException {
 		monitor.begin("S Simulation", 10);
@@ -432,6 +395,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 			// an active Editor
 
 			URI sOutput = URI.createURI("");
+			URI scOutput = URI.createURI("");
 			// By default there is no additional transformation necessary
 			Program transformedProgram = myModel;
 			
@@ -457,6 +421,11 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 			sOutput = sOutput.trimFragment();
 			sOutput = sOutput.trimFileExtension()
 					.appendFileExtension("simulation.s");
+			
+			scOutput = URI.createURI(input.toString());
+			scOutput = scOutput.trimFragment();
+			scOutput = scOutput.trimFileExtension()
+					.appendFileExtension("c");
 
 			try {
 				// Write out copy/transformation of Esterel program
@@ -472,136 +441,80 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 						"Cannot write output S file.", true, null);
 			}
 
-			// Compile Esterel to C
-			URL output = this.compileSToSC(sOutput,
-					null, esterelSimulationProgressMonitor)
-					.toURL();
-
+			// Set a random output folder for the compiled files
+			String outputFolder = SCExecution.generateRandomTempOutputFolder();
 			
-			// Cannot be done before because otherwise the new model cannot be serialized (24.01.2012)
-			// Do this on a copy to not destroy original program;
-			// Make Esterel Interface delcration consistent
-//			InterfaceDeclarationFix interfaceDeclarationFix = Guice.createInjector()
-//					.getInstance(InterfaceDeclarationFix.class);
-//			Program fixedTransformedProgram = (Program) CloningExtensions.clone(transformedProgram); 
-//			interfaceDeclarationFix.fix(fixedTransformedProgram);
+			// Genereate SC code
+			String scOutputString =	getFileStringFromUri(scOutput);
+			S2SCPlugin.generateSCCode(transformedProgram, scOutputString, outputFolder);
 			
-			
-//			// Generate data.c
-//			URL data = generateCSimulationInterface(transformedProgram,
-//					sOutput);
-
-//			// Compile C code
-//			Bundle bundle = Platform
-//					.getBundle("de.cau.cs.kieler.s.sim.sc");
-//
-//			URL fileUrl = FileLocator.find(bundle,
-//					new Path("simulation"), null);
-//			URL bundleLocation = FileLocator.toFileURL(fileUrl);
-//
-//			executable = File.createTempFile("sim", "");
-//			String compiler = (getProperties()[2]).getValue();
-//			compile = compiler + " " + output.getPath() + " "
-//					+ data.getPath() + " " + bundleLocation.getPath()
-//					+ "cJSON.c " + "-I " + bundleLocation.getPath() + " "
-//					+ "-lm -o " + executable;
-//
-//			if (isWindows()) {
-//				executable = File.createTempFile("sim", ".exe");
-//				compile = compiler + " " + output.getPath().substring(1) + " "
-//						+ data.getPath().substring(1) + " "
-//						+ bundleLocation.getPath().substring(1) + "cJSON.c "
-//						+ "-I " + bundleLocation.getPath().substring(1) + " "
-//						+ "-lm -o " + executable;
-//			}
-//
-//			simFile = executable;
-//
-//			System.out.println(compile);
-//
-//			process = Runtime.getRuntime().exec(compile);
-//			InputStream stderr = process.getErrorStream();
-//			InputStreamReader isr = new InputStreamReader(stderr);
-//			BufferedReader br = new BufferedReader(isr);
-//			String line = null;
-//			StringBuilder errorString = new StringBuilder();
-//			while ((line = br.readLine()) != null) {
-//				errorString.append("\n" + line);
-//
-//			}
-//
-//			int exitValue = process.waitFor();
-//
-//			if (exitValue != 0) {
-//				throw new KiemInitializationException("could not compile",
-//						true, new Exception(errorString.toString()));
-//			}
-
+			// Compile
+			scExecution = new SCExecution(outputFolder);
+			LinkedList<String> generatedSCFiles = new LinkedList<String>();
+			generatedSCFiles.add(scOutputString);
+			scExecution.compile(generatedSCFiles);	
 		} catch (Exception e) {
 			throw new KiemInitializationException(
-					"Error compiling Esterel file:\n\n " + e.getMessage() + "\n\n" + compile,
+					"Error compiling S program:\n\n " + e.getMessage() + "\n\n" + compile,
 					true, e);
 		}
 	}
-
+	
+	
 	// -------------------------------------------------------------------------
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public JSONObject doProvideInitialVariables()
 			throws KiemInitializationException {
+		
+		// start execution of compiled program
+		if (scExecution.isCompiled()) {
+			try {
+				scExecution.startExecution();
+			} catch (IOException e) {
+	    		throw new KiemInitializationException(
+	                    "S program could not be started sucessfully.\n\n",
+	                    true, e);
+			}
+		}
+		else {
+    		throw new KiemInitializationException(
+                    "S program was not compiled sucessfully.\n\n",
+                    true, null);
+		}
+		
 
-		if ((simFile == null) || (!simFile.exists())) {
+		if (!scExecution.isStarted()) {
 			throw new KiemInitializationException(
 					"Error running S program. Compiled simulation does not exist.\n",
 					true, null);
 		}
 
-		try {
-			// Execute the compiled C program (asynchronously)
-			String executablePath = simFile.getPath();
-			process = Runtime.getRuntime().exec(executablePath);
-
-			toS = new PrintWriter(new OutputStreamWriter(
-					process.getOutputStream()));
-			fromS = new BufferedReader(new InputStreamReader(
-					process.getInputStream()));
-			error = new BufferedReader(new InputStreamReader(
-					process.getErrorStream()));
-		} catch (IOException e) {
-			throw new KiemInitializationException(
-					"Error running S program:\n\n" + e.getMessage(), true, e);
-		}
 
 		// Build the list of interface output signals
 		outputSignalList = new LinkedList<String>();
 		JSONObject res = new JSONObject();
 		try {
-			if (myModel != null && myModel.getProgramInterface() != null) {
-				// only do this for the first module as it is the main module
-				
-					if (myModel.getProgramInterface().getInterfaceSignalDecls() != null) {
-						for (InterfaceSignalDecl sig : myModel.getProgramInterface().getInterfaceSignalDecls()) {
-							if (sig instanceof Input) {
-								for (Signal s : sig.getSignals()) {
-									res.accumulate(s.getName(),
-											JSONSignalValues.newValue(false));
-								}
-							}
-							if (sig instanceof Output) {
-								for (Signal signal : sig.getSignals()) {
-									String signalName = signal.getName();
-									if (!signalName
-											.startsWith(SSimSCPlugin.AUXILIARY_VARIABLE_TAG)) {
-										res.accumulate(signalName,
-												JSONSignalValues
-														.newValue(false));
-										outputSignalList.add(signalName);
-									}
-								}
-							}
-
+			if (myModel != null && myModel.getSignals() != null) {
+				for (Signal signal : myModel.getSignals()) {
+					if (signal.isIsInput()) {
+						res.accumulate(signal.getName(),
+								JSONSignalValues.newValue(false));
+					}
+					if (signal.isIsOutput()) {
+						String signalName = signal.getName();
+						if (!signalName
+								.startsWith(SSimSCPlugin.AUXILIARY_VARIABLE_TAG)) {
+							res.accumulate(signalName,
+									JSONSignalValues
+											.newValue(false));
+							outputSignalList.add(signalName);
 						}
 					}
+				}
 			}
 		} catch (JSONException e) {
 			// ignore
@@ -622,36 +535,46 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 	}
 
 	// -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
 
-//	/**
-//	 * Generate the CSimulationInterface.
-//	 * 
-//	 * @param esterelProgram
-//	 *            the esterel program
-//	 * @param esterelProgramURI
-//	 *            the esterel program uri
-//	 * @return the uRL
-//	 * @throws KiemInitializationException
-//	 *             the kiem initialization exception
-//	 */
-//	private URL generateCSimulationInterface(Program esterelProgram,
-//			URI esterelProgramURI) throws KiemInitializationException {
-//		File data;
-//		try {
-//			data = File.createTempFile("data", ".c");
-//			CSimulationInterfaceGenerator cSimulationInterfaceGenerator = new CSimulationInterfaceGenerator(
-//					esterelProgram, esterelProgramURI);
-//			cSimulationInterfaceGenerator.execute(data.getPath());
-//			return data.toURI().toURL();
-//		} catch (IOException e) {
-//			throw new KiemInitializationException("Error creating data file",
-//					true, e);
-//		} catch (ExecutionException e) {
-//			throw new KiemInitializationException("Error creating data file",
-//					true, e);
-//		}
-//	}
+	/**
+	 * Transform a URI into a file string.
+	 *
+	 * @param uri the uri
+	 * @return the file string from uri
+	 */
+	protected String getFileStringFromUri(URI uri) {
 
+		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
+				.getRoot();
+
+		IPath path = new Path(uri.toPlatformString(false));
+		IFile file = myWorkspaceRoot.getFile(path);
+
+		IPath fullPath = file.getLocation();
+
+		// If we have spaces, try it like this...
+		if (fullPath == null
+				&& file instanceof org.eclipse.core.internal.resources.Resource) {
+			org.eclipse.core.internal.resources.Resource resource = (org.eclipse.core.internal.resources.Resource) file;
+			fullPath = resource.getLocalManager().locationFor(resource);
+		}
+
+		// Ensure it is absolute
+		fullPath.makeAbsolute();
+
+		java.io.File javaFile = new java.io.File(fullPath.toString().replaceAll("%20",
+				" "));
+
+		if (javaFile != null) {
+			String fileString = javaFile.getAbsolutePath();
+			return fileString;
+		}
+
+		// Something went wrong, we could not resolve the file location
+		return null;
+	}		
+	
 	// -------------------------------------------------------------------------
 
 }
