@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.s.sim.sc;
+package de.cau.cs.kieler.sc;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -6,23 +6,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class SSimSCPlugin extends AbstractUIPlugin {
-	
-    /** The plug-in ID. */
-	public static final String PLUGIN_ID = "de.cau.cs.kieler.s.sim.sc"; //$NON-NLS-1$
-    
-    /** The Constant AUXILIARY_VARIABLE_TAG.
-     *  This TAG is also defined in S2Simulation.xtend. Both TAGs must match */
-    public static final String AUXILIARY_VARIABLE_TAG = "oSoAUXILIARYoVARIABLEoTAGoWILLoBEoREMOVEDo";
+public class SCPlugin extends AbstractUIPlugin {
 
+	// The plug-in ID
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.sc"; //$NON-NLS-1$
 
 	// The shared instance
-	private static SSimSCPlugin plugin;
+	private static SCPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public SSimSCPlugin() {
+	public SCPlugin() {
 	}
 
 	/*
@@ -48,7 +43,7 @@ public class SSimSCPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static SSimSCPlugin getDefault() {
+	public static SCPlugin getDefault() {
 		return plugin;
 	}
 

@@ -117,10 +117,10 @@ class Synccharts2S {
 			val sStateDepth = state.depthSState
 			val sStateJoin = state.joinSState
 			state.fillSStateSurface(sStateSurface);
-			state.fillSStateDepth(sStateDepth);
 			if (sStateJoin != null) {
 				state.fillSStateJoin(sStateJoin);
 			} 
+			state.fillSStateDepth(sStateDepth);
 		}
 		 
 		
@@ -208,7 +208,7 @@ class Synccharts2S {
 		val regardedTransitionNormalTermination = state.normalTerminationTransition
 
 		// lower priority (to allow a possible body to be executed)
-		sState.addHighestStrongPrio(state);
+		sState.addLowestWeakPrio(state);
 		
 		// then handle possible normal termination
 		if (regardedTransitionNormalTermination != null) {
@@ -232,7 +232,10 @@ class Synccharts2S {
 	def fillSStateDepth (State state, de.cau.cs.kieler.s.s.State sState) {
 		val regardedTransitionListStrong = state.strongTransitionsOrdered
 		val regardedTransitionListWeak = state.weakTransitionsOrdered
-		
+
+		// is a join instruction present? if this is the case do not generate a pause here!	
+		val joinInstruction = (state.getJoinSState != null)
+				
 		// optimization: of halt or term before then exit
 		if (    !sState.instructions.filter(typeof(de.cau.cs.kieler.s.s.Halt)).empty 
 		     || !sState.instructions.filter(typeof(de.cau.cs.kieler.s.s.Term)).empty) {
@@ -248,7 +251,7 @@ class Synccharts2S {
 	    // create a pause instruction only iff no HALT or TERM instruction
 	    // halt == no outgoing transition
 	    // term == final state
-		if (!state.finalState) {
+		if (!state.finalState && !joinInstruction) {
 			sState.instructions.add(SFactory::eINSTANCE.createPause());
 		}
 
@@ -295,6 +298,7 @@ class Synccharts2S {
 	def void handleTransition(Transition transition, de.cau.cs.kieler.s.s.State sState) {
 			val sif = SFactory::eINSTANCE.createIf();
 			val strans = SFactory::eINSTANCE.createTrans();
+			val sabort = SFactory::eINSTANCE.createAbort();
 			
 			// handle transition trigger - convert to s-expression
 			if (transition.type == TransitionType::NORMALTERMINATION) {
@@ -318,9 +322,17 @@ class Synccharts2S {
 				}
 			}
 			
+			// if leaving a macro state, first abort it
+			// for weak abortions we know because of the lowered priority that
+			// all internal behavior (of this tick!) has already executed and
+			// we can safely abort the state.
+			if (transition.sourceState.hierarchical) {
+				sif.instructions.add(sabort);
+			}	
+
+			// add transition to if-branch and add if-branch to sState
 			strans.setContinuation(transition.targetState.surfaceSState);
 			sif.instructions.add(strans);
-			
 			sState.instructions.add(sif);
 	}	
 

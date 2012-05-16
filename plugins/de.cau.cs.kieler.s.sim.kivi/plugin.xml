@@ -4,19 +4,19 @@
    <extension
          point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
       <content
-            class="de.cau.cs.kieler.s.sim.sc.SimulationDataComponent"
-            id="de.cau.cs.kieler.s.sim.sc"
-            name="S Simulator (SC)">
+            class="de.cau.cs.kieler.s.sim.kivi.DataComponent"
+            id="de.cau.cs.kieler.s.sim.kivi"
+            name="S Visualization">
       </content>
    </extension>
    <extension
          point="de.cau.cs.kieler.sim.kiem.config.DefaultScheduleContributor">
       <executionFile
-            file="execution/s_sc_no_visualization.execution">
+            file="execution/s_sc.execution">
          <editor
                id="de.cau.cs.kieler.s.S"
                name="KIELER S Editor"
-               priority="2">
+               priority="1">
          </editor>
       </executionFile>
    </extension>
