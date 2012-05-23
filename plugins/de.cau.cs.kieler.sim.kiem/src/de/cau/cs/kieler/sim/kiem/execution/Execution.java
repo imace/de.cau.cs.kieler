@@ -247,6 +247,10 @@ public class Execution extends Job {
 			for (int c = 0; c < dataComponentWrapperListParam.size(); c++) {
 				DataComponentWrapper dataComponentWrapper = dataComponentWrapperListParam
 						.get(c);
+				// reset delta index
+				this.dataComponentWrapperList.get(c).setDeltaIndex(0);
+				// reset pool indices
+				this.dataComponentWrapperList.get(c).resetPoolIndices();
 				timeout.timeout(getTimeout(), "isEnabled, isObserver, isProducer",
 						dataComponentWrapper, this);
 				if (dataComponentWrapper.isEnabled()) {
@@ -609,21 +613,6 @@ public class Execution extends Job {
 
 		synchronized (this) {
 			if (this.steps == NO_STEPS) {
-				// notify components
-				// TODO: dubious code, to be deleted
-				// for (int c = 0; c < this.dataComponentWrapperList.size();
-				// c++) {
-				// DataComponentWrapper dataComponentWrapper =
-				// dataComponentWrapperList.get(c);
-				// timeout.timeout(getTimeout(), "isEnabled",
-				// dataComponentWrapper, this);
-				// if (dataComponentWrapper.isEnabled()) {
-				// timeout.timeout(getTimeout(), "commandStep",
-				// dataComponentWrapper, this);
-				// // dataComponentWrapper.getDataComponent().commandStep();
-				// }
-				// timeout.abortTimeout();
-				// }
 				if (eventManager != null) {
 					eventManager.notify(KiemEvent.CMD_STEP);
 				}
@@ -916,6 +905,7 @@ public class Execution extends Job {
 		wrapupComponents(true);
 		// try to stop all components, no blocking stopExecution() call
 		for (int c = 0; c < this.dataComponentWrapperList.size(); c++) {
+			dataComponentWrapperList.get(c).setDeltaIndex(0);
 			if (this.observerExecutionArray[c] != null) {
 				this.observerExecutionArray[c].stopExecution();
 			}
@@ -1068,14 +1058,12 @@ public class Execution extends Job {
 	 * Makes step of an observer AND producer data component. This is not
 	 * sourced out into a separate thread because it is made in a blocking
 	 * sense.
-	 * 
-	 * @param dataComponentWrapper
-	 *            the data component which should make a step
-	 * 
-	 * @throws JSONException
-	 *             a JSONException
+	 *
+	 * @param dataComponentWrapper the data component which should make a step
+	 * @return true, if successful
+	 * @throws JSONException a JSONException
 	 */
-	private void makeStepObserverProducer(
+	private boolean makeStepObserverProducer(
 			final DataComponentWrapper dataComponentWrapper)
 			throws JSONException {
 		JSONObject oldData;
@@ -1098,6 +1086,7 @@ public class Execution extends Job {
 				timeout.abortTimeout();
 				KiemPlugin.handleComponentError(
 						dataComponentWrapper.getDataComponent(), e);
+				return false;
 			}
 
 			// only put in data pool if no history step
@@ -1114,6 +1103,7 @@ public class Execution extends Job {
 				timeout.abortTimeout();
 				KiemPlugin.handleComponentError(
 						dataComponentWrapper.getDataComponent(), e);
+				return false;
 			}
 			JSONObject newJsonData = null;
 			if (newData != null && newData != "") {
@@ -1126,6 +1116,7 @@ public class Execution extends Job {
 			}
 		}
 		timeout.abortTimeout();
+		return true;
 	}
 
 	// -------------------------------------------------------------------------
@@ -1319,9 +1310,13 @@ public class Execution extends Job {
 								// Observer AND Producer => blocking
 								try {
 									// make a step
-									makeStepObserverProducer(dataComponentWrapper);
+									if (!makeStepObserverProducer(dataComponentWrapper)) {
+										errorTerminate();
+										isStarted = false;
+										return Status.CANCEL_STATUS;
+									}
 									// save current pool index for next
-									// invokation
+									// invocation
 									// only iff no history step
 									if (!this.isHistoryStep()) {
 										dataComponentWrapper
