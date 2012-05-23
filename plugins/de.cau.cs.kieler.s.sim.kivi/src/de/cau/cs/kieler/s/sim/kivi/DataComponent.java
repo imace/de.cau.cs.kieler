@@ -1,7 +1,19 @@
+/*
+ * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2011 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.s.sim.kivi;
 
 import java.util.HashMap;
-
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -23,14 +35,17 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import org.eclipse.ui.texteditor.ITextEditorExtension3.InsertMode;
-
 import de.cau.cs.kieler.s.s.Program;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent;
 
+/**
+ * The DataComponent for visualizing S statements during simulation.
+ * 
+ * @author cmot
+ */
 public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	/** The S editor. */
@@ -73,28 +88,22 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
-	 * #initialize()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void initialize() throws KiemInitializationException {
 		this.sEditor = this.getSEditor();
 		this.sProgram = this.getSProgram(this.sEditor);
 		refreshEObjectMap();
-		this.semanticResource = this.getEsterelSemanticResource(sProgram);
+		this.semanticResource = this.getSSemanticResource(sProgram);
 		semanticResource.getResourceSet();
 	}
 
 	// -----------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.cau.cs.kieler.sim.kiem.IDataComponent#wrapup()
+	/**
+	 * {@inheritDoc}
 	 */
 	public void wrapup() throws KiemInitializationException {
 		// Undo Highlighting
@@ -127,12 +136,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
-	 * #isProducer()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isProducer() {
@@ -141,12 +146,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
-	 * #isObserver()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isObserver() {
@@ -157,7 +158,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	/**
 	 * Gets the encoded emf id to compare objects to the ones produced by the
-	 * Esterel simulation in Esterel2Simulation.xtend.
+	 * S simulation in S2Simulation.xtend.
 	 * 
 	 * @param eObject
 	 *            the e object
@@ -251,6 +252,14 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 	
+	/**
+	 * Gets the S statements.
+	 *
+	 * @param jSONObject the j son object
+	 * @param signalName the signal name
+	 * @return the statements
+	 * @throws KiemExecutionException the kiem execution exception
+	 */
 	LinkedList<EObject> getStatements(JSONObject jSONObject, String signalName)
 			throws KiemExecutionException {
 
@@ -276,7 +285,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 			} catch (JSONException e) {
 				throw new KiemExecutionException(
-						"Cannot parse statement data variable of active Esterel statements for visualization.",
+						"Cannot parse statement data variable of active S statements for visualization.",
 						false, false, true, e);
 			}
 		}
@@ -285,12 +294,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
-	 * #doStep(org.json.JSONObject)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public JSONObject doStep(JSONObject jSONObject)
@@ -329,7 +334,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 					setXtextSelection(statement, null);
 				} catch (KiemInitializationException e) {
 					throw new KiemExecutionException(
-							"No active Esterel editor for statement visualization.",
+							"No active S editor for statement visualization.",
 							false, false, true, e);
 				}
 			}
@@ -360,7 +365,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 					}
 				} catch (KiemInitializationException e) {
 					throw new KiemExecutionException(
-							"No active Esterel editor for statement visualization.",
+							"No active S editor for statement visualization.",
 							false, false, true, e);
 				}
 			}
@@ -372,11 +377,20 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
-	private Resource getEsterelSemanticResource(EObject semanticElement) {
+	/**
+	 * Gets the s semantic resource.
+	 *
+	 * @param semanticElement the semantic element
+	 * @return the s semantic resource
+	 */
+	private Resource getSSemanticResource(EObject semanticElement) {
 		return semanticElement.eResource();
 	}
 
+	/** The xtext node. */
 	ICompositeNode xtextNode;
+	
+	/** The selection done. */
 	boolean selectionDone;
 
 	// -----------------------------------------------------------------------------
@@ -458,7 +472,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 					// getOffset() and getLength() are trimming whitespaces
 					int offset = xtextNode.getOffset();
 
-					// Find the next leaf node element (the actual Esterel
+					// Find the next leaf node element (the actual S
 					// Statement)
 					// and get its legth
 					int length = NodeModelUtils.findLeafNodeAtOffset(xtextNode,
@@ -514,12 +528,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.sim.kiem.internal.AbstractDataComponent#isHistoryObserver
-	 * ()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isHistoryObserver() {
@@ -556,6 +566,9 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
 
 	// -----------------------------------------------------------------------------
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public KiemProperty[] doProvideProperties() {
 		final int nProperties = 2;
