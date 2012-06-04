@@ -16,6 +16,7 @@ package de.cau.cs.kieler.synccharts.codegen.s.xtend
 import de.cau.cs.kieler.core.kexpressions.ComplexExpression
 import de.cau.cs.kieler.core.kexpressions.Expression
 import de.cau.cs.kieler.core.kexpressions.KExpressionsFactory
+import de.cau.cs.kieler.core.kexpressions.OperatorExpression
 import de.cau.cs.kieler.core.kexpressions.Signal
 import de.cau.cs.kieler.core.kexpressions.ValuedObjectReference
 import de.cau.cs.kieler.s.s.Instruction
@@ -102,14 +103,12 @@ import org.eclipse.xtend.util.stdlib.TraceComponent
 	// ======================================================================================================
 
 	// Apply conversion on children/subexpression.
-	def dispatch Expression convertToSExpression(Expression expression) {
+	def dispatch Expression convertToSExpression(ComplexExpression expression) {
 		var newExpression = KExpressionsFactory::eINSTANCE.createExpression;
-		if (expression instanceof ComplexExpression) {
-			newExpression = KExpressionsFactory::eINSTANCE.createComplexExpression;
-			for (subExpression : (expression as ComplexExpression).subExpressions) {
-				(newExpression as ComplexExpression).subExpressions.add(subExpression.convertToSExpression());
-			} 
-		}
+		newExpression = KExpressionsFactory::eINSTANCE.createComplexExpression;
+		for (subExpression : (expression as ComplexExpression).subExpressions) {
+			(newExpression as ComplexExpression).subExpressions.add(subExpression.convertToSExpression());
+		} 
 		newExpression;
 	}
 
@@ -135,6 +134,22 @@ import org.eclipse.xtend.util.stdlib.TraceComponent
 	 	booleanValue	
 	}
 
+
+	// Apply conversion to operator expressions like and, equals, not, greater, val, pre, add, etc.
+	def dispatch Expression convertToSExpression(OperatorExpression expression) {
+		val newExpression = KExpressionsFactory::eINSTANCE.createOperatorExpression;
+		newExpression.setOperator(expression.operator);
+		for (subExpression : expression.subExpressions) {
+			newExpression.subExpressions.add(subExpression.convertToSExpression)
+		}
+		return newExpression;
+	}
+	
+	// Apply conversion to the default case
+	def dispatch Expression convertToSExpression(Expression expression) {
+		var newExpression = KExpressionsFactory::eINSTANCE.createExpression;
+		newExpression;
+	}
 
 	// ======================================================================================================
 	// ==                               C O N V E R T    E F F E C T S                                     ==

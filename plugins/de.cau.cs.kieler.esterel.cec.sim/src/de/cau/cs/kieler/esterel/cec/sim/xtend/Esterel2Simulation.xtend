@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.esterel.cec.sim.xtend
 
+import de.cau.cs.kieler.esterel.cec.sim.EsterelCECSimPlugin
+
 import de.cau.cs.kieler.core.kexpressions.KExpressionsFactory
 import de.cau.cs.kieler.core.kexpressions.ValueType
 import de.cau.cs.kieler.esterel.esterel.Abort
@@ -45,20 +47,23 @@ import org.eclipse.xtend.util.stdlib.CloningExtensions
 
 /**
  * Transformation of Esterel code into Esterel code that is 
- * enriched with additional signals for each statement.
- * 
- * These signals, here HP, are generated in the following fashion for a 
- * statement P:
- * 
- *  signal AP in 
- *  	[P; emit AP; || emit HP; abort sustain HP when immediate AP] 
- *  end 
- * 
- * As names for the signals are randomly generated and must be unique
- * there must be a mapping that keeps track which signal (name) belongs to
- * which original Esterel statement.
+ * enriched with additional signals for each statement.<BR>
+ * <BR>
+ * These signals, here HP, are generated in the following fashion for a<BR> 
+ * statement P:<BR>
+ * <BR>
+ * <PRE> 
+ *  signal AP in<BR> 
+ *  	[P; emit AP; || emit HP; abort sustain HP when immediate AP]<BR> 
+ *  end <BR>
+ * </PRE> 
+ * <BR>
+ * As names for the signals are randomly generated and must be unique<BR>
+ * there must be a mapping that keeps track which signal (name) belongs to<BR>
+ * which original Esterel statement.<BR>
  * 
  * @author cmot
+ * @kieler.rating 2012-05-31 yellow KI-7
  */
 class Esterel2Simulation {
     
@@ -66,32 +71,35 @@ class Esterel2Simulation {
 	
     // General method to create the enriched Esterel simulation code
    	def Program transform2Simulation (Program program) {
-   		var AUXILIARY_VARIABLE_TAG = "oESTERELoAUXILIARYoVARIABLEoTAGoWILLoBEoREMOVEDo"
+   		// Use the same auxiliary variable tag 
+   		val AUXILIARY_VARIABLE_TAG = EsterelCECSimPlugin::AUXILIARY_VARIABLE_TAG
    		
 		// Clone the complete Esterel program
 		// clone the program and then copy modules to preserve the run-links
-   		var target = CloningExtensions::clone(program) as Program;
+   		val target = CloningExtensions::clone(program) as Program;
 		
-		var originalStatements = program.eAllContents().toIterable().filter(typeof(Statement));
+		val originalStatements = program.eAllContents().toIterable().filter(typeof(Statement));
 		
-		var targetMainmodule = target.eAllContents().toIterable().filter(typeof(Module)).toList.get(0);
-		var targetMainmoduleStatements = targetMainmodule.eAllContents().toIterable().filter(typeof(Statement));
-		var targetMainmoduleStatemensCopy = targetMainmoduleStatements.toList;
+		val targetMainmodule = target.eAllContents().toIterable().filter(typeof(Module)).toList.get(0);
+		val targetMainmoduleStatements = targetMainmodule.eAllContents().toIterable().filter(typeof(Statement));
+		val targetMainmoduleStatementsCopy = targetMainmoduleStatements.toList;
 		
 		// Ensure an interface declaration
 		if (targetMainmodule.interface == null) {
-			var moduleInterface = EsterelFactory::eINSTANCE.createModuleInterface(); 
+			val moduleInterface = EsterelFactory::eINSTANCE.createModuleInterface(); 
 			targetMainmodule.setInterface(moduleInterface);
 		} 
 		
 		// For every statement in the Esterel program do the transformation
 		// Iterate over a copy of the list	
 		var i = 0;	
-		var originalStatementsList = originalStatements.toList;
-		for(targetStatement : targetMainmoduleStatemensCopy) {
+		val originalStatementsList = originalStatements.toList;
+		
+		for(targetStatement : targetMainmoduleStatementsCopy) {
 			var originalStatement = originalStatementsList.get(i);
 			i = i + 1;
-			var statementUID = AUXILIARY_VARIABLE_TAG + originalStatement.eResource.getURIFragment(originalStatement).hashCode.toString().replace("-","M");
+			val originalStatementURIFragment = originalStatement.eResource.getURIFragment(originalStatement);
+			val statementUID = AUXILIARY_VARIABLE_TAG + originalStatementURIFragment.hashCode.toString().replace("-","M");
 			// This statement we want to modify
 			targetStatement.transformStatement(targetMainmodule, statementUID);
 		}
@@ -100,38 +108,6 @@ class Esterel2Simulation {
 	}	
 	
 	
-	//-------------------------------------------------------------------------
-	
-	// Statement transformation in the fashion like described at the top
-	def void transformStatementSimple(Statement statement, Module mainmodule, String UID) {
-		//SIMPLE TEST
-		if ((
-		   (statement instanceof Abort)
-		   ||(statement instanceof Await)
-		   ||(statement instanceof Do)
-		   ||(statement instanceof Emit)
-		   ||(statement instanceof EveryDo)
-		   ||(statement instanceof Exit)
-		   ||(statement instanceof Halt)
-		   ||(statement instanceof IfTest)
-		   ||(statement instanceof Loop)
-		   ||(statement instanceof Nothing)
-		   ||(statement instanceof Pause)
-		   ||(statement instanceof Present)
-		   ||(statement instanceof Repeat)
-		   ||(statement instanceof Run)
-		   ||(statement instanceof Suspend)
-		   ||(statement instanceof Sustain)
-		)) {
-			var container = statement.eContainer;
-			var blockStatement = EsterelFactory::eINSTANCE.createBlock()
-			blockStatement.addStatement(statement);
-			container.addStatement(blockStatement);
-		}
-		
-	}
-
-
 	//-------------------------------------------------------------------------
 	
 	// Statement transformation in the fashion like described at the top
@@ -183,6 +159,7 @@ class Esterel2Simulation {
 		   ||(statement instanceof Run)
 		   ||(statement instanceof Suspend)
 		   ||(statement instanceof Sustain)
+// Other statements that currently are not visualized in an Esterel debug session		   
 //		   ||(statement instanceof ProcCall)
 //		   ||(statement instanceof LoopDelay)
 //		   ||(statement instanceof LocalSignalDecl)
@@ -250,9 +227,9 @@ class Esterel2Simulation {
 	
 	//-------------------------------------------------------------------------
 
-	// Replace an removeStatement with an addStatement
 	// Multiple statements
 	def dispatch void addStatement(ModuleBody parent, Statement addStatement) {
+		// Replace current statements with addStatement
 		parent.statements.clear();
 		parent.statements.add(addStatement);
 	}
