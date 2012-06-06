@@ -13,10 +13,13 @@
  */
 package de.cau.cs.kieler.sim.eso;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,9 +41,10 @@ import de.cau.cs.kieler.sim.eso.eso.tick;
 import de.cau.cs.kieler.sim.eso.eso.trace;
 import de.cau.cs.kieler.sim.eso.eso.tracelist;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
+import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
 
 /**
- * @author ctr
+ * @author ctr, cmot
  * 
  */
 public class EsoFile implements ITraceProvider {
@@ -154,7 +158,8 @@ public class EsoFile implements ITraceProvider {
      * 
      * @throws KiemInitializationException
      */
-    public List<ITrace> loadTrace(final String fileName) throws KiemInitializationException, FileNotFoundException {
+    public List<ITrace> loadTrace(final String fileName) throws KiemInitializationException,
+            FileNotFoundException {
         ISetup setup = new EsoStandaloneSetup();
         Injector injector = setup.createInjectorAndDoEMFRegistration();
         XtextResourceSet rs = injector.getInstance(XtextResourceSet.class);
@@ -168,7 +173,20 @@ public class EsoFile implements ITraceProvider {
 
         InputStream in;
         if (fileName != null && fileName.length() > 0) {
-            in = new FileInputStream(fileName);
+            try {
+                URL fileURL = KiemUtil.resolveBundleOrWorkspaceFile(fileName, "de.cau.cs.kieler.sim.eso");
+                in = KiemUtil.openBundleOrWorkspaceFile(fileURL);
+            } catch (MalformedURLException e) {
+                throw new KiemInitializationException(
+                        "EsiComponent cannot load trace file due to malformed URL.", false, null);
+            } catch (IOException e) {
+                throw new KiemInitializationException(
+                        "EsiComponent cannot load trace file due to IO exception.", false, null);
+            }
+            catch (URISyntaxException e) {
+                throw new KiemInitializationException(
+                        "EsiComponent cannot load trace file due to malformed URI.", false, null);
+            }
         } else {
             throw new KiemInitializationException(
                     "EsiComponent is activated but no trace file is set", false, null);
@@ -179,13 +197,11 @@ public class EsoFile implements ITraceProvider {
         IParseResult parseResult = parser.parse(new InputStreamReader(in));
         if (parseResult.getSyntaxErrors().iterator().hasNext()) {
             INode errorElem = parseResult.getSyntaxErrors().iterator().next();
-            throw new KiemInitializationException("Parse error on line "
-                    + errorElem.getStartLine() + " at column " + errorElem.getTotalOffset()
-                    + ": " + parseResult.getSyntaxErrors().iterator().next().getText(), true,
-                    null);
+            throw new KiemInitializationException("Parse error on line " + errorElem.getStartLine()
+                    + " at column " + errorElem.getTotalOffset() + ": "
+                    + parseResult.getSyntaxErrors().iterator().next().getText(), true, null);
         }
         traceList = (tracelist) parseResult.getRootASTElement();
-        
 
         LinkedList<ITrace> res = new LinkedList<ITrace>();
         for (trace trace : traceList.getTraces()) {

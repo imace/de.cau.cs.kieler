@@ -143,6 +143,9 @@ public class KiemPlugin extends AbstractUIPlugin {
     /** The initialize execution task. */
     private InitializeExecution initializeExecution;
 
+    /** The no error output. */
+    private boolean forceNoErrorOutput = false;
+
     // -------------------------------------------------------------------------
 
     /**
@@ -310,7 +313,8 @@ public class KiemPlugin extends AbstractUIPlugin {
      * 
      * @param editorInput
      *            the file editor input to open
-     * @throws IOException 
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     public void openFile(final IEditorInput editorInput) throws IOException {
         if (!(editorInput instanceof IFileEditorInput)) {
@@ -347,6 +351,7 @@ public class KiemPlugin extends AbstractUIPlugin {
 
         if (fileString.contains("bundleentry")) {
             String urlPath = fileString.replaceFirst("bundleentry:/", "bundleentry://");
+            urlPath = urlPath.replace("\\", "/");
             URL pathUrl = new URL(urlPath);
             URL url2 = FileLocator.resolve(pathUrl);
             openFile(executionFile, readOnly, url2.openStream());
@@ -370,9 +375,8 @@ public class KiemPlugin extends AbstractUIPlugin {
      *            the execution file to open
      * @param readOnly
      *            the readonly flag indicates that the file is locked for writing
-     * 
-     * @throws IOException
-     *             if the file was not found
+     * @param inputStream
+     *            the input stream
      */
     /**
      * Open a file from a given InputStream.
@@ -584,11 +588,10 @@ public class KiemPlugin extends AbstractUIPlugin {
 
     /**
      * Check for single enabled master. This is just a wrapper for the method
-     * {@link #checkForSingleEnabledMaster(boolean, DataComponentWrapper)}.
      * 
      * @param silent
      *            if true, the warning dialog will be suppressed
-     * 
+     *            {@link #checkForSingleEnabledMaster(boolean, DataComponentWrapper)}.
      */
     public void checkForSingleEnabledMaster(final boolean silent) {
         checkForSingleEnabledMaster(silent, null);
@@ -856,15 +859,15 @@ public class KiemPlugin extends AbstractUIPlugin {
                 if (vglComponentId.equals(componentId)) {
                     // restore KIEM property type first
                     if (properties != null) {
-                    	KiemProperty[] defaultProperties = dataComponent.getProperties();
+                        KiemProperty[] defaultProperties = dataComponent.getProperties();
                         for (int ccc = 0; ccc < properties.length; ccc++) {
                             try {
-                                if (ccc < dataComponent.getProperties().length)  {
+                                if (ccc < dataComponent.getProperties().length) {
                                     properties[ccc].setType(defaultProperties[ccc].getType());
                                     // if a property asks for restoring its default value
                                     // then omit the loaded value for this property
                                     if (properties[ccc].isRestoreToDefaultOnLoad()) {
-                                    	properties[ccc].setValue(defaultProperties[ccc].getValue());
+                                        properties[ccc].setValue(defaultProperties[ccc].getValue());
                                     }
                                 }
                             } catch (Exception e) {
@@ -1304,14 +1307,14 @@ public class KiemPlugin extends AbstractUIPlugin {
      * - {@link KiemExecutionException}<BR>
      * If the mustStop flag is set, then the execution is immediately stopped. Note that all threads
      * will be advised to stop in the
-     * {@link de.cau.cs.kieler.sim.kiem.execution.Execution#errorTerminate()} method. But there is
-     * no guarantee that they really stop. The links to these threads will be cut down, so that
-     * there is the possibility of zombie threads.
      * 
      * @param dataComponent
      *            the DataComponent that caused the error or warning
      * @param exception
      *            the Exception if any, or null
+     *            {@link de.cau.cs.kieler.sim.kiem.execution.Execution#errorTerminate()} method. But
+     *            there is no guarantee that they really stop. The links to these threads will be
+     *            cut down, so that there is the possibility of zombie threads.
      */
     public static void handleComponentError(final AbstractDataComponent dataComponent,
             final Exception exception) {
@@ -1371,6 +1374,17 @@ public class KiemPlugin extends AbstractUIPlugin {
 
     // -------------------------------------------------------------------------
 
+    /**
+     * Gets the error warning message.
+     * 
+     * @param textMessage
+     *            the text message
+     * @param pluginID
+     *            the plugin id
+     * @param exception
+     *            the exception
+     * @return the error warning message
+     */
     private String getErrorWarningMessage(final String textMessage, final String pluginID,
             final Exception exception) {
         String message = "";
@@ -1393,6 +1407,17 @@ public class KiemPlugin extends AbstractUIPlugin {
         return message;
     }
 
+    /**
+     * Gets the plugin id.
+     * 
+     * @param textMessage
+     *            the text message
+     * @param pluginID
+     *            the plugin id
+     * @param exception
+     *            the exception
+     * @return the plugin id
+     */
     private String getPluginID(final String textMessage, final String pluginID,
             final Exception exception) {
         String pluginID2 = null;
@@ -1456,6 +1481,9 @@ public class KiemPlugin extends AbstractUIPlugin {
      */
     public void showWarning(final String textMessage, final String pluginID,
             final Exception exception, final boolean silent) {
+        if (forceNoErrorOutput) {
+            return;
+        }
         try {
             String message = getErrorWarningMessage(textMessage, pluginID, exception);
             String pluginID2 = getPluginID(textMessage, pluginID, exception);
@@ -1511,6 +1539,9 @@ public class KiemPlugin extends AbstractUIPlugin {
 
     public void showError(final String textMessage, final String pluginID,
             final Exception exception, final boolean silent) {
+        if (isForceNoErrorOutput()) {
+            return;
+        }
         try {
             String message = getErrorWarningMessage(textMessage, pluginID, exception);
             String pluginID2 = getPluginID(textMessage, pluginID, exception);
@@ -1548,6 +1579,29 @@ public class KiemPlugin extends AbstractUIPlugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Checks if is force no error output.
+     *
+     * @return true, if is force no error output
+     */
+    public boolean isForceNoErrorOutput() {
+        return forceNoErrorOutput;
+    }
+
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Sets the force no error output.
+     *
+     * @param forceNoErrorOutput the new force no error output
+     */
+    public void setForceNoErrorOutput(final boolean forceNoErrorOutput) {
+        this.forceNoErrorOutput = forceNoErrorOutput;
     }
 
 }

@@ -89,7 +89,7 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
     private List<HashMap<String, String>> simVariables;
 
     /**
-     * A map f all values of all simulated or recorded input signals in each step. Pushed here by
+     * A map of all values of all simulated or recorded input signals in each step. Pushed here by
      * the DataReplayComponent
      */
     private List<HashMap<String, Object>> recInputs;
@@ -321,7 +321,6 @@ public class DataValidationComponent extends JSONObjectSimulationDataComponent i
         properties[3] = new KiemProperty(Constants.VALVAR, Constants.DEF_VALVAR);
         properties[4] = new KiemProperty(Constants.SIGNALVAR, Constants.DEF_SIGNALVAR);
         properties[5] = new KiemProperty(Constants.IGNOREEXTRA, false);
-
         return properties;
     }
 

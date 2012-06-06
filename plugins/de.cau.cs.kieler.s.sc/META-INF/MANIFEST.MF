@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KIELER S 2 SC Transformation
 Bundle-SymbolicName: de.cau.cs.kieler.s.sc;singleton:=true
-Bundle-Version: 0.1.1.qualifier
+Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: de.cau.cs.kieler.s.sc.S2SCPlugin
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
 Require-Bundle: org.eclipse.ui,
@@ -12,13 +12,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions;bundle-version="3.4.0",
  de.cau.cs.kieler.core.kexpressions,
  de.cau.cs.kieler.s,
- de.cau.cs.kieler.s.codegen
+ org.apache.log4j;bundle-version="1.2.15",
+ com.google.inject;bundle-version="3.0.0",
+ com.google.guava;bundle-version="10.0.1",
+ org.eclipse.xtend2.lib;bundle-version="2.2.1",
+ de.cau.cs.kieler.core.annotations
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.commons.logging,
- org.eclipse.emf.mwe.core.resources,
- org.eclipse.jdt.core,
- org.eclipse.jdt.core.formatter,
- org.eclipse.jface.text,
- org.eclipse.text.edits,
- org.eclipse.xpand2.output
+Export-Package: de.cau.cs.kieler.s.sc,
+ de.cau.cs.kieler.s.sc.xtend
