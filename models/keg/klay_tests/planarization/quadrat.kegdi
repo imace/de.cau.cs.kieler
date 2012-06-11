@@ -33,8 +33,9 @@
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vhrlA5mmEeG5hPDz2WOmyw" x="230" y="175"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_rnST0Za4EeGd8ubvttIUQQ"/>
-  <styles xmi:type="notation:StringValueStyle" xmi:id="_ALO5AJa5EeGd8ubvttIUQQ" name="layout:de.cau.cs.kieler.algorithm" stringValue="de.cau.cs.kieler.klay.planar.orthogonal"/>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_Aw7AAJa5EeGd8ubvttIUQQ" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_f1EbAa_HEeGsLoP-SwPTqg" name="defaultLayout:de.cau.cs.kieler.klay.planar.planarityTest" stringValue="BOYER_MYRVOLD_ALGORITHM"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_gfw90K_HEeGsLoP-SwPTqg" name="defaultLayout:de.cau.cs.kieler.algorithm" stringValue="de.cau.cs.kieler.klay.planar.orthogonal"/>
   <element xmi:type="keg:Node" href="quadrat.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_wD7WcJmmEeG5hPDz2WOmyw" type="4002" source="_ux01YZmmEeG5hPDz2WOmyw" target="_vAVygJmmEeG5hPDz2WOmyw">
     <children xmi:type="notation:DecorationNode" xmi:id="_wD79gJmmEeG5hPDz2WOmyw" type="6006">
