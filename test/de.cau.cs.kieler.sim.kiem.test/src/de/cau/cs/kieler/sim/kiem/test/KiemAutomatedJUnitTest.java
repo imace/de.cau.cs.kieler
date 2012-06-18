@@ -14,19 +14,17 @@
 
 package de.cau.cs.kieler.sim.kiem.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,18 +32,13 @@ import java.util.List;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
@@ -60,6 +53,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 
+import de.cau.cs.kieler.sim.kart.KartConstants;
 import de.cau.cs.kieler.sim.kiem.KiemPlugin;
 import de.cau.cs.kieler.sim.kiem.execution.Execution;
 import de.cau.cs.kieler.sim.kiem.internal.DataComponentWrapper;
@@ -67,117 +61,91 @@ import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
 
 /**
- * The class KiemAutomatedJUnit enabled the integration of several KIEM execution runs into a JUNIT
+ * The class KiemAutomatedJUnit enables the integration of several KIEM execution runs into a JUnit
  * plugin test.
  * 
- * Execution schedules may be passed using the -execution="/project/file.exeution" parameter.
- * Typically all ESO files found in all projects of the selected workspace are run.
+ * A new test plugin has to have a class C extending KiemAutomatedJUnitTest. The new class C has to
+ * have "Test" in its name to be found as a JUnit class by the build system.
  * 
- * You should select a model file extension -model=s or select directly some model files use the
- * -model={"/project/file1.s","/project/file2.s"} parameter to select some.
+ * Test model files and corresponding (same name by convention!) ESO files must be provided with the
+ * bundle implementing the KiemAutomatedJUnitTest abstract class in a bundle directory specified by
+ * getBundleTestPath().
  * 
- * ATTENTION: Be sure to uncheck the run in UI thread option in the run configuration of the JUnit
- * test case ([ ] run in UI thread).
+ * The execution file that should be used must exist also in this directory. Its name must be
+ * specified by getExecutionFileName().
  * 
- * ATTENTION: The Kiem.UI Plugin should not be part of the run configuration because the executions
- * may be too fast done and the Kiem.UI Plugin may get problems handling already closed widgets.
+ * Model, ESO and the execution file are linked in a temporary workspace folder. The name of this
+ * folder in the temporary workspace is defined by getTemporaryWorkspaceFolderName().
+ * 
+ * ESO file names are derived by model files. Model files are identified by the file extension that
+ * is specified by getModelFileExtension(). If a model has no corresponding ESO file it is not
+ * considered as a test case.
+ * 
+ * The maximum number of ticks is defined by 100. Reaching this maximum will generate an error
+ * because typical test models should be small (!) and should test specific functionality only.
+ * Hence ESO files for such test models should contain only a small number of ticks far below this
+ * maximum!
  * 
  * @author cmot
  * 
  */
-public class KiemAutomatedJUnitTest {
+public abstract class KiemAutomatedJUnitTest {
 
-    /** The Constant EXECUTION_FILE_ARG. */
-    static final String EXECUTION_FILE_ARG = "-execution";
+    // -------------------------------------------------------------------------
+    // General Configuration
 
-    /** The Constant MODEL_FILE_ARG. */
-    static final String MODEL_FILE_ARG = "-model";
-
-    /** The plugin id of the required KART plugin. */
-    static final String KART_REPLAY_DATACOMPONENT_ID_START = "de.cau.cs.kieler.sim.kart.replay";
-
-    /** The plugin id of the required KART plugin. */
-    static final String KART_VALIDATION_DATACOMPONENT_ID_START = "de.cau.cs.kieler.sim.kart.validation";
-
-    /** The Constant KART_KONFIG. */
-    static final String KART_KONFIG = "kartConfig";
-
-    /** The Constant KART_END_OF_TRANCE. */
-    static final String KART_END_OF_TRANCE = "eot";
+    /**
+     * The maximum number of ticks for executing one trace in an ESO file. If this boundary is
+     * reached an error will be thrown.
+     */
+    static final int MAX_NUMBER_OF_TICKS_UNTIL_ERROR = 100;
 
     /**
      * The delay between consecutive executions is needed for garbage collecting/freeing resources.
      */
-    static final long SLEEP_DELAY_BETWEEN_EXECUTIONS = 500;
+    static final long SLEEP_DELAY_BETWEEN_EXECUTIONS = 1;
 
     /** The Constant DEFAULT_ESO_FILE_EXTENSITION. */
     static final String DEFAULT_ESO_FILE_EXTENSITION = "eso";
 
-    /**
-     * The Constant KART_PROPERTY_ESOFILE - must be equal to the one defined in sim.kart.Constants!
-     */
-    static final String KART_PROPERTY_ESOFILE = "ESI/ESO trace file";
+    /** The DEBUG constant. */
+    static final boolean DEBUG = false;
+
+    // -------------------------------------------------------------------------
+    // ESO file an KART configuration
 
     /**
-     * The Constant KART_PROPERTY_TRACNUMBER - must be equal to the one defined in
-     * sim.kart.Constants!
-     */
-    static final String KART_PROPERTY_TRACNUMBER = "Trace number to replay";
-
-    /**
-     * The Constant KART_PROPERTY_ERRORVARIABLE - must be equal to the one defined in
-     * sim.kart.Constants!
-     */
-    static final String KART_PROPERTY_ERRORVARIABLE = "Erroneous signals variable";
-
-    /**
-     * The Constant KART_PROPERTY_STOPONSUCCESS - must be equal to the one defined in
-     * sim.kart.Constants!
-     */
-    static final String KART_PROPERTY_STOPONSUCCESS = "Stop execution upon end of ESO file";
-
-    /**
-     * The id used to separate traces within eso files is used to count the number of available
+     * The id used to separate traces within ESO files is used to count the number of available
      * traces.
      */
     static final String ESO_FILE_RESET_TRACE_ID = "! reset;";
-
-    // -------------------------------------------------------------------------
-
-    /** The kiem plugin sigle instance. */
-    private KiemPlugin kiemPlugin = null;
 
     /**
      * The error signal name to observe the KIEM data pool for potential execution errors detected
      * by KART. This is configurable in the KART data component properties and need to be extracted
      * from the execution file.
      */
-    private String errorSignalName = "errorState";
+    private String errorSignalName = KartConstants.DEF_VAL_ERRORSTATE; // "errorState"
 
-    /** The execution file name. */
-    protected String executionFile = "automated.execution";
+    // -------------------------------------------------------------------------
+    // Private properties
 
-    /**
-     * The model file extension that is used in case no direct model files are provided.
-     */
-    protected String modelFileExtension = "";
+    /** The kiem plugin single instance. */
+    private KiemPlugin kiemPlugin = null;
 
-    /** The model file names. */
-    protected List<String> modelFiles = new LinkedList<String>();
+    /** The ESO files. */
+    private List<IPath> esoFiles = new LinkedList<IPath>();
 
-    /** The eso files. */
-    protected List<URL> esoFiles = new LinkedList<URL>();
-
-    /** The corresponding model file for an eso file. */
-    protected HashMap<URL, URL> modelFile = new HashMap<URL, URL>();
+    /** The corresponding model file for an ESO file. */
+    private HashMap<IPath, IPath> modelFile = new HashMap<IPath, IPath>();
 
     /** The current model file path. */
-    private String modelFilePath;
+    private String modelFilePathString;
 
     // -------------------------------------------------------------------------
 
     /**
-     * Important for scanning files is the Plugin ID
+     * Important for scanning files is the Plugin ID.
      * 
      * @return the plugin id
      */
@@ -188,105 +156,204 @@ public class KiemAutomatedJUnitTest {
     // -------------------------------------------------------------------------
 
     /**
-     * Gets a list of paths of the considered ESO files. Derived test classes should provide a list
-     * of ESO files that should be part of the plugin.
+     * Defines a path in the bundle where the model files, the ESO files and the execution files are
+     * located.
+     * 
+     * E.g., return new Path("/testdata/");
      * 
      * @return the ESO files
      */
-    protected List<String> getPluginModelFiles() {
-        return new LinkedList<String>();
-    }
+    protected abstract IPath getBundleTestPath();
 
     // -------------------------------------------------------------------------
 
     /**
-     * Gets the path to the considered KIEM execution scheduling file. Derived test classes should
-     * provide the name of the execution file that should be part of the plugin.
+     * Defines the file extension for the model files.
+     * 
+     * E.g., return "s"
+     * 
+     * @return the model file extension
+     */
+    protected abstract String getModelFileExtension();
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Defines the name of the folder in the workspace where links to the bundle files will be
+     * created.
+     * 
+     * E.g., return "temp-s"
+     * 
+     * @return the temporary workspace folder name
+     */
+    protected abstract String getTemporaryWorkspaceFolderName();
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Gets the name of the considered KIEM execution scheduling file. Derived test classes should
+     * provide the name of the execution file that should be part of the plugin in the
+     * BundleTestPath.
+     * 
+     * E.g., return "myexecution.execution";
      * 
      * @return the plugin execution file
      */
-    protected String getPluginExecutionFile() {
-        return "";
+    protected abstract String getExecutionFileName();
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Creates links for all files in the bundles test directory and returns all paths as a list.
+     * 
+     * @return the list
+     */
+    private List<IPath> createLinksForAllTestFiles() {
+        List<IPath> allFiles = new LinkedList<IPath>();
+        // If the bundle is not ready then there is no image
+        final Bundle bundle = Platform.getBundle(this.getPluginId());
+
+        // Search for all files in the test directory
+        Enumeration<URL> allBundleFilesUrl = bundle.findEntries(
+                this.getBundleTestPath().toString(), "*.*", false);
+        if (DEBUG) {
+            System.out.println("testpath:" + this.getBundleTestPath().toString());
+        }
+        while (allBundleFilesUrl.hasMoreElements()) {
+            URL bundleFileUrl = allBundleFilesUrl.nextElement();
+            try {
+                if (DEBUG) {
+                    System.out.println("bundleFileUrl:" + bundleFileUrl.toString());
+                }
+                // IPath fullBundleFilePath = new Path(bundleFileURL.toString());
+
+                IFile workspaceFile = KiemUtil.createLinkedWorkspaceFile(bundleFileUrl,
+                        this.getTemporaryWorkspaceFolderName(), false, true);
+                if (!workspaceFile.exists()) {
+                    throw new RuntimeException(
+                            "Cannot create temporary workspace link for the following bundle file (1) :"
+                                    + bundleFileUrl.toString());
+                }
+                IPath filePath = workspaceFile.getFullPath();
+                allFiles.add(filePath);
+            } catch (CoreException e) {
+                throw new RuntimeException(
+                        "Cannot create temporary workspace link for the following bundle file (2) :"
+                                + bundleFileUrl.toString());
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(
+                        "Cannot create temporary workspace link for the following bundle file (3) :"
+                                + bundleFileUrl.toString());
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(
+                        "Cannot create temporary workspace link for the following bundle file (4) :"
+                                + bundleFileUrl.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(
+                        "Cannot create temporary workspace link for the following bundle file (5) :"
+                                + bundleFileUrl.toString());
+            }
+        }
+        return allFiles;
     }
 
     // -------------------------------------------------------------------------
 
     /**
-     * This generic test will look for *.eso files for provided corresponding model files. If there
-     * are no provided specific model files it will scan the current workspace for all model files
-     * and consider the linked eso files. It will run the models using the automated.execution
-     * execution scheduling file by default.
+     * Gets the path of the execution file if this is found in the files that were copied to the
+     * temporary workspace folder.
      * 
-     * Use -execution="/project/file.exeution" to change the default execution scheduling file. Use
-     * -model={"/project/file1.s","/project/file2.s"} to select some model files.
-     * 
-     * Corresponding eso files will be searched according to the model file names and the default
-     * ESO file extension.
+     * @param allWorkspaceFiles
+     *            the all workspace files
+     * @return true, if successful
      */
-    @Test
-    public void KiemAutomatedJUnitTestExecution() {
-        if (true) {
-            return;
-        }
-        // if the bundle is not ready then there is no image
-        Bundle bundle = Platform.getBundle(this.getPluginId());
-
-        // -----------------------------------------------------------------------------------------
-        // Inspect program arguments for -execution and -model parameters
-        // OR
-        // take the implementations of the according methods from derived
-        // classes
-        boolean executionFileAlreadySet = false;
-        boolean modelFilesAlreadySet = false;
-        if (!getPluginExecutionFile().equals("")) {
-            executionFile =  getPluginExecutionFile();
-            executionFileAlreadySet = true;
-        }
-        if (getPluginModelFiles().size() > 0) {
-            modelFiles = getPluginModelFiles();
-            modelFilesAlreadySet = true;
-        }
-        for (String arg : Platform.getApplicationArgs()) {
-            if (arg.startsWith(EXECUTION_FILE_ARG) && !executionFileAlreadySet) {
-                executionFile = arg.substring(EXECUTION_FILE_ARG.length() + 1, arg.length());
-                executionFile = executionFile.replace("\"", "");
+    private IPath getExecutionFilePath(final List<IPath> allWorkspaceFiles) {
+        for (IPath workspaceFilePath : allWorkspaceFiles) {
+            // If this is a model file search for the corresponding ESO file
+            if (workspaceFilePath.toString().endsWith(this.getExecutionFileName())) {
+                return workspaceFilePath;
             }
-            if (arg.startsWith(MODEL_FILE_ARG) && !modelFilesAlreadySet) {
-                // if this code is executed twice newer parameters replace older
-                // ones
-                modelFiles.clear();
-                String esoFilesString = arg.substring(MODEL_FILE_ARG.length() + 1, arg.length());
-                esoFilesString = esoFilesString.replace("\"", "");
-                esoFilesString = esoFilesString.replace("{", "");
-                esoFilesString = esoFilesString.replace("}", "");
-                String[] esoFilesArray = esoFilesString.split(",");
-                // decide whether these are direct model files provided as a
-                // parameter
-                // or this is a model file extension
-                if (esoFilesArray.length == 1 && !esoFilesArray[0].contains(".")
-                        && !esoFilesArray[0].contains("/") && !esoFilesArray[0].contains("\\")) {
-                    // consider this model file extension and NO specific
-                    // provided model files
-                    this.modelFileExtension = esoFilesArray[0];
-                    if (!modelFileExtension.startsWith(".")) {
-                        modelFileExtension = "." + modelFileExtension;
-                    }
-                } else {
-                    // consider specific model files and NO general model file
-                    // extension
-                    if (esoFilesArray != null && esoFilesArray.length > 0) {
-                        for (String esoFileString : esoFilesArray) {
-                            modelFiles.add(esoFileString);
-                        }
+        }
+        return null;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Fill model and ESO files list and hash map.
+     * 
+     * @param allFiles
+     *            the all files
+     */
+    private void fillModelAndEsoFiles(final List<IPath> allFiles) {
+        this.esoFiles.clear();
+        this.modelFile.clear();
+
+        for (IPath filePath : allFiles) {
+            // If this is a model file search for the corresponding ESO file
+            if (filePath.getFileExtension().equals(this.getModelFileExtension())) {
+                IPath modelFilePath = filePath;
+                IPath esoFilePath = modelFilePath.removeFileExtension().addFileExtension(
+                        KiemAutomatedJUnitTest.DEFAULT_ESO_FILE_EXTENSITION);
+
+                boolean foundEsoFile = false;
+                for (IPath filePath2 : allFiles) {
+                    if (filePath2.toString().equals(esoFilePath.toString())) {
+                        foundEsoFile = true;
+                        break;
                     }
                 }
+                if (foundEsoFile) {
+                    // ESO file was found => add both to their lists
+                    this.esoFiles.add(esoFilePath);
+                    this.modelFile.put(esoFilePath, modelFilePath);
+                }
+                // Consider this only a test case if matching ESO files are found.
+                // Otherwise this model file is ignored
+                //
+                // if (!foundEsoFile) {
+                // throw new RuntimeException(
+                // "ESO file:'"
+                // + esoFilePath.toString()
+                // +
+                // "' can not be found but its corresponding model file was specified to be tested.");
+                // }
             }
+
         }
-        // test if a model file extenion is used OR modelFiles > 0
-        if (modelFiles.size() == 0 && this.modelFileExtension.equals("")) {
+
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * This generic test will look for model files in a provided test files folder. If for a model
+     * file also an ESO file is found these both serve as a test case. Additionally a valid
+     * execution file has to be defined.
+     */
+    @Test
+    public void kiemAutomatedJUnitTestExecution() {
+        // -----------------------------------------------------------------------------------------
+        // Create links in temp workspace and test if valid input (eso files and execution file)
+
+        // First create links to local bundle file in a temporary workspace
+        List<IPath> allWorkspaceFiles = createLinksForAllTestFiles();
+
+        // Test if a valid execution file is defined
+        if (getExecutionFilePath(allWorkspaceFiles) == null) {
+            throw new RuntimeException(
+                    "No execution file is defined or the execution file is not found.");
+        }
+
+        // Fill esoFiles and modelFile list/hashmap
+        fillModelAndEsoFiles(allWorkspaceFiles);
+
+        // Test if ESO files and corresponding model files exist
+        if (esoFiles.size() == 0) {
             throw new RuntimeException(
                     "No model files are provided and also no model file extension was provided to search"
-                            + " for model files in the current workspace. Cannot proceed without model files to test!");
+                            + " for model files in the current workspace. "
+                            + "Cannot proceed without model files to test!");
         }
 
         // -----------------------------------------------------------
@@ -300,114 +367,23 @@ public class KiemAutomatedJUnitTest {
 
         // -----------------------------------------------------------------------------------------
         // Figure out execution file path and try to load it with KIEM
-        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        String executionFileString = getExecutionFilePath(allWorkspaceFiles).toString();
         try {
-            URL executionFileURL =  KiemUtil.resolveBundleOrWorkspaceFile(executionFile, this.getPluginId());
-            if (executionFileURL != null) {
-                kiemPlugin.openFile(new Path(executionFileURL.toString()), true);
-            } else {
-                fail("Cannot find execution scheduling file '" + executionFile + "'.");
-            }
+            kiemPlugin.openFile(getExecutionFilePath(allWorkspaceFiles), true);
         } catch (IOException e) {
-            fail("Cannot find execution scheduling file '" + executionFile + "'.");
-        } catch (URISyntaxException e) {
-            fail("Cannot find execution scheduling file '" + executionFile + "'.");
-        }
-
-        // -----------------------------------------------------------------------------------------
-        // Figure model and eso files of the all projects in the WORKSPACE if no
-        // specific
-        // parameter was
-        if (modelFiles.size() == 0) {
-            // find ESO files in the workspace
-            IProject[] projects = myWorkspaceRoot.getProjects();
-            for (IProject project : projects) {
-                try {
-                    IResource[] resources = project.members();
-                    for (IResource resource : resources) {
-                        String modelFileExtension = resource.getFileExtension();
-                        // only test model files that end with the model file extension
-                        if (("." + modelFileExtension).endsWith(this.modelFileExtension)) {
-                            String modelFileName = resource.getFullPath().toString();
-                            int replacePosition = modelFileName.lastIndexOf(modelFileExtension);
-                            String esoFileName = modelFileName.substring(0, replacePosition)
-                                    + DEFAULT_ESO_FILE_EXTENSITION;
-
-                            // test if eso file exists
-                            IFile esoFile = myWorkspaceRoot.getFile(new Path(esoFileName));
-                            IFile modelFile = myWorkspaceRoot.getFile(new Path(modelFileName));
-                            if (esoFile.exists() && modelFile.exists()) {
-                                // create mapping and add eso file
-                                try {
-                                    String esoFileString = myWorkspaceRoot
-                                            .getFile(esoFile.getFullPath()).getLocation()
-                                            .toString();
-                                    String modelFileString = myWorkspaceRoot
-                                            .getFile(modelFile.getFullPath()).getLocation()
-                                            .toString();
-                                    // URL esoFileUrl =
-                                    // EFS.getLocalFileSystem().getStore(esoFile.getFullPath()).toURI().toURL();
-                                    // URL modelFileUrl =
-                                    // EFS.getLocalFileSystem().getStore(modelFile.getFullPath()).toURI().toURL();
-                                    URL esoFileUrl = new URI("file://" + esoFileString).toURL();
-                                    URL modelFileUrl = new URI("file://" + modelFileString).toURL();
-                                    this.modelFile.put(esoFileUrl, modelFileUrl);
-                                    this.esoFiles.add(esoFileUrl);
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                } catch (URISyntaxException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                } catch (CoreException e) {
-                    // ignore
-                }
-            }
-        } else {
-            // if model files are given then try to find corresponding eso
-            // files and add both
-            for (String modelFileName : modelFiles) {
-                URL modelFileUrl = null;
-                URL esoFileUrl = null;
-                // can we finde an eso file for it?
-                int replacePosition = modelFileName.lastIndexOf(".");
-                String esoFileName = modelFileName.substring(0, replacePosition) + "."
-                        + DEFAULT_ESO_FILE_EXTENSITION;
-                try {
-                    modelFileUrl = KiemUtil.resolveBundleOrWorkspaceFile(modelFileName, this.getPluginId());
-                    esoFileUrl =  KiemUtil.resolveBundleOrWorkspaceFile(esoFileName, this.getPluginId());
-                } catch (MalformedURLException e) {
-                } catch (URISyntaxException e) {
-                }
-                if (modelFileUrl == null) {
-                    throw new RuntimeException("Model file:'" + modelFileName
-                            + "' can not be found but was specified to be tested.");
-                }
-                if (esoFileUrl == null) {
-                    throw new RuntimeException(
-                            "Eso file:'"
-                                    + esoFileName
-                                    + "' can not be found but its corresponding model file was specified to be tested.");
-                }
-                // if we got here then we can add both to be tested
-                this.modelFile.put(esoFileUrl, modelFileUrl);
-                this.esoFiles.add(esoFileUrl);
-            }
+            fail("Cannot find execution scheduling file '" + executionFileString + "'.");
         }
 
         // -----------------------------------------------------------------------------------------
         // Initialize the KART data component properties
         DataComponentWrapper kartReplay = getKartReplayComponent();
         DataComponentWrapper kartValidation = getKartValidationComponent();
-        KiemProperty fileProperty = getProperty(KART_PROPERTY_ESOFILE, kartReplay);
-        KiemProperty traceProperty = getProperty(KART_PROPERTY_TRACNUMBER, kartReplay);
-        KiemProperty errorProperty = getProperty(KART_PROPERTY_ERRORVARIABLE, kartValidation);
-        KiemProperty stopProperty = getProperty(KART_PROPERTY_STOPONSUCCESS, kartReplay);
-        stopProperty.setValue("false"); // not stop execution after eso file is
-                                        // done
-        errorSignalName = errorProperty.getValue(); // extract the corrct error
+        KiemProperty traceProperty = getProperty(KartConstants.TRACENUM, kartReplay);
+        KiemProperty errorProperty = getProperty(KartConstants.SIGNALVAR, kartValidation);
+        KiemProperty stopProperty = getProperty(KartConstants.STOPEXECUTION, kartReplay);
+        stopProperty.setValue("true"); // not stop execution after ESO file is
+                                       // done
+        errorSignalName = errorProperty.getValue(); // extract the correct error
                                                     // signal name to look for
         KiemPlugin.getDefault().setForceNoErrorOutput(true);
 
@@ -423,187 +399,229 @@ public class KiemAutomatedJUnitTest {
         boolean errorFlag = false;
         String errorInformation = "";
 
-        for (URL esoFileUrl : esoFiles) {
-            // IPath esoFilePath = new Path(esoFileString);
-            // IFile esoFile = myWorkspaceRoot.getFile(esoFilePath);
-            // String esoFileAbsolute = getAbsoluteFilePath(esoFile);
-
-            // set the correct eso file
-            // fileProperty.setValue(esoFileAbsolute);
-            fileProperty.setValue(esoFileUrl.toString());
-
-            // open the according model file
-            // modelFilePath =
-            // esoFilePath.removeFileExtension().addFileExtension(
-            // modelFileExtension);
-
-            URL modelFileUrl = this.modelFile.get(esoFileUrl);
-            openModelFile(modelFileUrl);
-
-            System.out.println("Model File" + modelFilePath.toString());
-
-            int numberOfTraces = getNumberOfTraces(esoFileUrl);
-            System.out.println("NUMBER OF TRACES " + numberOfTraces);
-
-            for (int traceNumber = 0; traceNumber < numberOfTraces; traceNumber++) {
-                System.out.println("traceNumber" + traceNumber);
-
-                // set the current trace number
-                traceProperty.setValue(traceNumber + "");
-                // now run the execution stepwise until it has stopped
-
-                if (kiemPlugin.initExecution()) {
-                    Execution execution = kiemPlugin.getExecution();
-                    if (execution == null) {
-                        throw new RuntimeException(
-                                "KIEM cannot start execution. Try to do this manually for the following scheduling file:'"
-                                        + executionFile + "'.");
-                    }
-                    pause();
-
-                    // at this point we know that the execution is not null
-                    int tick = 0;
-                    while (execution.isStarted() && !errorFlag) {
-                        System.out.println("Tick" + tick);
-
-                        // remember the pool counter number
-                        long poolCounter = execution.getDataPool().getPoolCounter();
-                        execution.stepExecutionSync();
-                        // wait until step is done
-                        while (!execution.isPaused() && execution.isStarted()) {
-                            try {
-                                Thread.sleep(10);
-                            } catch (InterruptedException e) {
-                                // ignore sleeping errors
-                            }
-                        }
-                        // now inspect the data pool
-                        try {
-                            JSONObject jSONData = execution.getDataPool()
-                                    .getData(null, poolCounter);
-                            System.out.println(jSONData.toString());
-                            if (jSONData != null) {
-                                if (jSONData.has(KART_KONFIG)) {
-                                    Object kartConfigContent = jSONData.get(KART_KONFIG);
-                                    if (kartConfigContent instanceof JSONObject
-                                            && ((JSONObject) kartConfigContent)
-                                                    .has(KART_END_OF_TRANCE)) {
-                                        Object kartEOTContent = ((JSONObject) kartConfigContent)
-                                                .get(KART_END_OF_TRANCE);
-                                        if (kartEOTContent instanceof Boolean) {
-                                            if (((Boolean) kartEOTContent)) {
-                                                // !!! EOT DETECTED !!! //
-                                                execution.stopExecutionSync();
-                                                execution.cancel();
-                                                while (kiemPlugin.getExecution() != null) {
-                                                    pause();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                if (jSONData.has(errorSignalName)) {
-                                    Object errorContent = jSONData.get(errorSignalName);
-                                    if (errorContent instanceof String) {
-                                        if (!((String) errorContent).equals("")) {
-                                            // !!! ERRROR DETECTED !!! //
-                                            // execution.stopExecutionSync();
-                                            errorFlag = true;
-                                            errorInformation = "Error (" + (String) errorContent
-                                                    + ") in tick " + tick + " of trace "
-                                                    + traceNumber + " of ESO file '"
-                                                    + esoFileUrl.getFile() + "' during execution '"
-                                                    + executionFile + "'.";
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        tick++;
-                    } // while executing
-                } // init execution
-
-                // if an error occurred, do not proceed with the next trace!
-                if (errorFlag) {
-                    break;
-                }
-            } // next trace
-
-            // if an error occurred, do not proceed with the next eso file!
+        for (IPath esoFilePath : esoFiles) {
+            // test this ESO file with all its included traces
+            // the traceProperty is required to be able to update the trace number
+            testEsoFile(esoFilePath, traceProperty);
+            // if an error occurred, do not proceed with the next ESO file!
             if (errorFlag) {
                 break;
             }
-        } // next eso file
+        } // next ESO file
 
         // -----------------------------------------------------------------------------------------
         // if an error occurred than print it out
         if (errorFlag) {
             fail(errorInformation);
         }
-
     }
 
     // -------------------------------------------------------------------------
 
     /**
-     * Pause.
+     * Test ESO file and return a potential (first) error as a String.
+     * 
+     * @param esoFilePath
+     *            the eso file path
+     * @param traceProperty
+     *            the trace property
+     * @return a possible error string or null if no error
      */
-    void pause() {
+    private String testEsoFile(final IPath esoFilePath, final KiemProperty traceProperty) {
+        boolean errorFlag = false;
+        String errorInformation = null;
+
+        // Get the corresponding model file
+        IPath modelFilePath = this.modelFile.get(esoFilePath);
+
+        // Try to open it
+        if (!KiemUtil.isHeadlessRun()) {
+            openModelFile(modelFilePath);
+        }
+
+        // Set modelFile in execution manager
+        // modelFilePath = getWorkspaceFile(modelFilePath).getProjectRelativePath();
+        // Set the global model file in KIEM, other components will retrieve this
+        KiemPlugin.setCurrentModelFile(modelFilePath);
+        System.out.println("\nModel File: " + modelFilePath);
+
+        int numberOfTraces = getNumberOfTraces(esoFilePath);
+
+        for (int traceNumber = 0; traceNumber < numberOfTraces; traceNumber++) {
+            System.out.println("Trace Number " + traceNumber);
+
+            // set the current trace number
+            traceProperty.setValue(traceNumber + "");
+            // now run the execution stepwise until it has stopped
+
+            pause();
+            if (kiemPlugin.initExecution()) {
+                pause();
+                Execution execution = kiemPlugin.getExecution();
+                if (execution == null) {
+                    throw new RuntimeException(
+                            "KIEM cannot start execution. " 
+                            + "Try to do this manually for the following scheduling file:'"
+                                    + this.getExecutionFileName() + "'.");
+                }
+                pause();
+
+                // at this point we know that the execution is not null
+                int tick = 0;
+                while (execution.isStarted() && !errorFlag) {
+                    System.out.println("Tick " + tick);
+
+                    if (tick > MAX_NUMBER_OF_TICKS_UNTIL_ERROR) {
+                        throw new RuntimeException("Maximum number of ticks ("
+                                + MAX_NUMBER_OF_TICKS_UNTIL_ERROR + ") reached.");
+                    }
+
+                    // remember the pool counter number
+                    long poolCounter = execution.getDataPool().getPoolCounter();
+                    execution.stepExecutionSync();
+                    // wait until step is done
+                    while (!execution.isPaused() && execution.isStarted()) {
+                        pause();
+                    }
+                    // now inspect the data pool
+                    try {
+                        JSONObject jSONData = execution.getDataPool().getData(null, poolCounter);
+                        if (DEBUG) {
+                            System.out.println(jSONData.toString());
+                        }
+                        if (jSONData != null) {
+                            if (jSONData.has(KartConstants.CONFIGVAR)) {
+                                Object kartConfigContent = jSONData.get(KartConstants.CONFIGVAR);
+                                if (kartConfigContent != null
+                                        && kartConfigContent instanceof JSONObject
+                                        && ((JSONObject) kartConfigContent)
+                                                .has(KartConstants.VAR_EOT)) {
+                                    Object kartEOTContent = ((JSONObject) kartConfigContent)
+                                            .get(KartConstants.VAR_EOT);
+                                    if (kartEOTContent instanceof Boolean) {
+                                        if (((Boolean) kartEOTContent)) {
+                                            // !!! EOT DETECTED !!! //
+                                            execution.stopExecutionSync();
+                                            execution.cancel();
+                                            while (kiemPlugin.getExecution() != null) {
+                                                pause();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (jSONData.has(errorSignalName)) {
+                                Object errorContent = jSONData.get(errorSignalName);
+                                if (errorContent instanceof String) {
+                                    if (!((String) errorContent).equals("")) {
+                                        // !!! ERRROR DETECTED !!! //
+                                        // execution.stopExecutionSync();
+                                        errorFlag = true;
+                                        errorInformation = "Error (" + (String) errorContent
+                                                + ") in tick " + tick + " of trace " + traceNumber
+                                                + " of ESO file '" + esoFilePath.toString()
+                                                + "' during execution '"
+                                                + this.getExecutionFileName() + "'.";
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    tick++;
+                } // while executing
+            } else {
+                throw new RuntimeException(
+                        "KIEM cannot initialize execution. "
+                        + "Try to do this manually for the following scheduling file:'"
+                                + this.getExecutionFileName() + "'. Error message: "
+                                + KiemPlugin.getLastError());
+            }
+        } // next trace
+
+        // return a possible error message or null if no error
+        return errorInformation;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * A pause instruction for delaying execution.
+     */
+    private void pause() {  
         try {
             Thread.sleep(SLEEP_DELAY_BETWEEN_EXECUTIONS);
         } catch (InterruptedException e1) {
-            // irgnore sleeping error
+            // ignore sleeping error
         }
     }
 
     // -------------------------------------------------------------------------
 
-    private IFile getWorkspaceFile(IFileStore fileStore) {
+    /**
+     * Creates the editor input for opening model files.
+     * 
+     * @param fullFilePathString
+     *            the full file path string
+     * @return the i editor input
+     */
+    private IEditorInput createEditorInput(final String fullFilePathString) {
+        IPath path = new Path(fullFilePathString);
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
-        IFile[] files = workspace.getRoot().findFilesForLocationURI(fileStore.toURI());
-        // files= filterNonExistentFiles(files);
-        if (files == null || files.length == 0) {
-//            fileStore.
-//            return  workspace.getRoot(). (new Path(fileStore.toString()));
-          return  workspace.getRoot().getFile(new Path(fileStore.toString()));
-        }
-        if (files.length == 1)
-            return files[0];
-        return (IFile) files[0];
-    }
-
-    private IEditorInput createEditorInput(IFileStore fileStore) {
-        IFile workspaceFile = getWorkspaceFile(fileStore);
-        if (workspaceFile != null)
+        IFile workspaceFile = workspace.getRoot().getFile(path);
+        if (workspaceFile != null) {
             return new FileEditorInput(workspaceFile);
-        return null;// new JavaFileEditorInput(fileStore);
+            
+        }
+        return null;
     }
 
-    private String getEditorId(IFileStore file) {
+    // -------------------------------------------------------------------------
+
+    /**
+     * Gets the editor id for opening model files.
+     * 
+     * @param fullFilePath
+     *            the full file path
+     * @return the editor id
+     * @throws URISyntaxException
+     *             the uRI syntax exception
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    private String getEditorId(final IPath fullFilePath) throws URISyntaxException, IOException {
+        URL absoluteFileUrl = KiemUtil.resolveWorkspaceFile(fullFilePath.toString());
+        String absoluteFilePathString = KiemUtil.getAbsoluteFilePath(absoluteFileUrl);
+        IPath absoluteFilePath = new Path(absoluteFilePathString);
+        IFileStore fileStore = EFS.getLocalFileSystem().getStore(absoluteFilePath);
         try {
             IWorkbench workbench = PlatformUI.getWorkbench();
             IEditorRegistry editorRegistry = workbench.getEditorRegistry();
             InputStream inputStream;
-            inputStream = file.openInputStream(EFS.NONE, null);
+            inputStream = fileStore.openInputStream(EFS.NONE, null);
             IContentType contentType = Platform.getContentTypeManager().findContentTypeFor(
-                    inputStream, file.getName());
-            IEditorDescriptor descriptor = editorRegistry.getDefaultEditor(file.getName(),
+                    inputStream, fileStore.getName());
+            IEditorDescriptor descriptor = editorRegistry.getDefaultEditor(fileStore.getName(),
                     contentType);
 
             // check the OS for in-place editor (OLE on Win32)
-            if (descriptor == null && editorRegistry.isSystemInPlaceEditorAvailable(file.getName()))
+            if (descriptor == null
+                    && editorRegistry.isSystemInPlaceEditorAvailable(fileStore.getName())) {
                 descriptor = editorRegistry.findEditor(IEditorRegistry.SYSTEM_INPLACE_EDITOR_ID);
+            }
 
             // check the OS for external editor
             if (descriptor == null
-                    && editorRegistry.isSystemExternalEditorAvailable(file.getName()))
+                    && editorRegistry.isSystemExternalEditorAvailable(fileStore.getName())) {
                 descriptor = editorRegistry.findEditor(IEditorRegistry.SYSTEM_EXTERNAL_EDITOR_ID);
+            }
 
-            if (descriptor != null)
+            // otherwise
+            if (descriptor != null) {
                 return descriptor.getId();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -613,93 +631,44 @@ public class KiemAutomatedJUnitTest {
 
     // -------------------------------------------------------------------------
 
-    // -------------------------------------------------------------------------
-
     /**
      * Open model file.
      * 
-     * @param modelFilePath2
-     *            the model file path2
-     * @throws  
+     * @param modelFilePath
+     *            the model file path
      */
-    void openModelFile(URL modelFileUrl)  {
-        try {
-            this.modelFilePath = KiemUtil.getAbsoluteFilePath(KiemUtil.getResolvedAbsoluteFilePath(modelFileUrl));
-        } catch (IOException e1) {
-            throw new RuntimeException(
-                    "Cannot open model file:'"
-                            + modelFileUrl + "'.");
-        }
+    void openModelFile(final IPath modelFilePath) {
+        this.modelFilePathString = modelFilePath.toString();
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
+                IPath modelFilePath = new Path(modelFilePathString);
 
                 IWorkbenchWindow win = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
                 IWorkbenchPage page = win.getActivePage();
 
-                IPath modelFilePath2 = new Path(modelFilePath);
-
+                // Get the default editor and the editor ID
+                String fileExtension = (modelFilePath).getFileExtension();
                 IEditorDescriptor defaultEditor = PlatformUI.getWorkbench().getEditorRegistry()
-                        .getDefaultEditor("default." + modelFilePath2.getFileExtension());
-
+                        .getDefaultEditor("default." + fileExtension);
                 if (defaultEditor == null) {
                     defaultEditor = PlatformUI.getWorkbench().getEditorRegistry()
                             .findEditor(IEditorRegistry.SYSTEM_EXTERNAL_EDITOR_ID);
                 }
+                try {
+                    String editorId = getEditorId(modelFilePath);
 
-                IFileStore fileStore = EFS.getLocalFileSystem().getStore(modelFilePath2);
-                // fileStore = fileStore.getChild(names[i]);
-                if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
-                    IEditorInput  input = createEditorInput(fileStore);
-                    String editorId = getEditorId(fileStore);
-                    try {
+                    // Close all other editors
+                    page.closeAllEditors(false);
+
+                    // Try to open as workspace file
+                    IEditorInput input = createEditorInput(modelFilePathString);
+                    if (input.exists()) {
+                        // If this exists then directly open it
                         page.openEditor(input, editorId);
-                    } catch (Exception e) {
-                        // bla
                     }
-
-                } else {
-                    throw new RuntimeException(
-                            "Cannot open model file:'"
-                                    + modelFilePath + "'.");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                // try {
-                // page.openEditor(FileEditorInput(modelFilePath2),
-                // defaultEditor.getId());
-                // } catch (PartInitException exception) {
-                // }
-                //
-                // IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
-                // .getRoot();
-                //
-                //
-                // IFile modelFile = myWorkspaceRoot.getFile(modelFilePath);
-                // IFile file = myWorkspaceRoot.getFile(path);
-                //
-                // IPath fullPath = file.getLocation();
-                // String modelFileString = (myWorkspaceRoot.getFile(modelFilePath)).getLocation();
-                //
-                // // only open the model file iff it exists (in the workspace)
-                // // otherwise do not open it
-                // if (modelFile.exists()) {
-                // IEditorDescriptor defaultEditor = PlatformUI.getWorkbench()
-                // .getEditorRegistry()
-                // .getDefaultEditor(modelFile.getName());
-                //
-                // if (defaultEditor == null) {
-                // defaultEditor = PlatformUI
-                // .getWorkbench()
-                // .getEditorRegistry()
-                // .findEditor(
-                // IEditorRegistry.SYSTEM_EXTERNAL_EDITOR_ID);
-                // }
-                // try {
-                // page.openEditor(new FileEditorInput(modelFilePath),
-                // defaultEditor.getId());
-                // } catch (PartInitException e) {
-                //
-                // }
-                // }
 
             }
         });
@@ -707,17 +676,17 @@ public class KiemAutomatedJUnitTest {
     }
 
     // -------------------------------------------------------------------------
-    
+
     /**
-     * Gets the number of traces.
+     * Gets the number of traces of an eso file.
      * 
-     * @param esoFileAbsolute
-     *            the eso file absolute
+     * @param esoFilePath
+     *            the ESO file path
      * @return the number of traces
      */
-    int getNumberOfTraces(URL esoFileAbsolute) {
+    int getNumberOfTraces(final IPath esoFilePath) {
         try {
-            InputStream inputStream = KiemUtil.openBundleOrWorkspaceFile(esoFileAbsolute, this.getPluginId());
+            InputStream inputStream = KiemUtil.openWorkspaceFile(esoFilePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             int number = 0;
@@ -730,11 +699,14 @@ public class KiemAutomatedJUnitTest {
             inputStream.close();
             return number;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Cannot load ESO file '" + esoFileAbsolute
-                    + "' in order to count the maximum number of traces.");
+            throw new RuntimeException("Cannot load ESO file '" + esoFilePath.toString()
+                    + "' in order to count the maximum number of traces. (FileNotFoundException)");
         } catch (IOException e) {
-            throw new RuntimeException("Cannot load ESO file '" + esoFileAbsolute
-                    + "' in order to count the maximum number of traces.");
+            throw new RuntimeException("Cannot load ESO file '" + esoFilePath.toString()
+                    + "' in order to count the maximum number of traces. (IOException)");
+        } catch (CoreException e) {
+            throw new RuntimeException("Cannot load ESO file '" + esoFilePath.toString()
+                    + "' in order to count the maximum number of traces. (CoreException)");
         }
     }
 
@@ -749,7 +721,7 @@ public class KiemAutomatedJUnitTest {
      *            the data component wrapper
      * @return the property
      */
-    KiemProperty getProperty(String propertyKey, DataComponentWrapper dataComponentWrapper) {
+    KiemProperty getProperty(final String propertyKey, final DataComponentWrapper dataComponentWrapper) {
         KiemProperty[] kiemProperties = dataComponentWrapper.getProperties();
         for (KiemProperty kiemProperty : kiemProperties) {
             if (kiemProperty.getKey().equals(propertyKey)) {
@@ -775,11 +747,12 @@ public class KiemAutomatedJUnitTest {
                 .getDataComponentWrapperList();
         for (DataComponentWrapper dataComponentWrapper : dataComponentWrapperList) {
             String dataComponentId = dataComponentWrapper.getDataComponent().getDataComponentId();
-            if (dataComponentId.startsWith(KART_REPLAY_DATACOMPONENT_ID_START)) {
+            if (dataComponentId.startsWith(KartConstants.KART_REPLAY_DATACOMPONENT_ID_START)) {
                 return dataComponentWrapper;
             }
         }
-        throw new RuntimeException("KART DataComponent (" + KART_REPLAY_DATACOMPONENT_ID_START
+        throw new RuntimeException("KART DataComponent ("
+                + KartConstants.KART_REPLAY_DATACOMPONENT_ID_START
                 + ") was not loaded. The KART Plugin must be added to the run configuration "
                 + "together with all dependend plugins.");
     }
@@ -796,11 +769,12 @@ public class KiemAutomatedJUnitTest {
                 .getDataComponentWrapperList();
         for (DataComponentWrapper dataComponentWrapper : dataComponentWrapperList) {
             String dataComponentId = dataComponentWrapper.getDataComponent().getDataComponentId();
-            if (dataComponentId.startsWith(KART_VALIDATION_DATACOMPONENT_ID_START)) {
+            if (dataComponentId.startsWith(KartConstants.KART_VALIDATION_DATACOMPONENT_ID_START)) {
                 return dataComponentWrapper;
             }
         }
-        throw new RuntimeException("KART DataComponent (" + KART_VALIDATION_DATACOMPONENT_ID_START
+        throw new RuntimeException("KART DataComponent ("
+                + KartConstants.KART_VALIDATION_DATACOMPONENT_ID_START
                 + ") was not loaded. The KART Plugin must be added to the run configuration"
                 + " together with all dependend plugins.");
     }

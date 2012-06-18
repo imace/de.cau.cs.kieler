@@ -19,8 +19,6 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -29,8 +27,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +34,7 @@ import org.json.JSONObject;
 import com.google.inject.Guice;
 
 import de.cau.cs.kieler.core.kexpressions.Signal;
-import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
+import de.cau.cs.kieler.core.ui.ProgressMonitorAdapter;
 import de.cau.cs.kieler.s.s.Program;
 import de.cau.cs.kieler.s.sc.S2SCPlugin;
 import de.cau.cs.kieler.s.sim.sc.xtend.S2Simulation;
@@ -49,6 +45,7 @@ import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeFile;
 import de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent;
+import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
 import de.cau.cs.kieler.sim.signals.JSONSignalValues;
 
 /**
@@ -112,6 +109,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             scExecution.getExecutionInterfaceToSC().write(jSONObject.toString() + "\n");
             scExecution.getExecutionInterfaceToSC().flush();
             while (scExecution.getExecutionInterfaceError().ready()) {
+                // Error output, if any
                 System.out.print(scExecution.getExecutionInterfaceError().read());
             }
 
@@ -244,32 +242,10 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
     // -------------------------------------------------------------------------
 
-    // /**
-    // * Convert an EMF URI to a Java.net.URI.
-    // *
-    // * @param uri
-    // * the uri
-    // * @return the java.net. uri
-    // * @throws URISyntaxException
-    // * the uRI syntax exception
-    // */
-    // private java.net.URI convertURI(URI uri) throws URISyntaxException {
-    // IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace()
-    // .getRoot();
-    //
-    // IPath path = new Path(uri.toPlatformString(false));
-    // IFile file = myWorkspaceRoot.getFile(path);
-    // IPath fullPath = file.getLocation();
-    //
-    // return new java.net.URI(fullPath.toString());
-    // }
-
-    // -------------------------------------------------------------------------
-
     /**
      * {@inheritDoc}
      */
-    public void doModel2ModelTransform(final KielerProgressMonitor monitor)
+    public void doModel2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
         monitor.begin("S Simulation", 10);
 
@@ -277,12 +253,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
         try {
             // get active editor
-            IEditorPart editorPart = this.getInputEditor();
-            if (editorPart == null) {
-                throw new KiemInitializationException("No active editor selected!", true, null);
-            }
-
-            myModel = (Program) this.getInputModelEObject(editorPart);
+            myModel = (Program) this.getModelRootElement();
 
             if (myModel == null) {
                 throw new KiemInitializationException(
@@ -302,16 +273,16 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             // Hence some pre-processing is needed and done by the
             // Esterl2Simulation Xtend2 model transformation
             if (this.getProperties()[3].getValueAsBoolean()) {
-                // Try to load synccharts model
+                // Try to load SyncCharts model
                 // 'Full Debug Mode' is turned ON
                 S2Simulation transform = Guice.createInjector().getInstance(S2Simulation.class);
                 transformedProgram = transform.transform2Simulation(myModel);
             }
 
             // Calculate output path
-            FileEditorInput editorInput = (FileEditorInput) editorPart.getEditorInput();
-            URI input = URI.createPlatformResourceURI(editorInput.getFile().getFullPath()
-                    .toString(), true);
+            //FileEditorInput editorInput = (FileEditorInput) editorPart.getEditorInput();
+            String inputPathString = this.getModelFilePath().toString();
+            URI input = URI.createPlatformResourceURI(inputPathString, true);
 
             sOutput = URI.createURI(input.toString());
             sOutput = sOutput.trimFragment();
@@ -335,10 +306,12 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             }
 
             // Set a random output folder for the compiled files
-            String outputFolder = SCExecution.generateRandomTempOutputFolder();
+            String outputFolder = KiemUtil.generateRandomTempOutputFolder();
 
-            // Genereate SC code
-            String scOutputString = getFileStringFromUri(scOutput);
+            // Generate SC code
+            IPath scOutputPath = new Path(scOutput.toPlatformString(false));
+            IFile scOutputFile = KiemUtil.convertIPathToIFile(scOutputPath);
+            String scOutputString =  KiemUtil.getAbsoluteFilePath(scOutputFile); 
             S2SCPlugin.generateSCCode(transformedProgram, scOutputString, outputFolder);
 
             // Compile
@@ -415,49 +388,4 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
     }
 
     // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-
-    /**
-     * Transform a URI into a file string.
-     * 
-     * @param uri
-     *            the uri
-     * @return the file string from uri
-     */
-    // To resolve references to locations outside the workspace 
-    // org.eclipse.core.internal.resources.Resource seems to be needed. 
-    // Is there a better alternative? -> "restriction"
-    // Checkstyle erroneously detects dead code which is not dead. -> "unused"
-    @SuppressWarnings({ "restriction", "unused" }) 
-    protected String getFileStringFromUri(URI uri) {
-
-        IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-
-        IPath path = new Path(uri.toPlatformString(false));
-        IFile file = myWorkspaceRoot.getFile(path);
-
-        IPath fullPath = file.getLocation();
-
-        // If we have spaces, try it like this...
-        if (fullPath == null && file instanceof org.eclipse.core.internal.resources.Resource) {
-            org.eclipse.core.internal.resources.Resource resource = (org.eclipse.core.internal.resources.Resource) file;
-            fullPath = resource.getLocalManager().locationFor(resource);
-        }
-
-        // Ensure it is absolute
-        fullPath.makeAbsolute();
-
-        java.io.File javaFile = new java.io.File(fullPath.toString().replaceAll("%20", " "));
-
-        if (javaFile != null) {
-            String fileString = javaFile.getAbsolutePath();
-            return fileString;
-        }
-
-        // Something went wrong, we could not resolve the file location
-        return "";
-    }
-
-    // -------------------------------------------------------------------------
-
 }

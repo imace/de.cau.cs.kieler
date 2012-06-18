@@ -22,12 +22,13 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
-import java.util.Random;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
+
+import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
 
 /**
  * This class is intended to compile and execute SC code.
@@ -64,7 +65,7 @@ public class SCExecution {
         setCompiler(COMPILER_DEFAULT);
         setCompiled(false);
         setStarted(false);
-        setOutputPath(SCExecution.generateRandomTempOutputFolder());
+        setOutputPath(KiemUtil.generateRandomTempOutputFolder());
     }
 
     /**
@@ -92,7 +93,7 @@ public class SCExecution {
         // reset successful compiled flag
         setCompiled(false);
         // choose a random name for the compiled executable
-        setExecutableName(EXECUTABLE_PREFIX + SCExecution.randomString());
+        setExecutableName(EXECUTABLE_PREFIX + KiemUtil.randomString());
 
         // building path to bundle
         Bundle bundle = Platform.getBundle(SCPlugin.PLUGIN_ID);
@@ -104,7 +105,6 @@ public class SCExecution {
         } catch (IOException e2) {
             e2.printStackTrace();
         }
-
         String bundleLocation = url.getFile();
 
         // Windows vs. Linux: Exchange possibly wrong slash/backslash
@@ -137,9 +137,35 @@ public class SCExecution {
                     + bundleLocation + " " + "-o " + outputPath + getExecutableName()
                     // -m32 = 32 bit compatibility mode to prevent compiler errors on
                     // 64bit machines/architectures.
-                    + " -lm -D_SC_NOTRACE -D_SC_SUPPRESS_ERROR_DETECT -D_SC_USE_PRE -m32";
+                    + " -lm -D_SC_NOTRACE -D_SC_SUPPRESS_ERROR_DETECT -D_SC_USE_PRE";
+            /*
+             * -m32"; REMOVED due to error with surefire on 64bit machine:
+             * 
+             * In file included from /usr/include/string.h:27:0, build 11-Jun-2012 11:42:26 from
+             * /var
+             * /atlassian/bamboo-data/xml-data/build-dir/KIELER-PLUGIN2-JOB1/test/de.cau.cs.kieler
+             * .s.
+             * sim.sc.test/target/work/data/test-s/05-simpletransition-inputoutput-communication.c
+             * :16: build 11-Jun-2012 11:42:26 /usr/include/features.h:323:26: fatal error:
+             * bits/predefs.h: No such file or directory build 11-Jun-2012 11:42:26 compilation
+             * terminated. build 11-Jun-2012 11:42:26 In file included from
+             * /usr/include/string.h:27:0, build 11-Jun-2012 11:42:26 from
+             * /var/atlassian/bamboo-data
+             * /xml-data/build-dir/KIELER-PLUGIN2-JOB1/test/de.cau.cs.kieler
+             * .s.sim.sc.test/target/work
+             * /configuration/org.eclipse.osgi/bundles/67/1/.cp/sc/sc.c:14: build 11-Jun-2012
+             * 11:42:26 /usr/include/features.h:323:26: fatal error: bits/predefs.h: No such file or
+             * directory build 11-Jun-2012 11:42:26 compilation terminated. build 11-Jun-2012
+             * 11:42:26 In file included from /usr/include/string.h:27:0, build 11-Jun-2012 11:42:26
+             * from
+             * /var/atlassian/bamboo-data/xml-data/build-dir/KIELER-PLUGIN2-JOB1/test/de.cau.cs.
+             * kieler
+             * .s.sim.sc.test/target/work/configuration/org.eclipse.osgi/bundles/67/1/.cp/sc/cJSON
+             * .c:26: build 11-Jun-2012 11:42:26 /usr/include/features.h:323:26: fatal error:
+             * bits/predefs.h: No such file or directory build 11-Jun-2012 11:42:26 compilation
+             * terminated.
+             */
             executionProcess = Runtime.getRuntime().exec(compile);
-            System.out.println(compile);
 
             InputStream stderr = executionProcess.getErrorStream();
             InputStreamReader isr = new InputStreamReader(stderr);
@@ -154,10 +180,16 @@ public class SCExecution {
             // (use own buffer)
             int exitValue = executionProcess.waitFor();
 
-            if (exitValue != 0) {
-                throw new IOException(
-                        "Could not compile the generated C code.\nCheck that the path to your Workspace/Eclipse installation does not contain any white spaces.\n\n"
-                                + getCompileError());
+            // Test if compiled file exists
+            File file = new File(outputPath + getExecutableName());
+            if (!file.exists()) {
+                if (exitValue != 0) {
+                    throw new IOException(
+                            "Could not compile the generated C code ("
+                                    + exitValue
+                                    + ").\nCheck that the path to your Workspace/Eclipse installation does not contain any white spaces.\n\n"
+                                    + getCompileError());
+                }
             }
 
         } catch (IOException e) {
@@ -240,73 +272,13 @@ public class SCExecution {
         // delete temp folder
         File folder = new File(outputPath);
         if (folder.getAbsolutePath().contains(System.getProperty("java.io.tmpdir"))) {
-            boolean folderDeleted = deleteFolder(folder);
-            if (folderDeleted) {
-                System.out.println("temp folder " + folder + " successfully deleted");
-            } else {
-                System.err.println("error while deleting temp folder: " + folder);
-            }
+            boolean folderDeleted = KiemUtil.deleteFolder(folder);
+//            if (!folderDeleted) {
+//                System.err.println("error while deleting temp folder: " + folder);
+//            }
         }
     }
 
-    // -------------------------------------------------------------------------
-
-    /**
-     * Generate a random temporary output folder in the java tempdir directory.
-     * 
-     * @return the string
-     * @throws IOException
-     */
-    public static String generateRandomTempOutputFolder() throws IOException {
-        String folderName = System.getProperty("java.io.tmpdir") + SCExecution.randomString()
-                + File.separator;
-        if (new File(folderName).mkdir()) {
-            return (folderName);
-        }
-        throw new IOException("Could not create folder '" + folderName + "'.");
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Create random string of 16 letters/numbers.
-     * 
-     * @return the string
-     */
-    private static String randomString() {
-        final int folderLength = 16;
-        String allowedChars = "0123456789abcdefghijklmnopqrstuvwxyz";
-        Random random = new Random();
-        int max = allowedChars.length();
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < folderLength; i++) {
-            int value = random.nextInt(max);
-            buffer.append(allowedChars.charAt(value));
-        }
-        return buffer.toString();
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Delete folder.
-     * 
-     * @param directory
-     *            the directory to be deleted
-     * @return true, if successful
-     */
-    private boolean deleteFolder(final File directory) {
-        if (directory.isDirectory()) {
-            String[] entries = directory.list();
-            for (int x = 0; x < entries.length; x++) {
-                File aktFile = new File(directory.getPath(), entries[x]);
-                deleteFolder(aktFile);
-            }
-        }
-        return directory.delete();
-    }
-
-    // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
     /**
@@ -496,7 +468,6 @@ public class SCExecution {
         this.compiled = compiled;
     }
 
-    // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
 }

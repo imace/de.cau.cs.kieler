@@ -13,20 +13,17 @@
  */
 package de.cau.cs.kieler.s.sim.sc.test;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 
 import de.cau.cs.kieler.sim.kiem.test.KiemAutomatedJUnitTest;
 
 /**
- * The test plugin for testing the s-sc-simulator
+ * The test plugin for regression testing the s-sc-simulator.
  * 
  * @author cmot
  */
 public class SSimSCAutomatedJUnitTest extends KiemAutomatedJUnitTest {
-
-    
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -35,26 +32,31 @@ public class SSimSCAutomatedJUnitTest extends KiemAutomatedJUnitTest {
         return SSimSCTestPlugin.PLUGIN_ID;
     }
 
-    // -------------------------------------------------------------------------
+    /**
+     * {@inheritDoc}
+     */
+    protected IPath getBundleTestPath() {
+        return new Path("testdata");
+    }
 
     /**
      * {@inheritDoc}
      */
-    protected List<String> getPluginModelFiles() {
-        LinkedList<String> modelFileList = new LinkedList<String>();
-        modelFileList.add("/testdata/03-goodcycle.s");
-        modelFileList.add("/testdata/05-simpletransition-inputoutput-communication.s");
-        return modelFileList;
+    protected String getModelFileExtension() {
+        return "s";
     }
-
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
      */
-    protected String getPluginExecutionFile() {
-        return "/testdata/automated.execution";
+    protected String getTemporaryWorkspaceFolderName() {
+        return "test-s";
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    protected String getExecutionFileName() {
+        return "automated.execution";
+    }
 }
