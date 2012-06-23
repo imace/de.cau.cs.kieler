@@ -21,7 +21,7 @@ import sj.Signal;
 import examples.EmbeddedABRO.StateLabel;
 /* Note: In order to allow static imports, the Java Compiler compliance level
  * should be set to 1.5 */
-// CHECKSTYLEOFF AbstractCheck
+@SuppressWarnings("AvoidStarImport")
 import static examples.EmbeddedABRO.StateLabel.*;
 
 /**
