@@ -40,7 +40,9 @@ public class EmbeddedPCCommunicator {
     private boolean closeTransmissionRequest = false;
 
     private static final EmbeddedPCCommunicator INSTANCE = new EmbeddedPCCommunicator();
-
+    
+    /** The SLEEP_TIME to wait for a connection. */
+    private static final int SLEEP_TIME = 1000;
 
     
     /**
@@ -71,10 +73,12 @@ public class EmbeddedPCCommunicator {
     
     
     /**
-     * @param protocol 
+     * Inits the.
+     *
+     * @param protocolParam the protocol param
      */
-    public void init(final int protocol) {
-        setProtocol(protocol);
+    public void init(final int protocolParam) {
+        setProtocol(protocolParam);
         init();
     }
 
@@ -106,11 +110,13 @@ public class EmbeddedPCCommunicator {
     /**
      * @return StringBuffer 
      */
+    @SuppressWarnings("deprecation")
     public StringBuffer receiveMessage() {
         StringBuffer buf = new StringBuffer();
         try {
-            String line = dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
-            while(!line.equals(EmbeddedConstants.END_OF_MESSAGE_COMMAND_KEY)) {
+            String line = dis.readLine();   
+            // FIXME: Find a way to use BufferedReader.readLine() instead!
+            while (!line.equals(EmbeddedConstants.END_OF_MESSAGE_COMMAND_KEY)) {
                 buf.append(line);
                 if (line.equals(EmbeddedConstants.END_OF_TRANSMISSION_COMMAND_KEY)) {
                     closeTransmissionRequest = true;
@@ -155,9 +161,9 @@ public class EmbeddedPCCommunicator {
             System.out.println("                ");
             System.out.println("                ");
             try {
-                java.lang.Thread.sleep(1000);
+                java.lang.Thread.sleep(SLEEP_TIME);
             } catch (Exception e) {
-                ;
+                // ignore
             }
             destroy();
             System.exit(0);
@@ -176,7 +182,7 @@ public class EmbeddedPCCommunicator {
             }
             dis.close();
             dos.close();
-            Thread.sleep(100); // wait for data to drain
+            Thread.sleep(SLEEP_TIME); // wait for data to drain
             connection.close();
         } catch (IOException e) {
             e.getMessage();

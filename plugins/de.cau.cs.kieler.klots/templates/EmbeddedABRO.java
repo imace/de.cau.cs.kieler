@@ -70,11 +70,14 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
 
     /**
      * Starts the program.
+     *
+     * @param args the arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             EmbeddedSJProgramStarter.start(new EmbeddedABRO(), "ABRO");
         } catch (IOException e) {
+            // ignore
         }
     }
 

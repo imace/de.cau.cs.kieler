@@ -50,25 +50,24 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**
  * @author root
- *
+ * 
  */
 @SuppressWarnings("restriction")
-public class KlotsEditor extends CompilationUnitEditor
-                         implements IResourceChangeListener, IPropertyChangeListener, IGotoMarker {
+public class KlotsEditor extends CompilationUnitEditor implements IResourceChangeListener,
+        IPropertyChangeListener, IGotoMarker {
 
     /**
      * 
      */
     public static final String ID = "de.cau.cs.kieler.klots.editor.KlotsEditor";
 
-    
     // ======================================================================
-    // >>>>>>>>>>              LABEL INFO INNER CLASS              <<<<<<<<<<
+    // >>>>>>>>>> LABEL INFO INNER CLASS <<<<<<<<<<
     // ======================================================================
 
     /**
      * @author root
-     *
+     * 
      */
     class LabelInfo {
         private String labelName;
@@ -124,10 +123,8 @@ public class KlotsEditor extends CompilationUnitEditor
             int instrStart = sjInstructionMarker.getAttribute(
                     KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0);
             for (int i = 0; i < this.sjInstructions.size(); i++) {
-                if (
-                     instrStart < this.sjInstructions.get(i).getAttribute(
-                        KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0)
-                    ) {
+                if (instrStart < this.sjInstructions.get(i).getAttribute(
+                        KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0)) {
                     this.sjInstructions.add(i, sjInstructionMarker);
                     return;
                 }
@@ -153,11 +150,8 @@ public class KlotsEditor extends CompilationUnitEditor
 
     } // end inner class LabelInfo
 
-    
-    
-    
     // ======================================================================
-    // >>>>>>>>>>                FIELDS & VARIABLES                <<<<<<<<<<
+    // >>>>>>>>>> FIELDS & VARIABLES <<<<<<<<<<
     // ======================================================================
 
     // colors
@@ -170,7 +164,7 @@ public class KlotsEditor extends CompilationUnitEditor
     private static Color colorBackgroundActiveMicrostep;
     private static Color colorForegroundYetToBeDoneMicrostep;
     private static Color colorBackgroundYetToBeDoneMicrostep;
-    
+
     // KiVi effects lists
     private static int microStepNumber = -1;
     private static List<HighlightSJMarkerEffect> kiviList = new ArrayList<HighlightSJMarkerEffect>();
@@ -190,11 +184,8 @@ public class KlotsEditor extends CompilationUnitEditor
     // status line SJ display
     // private StatusLineContributionItem uiStatusLineItem;
 
-    
-    
-    
     // ======================================================================
-    // >>>>>>>>>>                   CONSTRUCTORS                   <<<<<<<<<<
+    // >>>>>>>>>> CONSTRUCTORS <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -221,17 +212,12 @@ public class KlotsEditor extends CompilationUnitEditor
 
     }
 
-    
-    
-    
-    
-    
     // ######################################################################
-    // ######################     METHODS SECTION     #######################
+    // ###################### METHODS SECTION #######################
     // ######################################################################
 
     // ======================================================================
-    // >>>>>>>>>>      STANDARD IMPLEMENTETION METHODS & SETUP     <<<<<<<<<<
+    // >>>>>>>>>> STANDARD IMPLEMENTETION METHODS & SETUP <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -242,33 +228,30 @@ public class KlotsEditor extends CompilationUnitEditor
         if (colorProvider == null) {
             colorProvider = KlotsPlugin.getColorProvider();
         }
-        colorForegroundStandard = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_FOREGROUND_STANDARD);
-        colorBackgroundStandard = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_BACKGROUND_STANDARD);
-        colorForegroundAlreadyDoneMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_FOREGROUND_ALREADY_DONE_MICROSTEP);
-        colorBackgroundAlreadyDoneMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_BACKGROUND_ALREADY_DONE_MICROSTEP);
-        colorForegroundActiveMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_FOREGROUND_ACTIVE_MICROSTEP);
-        colorBackgroundActiveMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_BACKGROUND_ACTIVE_MICROSTEP);
-        colorForegroundYetToBeDoneMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_FOREGROUND_YET_TO_BE_DENE_MICROSTEP);
-        colorBackgroundYetToBeDoneMicrostep = colorProvider.getColor(
-                KlotsPreferenceConstants.P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP);
+        colorForegroundStandard = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_FOREGROUND_STANDARD);
+        colorBackgroundStandard = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_BACKGROUND_STANDARD);
+        colorForegroundAlreadyDoneMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_FOREGROUND_ALREADY_DONE_MICROSTEP);
+        colorBackgroundAlreadyDoneMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_BACKGROUND_ALREADY_DONE_MICROSTEP);
+        colorForegroundActiveMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_FOREGROUND_ACTIVE_MICROSTEP);
+        colorBackgroundActiveMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_BACKGROUND_ACTIVE_MICROSTEP);
+        colorForegroundYetToBeDoneMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_FOREGROUND_YET_TO_BE_DENE_MICROSTEP);
+        colorBackgroundYetToBeDoneMicrostep = colorProvider
+                .getColor(KlotsPreferenceConstants.P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP);
     }
-    
-    
-    
+
     /**
      * @return JavaEditor
      */
     public static JavaEditor getEditor() {
-        IEditorPart editorPart =
-            KlotsPlugin.getDefault().getWorkbench()
-            .getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+        IEditorPart editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage().getActiveEditor();
         if (editorPart != null) {
             KlotsEditor e = (KlotsEditor) editorPart;
             return e;
@@ -276,12 +259,9 @@ public class KlotsEditor extends CompilationUnitEditor
         return null;
     }
 
-    
-    
     /**
-     * The <code>MultiPageEditorPart</code> implementation of this
-     * <code>IWorkbenchPart</code> method disposes all nested editors.
-     * Subclasses may extend.
+     * The <code>MultiPageEditorPart</code> implementation of this <code>IWorkbenchPart</code>
+     * method disposes all nested editors. Subclasses may extend.
      */
     public void dispose() {
         ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
@@ -289,44 +269,35 @@ public class KlotsEditor extends CompilationUnitEditor
         super.dispose();
     }
 
-    
-    
     /**
      * Saves the multi-page editor's document.
-     * 
-     * @param monitor 
-     * 
+     *
+     * @param monitor the monitor
      */
     public void doSave(final IProgressMonitor monitor) {
         super.doSave(monitor);
     }
 
-    
-    
     /**
-     * Saves the multi-page editor's document as another file. Also updates the
-     * text for page 0's tab, and updates this multi-page editor's input to
-     * correspond to the nested editor's.
+     * Saves the multi-page editor's document as another file. Also updates the text for page 0's
+     * tab, and updates this multi-page editor's input to correspond to the nested editor's.
      */
     public void doSaveAs() {
         super.doSaveAs();
         setInput(getEditorInput());
     }
 
-    
-    
     /**
      * {@inheritDoc}
      */
-    public void init(final IEditorSite site, final IEditorInput editorInput) throws PartInitException {
+    public void init(final IEditorSite site, final IEditorInput editorInput)
+            throws PartInitException {
         if (!(editorInput instanceof IFileEditorInput)) {
             throw new PartInitException("Invalid Input: Must be IFileEditorInput");
         }
         super.init(site, editorInput);
     }
 
-    
-    
     /**
      * {@inheritDoc}
      */
@@ -334,8 +305,6 @@ public class KlotsEditor extends CompilationUnitEditor
         return true;
     }
 
-    
-    
     /**
      * {@inheritDoc}
      */
@@ -345,10 +314,8 @@ public class KlotsEditor extends CompilationUnitEditor
                 public void run() {
                     IWorkbenchPage[] pages = getSite().getWorkbenchWindow().getPages();
                     for (int i = 0; i < pages.length; i++) {
-                        if (
-                             ((FileEditorInput) getEditorInput()).getFile().getProject()
-                             .equals(event.getResource())
-                            ) {
+                        if (((FileEditorInput) getEditorInput()).getFile().getProject()
+                                .equals(event.getResource())) {
                             IEditorPart editorPart = pages[i].findEditor(getEditorInput());
                             pages[i].closeEditor(editorPart, true);
                         }
@@ -357,15 +324,14 @@ public class KlotsEditor extends CompilationUnitEditor
             });
         }
     }
-    
-    
-    
+
     /**
      * {@inheritDoc}
      */
     public void propertyChange(final PropertyChangeEvent event) {
         String property = event.getProperty();
-        System.out.println("***********>>>> EDITOR > propertyChange() with property >" + property + "<");
+        System.out.println("***********>>>> EDITOR > propertyChange() with property >" + property
+                + "<");
         if (property.startsWith(KlotsPreferenceConstants.P_COLOR_PREFERENCE_PREFIX)) {
             colorProvider.handlePreferenceStoreChanged(event);
         } else {
@@ -375,50 +341,44 @@ public class KlotsEditor extends CompilationUnitEditor
             colorForegroundStandard = colorProvider.getColor(property);
         } else if (property.equals(KlotsPreferenceConstants.P_COLOR_BACKGROUND_STANDARD)) {
             colorBackgroundStandard = colorProvider.getColor(property);
-        } else if (property.equals(KlotsPreferenceConstants.P_COLOR_FOREGROUND_ALREADY_DONE_MICROSTEP)) {
+        } else if (property
+                .equals(KlotsPreferenceConstants.P_COLOR_FOREGROUND_ALREADY_DONE_MICROSTEP)) {
             colorForegroundAlreadyDoneMicrostep = colorProvider.getColor(property);
-        } else if (property.equals(KlotsPreferenceConstants.P_COLOR_BACKGROUND_ALREADY_DONE_MICROSTEP)) {
+        } else if (property
+                .equals(KlotsPreferenceConstants.P_COLOR_BACKGROUND_ALREADY_DONE_MICROSTEP)) {
             colorBackgroundAlreadyDoneMicrostep = colorProvider.getColor(property);
         } else if (property.equals(KlotsPreferenceConstants.P_COLOR_FOREGROUND_ACTIVE_MICROSTEP)) {
             colorForegroundActiveMicrostep = colorProvider.getColor(property);
         } else if (property.equals(KlotsPreferenceConstants.P_COLOR_BACKGROUND_ACTIVE_MICROSTEP)) {
             colorBackgroundActiveMicrostep = colorProvider.getColor(property);
-        } else if (property.equals(
-                KlotsPreferenceConstants.P_COLOR_FOREGROUND_YET_TO_BE_DENE_MICROSTEP)) {
+        } else if (property
+                .equals(KlotsPreferenceConstants.P_COLOR_FOREGROUND_YET_TO_BE_DENE_MICROSTEP)) {
             colorForegroundYetToBeDoneMicrostep = colorProvider.getColor(property);
-        } else if (property.equals(
-                KlotsPreferenceConstants.P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP)) {
+        } else if (property
+                .equals(KlotsPreferenceConstants.P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP)) {
             colorBackgroundYetToBeDoneMicrostep = colorProvider.getColor(property);
         } else {
             return;
         }
         repaintAllMicroSteps();
     }
-    
-    
-    
+
     /**
-     * @return boolean 
+     * @return boolean
      */
     public boolean hasSJContent() {
         return hasSJContent;
     }
-    
-    
-    
+
     /**
-     * @return boolean 
+     * @return boolean
      */
     public boolean isInitialized() {
         return initialized;
     }
-    
-    
-    
-    
-    
+
     // ======================================================================
-    // >>>>>>>>>>         SJ INITIALIZATION UTILITY METHODS        <<<<<<<<<<
+    // >>>>>>>>>> SJ INITIALIZATION UTILITY METHODS <<<<<<<<<<
     // ======================================================================
 
     /**
@@ -442,18 +402,16 @@ public class KlotsEditor extends CompilationUnitEditor
         // uiStatusLineItem.setToolTipText("");
         // uiStatusLineItem.setErrorText("");
     }
-    
-    
-    
+
     /**
      * 
      */
     public void initSJContent() {
-        
+
         initColors();
-        
+
         hasSJContent = true;
-        
+
         // -------------------
         computeLabels();
         parseLabels();
@@ -463,8 +421,6 @@ public class KlotsEditor extends CompilationUnitEditor
         initialized = true;
     }
 
-    
-    
     private void computeLabels() {
         System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> COMPUTE LABELS <<<HHHHHHHHHHHHHHHHHHHHH");
         String text = this.getDocumentProvider().getDocument(this.getEditorInput()).get();
@@ -479,10 +435,8 @@ public class KlotsEditor extends CompilationUnitEditor
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
                 + KlotsConstants.LABEL_ENUM_NAME.length() + ", text = >"
                 + text.substring(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length()) + "<");
-        while (
-                isComment(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text)
-                || isString(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text)
-               ) {
+        while (isComment(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text)
+                || isString(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text)) {
             offset = text.indexOf(KlotsConstants.LABEL_ENUM_NAME, offset + 1);
             if (offset < 0 || offset > text.length()) {
                 System.err.println("EDITOR INITIALIZATION ERROR: No label declaration part found!");
@@ -490,7 +444,8 @@ public class KlotsEditor extends CompilationUnitEditor
             }
             System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
                     + KlotsConstants.LABEL_ENUM_NAME.length() + ", text = >"
-                    + text.substring(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length()) + "<");
+                    + text.substring(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length())
+                    + "<");
         }
 
         // parse label declarations
@@ -510,14 +465,12 @@ public class KlotsEditor extends CompilationUnitEditor
                     + rawLabels[i] + "<");
         }
         for (String l : rawLabels) {
-            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' label after processing = >"
-                    + l + "<");
+            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' label after processing = >" + l
+                    + "<");
         }
         this.labels = rawLabels;
     }
 
-    
-    
     private void parseSignals(final boolean first, final int tickMethodOffset, final int startOffset) {
         System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SIGNALS <<<HHHHHHHHHHHHHHHHHHHHH");
         String text = getDocumentProvider().getDocument(this.getEditorInput()).get();
@@ -530,14 +483,16 @@ public class KlotsEditor extends CompilationUnitEditor
 
         // find signal declaration part
         offset = text.indexOf(KlotsConstants.SIGNAL_DECLARATION_NAME, offset);
-        System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset
-                + ", tickOffset = " + tickOffset);
+        System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", tickOffset = "
+                + tickOffset);
         if (offset < 0 || offset > tickOffset) {
             if (first) {
-                System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+                System.err
+                        .println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
                 hasSJContent = false;
             } else {
-                System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
+                System.out
+                        .println("HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
             }
             return;
         }
@@ -545,35 +500,38 @@ public class KlotsEditor extends CompilationUnitEditor
                 + KlotsConstants.SIGNAL_DECLARATION_NAME.length() + ", text = >"
                 + text.substring(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length())
                 + "<");
-        while (
-                isComment(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text)
-                || isString(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text)
-               ) {
+        while (isComment(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text)
+                || isString(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text)) {
             offset = text.indexOf(KlotsConstants.SIGNAL_DECLARATION_NAME, offset + 1);
             if (offset < 0 || offset > tickOffset) {
                 if (first) {
-                    System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+                    System.err
+                            .println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
                     hasSJContent = false;
                 } else {
-                    System.out.println(
-                            "HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
+                    System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> "
+                            + "ALL SIGNAL DECLARATION PARTS PROCESSED!");
                 }
                 return;
             }
-            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
-                    + KlotsConstants.SIGNAL_DECLARATION_NAME.length() + ", text = >"
-                    + text.substring(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length())
-                    + "<");
+            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = "
+                    + offset
+                    + ", length = "
+                    + KlotsConstants.SIGNAL_DECLARATION_NAME.length()
+                    + ", text = >"
+                    + text.substring(offset,
+                            offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length()) + "<");
         }
 
         // parse label declarations
         offset = text.indexOf(KlotsConstants.SJ_INSTRUCTION_START_BRACKET_CHAR, offset) + 1;
-        String signalsText =
-            text.substring(offset, text.indexOf(KlotsConstants.SJ_INSTRUCTION_END_BRACKET_CHAR, offset));
+        String signalsText = text.substring(offset,
+                text.indexOf(KlotsConstants.SJ_INSTRUCTION_END_BRACKET_CHAR, offset));
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> signals text = >" + signalsText + "<");
         String[] rawSignals = signalsText.split(KlotsConstants.COMMA_STRING);
         for (int i = 0; i < rawSignals.length; i++) {
-            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> process signal = >" + rawSignals[i] + "<");
+            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> process signal = >" + rawSignals[i]
+                    + "<");
             rawSignals[i] = rawSignals[i].trim();
             // remove multi line comments
             rawSignals[i] = rawSignals[i].replaceAll("(/\\x2A{1}).*(\\x2A/{1})", " ");
@@ -584,7 +542,8 @@ public class KlotsEditor extends CompilationUnitEditor
                     + rawSignals[i] + "<");
         }
         for (String s : rawSignals) {
-            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' signal after processing = >" + s + "<");
+            System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' signal after processing = >" + s
+                    + "<");
         }
         if (first) {
             this.signals = rawSignals;
@@ -604,11 +563,9 @@ public class KlotsEditor extends CompilationUnitEditor
         parseSignals(false, tickOffset, offset);
     }
 
-    
-    
     private int computeTickMethodStartOffset() {
-        System.out.println(
-                "HHHHHHHHHHHHHHHHHHHHH>>> COMPUTE TICK METHOD OFFSET <<<HHHHHHHHHHHHHHHHHHHHH");
+        System.out
+                .println("HHHHHHHHHHHHHHHHHHHHH>>> COMPUTE TICK METHOD OFFSET <<<HHHHHHHHHHHHHHHHHHHHH");
         String text = this.getDocumentProvider().getDocument(this.getEditorInput()).get();
 
         // find tick method start offset
@@ -621,10 +578,8 @@ public class KlotsEditor extends CompilationUnitEditor
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
                 + KlotsConstants.TICK_METHOD_NAME.length() + ", text = >"
                 + text.substring(offset, offset + KlotsConstants.TICK_METHOD_NAME.length()) + "<");
-        while (
-                isComment(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text)
-                || isString(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text)
-               ) {
+        while (isComment(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text)
+                || isString(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text)) {
             offset = text.indexOf(KlotsConstants.TICK_METHOD_NAME, offset + 1);
             if (offset < 0 || offset > text.length()) {
                 System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
@@ -633,15 +588,14 @@ public class KlotsEditor extends CompilationUnitEditor
             }
             System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
                     + KlotsConstants.TICK_METHOD_NAME.length() + ", text = >"
-                    + text.substring(offset, offset + KlotsConstants.TICK_METHOD_NAME.length()) + "<");
+                    + text.substring(offset, offset + KlotsConstants.TICK_METHOD_NAME.length())
+                    + "<");
         }
 
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> found tick() method at offset = " + offset);
         return offset;
     }
 
-    
-    
     private void parseLabels() {
         System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE LABELS <<<HHHHHHHHHHHHHHHHHHHHH");
         labelList.clear();
@@ -650,33 +604,29 @@ public class KlotsEditor extends CompilationUnitEditor
         String label = "";
         int labelColon = 0;
 
-        for (
-              int labelStart = text.indexOf(KlotsConstants.LABEL_CASE_NAME);
-              (0 < labelStart && labelStart < size);
-              labelStart = text.indexOf(KlotsConstants.LABEL_CASE_NAME, labelStart + 1)
-             ) {
-            if (
-                 (text.charAt(labelStart - 1) != KlotsConstants.SPACE_CHAR)
-                 && (text.charAt(labelStart - 1) != KlotsConstants.SEMICOLON_CHAR)
-                 && (text.charAt(labelStart - 1) != '{')
-                 && (text.charAt(labelStart - 1) != '/')
-                ) {
-                System.out.println("################>>>>>>>>>>>> case is part of a word! -> continue!"
-                        + " [char before case = " + text.charAt(labelStart - 1) + "]");
+        for (int labelStart = text.indexOf(KlotsConstants.LABEL_CASE_NAME); 
+                (0 < labelStart && labelStart < size); labelStart = text
+                .indexOf(KlotsConstants.LABEL_CASE_NAME, labelStart + 1)) {
+            if ((text.charAt(labelStart - 1) != KlotsConstants.SPACE_CHAR)
+                    && (text.charAt(labelStart - 1) != KlotsConstants.SEMICOLON_CHAR)
+                    && (text.charAt(labelStart - 1) != '{') && (text.charAt(labelStart - 1) != '/')) {
+                System.out
+                        .println("################>>>>>>>>>>>> case is part of a word! -> continue!"
+                                + " [char before case = " + text.charAt(labelStart - 1) + "]");
                 continue;
             }
-            if (
-                 isComment(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1, text)
-                 || isString(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1, text)
-                ) {
+            if (isComment(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1,
+                    text)
+                    || isString(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length()
+                            - 1, text)) {
                 System.out.println("################>>>>>>>>>>>> case is inside of a comment! "
                         + "-> continue!");
                 continue;
             }
             labelColon = text.indexOf(KlotsConstants.COLON_STRING, labelStart);
             System.out.println("################>>>>>>>>>>>> labelStart = " + labelStart
-                    + ", labelColon = " + labelColon
-                    + ", labelText = " + text.substring(labelStart, labelColon) + "<<<");
+                    + ", labelColon = " + labelColon + ", labelText = "
+                    + text.substring(labelStart, labelColon) + "<<<");
             if (labelColon == -1) {
                 System.out.println("################>>>>>>>>>>>> labelColon = -1, -> END!");
                 break;
@@ -685,12 +635,12 @@ public class KlotsEditor extends CompilationUnitEditor
             label = checkForLabelAt(labelStart, labelColon, text);
             if (!label.equals(KlotsConstants.EMPTY_STRING)) {
                 if (labelList.isEmpty()) {
-                    labelList.add(new LabelInfo(label,
-                            labelStart + KlotsConstants.LABEL_CASE_NAME.length()));
+                    labelList.add(new LabelInfo(label, labelStart
+                            + KlotsConstants.LABEL_CASE_NAME.length()));
                 } else {
                     labelList.get(labelList.size() - 1).setLabelEndIndex(labelStart);
-                    labelList.add(new LabelInfo(label,
-                            labelStart + KlotsConstants.LABEL_CASE_NAME.length()));
+                    labelList.add(new LabelInfo(label, labelStart
+                            + KlotsConstants.LABEL_CASE_NAME.length()));
                 }
             } else {
                 System.out.println("################>>>>>>>>>>>> BAD LABEL at: >"
@@ -718,20 +668,20 @@ public class KlotsEditor extends CompilationUnitEditor
 
     }
 
-    
-    
     private void parseSJInstructions() {
-        System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SJ INSTRUCTIONS <<<HHHHHHHHHHHHHHHHHHHHH");
+        System.out
+                .println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SJ INSTRUCTIONS <<<HHHHHHHHHHHHHHHHHHHHH");
         String text = this.getDocumentProvider().getDocument(this.getEditorInput()).get();
         String instrName = "";
         for (LabelInfo label : labelList) {
-            for (int i = 0; i < KlotsConstants.sjInstructionsMapSize; i++) {
-                instrName = KlotsConstants.sjInstructionsMap[i][1];
+            for (int i = 0; i < KlotsConstants.SJ_INSTRUCTIONS_MAP_SIZE; i++) {
+                instrName = KlotsConstants.SJ_INSTSTRUCTIONS_MAP[i][1];
                 label.setCursorIndex(label.getLabelStartIndex());
 
                 // ----------------------------------------------------------------------
                 while (findSJInstructionAndAddMarkerToLabel(text, label, instrName)) {
-                    ; // SUPPRESS CHECKSTYLE EmptyStatement All the work is done in the while condition
+                    ; // SUPPRESS CHECKSTYLE EmptyStatement All the work is done in the while
+                      // condition
                 }
                 // ----------------------------------------------------------------------
 
@@ -742,21 +692,26 @@ public class KlotsEditor extends CompilationUnitEditor
             System.out.println("OOOOOOOOOOOOOOOOOOOO INSTRUCTIONS AT LABEL >"
                     + label.getLabelName() + "< OOOOOOOOOOOOOOOOOOOO");
             for (IMarker m : label.getSJInstructions()) {
-                System.out.print("instruction: >" + m.getAttribute(
-                        KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")
-                        + "<");
-                System.out.println(", text: >" + text.substring(m.getAttribute(
-                        KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0),
-                        m.getAttribute(
-                                KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END, 1))
-                                + "<");
+                System.out.print("instruction: >"
+                        + m.getAttribute(
+                                KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME,
+                                "NO NAME") + "<");
+                System.out
+                        .println(", text: >"
+                                + text.substring(
+                                        m.getAttribute(
+                                                KlotsConstants
+                                                .SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START,
+                                                0),
+                                        m.getAttribute(
+                                                KlotsConstants
+                                                .SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END,
+                                                1)) + "<");
             }
             System.out.println();
         }
     }
 
-    
-    
     private String checkForLabelAt(final int labelStart, final int labelColon, final String text) {
         String label = text.substring(labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1,
                 labelColon);
@@ -777,8 +732,6 @@ public class KlotsEditor extends CompilationUnitEditor
         return label;
     }
 
-    
-    
     private boolean isComment(final int startIndex, final int endIndex, final String text) {
         int commentStart = -1;
         int commentEnd = -1;
@@ -813,8 +766,6 @@ public class KlotsEditor extends CompilationUnitEditor
         return false;
     }
 
-    
-    
     private boolean isString(final int startIndex, final int endIndex, final String text) {
         System.out.println("####>>>>>>>>>>>> CHECK IF STRING! <<<<<<<<<<<<<<####");
         System.out.println(">>> RULE OUT STRINGS");
@@ -839,8 +790,6 @@ public class KlotsEditor extends CompilationUnitEditor
         return false;
     }
 
-    
-    
     private boolean findSJInstructionAndAddMarkerToLabel(final String text, final LabelInfo label,
             final String instrName) {
         System.out.println("XXXXXXXXXX label = >" + label.getLabelName()
@@ -855,14 +804,14 @@ public class KlotsEditor extends CompilationUnitEditor
             return false;
         }
         label.setCursorIndex(offset + 1);
-        System.out.println("XXXXXXXXXXXX instruction offset = " + offset
-                + ", instruction text = " + text.substring(offset, end));
+        System.out.println("XXXXXXXXXXXX instruction offset = " + offset + ", instruction text = "
+                + text.substring(offset, end));
 
         if (!isComment(offset, end, text) && !isString(offset, end, text)) {
             int line = 0;
             try {
-                line = this.getDocumentProvider()
-                .getDocument(this.getEditorInput()).getLineOfOffset(offset);
+                line = this.getDocumentProvider().getDocument(this.getEditorInput())
+                        .getLineOfOffset(offset);
             } catch (BadLocationException e) {
                 e.printStackTrace();
             }
@@ -874,8 +823,6 @@ public class KlotsEditor extends CompilationUnitEditor
         return true;
     }
 
-    
-    
     private IMarker createSJInstructionMarker(final String msg, final String instrName,
             final String instrLabel, final int line, final int instrStart, final int instrEnd) {
         try {
@@ -903,12 +850,8 @@ public class KlotsEditor extends CompilationUnitEditor
         }
     }
 
-    
-    
-    
-    
     // ======================================================================
-    // >>>>>>>>>>             MACRO STEP UPDATE METHODS            <<<<<<<<<<
+    // >>>>>>>>>> MACRO STEP UPDATE METHODS <<<<<<<<<<
     // ======================================================================
 
     static void updateJavaEditor() {
@@ -943,15 +886,12 @@ public class KlotsEditor extends CompilationUnitEditor
 
                     // set all instructions 'already done'
                     for (int i = 0; i < kiviList.size() - 1; i++) {
-                        kiviList.get(i).setColor(
-                                colorForegroundAlreadyDoneMicrostep);
-                        kiviList.get(i).setBackgroundColor(
-                                colorBackgroundAlreadyDoneMicrostep);
+                        kiviList.get(i).setColor(colorForegroundAlreadyDoneMicrostep);
+                        kiviList.get(i).setBackgroundColor(colorBackgroundAlreadyDoneMicrostep);
                         kiviList.get(i).execute();
                     }
                     // set last instruction 'active'
-                    kiviList.get(kiviList.size() - 1).setColor(
-                            colorForegroundActiveMicrostep);
+                    kiviList.get(kiviList.size() - 1).setColor(colorForegroundActiveMicrostep);
                     kiviList.get(kiviList.size() - 1).setBackgroundColor(
                             colorBackgroundActiveMicrostep);
                     kiviList.get(kiviList.size() - 1).execute();
@@ -967,27 +907,29 @@ public class KlotsEditor extends CompilationUnitEditor
         }); // end asyncExec()
     }
 
-    
-    
     private static String getProperSJInstruktionName(final String instr) {
-        for (int i = 0; i < KlotsConstants.sjInstructionsMapSize; i++) {
-            if (instr.equals(KlotsConstants.sjInstructionsMap[i][0])) {
-                return KlotsConstants.sjInstructionsMap[i][1];
+        for (int i = 0; i < KlotsConstants.SJ_INSTRUCTIONS_MAP_SIZE; i++) {
+            if (instr.equals(KlotsConstants.SJ_INSTSTRUCTIONS_MAP[i][0])) {
+                return KlotsConstants.SJ_INSTSTRUCTIONS_MAP[i][1];
             }
         }
         return "INSTRUCTION MAPPING ERROR";
     }
 
-    
-    
     /**
-     * @param instrName 
-     * @param instrData 
-     * @param chronology 
-     * @throws JSONException 
+     * Creates the highlight effect.
+     * 
+     * @param instrName
+     *            the instr name
+     * @param instrData
+     *            the instr data
+     * @param chronology
+     *            the chronology
+     * @throws JSONException
+     *             the jSON exception
      */
-    protected static void createHighlightEffect(final String instrName,
-            final JSONObject instrData, final int chronology) throws JSONException {
+    protected static void createHighlightEffect(final String instrName, final JSONObject instrData,
+            final int chronology) throws JSONException {
         LabelInfo label = null;
         System.out.print("$$$$$$>>> LABELS IN LIST: [");
         for (LabelInfo info : labelList) {
@@ -1009,11 +951,9 @@ public class KlotsEditor extends CompilationUnitEditor
         // search for the instruction from current position to the end of the
         // label range
         for (int i = label.getSJInstructionCursor(); i < list.size(); i++) {
-            if (
-                 (list.get(i).getAttribute(
-                            KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME,
-                            "NO NAME")).equals(instrName)
-                ) {
+            if ((list.get(i).getAttribute(
+                    KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME"))
+                    .equals(instrName)) {
                 marker = list.get(i);
                 label.setSJInstructionCursor(i + 1);
                 break;
@@ -1024,11 +964,9 @@ public class KlotsEditor extends CompilationUnitEditor
         // search from there
         if (marker == null) {
             for (int i = 0; i < label.getSJInstructionCursor(); i++) {
-                if (
-                     (list.get(i).getAttribute(
-                             KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME,
-                             "NO NAME")).equals(instrName)
-                    ) {
+                if ((list.get(i).getAttribute(
+                        KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME"))
+                        .equals(instrName)) {
                     marker = list.get(i);
                     label.setSJInstructionCursor(i + 1);
                     break;
@@ -1040,7 +978,7 @@ public class KlotsEditor extends CompilationUnitEditor
         if (marker == null) {
             if (instrName.equals("isPresent")) {
                 System.out.println("=> skipping instruction >present<");
-                System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
+                System.out.println("======================================================\n");
             } else {
                 System.err.println("=> Instruction >" + instrName + "< not found at label >"
                         + label.getLabelName() + "<! No such instruction!");
@@ -1049,37 +987,35 @@ public class KlotsEditor extends CompilationUnitEditor
         }
 
         // create highlight effect
-        HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(
-                marker,
-                colorForegroundYetToBeDoneMicrostep,
-                colorBackgroundYetToBeDoneMicrostep,
-                colorForegroundStandard,
-                colorBackgroundStandard,
-                getEditor());
+        HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(marker,
+                colorForegroundYetToBeDoneMicrostep, colorBackgroundYetToBeDoneMicrostep,
+                colorForegroundStandard, colorBackgroundStandard, getEditor());
         kiviList.add(e);
     }
 
-    
-    
-    
-    
     // ======================================================================
-    // >>>>>>>>>>     INTERACTIONS WITH THE KIEM DATA OBSERVER     <<<<<<<<<<
+    // >>>>>>>>>> INTERACTIONS WITH THE KIEM DATA OBSERVER <<<<<<<<<<
     // ======================================================================
 
     /**
-     * @param data 
-     * @param historyData 
+     * Update.
+     * 
+     * @param data
+     *            the data
+     * @param historyData
+     *            the history data
      */
     public void update(final StringBuffer data, final boolean historyData) {
         update(data.toString(), historyData);
     }
 
-    
-    
     /**
-     * @param data 
-     * @param historyData 
+     * Update.
+     * 
+     * @param data
+     *            the data
+     * @param historyData
+     *            the history data
      */
     public void update(final String data, final boolean historyData) {
         sjInstructionsUpdateData = data;
@@ -1091,10 +1027,11 @@ public class KlotsEditor extends CompilationUnitEditor
         // -----------------------------------------------
     }
 
-    
-    
     /**
-     * @param b 
+     * Use as execution viewer.
+     * 
+     * @param b
+     *            the b
      */
     public void useAsExecutionViewer(final boolean b) {
         Display.getDefault().asyncExec(new Runnable() {
@@ -1104,10 +1041,8 @@ public class KlotsEditor extends CompilationUnitEditor
         });
     }
 
-    
-    
     /**
-     * @return String[] 
+     * @return String[]
      */
     public String[] getSignals() {
         if (signals == null) {
@@ -1116,19 +1051,16 @@ public class KlotsEditor extends CompilationUnitEditor
         return signals;
     }
 
-    
-    
-    
-    
     // ======================================================================
-    // >>>>>>>>>>    INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW    <<<<<<<<<<
+    // >>>>>>>>>> INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW <<<<<<<<<<
     // ======================================================================
 
     /**
      * 
      */
     public void doMicroStepForwards() {
-        System.out.println(">>> this.doMicroStepForwards() >>> microStepNumber = " + microStepNumber);
+        System.out.println(">>> this.doMicroStepForwards() >>> microStepNumber = "
+                + microStepNumber);
         if (microStepNumber >= kiviList.size() - 1) {
             return;
         }
@@ -1152,8 +1084,6 @@ public class KlotsEditor extends CompilationUnitEditor
         kiviList.get(microStepNumber).execute();
     }
 
-    
-    
     /**
      * 
      */
@@ -1171,8 +1101,6 @@ public class KlotsEditor extends CompilationUnitEditor
         }
     }
 
-    
-    
     /**
      * 
      */
@@ -1191,8 +1119,6 @@ public class KlotsEditor extends CompilationUnitEditor
         microStepNumber = kiviList.size() - 1;
     }
 
-    
-    
     /**
      * 
      */
@@ -1201,8 +1127,6 @@ public class KlotsEditor extends CompilationUnitEditor
         doMicroStepForwards();
     }
 
-    
-    
     /**
      * 
      */
@@ -1212,8 +1136,6 @@ public class KlotsEditor extends CompilationUnitEditor
         }
     }
 
-    
-    
     /**
      * 
      */
@@ -1221,10 +1143,11 @@ public class KlotsEditor extends CompilationUnitEditor
         microStepNumber = -1;
     }
 
-    
-    
     /**
-     * @param indexArray 
+     * Do specific single micro step.
+     * 
+     * @param indexArray
+     *            the index array
      */
     public void doSpecificSingleMicroStep(final int[] indexArray) {
         // highlight 'already done' instructions
@@ -1249,8 +1172,6 @@ public class KlotsEditor extends CompilationUnitEditor
         microStepNumber = indexArray[0];
     }
 
-    
-    
     /**
      * 
      */
@@ -1275,13 +1196,9 @@ public class KlotsEditor extends CompilationUnitEditor
         kiviList.get(microStepNumber).setBackgroundColor(colorBackgroundActiveMicrostep);
         kiviList.get(microStepNumber).execute();
     }
-    
-    
-    
-    
-    
+
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    // XXXXXXXXXX                HISTORICAL METHODS                XXXXXXXXXX
+    // XXXXXXXXXX HISTORICAL METHODS XXXXXXXXXX
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     // private void bindToDataPool() {
@@ -1452,7 +1369,7 @@ public class KlotsEditor extends CompilationUnitEditor
     // int instrStartOffset = text.indexOf( instrName + "(",
     // label.getCursorIndex()-1 );
     // int instrEndOffset = -1;
-    // System.out.println("\n§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
+    // System.out.println("======================================================\n");
     // System.out.println("instrName = " + instrName);
     // System.out.println("label.getLabelName() = " + label.getLabelName());
     // System.out.println("label.getLabelStartIndex() = " +
@@ -1472,7 +1389,7 @@ public class KlotsEditor extends CompilationUnitEditor
     // if( instrStartOffset < 0 ) {
     // if( instrName.equals("isPresent") ) {
     // System.out.println("=> skipping instruction >present<");
-    // System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
+    // System.out.println("======================================================\n");
     // return;
     // } else {
     // System.err.println("=> Instruction >" + instrName +
@@ -1487,7 +1404,7 @@ public class KlotsEditor extends CompilationUnitEditor
     // System.out.println("instrEndOffset = " + instrEndOffset);
     // System.out.println("Paint text: " + text.substring(instrStartOffset,
     // instrEndOffset));
-    // System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
+    // System.out.println("=====================================\n");
     // try {
     //
     // // ---------- highlight instruction using KiVi effect -----------
