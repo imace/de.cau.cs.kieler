@@ -21,6 +21,7 @@ import sj.Signal;
 import examples.EmbeddedABRO.StateLabel;
 /* Note: In order to allow static imports, the Java Compiler compliance level
  * should be set to 1.5 */
+@SuppressWarnings("AvoidStarImport")
 import static examples.EmbeddedABRO.StateLabel.*;
 
 /**
@@ -70,11 +71,14 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
 
     /**
      * Starts the program.
+     *
+     * @param args the arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             EmbeddedSJProgramStarter.start(new EmbeddedABRO(), "ABRO");
         } catch (IOException e) {
+            // ignore
         }
     }
 

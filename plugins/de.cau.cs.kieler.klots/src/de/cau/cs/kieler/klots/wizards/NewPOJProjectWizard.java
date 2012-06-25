@@ -74,7 +74,6 @@ public class NewPOJProjectWizard extends Wizard implements INewWizard, IExecutab
     private WizardNewProjectCreationPage wizardPage;
     private IConfigurationElement config;
     private IWorkbench workbench;
-    private IStructuredSelection selection;
     private IProject project;
 
     
@@ -265,7 +264,6 @@ public class NewPOJProjectWizard extends Wizard implements INewWizard, IExecutab
      * {@inheritDoc}
      */
     public void init(final IWorkbench wb, final IStructuredSelection sel) {
-        this.selection = sel;
         this.workbench = wb;
     }
 

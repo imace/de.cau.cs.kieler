@@ -3,7 +3,7 @@
  *
  * http://www.informatik.uni-kiel.de/rtsys/kieler/
  * 
- * Copyright 2010 by
+ * Copyright 2012 by
  * + Christian-Albrechts-University of Kiel
  *   + Department of Computer Science
  *     + Real-Time and Embedded Systems Group
@@ -16,12 +16,17 @@ package de.cau.cs.kieler.esterel.cec.sim;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -43,8 +48,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtend.util.stdlib.CloningExtensions;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,18 +61,19 @@ import de.cau.cs.kieler.core.kexpressions.InterfaceSignalDecl;
 import de.cau.cs.kieler.core.kexpressions.Output;
 import de.cau.cs.kieler.core.kexpressions.Signal;
 import de.cau.cs.kieler.core.ui.ProgressMonitorAdapter;
-import de.cau.cs.kieler.esterel.xtend.InterfaceDeclarationFix;
 import de.cau.cs.kieler.esterel.cec.CEC;
 import de.cau.cs.kieler.esterel.cec.sim.xtend.Esterel2CSimulationInterface;
 import de.cau.cs.kieler.esterel.cec.sim.xtend.Esterel2Simulation;
 import de.cau.cs.kieler.esterel.esterel.Module;
 import de.cau.cs.kieler.esterel.esterel.Program;
-import de.cau.cs.kieler.sim.signals.JSONSignalValues;
+import de.cau.cs.kieler.esterel.xtend.InterfaceDeclarationFix;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeFile;
 import de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent;
+import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
+import de.cau.cs.kieler.sim.signals.JSONSignalValues;
 
 /**
  * The Esterel simulation DataComponent is responsible for <br>
@@ -600,14 +604,91 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
     // -------------------------------------------------------------------------
 
     /**
+     * If there is a header file available, add include directive to generated C program and return
+     * the path to the modified C program. Otherwise return the original path.
+     * 
+     * @throws KiemInitializationException
+     */
+    private URL copyPossibleHeaderFile(final String mainModuleName, final URI inputModel,
+            final URL cProgram) throws KiemInitializationException {
+        // Build header file name
+        String headerFileString;
+        try {
+            java.net.URI inputURI = convertEMFtoJavaURI(inputModel);
+            headerFileString = inputURI.toString();
+            headerFileString = headerFileString.replaceFirst(".strl", ".h");
+        } catch (URISyntaxException e) {
+            return cProgram;
+        }
+        IPath headerFilePath = new Path(headerFileString);
+
+        // Test if header file exists
+        File headerFile = new File(headerFileString);
+        if (!headerFile.exists()) {
+            // header file was not found, return the original cProgram path
+            return cProgram;
+        }
+
+        // append include directive to cProgram
+        URI cProgramFile = URI.createURI(cProgram.toString());
+        URI cProgramModifiedFile = URI.createURI(cProgram.toString());
+        cProgramModifiedFile = cProgramModifiedFile.trimFragment();
+        cProgramModifiedFile = cProgramModifiedFile.trimFileExtension().appendFileExtension(
+                "modified.c");
+        IPath cProgramFilePath = new Path(cProgramFile.toFileString());
+        IPath cProgramModifiedFilePath = new Path(cProgramModifiedFile.toFileString());
+
+        try {
+            InputStream cProgramFileInputStream = new FileInputStream(cProgramFilePath.toString());
+            OutputStream cProgramModifiedFileOutputStream = new FileOutputStream(
+                    cProgramModifiedFilePath.toString());
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                    cProgramFileInputStream));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+                    cProgramModifiedFileOutputStream));
+            String line = null;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                // Search for "#include mainmodule.h" line and replace it with
+                // the more concrete header file.
+                if (line.startsWith("#include")) {
+                    if (line.contains(mainModuleName + ".h")) {
+                        // replace this line
+                        line = "#include \"" + headerFilePath + "\"\n";
+                    }
+                }
+
+                bufferedWriter.append(line + "\n");
+            }
+            bufferedWriter.close();
+            bufferedReader.close();
+
+            // return the modified file instead
+            URL cProgramModified = new URL(cProgramModifiedFile.toString());
+
+            return cProgramModified;
+        } catch (FileNotFoundException e) {
+            throw new KiemInitializationException(
+                    "Cannot read from generated C file in order to append header file inclusion.",
+                    true, e);
+        } catch (IOException e) {
+            throw new KiemInitializationException(
+                    "Cannot read from generated C file in order to append header file inclusion.",
+                    true, e);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
      * {@inheritDoc}
      */
     public void doModel2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
         monitor.begin("Esterel Simulation", EsterelSimulationProgressMonitor.NUMBER_OF_TASKS);
 
-        EsterelSimulationProgressMonitor esterelSimulationProgressMonitor = 
-                new EsterelSimulationProgressMonitor(
+        EsterelSimulationProgressMonitor esterelSimulationProgressMonitor = new EsterelSimulationProgressMonitor(
                 monitor, EsterelSimulationProgressMonitor.NUMBER_OF_TASKS);
 
         File executable = null;
@@ -640,8 +721,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             }
 
             // Calculate output path
-            URI input = URI.createPlatformResourceURI(this.getModelFilePath()
-                    .toString(), true);
+            URI input = URI.createPlatformResourceURI(this.getModelFilePath().toString(), true);
 
             esterelOutput = URI.createURI(input.toString());
             esterelOutput = esterelOutput.trimFragment();
@@ -665,6 +745,12 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             // Compile Esterel to C
             URL output = this.compileEsterelToC(esterelOutput, CEC.getDefaultOutFile(),
                     esterelSimulationProgressMonitor).toURL();
+
+            // Possibly add #include for a header file
+            if (myModel.getModules() != null && myModel.getModules().size() > 0) {
+                String mainModuleName = myModel.getModules().get(0).getName();
+                output = copyPossibleHeaderFile(mainModuleName, input, output);
+            }
 
             // Cannot be done before because otherwise the new model cannot be serialized
             // Do this on a copy to not destroy original program;
@@ -718,8 +804,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             int exitValue = process.waitFor();
 
             if (exitValue != 0) {
-                throw new KiemInitializationException("Could not compile", true, new Exception(
-                        errorString.toString()));
+                throw new KiemInitializationException("Could not compile: " + errorString, true,
+                        new Exception(errorString.toString()));
             }
 
         } catch (Exception e) {

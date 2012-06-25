@@ -1468,8 +1468,7 @@ public class KiemPlugin extends AbstractUIPlugin {
      * @param message
      *            the message to present
      */
-    @SuppressWarnings("unused")
-    private void showError(final String message) {
+    public void showError(final String message) {
         if (parentShell != null) {
             MessageDialog.openError(parentShell, Messages.mViewTitle, message);
         } else {
@@ -1670,6 +1669,7 @@ public class KiemPlugin extends AbstractUIPlugin {
      * @param currentModelFile the new current model file
      */
     public static void setCurrentModelFile(final IPath currentModelFile) {
+        System.out.println("Current Model File" + currentModelFile);
         KiemPlugin.currentModelFile = currentModelFile;
     }
 
