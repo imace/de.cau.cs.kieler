@@ -19,7 +19,7 @@ package de.cau.cs.kieler.klots.preferences;
  * @author ybe
  * 
  */
-public class KlotsPreferenceConstants {
+public final class KlotsPreferenceConstants {
     
     // CHECKSTYLEOFF LineLength
 
@@ -106,4 +106,8 @@ public class KlotsPreferenceConstants {
     public static final String P_COLOR_BACKGROUND_YET_TO_BE_DENE_MICROSTEP = "prefColorBackgroundYetToBeDoneMicrostep";
     
     // CHECKSTYLEON LineLength
+    
+    private KlotsPreferenceConstants() {
+        
+    }
 }

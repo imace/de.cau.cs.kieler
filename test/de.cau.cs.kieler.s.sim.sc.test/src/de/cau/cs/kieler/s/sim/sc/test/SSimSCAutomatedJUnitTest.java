@@ -26,10 +26,19 @@ import de.cau.cs.kieler.sim.kiem.test.KiemAutomatedJUnitTest;
 public class SSimSCAutomatedJUnitTest extends KiemAutomatedJUnitTest {
 
     /**
+     * Instantiates a new S-SC simulation test.
+     *
+     * @param esoFile the ESO file
+     */
+    public SSimSCAutomatedJUnitTest(final IPath esoFile) {
+        super(esoFile);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected String getPluginId() {
-        return SSimSCTestPlugin.PLUGIN_ID;
+        return "de.cau.cs.kieler.s.sim.sc.test";
     }
 
     /**
@@ -57,6 +66,6 @@ public class SSimSCAutomatedJUnitTest extends KiemAutomatedJUnitTest {
      * {@inheritDoc}
      */
     protected String getExecutionFileName() {
-        return "automated.execution";
+        return "s_sc_validation_headless.execution";
     }
 }

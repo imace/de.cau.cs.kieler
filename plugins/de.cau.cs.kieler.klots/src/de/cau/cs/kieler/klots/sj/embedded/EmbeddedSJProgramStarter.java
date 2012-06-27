@@ -26,19 +26,27 @@ import de.cau.cs.kieler.sj.exceptions.SignalNotDeclaredException;
 import de.cau.cs.kieler.sj.util.LinkedList;
 
 /**
- * @author ybe
+ * The Class EmbeddedSJProgramStarter.
  *
+ * @author ybe
  */
-public class EmbeddedSJProgramStarter {
+public final class EmbeddedSJProgramStarter {
+
+    /** The SLEEP_TIME to wait. */
+    private static final int SLEEP_TIME = 1000;
+
+    /** A special protocol identifier, TODO: why 4?. */
+    private static final int PROTOCOL_ID = 4;
 
     /**
-     * @param str 
-     * @param program 
-     * @return Signal 
-     * @throws SignalNotDeclaredException 
+     * String2 signal.
+     *
+     * @param str the str
+     * @param program the program
+     * @return Signal
+     * @throws SignalNotDeclaredException the signal not declared exception
      */
-    public static Signal string2Signal(final String str, final EmbeddedSJProgram<?> program)
-    throws SignalNotDeclaredException {
+    public static Signal string2Signal(final String str, final EmbeddedSJProgram<?> program) {
         Signal[] signals = program.getSignals();
         for (Signal s : signals) {
             if (s.getName().equals(str)) {
@@ -49,47 +57,47 @@ public class EmbeddedSJProgramStarter {
                 + program.getName() + "!");
     }
 
-    
-    
     /**
-     * @param program 
-     * @throws IOException 
+     * Start.
+     *
+     * @param program the program
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void start(final EmbeddedSJProgram<?> program) throws IOException {
         start(program, "Program", null);
     }
 
-    
-    
     /**
-     * @param program 
-     * @param programName 
-     * @throws IOException 
+     * Start.
+     *
+     * @param program the program
+     * @param programName the program name
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void start(final EmbeddedSJProgram<?> program, final String programName)
-    throws IOException {
+            throws IOException {
         start(program, programName, null);
     }
 
-    
-    
     /**
-     * @param program 
-     * @param console 
-     * @throws IOException 
+     * Start.
+     *
+     * @param program the program
+     * @param console the console
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void start(final EmbeddedSJProgram<?> program, final EmbeddedRemoteConsole console)
-    throws IOException {
+            throws IOException {
         start(program, "Program", console);
     }
 
-    
-    
     /**
-     * @param program 
-     * @param programName 
-     * @param console 
-     * @throws IOException 
+     * Start.
+     *
+     * @param program the program
+     * @param programName the program name
+     * @param console the console
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public static void start(final EmbeddedSJProgram<?> program, final String programName,
             final EmbeddedRemoteConsole console) throws IOException {
@@ -106,12 +114,17 @@ public class EmbeddedSJProgramStarter {
         }
     }
 
-    
-    
     // ######################################################################
-    // ###################           DEBUG MODE           ###################
+    // ################### DEBUG MODE ###################
     // ######################################################################
 
+    /**
+     * Debug mode.
+     *
+     * @param program the program
+     * @param programName the program name
+     * @param console the console
+     */
     private static void debugMode(final EmbeddedSJProgram<?> program, final String programName,
             final EmbeddedRemoteConsole console) {
         // ----------------------- init debug mode --------------------------
@@ -171,9 +184,9 @@ public class EmbeddedSJProgramStarter {
             comm = pcComm.receiveMessage().toString();
             System.out.println("INPUT: >" + comm + "<");
 
-            if (comm.substring(0, 4).equals(EmbeddedConstants.STEP_COMMAND_KEY)) {
+            if (comm.substring(0, PROTOCOL_ID).equals(EmbeddedConstants.STEP_COMMAND_KEY)) {
                 System.out.println("NEXT STEP OK");
-                comm = comm.substring(4);
+                comm = comm.substring(PROTOCOL_ID);
 
                 // if there are no input signals do tick without inputs
                 if (comm.length() < 2) {
@@ -214,18 +227,18 @@ public class EmbeddedSJProgramStarter {
                 System.out.println("                ");
                 System.out.println("                ");
                 try {
-                    java.lang.Thread.sleep(1000);
+                    java.lang.Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
-                    ;
+                    // ignore errors
                 }
                 System.exit(0);
 
             } else {
                 System.out.println("COMMAND ERROR");
                 try {
-                    java.lang.Thread.sleep(2000);
+                    java.lang.Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
-                    ;
+                    // ignore errors
                 }
             }
             // --------------------------------------------------------------
@@ -244,12 +257,16 @@ public class EmbeddedSJProgramStarter {
 
     }
 
-    
-    
     // ######################################################################
-    // ##################           NORMAL MODE           ###################
+    // ################## NORMAL MODE ###################
     // ######################################################################
 
+    /**
+     * Normal mode.
+     *
+     * @param program the program
+     * @param programName the program name
+     */
     private static void normalMode(final EmbeddedSJProgram<?> program, final String programName) {
         // ----------------------- init normal mode -------------------------
         System.out.println("     ");
@@ -308,9 +325,9 @@ public class EmbeddedSJProgramStarter {
                             System.out.println("                ");
                             System.out.println("                ");
                             try {
-                                java.lang.Thread.sleep(1000);
+                                java.lang.Thread.sleep(SLEEP_TIME);
                             } catch (Exception e) {
-                                ;
+                                // ignore errors
                             }
                             System.exit(0);
                         } else {
@@ -320,8 +337,8 @@ public class EmbeddedSJProgramStarter {
                         }
 
                     } else if (buttonPressed == Button.ID_ENTER) {
-                        presentSignals.add(knownSignals[i].getName() + EmbeddedConstants.COMMA_STRING
-                                + EmbeddedConstants.NULL_STRING);
+                        presentSignals.add(knownSignals[i].getName()
+                                + EmbeddedConstants.COMMA_STRING + EmbeddedConstants.NULL_STRING);
                         System.out.println("+");
 
                     } else {
@@ -346,12 +363,16 @@ public class EmbeddedSJProgramStarter {
         } // end while(!program.isTerminated())
     }
 
-    
-    
     // ######################################################################
-    // #######           DO TICK (same for both run modes)           ########
+    // ####### DO TICK (same for both run modes) ########
     // ######################################################################
 
+    /**
+     * Do tick.
+     *
+     * @param program the program
+     * @param signals the signals
+     */
     private static void doTick(final EmbeddedSJProgram<?> program, final String[] signals) {
         LCD.refresh();
 
@@ -379,13 +400,13 @@ public class EmbeddedSJProgramStarter {
                     if (sig instanceof ValuedSignal) {
                         // 1. Transform value to either double or integer.
                         // 2. Set it as the signal's start value for this tick.
-                        if (signals[i].substring(index + 1)
-                                .indexOf((EmbeddedConstants.COMMA_STRING)) > 0) {
-                            ((ValuedSignal) sig)
-                            .setStartValue(new Double(signals[i].substring(index + 1)));
+                        if (signals[i].substring(index + 1).indexOf(
+                                (EmbeddedConstants.COMMA_STRING)) > 0) {
+                            ((ValuedSignal) sig).setStartValue(new Double(signals[i]
+                                    .substring(index + 1)));
                         } else {
-                            ((ValuedSignal) sig)
-                            .setStartValue(new Integer(signals[i].substring(index + 1)));
+                            ((ValuedSignal) sig).setStartValue(new Integer(signals[i]
+                                    .substring(index + 1)));
                         }
                     } else {
                         System.out.println("SIGNAL MISMATCH!");
@@ -393,12 +414,12 @@ public class EmbeddedSJProgramStarter {
                         System.out.println("is not declared ");
                         System.out.println("as valued signal");
                         try {
-                            java.lang.Thread.sleep(1000);
+                            java.lang.Thread.sleep(SLEEP_TIME);
                         } catch (Exception e) {
-                            ;
+                            // ignore errors
                         }
                     }
-                    
+
                 }
                 signalArray[i] = sig;
             } catch (SignalNotDeclaredException e) {
@@ -408,4 +429,9 @@ public class EmbeddedSJProgramStarter {
         program.doTick(signalArray);
     }
 
+    /**
+     * Utility class should not be instantiated.
+     */
+    private EmbeddedSJProgramStarter() {
+    }
 }

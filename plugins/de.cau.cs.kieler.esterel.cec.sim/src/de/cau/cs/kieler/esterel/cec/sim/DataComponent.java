@@ -3,7 +3,7 @@
  *
  * http://www.informatik.uni-kiel.de/rtsys/kieler/
  * 
- * Copyright 2010 by
+ * Copyright 2012 by
  * + Christian-Albrechts-University of Kiel
  *   + Department of Computer Science
  *     + Real-Time and Embedded Systems Group
@@ -16,10 +16,14 @@ package de.cau.cs.kieler.esterel.cec.sim;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
@@ -43,8 +47,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtend.util.stdlib.CloningExtensions;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,18 +60,18 @@ import de.cau.cs.kieler.core.kexpressions.InterfaceSignalDecl;
 import de.cau.cs.kieler.core.kexpressions.Output;
 import de.cau.cs.kieler.core.kexpressions.Signal;
 import de.cau.cs.kieler.core.ui.ProgressMonitorAdapter;
-import de.cau.cs.kieler.esterel.xtend.InterfaceDeclarationFix;
 import de.cau.cs.kieler.esterel.cec.CEC;
 import de.cau.cs.kieler.esterel.cec.sim.xtend.Esterel2CSimulationInterface;
 import de.cau.cs.kieler.esterel.cec.sim.xtend.Esterel2Simulation;
 import de.cau.cs.kieler.esterel.esterel.Module;
 import de.cau.cs.kieler.esterel.esterel.Program;
-import de.cau.cs.kieler.sim.signals.JSONSignalValues;
+import de.cau.cs.kieler.esterel.xtend.InterfaceDeclarationFix;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeFile;
 import de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent;
+import de.cau.cs.kieler.sim.signals.JSONSignalValues;
 
 /**
  * The Esterel simulation DataComponent is responsible for <br>
@@ -489,11 +491,16 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
      */
     private java.net.URI convertEMFtoJavaURI(final URI uri) throws URISyntaxException {
         IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+        
+        System.out.println("convertEMFtoJavaURI 1" );
 
         IPath path = new Path(uri.toPlatformString(false));
+        System.out.println("convertEMFtoJavaURI 2" + path );
         IFile file = myWorkspaceRoot.getFile(path);
+        System.out.println("convertEMFtoJavaURI 3" + file.toString()); 
 
         IPath fullPath = file.getLocation();
+        System.out.println("convertEMFtoJavaURI 4" + fullPath.toString()); 
 
         return new java.net.URI(fullPath.toString());
     }
@@ -519,14 +526,18 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
     private java.net.URI compileEsterelToC(final URI strlFile, final File outFile,
             final EsterelSimulationProgressMonitor monitor) throws IOException, URISyntaxException {
         monitor.subTask("Reading Esterel file");
+        System.out.println("Compile 1" + strlFile.toString() +" , "+ outFile.toString());
         java.net.URI inputURI = convertEMFtoJavaURI(strlFile);
 
+        System.out.println("Compile 2" + inputURI.toString());
         InputStream strl = CEC.runSTRL(inputURI);
+        System.out.println("Compile 3");
         monitor.worked(1);
         if (monitor.isCanceled()) {
             strl.close();
             return null;
         }
+        System.out.println("Compile 4");
         monitor.subTask("Parsing Esterel file");
         InputStream strlxml = CEC.runSTRLXML(strl);
         monitor.worked(1);
@@ -534,6 +545,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 5");
         monitor.subTask("Expanding Esterel file");
         InputStream expandmodule = CEC.runEXPANDMODULE(strlxml);
         monitor.worked(1);
@@ -541,6 +553,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 6");
         monitor.subTask("Dismantle Esterel file");
         InputStream dismantle = CEC.runDISMANTLE(expandmodule);
         monitor.worked(1);
@@ -548,6 +561,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 7");
         monitor.subTask("ASTGRC");
         InputStream astgrc = CEC.runASTGRC(dismantle);
         monitor.worked(1);
@@ -555,6 +569,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 8");
         monitor.subTask("GRCOPT");
         InputStream grcopt = CEC.runGRCOPT(astgrc);
         monitor.worked(1);
@@ -576,6 +591,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 9");
         monitor.subTask("EEC");
         InputStream eec = CEC.runEEC(pdgccfg);
         monitor.worked(1);
@@ -590,11 +606,91 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             strl.close();
             return null;
         }
+        System.out.println("Compile 10");
         monitor.subTask("Generating C code");
         java.net.URI uri = CEC.runCODEGEN(scfgc, outFile);
+        System.out.println("Compile 11" + uri);
         monitor.worked(1);
         strl.close();
         return uri;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * If there is a header file available, add include directive to generated C program and return
+     * the path to the modified C program. Otherwise return the original path.
+     * 
+     * @throws KiemInitializationException
+     */
+    private URL copyPossibleHeaderFile(final String mainModuleName, final URI inputModel,
+            final URL cProgram) throws KiemInitializationException {
+        // Build header file name
+        String headerFileString;
+        try {
+            java.net.URI inputURI = convertEMFtoJavaURI(inputModel);
+            headerFileString = inputURI.toString();
+            headerFileString = headerFileString.replaceFirst(".strl", ".h");
+        } catch (URISyntaxException e) {
+            return cProgram;
+        }
+        IPath headerFilePath = new Path(headerFileString);
+
+        // Test if header file exists
+        File headerFile = new File(headerFileString);
+        if (!headerFile.exists()) {
+            // header file was not found, return the original cProgram path
+            return cProgram;
+        }
+
+        // append include directive to cProgram
+        URI cProgramFile = URI.createURI(cProgram.toString());
+        URI cProgramModifiedFile = URI.createURI(cProgram.toString());
+        cProgramModifiedFile = cProgramModifiedFile.trimFragment();
+        cProgramModifiedFile = cProgramModifiedFile.trimFileExtension().appendFileExtension(
+                "modified.c");
+        IPath cProgramFilePath = new Path(cProgramFile.toFileString());
+        IPath cProgramModifiedFilePath = new Path(cProgramModifiedFile.toFileString());
+
+        try {
+            InputStream cProgramFileInputStream = new FileInputStream(cProgramFilePath.toString());
+            OutputStream cProgramModifiedFileOutputStream = new FileOutputStream(
+                    cProgramModifiedFilePath.toString());
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                    cProgramFileInputStream));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+                    cProgramModifiedFileOutputStream));
+            String line = null;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                // Search for "#include mainmodule.h" line and replace it with
+                // the more concrete header file.
+                if (line.startsWith("#include")) {
+                    if (line.contains(mainModuleName + ".h")) {
+                        // replace this line
+                        line = "#include \"" + headerFilePath + "\"\n";
+                    }
+                }
+
+                bufferedWriter.append(line + "\n");
+            }
+            bufferedWriter.close();
+            bufferedReader.close();
+
+            // return the modified file instead
+            URL cProgramModified = new URL(cProgramModifiedFile.toString());
+
+            return cProgramModified;
+        } catch (FileNotFoundException e) {
+            throw new KiemInitializationException(
+                    "Cannot read from generated C file in order to append header file inclusion.",
+                    true, e);
+        } catch (IOException e) {
+            throw new KiemInitializationException(
+                    "Cannot read from generated C file in order to append header file inclusion.",
+                    true, e);
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -604,19 +700,23 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
      */
     public void doModel2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
+        System.out.println("M2M 1");
         monitor.begin("Esterel Simulation", EsterelSimulationProgressMonitor.NUMBER_OF_TASKS);
 
-        EsterelSimulationProgressMonitor esterelSimulationProgressMonitor = 
-                new EsterelSimulationProgressMonitor(
+        EsterelSimulationProgressMonitor esterelSimulationProgressMonitor 
+        = new EsterelSimulationProgressMonitor(
                 monitor, EsterelSimulationProgressMonitor.NUMBER_OF_TASKS);
+        
 
         File executable = null;
         String compile = "";
+        System.out.println("M2M 2");
 
         try {
 
             myModel = (Program) this.getModelRootElement();
 
+            System.out.println("M2M 3");
             if (myModel == null) {
                 throw new KiemInitializationException(
                         "Cannot simulate active editor using the CEC", true, null);
@@ -625,6 +725,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             URI esterelOutput = URI.createURI("");
             // By default there is no additional transformation necessary
             Program transformedProgram = myModel;
+            System.out.println("M2M 4");
 
             // If 'Full Debug Mode' is turned on then the user wants to have
             // also states visualized.
@@ -638,15 +739,17 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
                         Esterel2Simulation.class);
                 transformedProgram = transform.transform2Simulation(myModel);
             }
+            System.out.println("M2M 5");
 
             // Calculate output path
-            URI input = URI.createPlatformResourceURI(this.getModelFilePath()
-                    .toString(), true);
+            URI input = URI.createPlatformResourceURI(this.getModelFilePath().toString(), true);
+            System.out.println("M2M 6" + input.toString());
 
             esterelOutput = URI.createURI(input.toString());
             esterelOutput = esterelOutput.trimFragment();
             esterelOutput = esterelOutput.trimFileExtension()
                     .appendFileExtension("simulation.strl");
+            System.out.println("M2M 7" + esterelOutput.toString());
 
             try {
                 // Write out copy/transformation of Esterel program
@@ -661,10 +764,19 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
                 throw new KiemInitializationException("Cannot write output Esterel file.", true,
                         null);
             }
+            System.out.println("M2M 8");
 
             // Compile Esterel to C
             URL output = this.compileEsterelToC(esterelOutput, CEC.getDefaultOutFile(),
                     esterelSimulationProgressMonitor).toURL();
+            System.out.println("M2M 9");
+
+            // Possibly add #include for a header file
+            if (myModel.getModules() != null && myModel.getModules().size() > 0) {
+                String mainModuleName = myModel.getModules().get(0).getName();
+                output = copyPossibleHeaderFile(mainModuleName, input, output);
+            }
+            System.out.println("M2M 10");
 
             // Cannot be done before because otherwise the new model cannot be serialized
             // Do this on a copy to not destroy original program;
@@ -673,15 +785,19 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
                     InterfaceDeclarationFix.class);
             Program fixedTransformedProgram = (Program) CloningExtensions.clone(transformedProgram);
             interfaceDeclarationFix.fix(fixedTransformedProgram);
+            System.out.println("M2M 11");
 
             // Generate data.c
             URL data = generateCSimulationInterface(fixedTransformedProgram, esterelOutput);
+            System.out.println("M2M 12");
 
             // Compile C code
             Bundle bundle = Platform.getBundle(EsterelCECSimPlugin.PLUGIN_ID);
+            System.out.println("M2M 13");
 
             URL fileUrl = FileLocator.find(bundle, new Path(SIMULATION_SUBPATH), null);
             URL bundleLocation = FileLocator.toFileURL(fileUrl);
+            System.out.println("M2M 14");
 
             String compiler = (getProperties()[KIEM_PROPERTY_CCOMPILER
                     + JSONObjectSimulationDataComponent.KIEM_PROPERTY_DIFF]).getValue();
@@ -702,6 +818,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
                         + " " + SIMULATION_COMPILER_OPTIONS + " " + executable;
             }
 
+            System.out.println("M2M 15" + compile);
             simFile = executable;
 
             // Compile the code with the settings from above
@@ -714,12 +831,13 @@ public class DataComponent extends JSONObjectSimulationDataComponent {
             while ((line = br.readLine()) != null) {
                 errorString.append("\n" + line);
             }
+            System.out.println("M2M 16");
 
             int exitValue = process.waitFor();
 
             if (exitValue != 0) {
-                throw new KiemInitializationException("Could not compile", true, new Exception(
-                        errorString.toString()));
+                throw new KiemInitializationException("Could not compile: " + errorString, true,
+                        new Exception(errorString.toString()));
             }
 
         } catch (Exception e) {
