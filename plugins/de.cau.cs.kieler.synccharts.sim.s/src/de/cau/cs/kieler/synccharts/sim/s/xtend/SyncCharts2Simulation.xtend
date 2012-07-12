@@ -18,15 +18,30 @@ import org.eclipse.xtend.util.stdlib.CloningExtensions
 import de.cau.cs.kieler.synccharts.sim.s.SyncChartsSimSPlugin
 import de.cau.cs.kieler.synccharts.Region
 import de.cau.cs.kieler.synccharts.State
+import de.cau.cs.kieler.synccharts.Transition
+import de.cau.cs.kieler.core.kexpressions.KExpressionsFactory
+import de.cau.cs.kieler.synccharts.SyncchartsFactory;
+import de.cau.cs.kieler.core.kexpressions.ValueType
 
 /**
- * Transformation of S code into S code that is
- * enriched with additional signals for each s statement.
+ * Transformation of a SyncChart to another SyncChart
+ * enriched with additional signals for each state and
+ * each transition.
  * 
- * These signals, here HP, are generated in the following fashion for a 
- * statement P:
+ * These signals are HS for auxiliary state signals
+ * and HT for auxiliary transition signals.
  * 
- * Emit HP; P
+ * Signals HS are generated in the following fashion for a 
+ * state S:
+ * 
+ * 1. For every incoming transition, add an output-emit action for HS
+ * 2. Create an auxiliary region that has one state and a self-loop 
+ *    emitting HS.
+ * 
+ * ATTENTION: Iff the incoming transition
+ * 
+ * Signal HT are generated in the following fashion for a
+ * transition T:
  * 
  * As names for the signals are randomly generated and must be unique
  * there must be a mapping that keeps track which signal (name) belongs to
@@ -45,8 +60,12 @@ class SyncCharts2Simulation {
 
 		var originalStates = rootRegion.eAllContents().toIterable().filter(typeof(State));
 		var targetStates = target.eAllContents().toIterable().filter(typeof(State)).toList();
-		
-		// For every instruction in the S program do the transformation
+
+		var originalTransitions = rootRegion.eAllContents().toIterable().filter(typeof(Transition));
+		var targetTransitions = target.eAllContents().toIterable().filter(typeof(Transition)).toList();
+
+
+		// For every state in the SyncChart do the transformation
 		// Iterate over a copy of the list	
 		var i = 0;	
 		var originalStatesList = originalStates.toList;
@@ -54,72 +73,91 @@ class SyncCharts2Simulation {
 			var originalState = originalStatesList.get(i);
 			i = i + 1;
 			val originalStateURIFragment = originalState.eResource.getURIFragment(originalState);
-			var statementUID = AUXILIARY_VARIABLE_TAG + originalStateURIFragment.hashCode.toString().replace("-","M");
+			var stateUID = AUXILIARY_VARIABLE_TAG + originalStateURIFragment.hashCode.toString().replace("-","M");
 			// This statement we want to modify
-			targetState.transformState(target, statementUID);
+			targetState.transformState(target, stateUID);
+		}
+
+		// For every state in the SyncChart do the transformation
+		// Iterate over a copy of the list	
+		i = 0;	
+		var originalTransitionList = originalTransitions.toList;
+		for(targetTransition : targetTransitions) {
+			var originalTransition = originalTransitionList.get(i);
+			i = i + 1;
+			val originalTransitionURIFragment = originalTransition.eResource.getURIFragment(originalTransition);
+			var transitionUID = AUXILIARY_VARIABLE_TAG + originalTransitionURIFragment.hashCode.toString().replace("-","M");
+			// This statement we want to modify
+			targetTransition.transformTransition(target, transitionUID);
 		}
 		
 		target;
 	}	
 	
+	def void transformTransition(Transition transition, Region targetRootRegion, String UID) {
+		// auxiliary signal
+		var auxiliarySignal = KExpressionsFactory::eINSTANCE.createSignal();
+		var auxiliaryEmission = SyncchartsFactory::eINSTANCE.createEmission();
+		
+		// Setup the auxiliarySignal as an OUTPUT to the module
+		auxiliarySignal.setName(UID);
+		auxiliarySignal.setIsInput(false);
+		auxiliarySignal.setIsOutput(true);
+		auxiliarySignal.setType(ValueType::PURE);
+		// Set the auxliiarySignal for emission 
+		auxiliaryEmission.setSignal(auxiliarySignal);
+		
+		// Add emission of auxiliary Signal to tansition
+		transition.effects.add(auxiliaryEmission);
+
+		// Add auxiliarySignal to first (and only) root region state SyncCharts main interface
+		targetRootRegion.states.get(0).signals.add(auxiliarySignal);
+	}
 	
 	def void transformState(State state, Region targetRootRegion, String UID) {
+		// auxiliary signal
+		var auxiliarySignal = KExpressionsFactory::eINSTANCE.createSignal();
+		
+		// Setup the auxiliarySignal as an OUTPUT to the module
+		auxiliarySignal.setName(UID);
+		auxiliarySignal.setIsInput(false);
+		auxiliarySignal.setIsOutput(true);
+		auxiliarySignal.setType(ValueType::PURE);
+		
+		// 1. Add emission of auxiliary Signal to every incoming transition
+		for (transition : state.incomingTransitions) {
+			// Set the auxliiarySignal for emission 
+			var auxiliaryEmission = SyncchartsFactory::eINSTANCE.createEmission();
+   			auxiliaryEmission.setSignal(auxiliarySignal);
+   			// Add emission to effect of incoming transition
+			transition.effects.add(auxiliaryEmission);
+		}
+		
+		// 2. Create auxiliary region and an inner state with a self-loop
+		// emitting the signal
+		var auxiliaryRegion = SyncchartsFactory::eINSTANCE.createRegion()
+		var auxiliaryState  = SyncchartsFactory::eINSTANCE.createState();
+		var auxiliarySelfLoop =  SyncchartsFactory::eINSTANCE.createTransition();
+		
+		auxiliarySelfLoop.setTargetState(auxiliaryState);
+		// Set the auxliiarySignal for emission 
+		var auxiliaryEmission = SyncchartsFactory::eINSTANCE.createEmission();
+		auxiliaryEmission.setSignal(auxiliarySignal);
+		auxiliarySelfLoop.effects.add(auxiliaryEmission);
+		
+		auxiliaryState.setId("state" + UID);
+		auxiliaryState.setIsInitial(true);
+		auxiliaryState.outgoingTransitions.add(auxiliarySelfLoop);
+		
+		auxiliaryRegion.states.add(auxiliaryState);
+		
+		state.regions.add(auxiliaryRegion);
+		
+		// Add auxiliarySignal to first (and only) root region state SyncCharts main interface
+		targetRootRegion.states.get(0).signals.add(auxiliarySignal);
 		
 	}
 	
-//	// Instruction transformation in the fashion like described at the top.
-//	def void transformInstruction(Instruction instruction, Program program, String UID) {
-//		//SIMPLE TEST
-//		if ((
-//		   (instruction instanceof Prio)
-//		   ||(instruction instanceof Trans)
-//		   ||(instruction instanceof Fork)
-//		   ||(instruction instanceof Join)
-//		   ||(instruction instanceof Pause)
-//		   ||(instruction instanceof Term)
-//		   ||(instruction instanceof Halt)
-//		   ||(instruction instanceof Emit)
-//		   ||(instruction instanceof Abort)
-//		   ||(instruction instanceof If)
-//		   ||(instruction instanceof Await)
-//		)) {
-//			
-//		// auxiliary signal
-//		var auxiliarySignal = KExpressionsFactory::eINSTANCE.createSignal();
-//		var auxiliaryEmitInstruction = SFactory::eINSTANCE.createEmit
-//			
-//		// Setup the auxiliarySignal as an OUTPUT to the module
-//		auxiliarySignal.setName(UID);
-//		auxiliarySignal.setIsInput(false);
-//		auxiliarySignal.setIsOutput(true);
-//		auxiliarySignal.setType(ValueType::PURE);
-//		// Set the auxliiarySignal for emission 
-//		auxiliaryEmitInstruction.setSignal(auxiliarySignal);
-//		
-//		// get the container of the instruction
-//		var container = instruction.eContainer;
-//		
-//		if (container instanceof State) {
-//			// Add auxiliarySignal to program
-//			program.signals.add(auxiliarySignal);
-//			val stateInstruction = container as State;
-//			val instructionList = stateInstruction.instructions;
-//			val index = instructionList.indexOf(instruction);
-//			//System::out.println(index.toString + ":"+  stateInstruction.name.toString);
-//			instructionList.add(index, auxiliaryEmitInstruction);
-//		}
-//		else if (container instanceof If) {
-//			// Add auxiliarySignal to program
-//			program.signals.add(auxiliarySignal);
-//			val ifInstruction = container as If
-//			val instructionList = ifInstruction.instructions;
-//			val index = instructionList.indexOf(instruction);
-//			instructionList.add(index, auxiliaryEmitInstruction);
-//		}
-//			
-//		}
-//		
-//	}
 
 
 }
