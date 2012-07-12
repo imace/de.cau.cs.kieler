@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_mPR1UMwWEeGi75xyBDa1Aw" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_mQNCYMwWEeGi75xyBDa1Aw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_mQNpc8wWEeGi75xyBDa1Aw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_mQNpdMwWEeGi75xyBDa1Aw" type="7001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_mQNpcMwWEeGi75xyBDa1Aw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_mQNpccwWEeGi75xyBDa1Aw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="SimpleHierarchyCrossing.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mQNpcswWEeGi75xyBDa1Aw" x="20" y="30" width="42" height="40"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_mQOQgMwWEeGi75xyBDa1Aw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_mQO3kMwWEeGi75xyBDa1Aw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_mQO3kcwWEeGi75xyBDa1Aw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_mQR64MwWEeGi75xyBDa1Aw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_mQR65MwWEeGi75xyBDa1Aw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_mQSh8MwWEeGi75xyBDa1Aw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_mQR64cwWEeGi75xyBDa1Aw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_mQR64swWEeGi75xyBDa1Aw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="SimpleHierarchyCrossing.keg#//@children.1/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mQR648wWEeGi75xyBDa1Aw" x="20" y="30" width="41" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_mQOQgcwWEeGi75xyBDa1Aw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_mQOQgswWEeGi75xyBDa1Aw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="SimpleHierarchyCrossing.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mQOQg8wWEeGi75xyBDa1Aw" x="102" y="30" width="141" height="158"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_mPR1UcwWEeGi75xyBDa1Aw"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_oH48wMwWEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_o5jqQMwWEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_qP6ZMMwWEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_rJlzMMwWEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="SimpleHierarchyCrossing.keg#/"/>
+</notation:Diagram>
