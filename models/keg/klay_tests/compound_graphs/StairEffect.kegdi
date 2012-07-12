@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_KG7-sMwjEeG0Cui0TbGTtQ" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_KIFOMMwjEeG0Cui0TbGTtQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIF1QcwjEeG0Cui0TbGTtQ" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIF1QswjEeG0Cui0TbGTtQ" type="7001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_KIFOMcwjEeG0Cui0TbGTtQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_KIFOMswjEeG0Cui0TbGTtQ" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="StairEffect.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KIF1QMwjEeG0Cui0TbGTtQ" x="20" y="141" width="42" height="40"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_KIF1Q8wjEeG0Cui0TbGTtQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIGcUMwjEeG0Cui0TbGTtQ" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIGcUcwjEeG0Cui0TbGTtQ" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_KIKGsMwjEeG0Cui0TbGTtQ" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_KIKtwMwjEeG0Cui0TbGTtQ" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_KIKtwcwjEeG0Cui0TbGTtQ" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_KINKAMwjEeG0Cui0TbGTtQ" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_KINxEMwjEeG0Cui0TbGTtQ" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_KINxEcwjEeG0Cui0TbGTtQ" type="7002"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_KINKAcwjEeG0Cui0TbGTtQ"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_KINKAswjEeG0Cui0TbGTtQ" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="StairEffect.keg#//@children.1/@children.0/@children.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KINKA8wjEeG0Cui0TbGTtQ" x="60" y="29" width="41" height="40"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_KIKGscwjEeG0Cui0TbGTtQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_KIKGsswjEeG0Cui0TbGTtQ" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="StairEffect.keg#//@children.1/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KIKGs8wjEeG0Cui0TbGTtQ" x="131" y="29" width="201" height="213"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KIKtwswjEeG0Cui0TbGTtQ" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_KILU0MwjEeG0Cui0TbGTtQ" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_KILU0cwjEeG0Cui0TbGTtQ" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_KIKtw8wjEeG0Cui0TbGTtQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_KIKtxMwjEeG0Cui0TbGTtQ" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="StairEffect.keg#//@children.1/@children.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KIKtxcwjEeG0Cui0TbGTtQ" x="60" y="90" width="51" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_KIF1RMwjEeG0Cui0TbGTtQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_KIF1RcwjEeG0Cui0TbGTtQ" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="StairEffect.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KIF1RswjEeG0Cui0TbGTtQ" x="82" y="20" width="432" height="333"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_KG7-scwjEeG0Cui0TbGTtQ"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_Mo9PgMwjEeG0Cui0TbGTtQ" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_PViKgMwjEeG0Cui0TbGTtQ" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_QXNp8MwjEeG0Cui0TbGTtQ" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_S0BDkMwjEeG0Cui0TbGTtQ" name="layout:de.cau.cs.kieler.klay.layered.thoroughness" stringValue="5000"/>
+  <element xmi:type="keg:Node" href="StairEffect.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_KIZ-UMwjEeG0Cui0TbGTtQ" type="4001" source="_KIFOMMwjEeG0Cui0TbGTtQ" target="_KIKtwswjEeG0Cui0TbGTtQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIZ-VMwjEeG0Cui0TbGTtQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIZ-VcwjEeG0Cui0TbGTtQ" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIalYMwjEeG0Cui0TbGTtQ" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIalYcwjEeG0Cui0TbGTtQ" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIalYswjEeG0Cui0TbGTtQ" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIalY8wjEeG0Cui0TbGTtQ" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_KIZ-UcwjEeG0Cui0TbGTtQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_KIZ-UswjEeG0Cui0TbGTtQ" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="StairEffect.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KIZ-U8wjEeG0Cui0TbGTtQ" points="[0, 0, -110, 0]$[90, 0, -20, 0]$[90, 0, -20, 0]$[110, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_afuyEcwjEeG0Cui0TbGTtQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_afuyEswjEeG0Cui0TbGTtQ" id="(0.0,0.5000001907348632)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_KIdosMwjEeG0Cui0TbGTtQ" type="4001" source="_KIKtwswjEeG0Cui0TbGTtQ" target="_KINKAMwjEeG0Cui0TbGTtQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIePwMwjEeG0Cui0TbGTtQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIePwcwjEeG0Cui0TbGTtQ" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIePwswjEeG0Cui0TbGTtQ" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIePw8wjEeG0Cui0TbGTtQ" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_KIePxMwjEeG0Cui0TbGTtQ" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KIePxcwjEeG0Cui0TbGTtQ" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_KIdoscwjEeG0Cui0TbGTtQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_KIdosswjEeG0Cui0TbGTtQ" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="StairEffect.keg#//@children.1/@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KIdos8wjEeG0Cui0TbGTtQ" points="[0, 0, -110, 0]$[110, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_afuLAMwjEeG0Cui0TbGTtQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_afuyEMwjEeG0Cui0TbGTtQ" id="(0.0,0.5000000953674316)"/>
+  </edges>
+</notation:Diagram>
