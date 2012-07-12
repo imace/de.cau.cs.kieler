@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_5SHGscwOEeG6TYSQpCdsSA" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_5TEI8MwOEeG6TYSQpCdsSA" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_5TEwAMwOEeG6TYSQpCdsSA" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_5TEwAcwOEeG6TYSQpCdsSA" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_5TIaYMwOEeG6TYSQpCdsSA" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_5TIaZMwOEeG6TYSQpCdsSA" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_5TIaZcwOEeG6TYSQpCdsSA" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_5TLdsMwOEeG6TYSQpCdsSA" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_5TLdtMwOEeG6TYSQpCdsSA" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_5TLdtcwOEeG6TYSQpCdsSA" type="7002"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TLdscwOEeG6TYSQpCdsSA"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_5TLdsswOEeG6TYSQpCdsSA" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="CompoundNoEdges.keg#//@children.0/@children.0/@children.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TLds8wOEeG6TYSQpCdsSA" x="20" y="30" width="40" height="40"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TIaYcwOEeG6TYSQpCdsSA"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_5TIaYswOEeG6TYSQpCdsSA" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CompoundNoEdges.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TIaY8wOEeG6TYSQpCdsSA" x="20" y="30" width="120" height="148"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5TJBcMwOEeG6TYSQpCdsSA" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_5TJBdMwOEeG6TYSQpCdsSA" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_5TJBdcwOEeG6TYSQpCdsSA" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_5TOhAMwOEeG6TYSQpCdsSA" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_5TPIE8wOEeG6TYSQpCdsSA" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_5TPIFMwOEeG6TYSQpCdsSA" type="7002"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TPIEMwOEeG6TYSQpCdsSA"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_5TPIEcwOEeG6TYSQpCdsSA" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="CompoundNoEdges.keg#//@children.0/@children.1/@children.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TPIEswOEeG6TYSQpCdsSA" x="20" y="30" width="40" height="40"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TJBccwOEeG6TYSQpCdsSA"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_5TJBcswOEeG6TYSQpCdsSA" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CompoundNoEdges.keg#//@children.0/@children.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TJBc8wOEeG6TYSQpCdsSA" x="180" y="30" width="120" height="148"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TEI8cwOEeG6TYSQpCdsSA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5TEI8swOEeG6TYSQpCdsSA" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="CompoundNoEdges.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TEI88wOEeG6TYSQpCdsSA" x="20" y="30" width="360" height="256"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_5SHGsswOEeG6TYSQpCdsSA"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_9AKs0MwOEeG6TYSQpCdsSA" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_-RejsMwOEeG6TYSQpCdsSA" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_ALTMEMwPEeG6TYSQpCdsSA" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_BXrfoMwPEeG6TYSQpCdsSA" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="CompoundNoEdges.keg#/"/>
+</notation:Diagram>
