@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="__i1WgMwREeGZifIX_kFD4g" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="__jlkcMwREeGZifIX_kFD4g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="__jmLgMwREeGZifIX_kFD4g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="__jmLgcwREeGZifIX_kFD4g" type="7001">
+      <children xmi:type="notation:Node" xmi:id="__joAsMwREeGZifIX_kFD4g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="__jonwMwREeGZifIX_kFD4g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="__jonwcwREeGZifIX_kFD4g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="__joAscwREeGZifIX_kFD4g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="__joAsswREeGZifIX_kFD4g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Simple3Child.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="__joAs8wREeGZifIX_kFD4g" x="20" y="30" width="49" height="40"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__jonwswREeGZifIX_kFD4g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="__jonxswREeGZifIX_kFD4g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="__jpO0MwREeGZifIX_kFD4g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="__jonw8wREeGZifIX_kFD4g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="__jonxMwREeGZifIX_kFD4g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Simple3Child.keg#//@children.0/@children.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="__jonxcwREeGZifIX_kFD4g" x="20" y="120" width="49" height="40"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__jpO0cwREeGZifIX_kFD4g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="__jpO1cwREeGZifIX_kFD4g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="__jpO1swREeGZifIX_kFD4g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="__jpO0swREeGZifIX_kFD4g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="__jpO08wREeGZifIX_kFD4g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Simple3Child.keg#//@children.0/@children.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="__jpO1MwREeGZifIX_kFD4g" x="20" y="210" width="49" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="__jlkccwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__jlkcswREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Simple3Child.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__jlkc8wREeGZifIX_kFD4g" x="20" y="30" width="129" height="321"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="__i1WgcwREeGZifIX_kFD4g"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_CHJGUMwSEeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_C7oeUMwSEeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_EYQ0YMwSEeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_FVw-cMwSEeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="Simple3Child.keg#/"/>
+</notation:Diagram>

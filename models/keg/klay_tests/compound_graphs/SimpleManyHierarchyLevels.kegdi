@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_333ukMwUEeGi75xyBDa1Aw" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_34nVcMwUEeGi75xyBDa1Aw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_34nVdMwUEeGi75xyBDa1Aw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_34nVdcwUEeGi75xyBDa1Aw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_34pKoMwUEeGi75xyBDa1Aw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_34pxsMwUEeGi75xyBDa1Aw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_34pxscwUEeGi75xyBDa1Aw" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_34sN8MwUEeGi75xyBDa1Aw" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_34sN9MwUEeGi75xyBDa1Aw" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_34sN9cwUEeGi75xyBDa1Aw" type="7002">
+              <children xmi:type="notation:Node" xmi:id="_34uDIMwUEeGi75xyBDa1Aw" type="3001">
+                <children xmi:type="notation:DecorationNode" xmi:id="_34uDJMwUEeGi75xyBDa1Aw" type="5002"/>
+                <children xmi:type="notation:DecorationNode" xmi:id="_34uqMMwUEeGi75xyBDa1Aw" type="7002"/>
+                <styles xmi:type="notation:DescriptionStyle" xmi:id="_34uDIcwUEeGi75xyBDa1Aw"/>
+                <styles xmi:type="notation:FontStyle" xmi:id="_34uDIswUEeGi75xyBDa1Aw" fontName="Sans"/>
+                <element xmi:type="keg:Node" href="SimpleManyHierarchyLevels.keg#//@children.0/@children.0/@children.0/@children.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_34uDI8wUEeGi75xyBDa1Aw" x="20" y="30" width="40" height="40"/>
+              </children>
+            </children>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_34sN8cwUEeGi75xyBDa1Aw"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_34sN8swUEeGi75xyBDa1Aw" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="SimpleManyHierarchyLevels.keg#//@children.0/@children.0/@children.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_34sN88wUEeGi75xyBDa1Aw" x="20" y="30" width="120" height="141"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_34pKocwUEeGi75xyBDa1Aw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_34pKoswUEeGi75xyBDa1Aw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="SimpleManyHierarchyLevels.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_34pKo8wUEeGi75xyBDa1Aw" x="20" y="30" width="200" height="242"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_34nVccwUEeGi75xyBDa1Aw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_34nVcswUEeGi75xyBDa1Aw" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="SimpleManyHierarchyLevels.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_34nVc8wUEeGi75xyBDa1Aw" x="20" y="30" width="280" height="343"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_333ukcwUEeGi75xyBDa1Aw"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_6aVEQMwUEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_7HzOQMwUEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_9fO_sMwUEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_-vXK0MwUEeGi75xyBDa1Aw" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="SimpleManyHierarchyLevels.keg#/"/>
+</notation:Diagram>
