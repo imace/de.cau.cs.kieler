@@ -34,7 +34,7 @@ import org.json.JSONObject;
 import com.google.inject.Guice;
 
 import de.cau.cs.kieler.core.kexpressions.Signal;
-import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
+import de.cau.cs.kieler.core.ui.ProgressMonitorAdapter;
 import de.cau.cs.kieler.s.s.Program;
 import de.cau.cs.kieler.s.sc.S2SCPlugin;
 import de.cau.cs.kieler.s.sim.sc.xtend.S2Simulation;
@@ -64,6 +64,11 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
     /** The list of output signals including the ones used for the visualization. */
     private LinkedList<String> outputSignalList = null;
+
+    /** The Constant NUMBER_OF_TASKS for model transformation and code generation. */
+    private static final int NUMBER_OF_TASKS = 10;
+
+    private static final int KIEM_PROPERTY_FULLDEBUGMODE = 3;
 
     // -------------------------------------------------------------------------
 
@@ -100,9 +105,10 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
         // Collect active statements
         String activeStatements = "";
+        StringBuffer activeStatementsBuf = new StringBuffer();
 
         if (!scExecution.isStarted()) {
-            throw new KiemExecutionException("No s simulation is running", true, null);
+            throw new KiemExecutionException("No S simulation is running", true, null);
         }
         try {
 
@@ -138,19 +144,21 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
                                         .substring(SSimSCPlugin.AUXILIARY_VARIABLE_TAG.length());
 
                                 // Insert a "," if not the first statement
-                                if (activeStatements.length() != 0) {
-                                    activeStatements += ",";
+                                if (activeStatementsBuf.length() != 0) {
+                                    activeStatementsBuf.append(",");
                                 }
 
-                                activeStatements += statementWithoutAuxiliaryVariableTag;
+                                activeStatementsBuf.append(statementWithoutAuxiliaryVariableTag);
 
                             } catch (Exception e) {
+                                // ignore error
                             }
 
                         }
 
                     }
                 }
+                activeStatements = activeStatementsBuf.toString();
 
                 // Then add normal output signals
                 for (String outputSignal : outputSignalList) {
@@ -245,9 +253,9 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
     /**
      * {@inheritDoc}
      */
-    public void doModel2ModelTransform(final KielerProgressMonitor monitor)
+    public void doModel2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
-        monitor.begin("S Simulation", 10);
+        monitor.begin("S Simulation", NUMBER_OF_TASKS);
 
         String compile = "";
 
@@ -260,50 +268,59 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
                         "Cannot simulate active editor using the S Simulator", true, null);
             }
 
+            if (this.getModelRootElement().eResource() == null) {
+                throw new KiemInitializationException(
+                        "The active editor has must be saved in order to simulate the S program."
+                                + " Volatile resources cannot be simulated.", true, null);
+            }
+
             // Make a copy of the S program in case it was from
             // an active Editor
 
             URI sOutput = URI.createURI("");
             URI scOutput = URI.createURI("");
             // By default there is no additional transformation necessary
-            Program transformedProgram = myModel;
+            Program transformedProgram =  myModel;
+
+            // Calculate output path for possible S-m2m
+            // FileEditorInput editorInput = (FileEditorInput) editorPart.getEditorInput();
+            String inputPathString = this.getModelFilePath().toString();
+            URI input = URI.createPlatformResourceURI(inputPathString, true);
+            sOutput = URI.createURI(input.toString());
 
             // If 'Full Debug Mode' is turned on then the user wants to have
             // also states visualized.
             // Hence some pre-processing is needed and done by the
             // Esterl2Simulation Xtend2 model transformation
-            if (this.getProperties()[3].getValueAsBoolean()) {
+            if (this.getProperties()[KIEM_PROPERTY_FULLDEBUGMODE].getValueAsBoolean()) {
                 // Try to load SyncCharts model
                 // 'Full Debug Mode' is turned ON
                 S2Simulation transform = Guice.createInjector().getInstance(S2Simulation.class);
                 transformedProgram = transform.transform2Simulation(myModel);
-            }
 
-            // Calculate output path
-            //FileEditorInput editorInput = (FileEditorInput) editorPart.getEditorInput();
-            String inputPathString = this.getModelFilePath().toString();
-            URI input = URI.createPlatformResourceURI(inputPathString, true);
+                // Because we transformed the S program we need to save a different file
+                // and pass this new file to the SC simulation instead.
+                sOutput = sOutput.trimFragment();
+                sOutput = sOutput.trimFileExtension().appendFileExtension("simulation.s");
+                
+                try {
+                    // Write out copy/transformation of S program
+                    Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+                    Map<String, Object> m = reg.getExtensionToFactoryMap();
+                    m.put("daform", new XMIResourceFactoryImpl());
+                    ResourceSet resSet = new ResourceSetImpl();
+                    Resource resource = resSet.createResource(sOutput);
+                    resource.getContents().add(transformedProgram);
+                    resource.save(Collections.EMPTY_MAP);
+                } catch (IOException e) {
+                    throw new KiemInitializationException("Cannot write output S file.", true, null);
+                }
+            } 
 
-            sOutput = URI.createURI(input.toString());
-            sOutput = sOutput.trimFragment();
-            sOutput = sOutput.trimFileExtension().appendFileExtension("simulation.s");
-
+            // Calculate output path for SC-m2t
             scOutput = URI.createURI(input.toString());
             scOutput = scOutput.trimFragment();
             scOutput = scOutput.trimFileExtension().appendFileExtension("c");
-
-            try {
-                // Write out copy/transformation of S program
-                Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-                Map<String, Object> m = reg.getExtensionToFactoryMap();
-                m.put("daform", new XMIResourceFactoryImpl());
-                ResourceSet resSet = new ResourceSetImpl();
-                Resource resource = resSet.createResource(sOutput);
-                resource.getContents().add(transformedProgram);
-                resource.save(Collections.EMPTY_MAP);
-            } catch (IOException e) {
-                throw new KiemInitializationException("Cannot write output S file.", true, null);
-            }
 
             // Set a random output folder for the compiled files
             String outputFolder = KiemUtil.generateRandomTempOutputFolder();
@@ -311,7 +328,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             // Generate SC code
             IPath scOutputPath = new Path(scOutput.toPlatformString(false));
             IFile scOutputFile = KiemUtil.convertIPathToIFile(scOutputPath);
-            String scOutputString =  KiemUtil.getAbsoluteFilePath(scOutputFile); 
+            String scOutputString = KiemUtil.getAbsoluteFilePath(scOutputFile);
             S2SCPlugin.generateSCCode(transformedProgram, scOutputString, outputFolder);
 
             // Compile
@@ -319,7 +336,13 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             LinkedList<String> generatedSCFiles = new LinkedList<String>();
             generatedSCFiles.add(scOutputString);
             scExecution.compile(generatedSCFiles);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            throw new KiemInitializationException("Error compiling S program:\n\n "
+                    + e.getMessage() + "\n\n" + compile, true, e);
+        } catch (IOException e) {
+            throw new KiemInitializationException("Error compiling S program:\n\n "
+                    + e.getMessage() + "\n\n" + compile, true, e);
+        } catch (InterruptedException e) {
             throw new KiemInitializationException("Error compiling S program:\n\n "
                     + e.getMessage() + "\n\n" + compile, true, e);
         }

@@ -20,6 +20,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
+/**
+ * A MaudeSession used internally by the MaudInterfacePlugin to handle calls to Maude.
+ * 
+ * @author cmot, jes
+ */
 public class MaudeSession {
 
     /** The constant for the Maude timeout. */
@@ -27,22 +32,22 @@ public class MaudeSession {
 
     /** The path to maude.exe. */
     private String pathToMaude;
-    
+
     /** The path to the maude code. */
     private String pathToMaudeCode;
-    
+
     /** The process. */
     private Process process = null;
-    
+
     /** The stream to maude. */
     private PrintWriter toMaude;
-    
+
     /** The stream from maude. */
     private BufferedReader fromMaude;
-    
+
     /** The error stream from maude. */
     private BufferedReader error;
-    
+
     /** The started flag. */
     private boolean started;
 
@@ -56,7 +61,7 @@ public class MaudeSession {
      * @param pathToMaudeCodeParam
      *            the path to maude code param
      */
-    public MaudeSession(String pathToMaudeParam, String pathToMaudeCodeParam) {
+    public MaudeSession(final String pathToMaudeParam, final String pathToMaudeCodeParam) {
         pathToMaude = pathToMaudeParam;
         pathToMaudeCode = pathToMaudeCodeParam;
         started = false;
@@ -133,25 +138,26 @@ public class MaudeSession {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public String queryMaude(String queryRequest) throws IOException {
+    public String queryMaude(final String queryRequest) throws IOException {
         return queryMaude(queryRequest, 0);
     }
 
     // -------------------------------------------------------------------------
 
     /**
-     * Query maude with a string returning a string for a given maude session id.
-     * The optional wait parameter can be used the first time after initialization
-     * to get all contens. 
+     * Query maude with a string returning a string for a given maude session id. The optional wait
+     * parameter can be used the first time after initialization to get all contens.
      * 
      * @param queryRequest
      *            the query request
+     * @param wait
+     *            the wait
      * @return the string
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public String queryMaude(String queryRequest, int wait) throws IOException {
-        String returnValue = "";
+    public String queryMaude(final String queryRequest, final int wait) throws IOException {
+        StringBuffer returnValueBuf = new StringBuffer();
 
         if (queryRequest != null) {
             toMaude.write(queryRequest);
@@ -162,24 +168,21 @@ public class MaudeSession {
             try {
                 Thread.sleep(wait);
             } catch (InterruptedException e) {
+                // ignore error
             }
         }
 
         boolean done = false;
-        boolean fmready = false;
-        boolean erready = false;
         long startTime = System.currentTimeMillis();
-        
+
         while (!done) {
-        	erready = error.ready(); 
             while (error.ready()) {
-                returnValue += (((char) error.read() + ""));
+                returnValueBuf.append(((char) error.read() + ""));
             }
-            fmready = fromMaude.ready(); 
             while (fromMaude.ready()) {
-                returnValue += ((char) fromMaude.read() + "");
+                returnValueBuf.append((char) fromMaude.read() + "");
             }
-            if (returnValue.contains("Maude>")) {
+            if (returnValueBuf.toString().contains("Maude>")) {
                 done = true;
             }
             if (System.currentTimeMillis() - startTime > MAUDETIMEOUT) {
@@ -187,7 +190,7 @@ public class MaudeSession {
             }
         }
 
-        return returnValue;
+        return returnValueBuf.toString();
     }
 
     // -------------------------------------------------------------------------

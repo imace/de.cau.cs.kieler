@@ -14,7 +14,6 @@
 package de.cau.cs.kieler.klots.util;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.jar.JarInputStream;
@@ -28,11 +27,10 @@ import lejos.pc.comm.NXTInfo;
 import lejos.pc.comm.NXTSamba;
 import lejos.pc.tools.NXJFlashUI;
 
-
 /**
- * Class to allow the updating and verification of the leJOS firmware. The firmware image files
- * can be located inside of jar archives, such as Eclipse plugins, as well as on the file system.
- * This adapted implementation is based on Andy Shaw original code.
+ * Class to allow the updating and verification of the leJOS firmware. The firmware image files can
+ * be located inside of jar archives, such as Eclipse plugins, as well as on the file system. This
+ * adapted implementation is based on Andy Shaw original code.
  * 
  * @author ybe
  */
@@ -46,20 +44,35 @@ public class NXTFlashUpdate {
     private static final int ADDRESS_LOC_ADDITION = 4;
     private static final int MENU_LENGTH_LOC = MENU_ADDRESS_LOC + ADDRESS_LOC_ADDITION;
     private static final int FLASH_START_PAGE_LOC = MENU_LENGTH_LOC + ADDRESS_LOC_ADDITION;
-    
+
+    private static final int BYTE_FILTER = 0xff;
+
+    private static final int SHIFT_8 = 8;
+    private static final int SHIFT_16 = 16;
+    private static final int SHIFT_24 = 24;
+
+    private static final int CMD_1 = 0xf0f0f0f0;
+    private static final int CMD_2 = 0x0f0f0f0f;
+    private static final int CMD_3 = 0xaaaaaaaa;
+    private static final int CMD_4 = 0x55555555;
+
+    private static final int SIZE = 32;
+
+    private static final int SLEEP_TIME = 1000;
+    private static final int PAGE_SIZE = 100;
+
     private NXJFlashUI ui;
 
-    
-    
     /**
-     * @param ui 
+     * Instantiates a new nXT flash update.
+     * 
+     * @param ui
+     *            the ui
      */
     public NXTFlashUpdate(final NXJFlashUI ui) {
         this.ui = ui;
     }
 
-    
-    
     /**
      * Format and store a 32 bit value into a memory image.
      * 
@@ -70,32 +83,31 @@ public class NXTFlashUpdate {
      * @param val
      *            The value to be stored.
      */
-    void storeWord(byte[] mem, int offset, final int val) {
-        mem[offset++] = (byte) (val & 0xff);
-        mem[offset++] = (byte) ((val >> 8) & 0xff);
-        mem[offset++] = (byte) ((val >> 16) & 0xff);
-        mem[offset++] = (byte) ((val >> 24) & 0xff);
+    void storeWord(final byte[] mem, final int offset, final int val) {
+        int offsetCopy = offset;
+        mem[offsetCopy++] = (byte) (val & BYTE_FILTER);
+        mem[offsetCopy++] = (byte) ((val >> SHIFT_8) & BYTE_FILTER);
+        mem[offsetCopy++] = (byte) ((val >> SHIFT_16) & BYTE_FILTER);
+        mem[offsetCopy++] = (byte) ((val >> SHIFT_24) & BYTE_FILTER);
     }
 
-    
-    
     /**
-     * Create the memory image ready to be flashed to the device. Load the
-     * firmware and menu images into memory ready for flashing.
+     * Create the memory image ready to be flashed to the device. Load the firmware and menu images
+     * into memory ready for flashing.
      * 
-     * @param vmPath Relative path to the leJOS VM firmware image in the KLOTS plugin jar file.
+     * @param vmPath
+     *            Relative path to the leJOS VM firmware image in the KLOTS plugin jar file.
      * @param menuPath
-     *               Relative path to the leJOS menu system firmware image in the KLOTS plugin jar file.
+     *            Relative path to the leJOS menu system firmware image in the KLOTS plugin jar
+     *            file.
      * @param klotsPath
-     *               Full path to the KLOTS plugin jar file.
-     * 
+     *            Full path to the KLOTS plugin jar file.
      * @return Memory image ready to be flashed to the device.
-     * 
-     * @throws IOException 
-     * @throws FileNotFoundException 
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public byte[] createFirmwareImage(final String vmPath, final String menuPath, final String klotsPath)
-    throws IOException, FileNotFoundException {
+    public byte[] createFirmwareImage(final String vmPath, final String menuPath,
+            final String klotsPath) throws IOException {
         ui.message("Building firmware image.");
         byte[] memoryImage = new byte[MAX_FIRMWARE_PAGES * NXTSamba.PAGE_SIZE];
         ui.message("VM file:   KLOTS plugin/" + vmPath);
@@ -107,26 +119,29 @@ public class NXTFlashUpdate {
         if (klotsPath.endsWith(".jar")) {
             vmLen = readBytesIntoArray(klotsPath, vmPath, memoryImage, 0);
             // Round up to page and use as base for the menu location
-            menuStart = ((vmLen + NXTSamba.PAGE_SIZE - 1) / NXTSamba.PAGE_SIZE) * NXTSamba.PAGE_SIZE;
+            menuStart = ((vmLen + NXTSamba.PAGE_SIZE - 1) / NXTSamba.PAGE_SIZE)
+                    * NXTSamba.PAGE_SIZE;
             // Read the menu. Note we may read less than the full size of the menu.
             // If so this will be caught by the overall size check below.
             menuLen = readBytesIntoArray(klotsPath, menuPath, memoryImage, menuStart);
-        // if this is a eclipse developer instance, so the firmware images are located in the file system
+            // if this is a eclipse developer instance, so the firmware images are located in the
+            // file system
         } else {
-            FileInputStream vm = new FileInputStream(
-                    klotsPath + System.getProperty("file.separator") + vmPath);
-            FileInputStream menu = new FileInputStream(
-                    klotsPath + System.getProperty("file.separator") + menuPath);
+            FileInputStream vm = new FileInputStream(klotsPath
+                    + System.getProperty("file.separator") + vmPath);
+            FileInputStream menu = new FileInputStream(klotsPath
+                    + System.getProperty("file.separator") + menuPath);
             vmLen = vm.read(memoryImage, 0, memoryImage.length);
             // Round up to page and use as base for the menu location
-            menuStart = ((vmLen + NXTSamba.PAGE_SIZE - 1) / NXTSamba.PAGE_SIZE) * NXTSamba.PAGE_SIZE;
+            menuStart = ((vmLen + NXTSamba.PAGE_SIZE - 1) / NXTSamba.PAGE_SIZE)
+                    * NXTSamba.PAGE_SIZE;
             // Read the menu. Note we may read less than the full size of the menu.
             // If so this will be caught by the overall size check below.
             menuLen = menu.read(memoryImage, menuStart, memoryImage.length - menuStart);
             vm.close();
             menu.close();
         }
-        
+
         // We store the length and location of the Menu in special locations
         // that are known to the firmware.
         storeWord(memoryImage, MENU_LENGTH_LOC, menuLen);
@@ -138,16 +153,15 @@ public class NXTFlashUpdate {
         }
         ui.message("VM size: " + vmLen + " bytes.");
         ui.message("Menu size: " + menuLen + " bytes.");
-        ui.message("Total image size " + (menuStart + menuLen) + "/" + memoryImage.length + " bytes.");
+        ui.message("Total image size " + (menuStart + menuLen) + "/" + memoryImage.length
+                + " bytes.");
         return memoryImage;
     }
 
-    
-    
     /**
-     * Create a memory image for the leJOS file system. We create an in memory
-     * image for the settings, and directory pages. We then fill the remainder
-     * of the space with a test pattern to help detect any flash memory problems
+     * Create a memory image for the leJOS file system. We create an in memory image for the
+     * settings, and directory pages. We then fill the remainder of the space with a test pattern to
+     * help detect any flash memory problems
      * 
      * @return byte array containing the file system data
      */
@@ -158,39 +172,38 @@ public class NXTFlashUpdate {
         // cleared to zero. After that we fill with a test pattern, to help
         // spot any flash problems
         int addr = (SETTINGS_PAGES + DIRECTORY_PAGES) * NXTSamba.PAGE_SIZE;
-        while (addr <= (fs.length - 32)) {
+        while (addr <= (fs.length - SIZE)) {
             storeWord(fs, addr, addr);
-            addr += 4;
+            addr += ADDRESS_LOC_ADDITION;
             storeWord(fs, addr, ~addr);
-            addr += 4;
-            storeWord(fs, addr, 0xf0f0f0f0);
-            addr += 4;
-            storeWord(fs, addr, 0x0f0f0f0f);
-            addr += 4;
-            storeWord(fs, addr, 0xaaaaaaaa);
-            addr += 4;
-            storeWord(fs, addr, 0x55555555);
-            addr += 4;
+            addr += ADDRESS_LOC_ADDITION;
+            storeWord(fs, addr, CMD_1);
+            addr += ADDRESS_LOC_ADDITION;
+            storeWord(fs, addr, CMD_2);
+            addr += ADDRESS_LOC_ADDITION;
+            storeWord(fs, addr, CMD_3);
+            addr += ADDRESS_LOC_ADDITION;
+            storeWord(fs, addr, CMD_4);
+            addr += ADDRESS_LOC_ADDITION;
             storeWord(fs, addr, 0x00000000);
-            addr += 4;
+            addr += ADDRESS_LOC_ADDITION;
             storeWord(fs, addr, 0xffffffff);
-            addr += 4;
+            addr += ADDRESS_LOC_ADDITION;
         }
         return fs;
     }
 
-    
-    
     /**
-     * Locate and open an nxt device in SAM-BA mode. If none are present wait up
-     * to timeout ms checking to see if one has become available.
+     * Locate and open an nxt device in SAM-BA mode. If none are present wait up to timeout ms
+     * checking to see if one has become available.
      * 
-     * @param timeout 
-     * 
-     * @return NXTSamba 
-     * 
-     * @throws NXTCommException 
-     * @throws IOException 
+     * @param timeout
+     *            the timeout
+     * @return NXTSamba
+     * @throws NXTCommException
+     *             the nXT comm exception
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     public NXTSamba openSambaDevice(final int timeout) throws NXTCommException, IOException {
         NXTSamba samba = new NXTSamba();
@@ -199,15 +212,16 @@ public class NXTFlashUpdate {
         // Look for devices in SAM-BA mode
         NXTInfo[] nxts = samba.search();
         if (nxts.length == 0) {
-            for (int i = 0; i < timeout / 1000; i++) {
+            for (int i = 0; i < timeout / SLEEP_TIME; i++) {
                 nxts = samba.search();
                 if (nxts.length > 0) {
                     break;
                 }
                 try {
-                    ui.progress("Searching", (i * 100) / (timeout / 1000));
-                    Thread.sleep(1000);
+                    ui.progress("Searching", (i * PAGE_SIZE) / (timeout / SLEEP_TIME));
+                    Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
+                    // ignore
                 }
             }
         }
@@ -225,15 +239,15 @@ public class NXTFlashUpdate {
         return samba;
     }
 
-    
-    
     /**
      * Attempt to restart the nxt in SAM-BA mode.
      * 
-     * @param nxt The device to reset
-     * 
+     * @param nxt
+     *            The device to reset
      * @throws NXTCommException
+     *             the nXT comm exception
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     public void resetDevice(final NXTInfo nxt) throws NXTCommException, IOException {
         ui.message("Attempting to reboot the device.");
@@ -247,23 +261,17 @@ public class NXTFlashUpdate {
         cmd.boot();
         cmd.close();
     }
-    
-    
-    
-    
+
     /**
-     * @param page 
-     * @return 
+     * @param page
+     * @return
      */
     private static int getPageAddr(final int page) {
-        return NXTSamba.FLASH_BASE + page * NXTSamba.PAGE_SIZE; 
+        return NXTSamba.FLASH_BASE + page * NXTSamba.PAGE_SIZE;
     }
 
-    
-    
     /**
-     * Verify that the contents of the nxt flash memory match the supplied
-     * image.
+     * Verify that the contents of the nxt flash memory match the supplied image.
      * 
      * @param nxt
      *            device to verify
@@ -271,33 +279,33 @@ public class NXTFlashUpdate {
      *            starting address
      * @param memoryImage
      *            memory address to compare with
-     * 
      * @return number of mismatched bytes found
-     * 
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public int verifyPages(final NXTSamba nxt, final int first, byte[] memoryImage) throws IOException {
+    public int verifyPages(final NXTSamba nxt, final int first, final byte[] memoryImage)
+            throws IOException {
         int failCnt = 0;
         int len = memoryImage.length;
         InputStream is = nxt.createInputStream(getPageAddr(first), len);
         try {
             int p = -1;
             for (int i = 0; i < len; i++) {
-                int np = i * 100 / len;
+                int np = i * PAGE_SIZE / len;
                 if (np > p) {
                     p = np;
                     ui.progress("Verifying", np);
                 }
-                
+
                 int b = is.read();
                 if (b < 0) {
                     throw new IOException("EOF came too soon");
                 }
-                
+
                 if ((byte) b != memoryImage[i]) {
                     ui.message(String.format(
-                        "Verify failed at address 0x%08X: expected 0x%02X, found 0x%02X\n",
-                        i,  memoryImage[i] & 0xff,  b));
+                            "Verify failed at address 0x%08X: expected 0x%02X, found 0x%02X\n", i,
+                            memoryImage[i] & BYTE_FILTER, b));
                     failCnt++;
                 }
             }
@@ -313,36 +321,37 @@ public class NXTFlashUpdate {
         return failCnt;
     }
 
-    
-    
-    
     /**
-     * @param nxt 
-     * @param first 
-     * @param memoryImage 
+     * Write pages.
      * 
-     * @throws IOException 
+     * @param nxt
+     *            the nxt
+     * @param first
+     *            the first
+     * @param memoryImage
+     *            the memory image
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public void writePages(final NXTSamba nxt, final int first, byte[] memoryImage) throws IOException {
+    public void writePages(final NXTSamba nxt, final int first, final byte[] memoryImage)
+            throws IOException {
         int pages = memoryImage.length / NXTSamba.PAGE_SIZE;
         int p = -1;
         for (int page = 0; page < pages; page++) {
-            int np = page * 100 / pages;
+            int np = page * PAGE_SIZE / pages;
             if (np > p) {
                 p = np;
                 ui.progress("Writing", np);
             }
-            nxt.writePage(first + page, memoryImage, page   * NXTSamba.PAGE_SIZE);
+            nxt.writePage(first + page, memoryImage, page * NXTSamba.PAGE_SIZE);
         }
-        
-        //workaround the problem, that verification and rebooting fails directly after write
+
+        // workaround the problem, that verification and rebooting fails directly after write
         nxt.readWord(getPageAddr(first));
 
         ui.progress("", 0);
     }
 
-    
-    
     /**
      * Update the NXT with the new memory image.
      * 
@@ -350,18 +359,16 @@ public class NXTFlashUpdate {
      *            Device to update, must be open in SAM-BA mode.
      * @param memoryImage
      *            New image for the device
-     * 
-     * @throws IOException 
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public void writeFirmware(final NXTSamba nxt, byte[] memoryImage) throws IOException {
+    public void writeFirmware(final NXTSamba nxt, final byte[] memoryImage) throws IOException {
         ui.message("Unlocking pages.");
         nxt.unlockAllPages();
         ui.message("Writing firmware image.");
         writePages(nxt, 0, memoryImage);
     }
 
-    
-    
     /**
      * Format the nxt file system.
      * 
@@ -370,16 +377,15 @@ public class NXTFlashUpdate {
      * @param fs
      *            File system image to use
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public void writeFilesystem(final NXTSamba nxt, byte[] fs) throws IOException {
+    public void writeFilesystem(final NXTSamba nxt, final byte[] fs) throws IOException {
         ui.message("Unlocking pages.");
         nxt.unlockAllPages();
         ui.message("Writing filesystem image.");
         writePages(nxt, MAX_FIRMWARE_PAGES, fs);
     }
 
-    
-    
     /**
      * Verify the firmware downloaded to the device.
      * 
@@ -389,34 +395,36 @@ public class NXTFlashUpdate {
      *            firmware image to compare against
      * @return the number of mismatched bytes.
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public int verifyFirmware(final NXTSamba nxt, byte[] image) throws IOException {
+    public int verifyFirmware(final NXTSamba nxt, final byte[] image) throws IOException {
         ui.message("Verifying firmware.");
         return verifyPages(nxt, 0, image);
     }
 
-    
-    
     /**
      * Verify the file system downloaded to the device.
      * 
      * @param nxt
      *            device to verify
-     * @param image
-     *            file system image to compare against
+     * @param fs
+     *            the fs
      * @return the number of mismatched bytes.
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public int verifyFilesystem(final NXTSamba nxt, byte[] fs) throws IOException {
+    public int verifyFilesystem(final NXTSamba nxt, final byte[] fs) throws IOException {
         ui.message("Verifying filesystem.");
         return verifyPages(nxt, MAX_FIRMWARE_PAGES, fs);
     }
 
-    
-    
     /**
-     * @param nxt 
-     * @throws IOException 
+     * Reboot device.
+     * 
+     * @param nxt
+     *            the nxt
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     public void rebootDevice(final NXTSamba nxt) throws IOException {
         ui.message("Restarting the device.");
@@ -424,8 +432,6 @@ public class NXTFlashUpdate {
         nxt.close();
     }
 
-    
-    
     /**
      * Update the NXT with the new memory image.
      * 
@@ -437,37 +443,28 @@ public class NXTFlashUpdate {
      *            File system image.
      * @param verify
      *            Should we verify the updates?
-     *            
-     * @throws IOException 
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
-    public void updateDevice(final NXTSamba nxt, byte[] memoryImage, byte[] fs, final boolean verify)
-    throws IOException {
+    public void updateDevice(final NXTSamba nxt, final byte[] memoryImage, final byte[] fs,
+            final boolean verify) throws IOException {
         updateDevice(nxt, memoryImage, fs, verify, verify, true);
     }
 
-    
-    
     /**
      * Update the NXT with the new memory image.
-     * 
-     * @param nxt
-     *            Device to update, must be open in SAM-BA mode.
-     * @param memoryImage
-     *            New firmware image for the device
-     * @param fs
-     *            File system image.
-     * @param verifyFirm
-     *            Should we verify the firmware updates?
-     * @param verifyFS
-     *            Should we verify the file system updates?
-     * @param reboot
-     *            Reboot after update.
-     *            
-     * @throws IOException 
+     *
+     * @param nxt Device to update, must be open in SAM-BA mode.
+     * @param memoryImage New firmware image for the device
+     * @param fs File system image.
+     * @param verifyFirm Should we verify the firmware updates?
+     * @param verifyFS Should we verify the file system updates?
+     * @param reboot Reboot after update.
+     * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void updateDevice(final NXTSamba nxt, byte[] memoryImage, byte[] fs,
-                             final boolean verifyFirm, final boolean verifyFS, final boolean reboot)
-    throws IOException {
+    public void updateDevice(final NXTSamba nxt, final byte[] memoryImage, final byte[] fs,
+            final boolean verifyFirm, final boolean verifyFS, final boolean reboot)
+            throws IOException {
         if (memoryImage != null) {
             writeFirmware(nxt, memoryImage);
             if (verifyFirm) {
@@ -484,18 +481,16 @@ public class NXTFlashUpdate {
             rebootDevice(nxt);
         }
     }
-    
-    
-    
+
     /**
-     * @param pathToJar 
-     * @param relativeFilePathInJar 
-     * @param memoryImage 
-     * @return int 
-     * @throws IOException 
+     * @param pathToJar
+     * @param relativeFilePathInJar
+     * @param memoryImage
+     * @return int
+     * @throws IOException
      */
     private int readBytesIntoArray(final String pathToJar, final String relativeFilePathInJar,
-                                   byte[] memoryImage, final int offset) throws IOException {
+            final byte[] memoryImage, final int offset) throws IOException {
         // open jar stream
         FileInputStream fin = null;
         JarInputStream jin = null;
@@ -522,5 +517,5 @@ public class NXTFlashUpdate {
         // return the number of total bytes read
         return imageLen;
     }
-    
+
 }

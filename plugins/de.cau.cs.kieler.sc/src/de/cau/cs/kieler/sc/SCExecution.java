@@ -37,8 +37,8 @@ import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
  */
 public class SCExecution {
 
-    private final String COMPILER_DEFAULT = "gcc";
-    private final String EXECUTABLE_PREFIX = "SC-GENERATED-EXECUTABLE-";
+    private static final String COMPILER_DEFAULT = "gcc";
+    private static final String EXECUTABLE_PREFIX = "SC-GENERATED-EXECUTABLE-";
 
     private Process executionProcess = null;
     private PrintWriter executionInterfaceToSC;
@@ -60,6 +60,7 @@ public class SCExecution {
      * Instantiates a new SCExecution with a random outputPath.
      * 
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     public SCExecution() throws IOException {
         setCompiler(COMPILER_DEFAULT);
@@ -70,8 +71,11 @@ public class SCExecution {
 
     /**
      * Instantiates a new SCExecution with a concrete outputPath.
+     * 
+     * @param outputPath
+     *            the output path
      */
-    public SCExecution(String outputPath) {
+    public SCExecution(final String outputPath) {
         setCompiler(COMPILER_DEFAULT);
         setCompiled(false);
         setStarted(false);
@@ -89,7 +93,7 @@ public class SCExecution {
      * 
      * {@inheritDoc}
      */
-    public void compile(List<String> filePaths) throws IOException, InterruptedException {
+    public void compile(final List<String> filePaths) throws IOException, InterruptedException {
         // reset successful compiled flag
         setCompiled(false);
         // choose a random name for the compiled executable
@@ -104,6 +108,9 @@ public class SCExecution {
             url = FileLocator.toFileURL(FileLocator.find(bundle, new Path("sc"), null));
         } catch (IOException e2) {
             e2.printStackTrace();
+        }
+        if (url == null) {
+            return;
         }
         String bundleLocation = url.getFile();
 
@@ -122,9 +129,11 @@ public class SCExecution {
         try {
             String compile = compiler;
 
+            StringBuffer compileBuf = new StringBuffer();
             for (String filePath : filePaths) {
-                compile = compile + " " + filePath;
+                compileBuf.append(" " + filePath);
             }
+            compile += compileBuf.toString();
 
             compile += " "
                     // + outPath
@@ -175,6 +184,7 @@ public class SCExecution {
             while ((line = br.readLine()) != null) {
                 setCompileError(getCompileError() + "\n" + line);
             }
+            br.close();
 
             // TODO: -D_SC_SUPPRESS_ERROR_DETECT: error messages detecting
             // (use own buffer)
@@ -184,11 +194,10 @@ public class SCExecution {
             File file = new File(outputPath + getExecutableName());
             if (!file.exists()) {
                 if (exitValue != 0) {
-                    throw new IOException(
-                            "Could not compile the generated C code ("
-                                    + exitValue
-                                    + ").\nCheck that the path to your Workspace/Eclipse installation does not contain any white spaces.\n\n"
-                                    + getCompileError());
+                    throw new IOException("Could not compile the generated C code (" + exitValue
+                            + ").\nCheck that the path to your Workspace/Eclipse"
+                            + " installation does not contain any white spaces.\n\n"
+                            + getCompileError());
                 }
             }
 
@@ -269,13 +278,10 @@ public class SCExecution {
         // destroy process
         executionProcess.destroy();
 
-        // delete temp folder
+        // (try to) delete temp folder
         File folder = new File(outputPath);
         if (folder.getAbsolutePath().contains(System.getProperty("java.io.tmpdir"))) {
-            boolean folderDeleted = KiemUtil.deleteFolder(folder);
-//            if (!folderDeleted) {
-//                System.err.println("error while deleting temp folder: " + folder);
-//            }
+            KiemUtil.deleteFolder(folder);
         }
     }
 
@@ -287,9 +293,11 @@ public class SCExecution {
      * @param executableName
      *            the new executable name
      */
-    public void setExecutableName(String executableName) {
+    public void setExecutableName(final String executableName) {
         this.executableName = executableName;
     }
+
+    // -------------------------------------------------------------------------
 
     /**
      * Gets the executable name.
@@ -311,13 +319,15 @@ public class SCExecution {
         return compiler;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the compiler.
      * 
      * @param compiler
      *            the new compiler
      */
-    public void setCompiler(String compiler) {
+    public void setCompiler(final String compiler) {
         this.compiler = compiler;
     }
 
@@ -332,13 +342,15 @@ public class SCExecution {
         return outputPath;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the output path.
      * 
      * @param outputPath
      *            the new output path
      */
-    public void setOutputPath(String outputPath) {
+    public void setOutputPath(final String outputPath) {
         this.outputPath = outputPath;
     }
 
@@ -353,13 +365,15 @@ public class SCExecution {
         return executionInterfaceToSC;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the execution interface to sc.
      * 
      * @param toSC
      *            the new execution interface to sc
      */
-    private void setExecutionInterfaceToSC(PrintWriter toSC) {
+    private void setExecutionInterfaceToSC(final PrintWriter toSC) {
         this.executionInterfaceToSC = toSC;
     }
 
@@ -374,13 +388,15 @@ public class SCExecution {
         return executionInterfaceFromSC;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the execution interface from sc.
      * 
      * @param fromSC
      *            the new execution interface from sc
      */
-    private void setExecutionInterfaceFromSC(BufferedReader fromSC) {
+    private void setExecutionInterfaceFromSC(final BufferedReader fromSC) {
         this.executionInterfaceFromSC = fromSC;
     }
 
@@ -395,13 +411,15 @@ public class SCExecution {
         return executionInterfaceError;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the execution interface error.
      * 
      * @param error
      *            the new execution interface error
      */
-    private void setExecutionInterfaceError(BufferedReader error) {
+    private void setExecutionInterfaceError(final BufferedReader error) {
         this.executionInterfaceError = error;
     }
 
@@ -416,13 +434,15 @@ public class SCExecution {
         return compileError;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the compile error.
      * 
      * @param compileError
      *            the new compile error
      */
-    private void setCompileError(String compileError) {
+    private void setCompileError(final String compileError) {
         this.compileError = compileError;
     }
 
@@ -437,13 +457,15 @@ public class SCExecution {
         return started;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the started.
      * 
      * @param started
      *            the new started
      */
-    private void setStarted(boolean started) {
+    private void setStarted(final boolean started) {
         this.started = started;
     }
 
@@ -458,13 +480,15 @@ public class SCExecution {
         return compiled;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * Sets the compiled.
      * 
      * @param compiled
      *            the new compiled
      */
-    private void setCompiled(boolean compiled) {
+    private void setCompiled(final boolean compiled) {
         this.compiled = compiled;
     }
 

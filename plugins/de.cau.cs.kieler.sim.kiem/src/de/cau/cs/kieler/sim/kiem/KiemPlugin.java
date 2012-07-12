@@ -1468,8 +1468,7 @@ public class KiemPlugin extends AbstractUIPlugin {
      * @param message
      *            the message to present
      */
-    @SuppressWarnings("unused")
-    private void showError(final String message) {
+    public void showError(final String message) {
         if (parentShell != null) {
             MessageDialog.openError(parentShell, Messages.mViewTitle, message);
         } else {

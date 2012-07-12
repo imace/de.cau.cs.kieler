@@ -1,5 +1,3 @@
-package de.cau.cs.kieler.synccharts.codegen.sc;
-
 /*
  * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
  *
@@ -13,6 +11,7 @@ package de.cau.cs.kieler.synccharts.codegen.sc;
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
+package de.cau.cs.kieler.synccharts.codegen.sc;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,22 +34,11 @@ import de.cau.cs.kieler.synccharts.State;
 import de.cau.cs.kieler.synccharts.StateType;
 import de.cau.cs.kieler.synccharts.Transition;
 import de.cau.cs.kieler.synccharts.TransitionType;
-import de.cau.cs.kieler.synccharts.codegen.sc.CompareTransitions;
-import de.cau.cs.kieler.synccharts.codegen.sc.Dependency;
-import de.cau.cs.kieler.synccharts.codegen.sc.Graph;
-import de.cau.cs.kieler.synccharts.codegen.sc.StateAndSignals;
-import de.cau.cs.kieler.synccharts.codegen.sc.StatePlusTransition;
 
 /**
  * The Helper class provides some helping functions for the generation of code.
  * 
- * @kieler.rating 2010-06-14 proposed yellow
- * 
  * @author tam
- * 
- *         TODO: Discuss the usage of classes with just static variables (thread
- *         unsafe).
- * 
  */
 public final class Helper {
 

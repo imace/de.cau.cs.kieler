@@ -43,7 +43,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**

@@ -15,13 +15,11 @@
 package de.cau.cs.kieler.sim.kiem.ui.datacomponent;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -29,7 +27,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
@@ -39,8 +36,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.json.JSONObject;
 
-import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
-import de.cau.cs.kieler.core.util.Maybe;
+import de.cau.cs.kieler.core.ui.ProgressMonitorAdapter;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
@@ -51,6 +47,7 @@ import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeModel;
 import de.cau.cs.kieler.sim.kiem.util.KiemUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class JSONObjectDataComponent. Implementation for the extension point JSONObjectDataComponent
  * that implements the interface {@link IJSONObjectDataComponent}.
@@ -65,8 +62,14 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
     /** The properties added by this super-component shift all sub components properties by one. */
     protected static final int KIEM_PROPERTY_DIFF = 1;
 
+    /** The Constant TOTAL_WORK for the progress monitor. */
+    protected static final int TOTAL_WORK = 4;
+
     /** The Constant for the name of the KIEM property model file selection. */
     public static final String KIEM_PROPERTY_MODEFILE = "Model File";
+
+    /** Time to wait for the model transformation to be completed. */
+    public static final int SLEEP_TIME = 50;
 
     /** The transformation completed flag. */
     private boolean transformationCompleted;
@@ -75,7 +78,7 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
     private boolean transformationError;
 
     /** The initialization exception that can be possibly thrown. */
-    protected Exception exception;
+    private Exception exception;
 
     /** The model time stamp. */
     private long modelTimeStamp;
@@ -140,61 +143,113 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
 
     // -----------------------------------------------------------------------------
     // -----------------------------------------------------------------------------
-    protected class M2MProgressMonitor implements ProgressMonitor {
+    /**
+     * The Class M2MProgressMonitor.
+     */
+    protected static class M2MProgressMonitor implements ProgressMonitor {
 
-        private KielerProgressMonitor kielerProgressMonitor;
+        /** The kieler progress monitor. */
+        private ProgressMonitorAdapter kielerProgressMonitor;
+        
+        /** The number of components. */
         private int numberOfComponents = 1;
+        
+        /** The number of components done. */
         private int numberOfComponentsDone = 0;
 
-        public M2MProgressMonitor(KielerProgressMonitor kielerProgressMonitorParam,
-                int numberOfComponentsParam) {
+        /**
+         * Instantiates a new m2 m progress monitor.
+         * 
+         * @param kielerProgressMonitorParam
+         *            the kieler progress monitor param
+         * @param numberOfComponentsParam
+         *            the number of components param
+         */
+        public M2MProgressMonitor(final ProgressMonitorAdapter kielerProgressMonitorParam,
+                final int numberOfComponentsParam) {
             kielerProgressMonitor = kielerProgressMonitorParam;
             numberOfComponents = numberOfComponentsParam;
             numberOfComponentsDone = 0;
         }
 
-        public void beginTask(String name, int totalWork) {
+        /**
+         * {@inheritDoc}
+         */
+        public void beginTask(final String name, final int totalWork) {
             kielerProgressMonitor.begin(name, numberOfComponents);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         public void done() {
             // is called by the workflow wrapper
         }
 
-        public void finished(Object element, Object context) {
+        /**
+         * {@inheritDoc}
+         */
+        public void finished(final Object element, final Object context) {
         }
 
-        public void internalWorked(double work) {
+        /**
+         * {@inheritDoc}
+         */
+        public void internalWorked(final double work) {
         }
 
+        /**
+         * {@inheritDoc}
+         */
         public boolean isCanceled() {
             return (kielerProgressMonitor.isCanceled());
         }
 
-        public void postTask(Object element, Object context) {
+        /**
+         * {@inheritDoc}
+         */
+        public void postTask(final Object element, final Object context) {
             kielerProgressMonitor.worked(numberOfComponentsDone);
             numberOfComponentsDone++;
         }
 
-        public void preTask(Object element, Object context) {
+        /**
+         * {@inheritDoc}
+         */
+        public void preTask(final Object element, final Object context) {
             // kielerProgressMonitor.begin(element.toString(), 1);
             kielerProgressMonitor.worked(numberOfComponentsDone);
         }
 
-        public void setCanceled(boolean value) {
+        /**
+         * {@inheritDoc}
+         */
+        public void setCanceled(final boolean value) {
         }
 
-        public void setTaskName(String name) {
+        /**
+         * {@inheritDoc}
+         */
+        public void setTaskName(final String name) {
         }
 
-        public void started(Object element, Object context) {
+        /**
+         * {@inheritDoc}
+         */
+        public void started(final Object element, final Object context) {
         }
 
-        public void subTask(String name) {
+        /**
+         * {@inheritDoc}
+         */
+        public void subTask(final String name) {
             kielerProgressMonitor.subTask(UNKNOWN);
         }
 
-        public void worked(int work) {
+        /**
+         * {@inheritDoc}
+         */
+        public void worked(final int work) {
             kielerProgressMonitor.worked(work);
         }
 
@@ -211,7 +266,7 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
      * @throws Exception
      *             the exception
      */
-    public void doModel2ModelTransform(KielerProgressMonitor monitor) throws Exception {
+    public void doModel2ModelTransform(final ProgressMonitorAdapter monitor) throws Exception {
         // not implemented
     }
 
@@ -221,17 +276,15 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
      * Performs the model 2 model transformation and handles exceptions <BR>
      * This transformation uses the Xtend transformation language.
      * 
-     * @param progressBar
-     *            if true a progress bar is displayed
-     * 
+     * @param monitor
+     *            the monitor
      * @return true, if m2m transformation was successful
-     * 
      * @throws KiemInitializationException
      *             the kiem initialization exception
      */
-    private final IStatus model2ModelTransform(KielerProgressMonitor monitor)
+    private IStatus model2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
-        monitor.begin("Model2Model transformation", 4);
+        monitor.begin("Model2Model transformation", TOTAL_WORK);
         try {
             doModel2ModelTransform(monitor);
         } catch (Exception e) {
@@ -259,7 +312,7 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
      * @throws KiemExecutionException
      *             the kiem execution exception
      */
-    public JSONObject doStep(JSONObject jSONObject) throws KiemExecutionException {
+    public JSONObject doStep(final JSONObject jSONObject) throws KiemExecutionException {
         return null;
     }
 
@@ -268,9 +321,9 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
     /**
      * {@inheritDoc}
      */
-    public final JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
+    public final JSONObject step(final JSONObject jSONObject) throws KiemExecutionException {
         // If an opened EMF model editor is involved, check the timestamp
-        if (this.getModelRootElement() != null) {
+        if (this.getModelRootElement() != null && getModelRootElement().eResource() != null) {
             try {
                 long newModelTimeStamp = getModelRootElement().eResource().getTimeStamp();
                 // check the dirty state of the editor containing the simulated
@@ -307,9 +360,14 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
      * int serenity = diagnostic.getSeverity(); <BR>
      * return (serenity == Diagnostic.OK); <BR>
      * 
+     * @param rootEObject
+     *            the root e object
      * @return true, if successful
+     * @throws KiemInitializationException
+     *             the kiem initialization exception
      */
-    public boolean checkModelValidation(EObject rootEObject) throws KiemInitializationException {
+    public boolean checkModelValidation(final EObject rootEObject)
+            throws KiemInitializationException {
         return true;
     }
 
@@ -421,8 +479,15 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
 
     // -------------------------------------------------------------------------
 
-    int askForModelErrorReturnValue = 0;
+    /** The ask for model error return value. */
+    private int askForModelErrorReturnValue = 0;
 
+    /**
+     * Ask for model error.
+     *
+     * @return true, if successful
+     * @throws KiemInitializationException the kiem initialization exception
+     */
     private boolean askForModelError() throws KiemInitializationException {
         Display.getDefault().syncExec(new Runnable() {
             public void run() {
@@ -430,17 +495,13 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
 
                 String[] buttons = { "Yes", "No", "Cancel" };
 
-                MessageDialog dlg = new MessageDialog(
-                        shell,
-                        "Errors or Warnings exist",
-                        null,
-                        "'"
-                                + getModelEditor().getEditorInput().getName()
-                                + "'"
-                                + " contains unsolved problems. Please check the Eclipse Problems View to fix these"
-                                + ".\n\nNote that while errors or simulation warnings exist, the"
-                                + " execution of the model is rather unpredictable.\n\nDo you still want to continue?",
-                        MessageDialog.QUESTION, buttons, 0);
+                MessageDialog dlg = new MessageDialog(shell, "Errors or Warnings exist", null, "'"
+                        + getModelEditor().getEditorInput().getName() + "'"
+                        + " contains unsolved problems. Please check the Eclipse "
+                        + "Problems View to fix these"
+                        + ".\n\nNote that while errors or simulation warnings exist, the"
+                        + " execution of the model is rather unpredictable.\n\n"
+                        + "Do you still want to continue?", MessageDialog.QUESTION, buttons, 0);
 
                 askForModelErrorReturnValue = 2;
                 try {
@@ -462,11 +523,14 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
 
     // -------------------------------------------------------------------------
 
+    /**
+     * {@inheritDoc}
+     */
     public final JSONObject provideInitialVariables() throws KiemInitializationException {
-        JSONObject returnObj = new JSONObject();
+        JSONObject returnObj = null;
 
         // Do validation only for (opened) EMF editors
-        if (this.getModelRootElement() != null) {
+        if (this.getModelEditor() != null) {
             // Check if the model conforms to all check files and no warnings left!
             EObject rootEObject = this.getModelRootElement();
             boolean ok = checkModelValidation(rootEObject);
@@ -486,63 +550,75 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
             performModelTransformation();
             // then do the provide initial variables
             returnObj = doProvideInitialVariables();
+            return returnObj;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new KiemInitializationException("Model could not be generated\n\n"
                     + "Please ensure that all simulation warnings in the "
                     + "respective Eclipse Problems View have been cleared.\n\n", true, e);
         }
-        return returnObj;
     }
 
     // -------------------------------------------------------------------------
 
-    private final boolean performModelTransformation() throws KiemInitializationException {
+    /**
+     * Perform model transformation.
+     * 
+     * @return true, if successful
+     * @throws KiemInitializationException
+     *             the kiem initialization exception
+     */
+    private boolean performModelTransformation() throws KiemInitializationException {
         transformationCompleted = false;
         transformationError = false;
         exception = null;
 
-        if (KiemUtil.isHeadlessRun()) {
+// Problem: 26.06.2012
+// 1. Strange Blocking (Deadlock) when running regression tests with UI, non-headless
+// 2. Popup of progress monitor needs much longer than the actual transformation for
+//    small models
+// Removed this code for now.        
+        
+//        if (KiemUtil.isHeadlessRun()) {
             // headless run - sequential in current thread
-            model2ModelTransform(new KielerProgressMonitor(
-                    new NullProgressMonitor()));
-        } else {
-            // normal run - concurrent to UI thread
-            Display.getDefault().asyncExec(new Runnable() {
-                public void run() {
-
-                    final Maybe<IStatus> status = new Maybe<IStatus>();
-                    try {
-                        PlatformUI.getWorkbench().getProgressService()
-                                .run(false, false, new IRunnableWithProgress() {
-                                    public void run(final IProgressMonitor monitor) {
-                                        try {
-                                            status.set(model2ModelTransform(new KielerProgressMonitor(
-                                                    monitor)));
-                                        } catch (KiemInitializationException e) {
-                                            transformationError = true;
-                                            exception = e;
-                                        }
-                                    }
-                                });
-                    } catch (InvocationTargetException e) {
-                        transformationError = true;
-                        exception = e;
-                    } catch (InterruptedException e) {
-                        transformationError = true;
-                        exception = e;
-                    }
-                }
-            });
-
-            // wait until error or transformation completed
-            while (!transformationCompleted && !transformationError) {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) { /* hide sleep error */
-                }
-            }// end while
-        } // end if NOT headless
-
+            model2ModelTransform(new ProgressMonitorAdapter(new NullProgressMonitor()));
+//        } else {
+//            // normal run - concurrent to UI thread
+//            Display.getDefault().asyncExec(new Runnable() {
+//                public void run() {
+//                    final Maybe<IStatus> status = new Maybe<IStatus>();
+//                    try {
+//                        PlatformUI.getWorkbench().getProgressService()
+//                                .run(true, true, new IRunnableWithProgress() {
+//                                    public void run(final IProgressMonitor monitor) {
+//                                        try {
+//                                            status.set(model2ModelTransform(new ProgressMonitorAdapter(
+//                                                    monitor)));
+//                                        } catch (KiemInitializationException e) {
+//                                            transformationError = true;
+//                                            exception = e;
+//                                        }
+//                                    }
+//                                });
+//                    } catch (InvocationTargetException e) {
+//                        transformationError = true;
+//                        exception = e;
+//                    } catch (InterruptedException e) {
+//                        transformationError = true;
+//                        exception = e;
+//                    }
+//                }
+//            });
+//
+//            // wait until error or transformation completed
+//            while (!transformationCompleted && !transformationError) {
+//                try {
+//                    Thread.sleep(SLEEP_TIME);
+//                } catch (InterruptedException e) { 
+//                    // hide sleep error
+//                }
+//            } // end while
+//        } // end if NOT headless
 
         if (transformationError) {
             if (exception instanceof KiemInitializationException) {
@@ -551,7 +627,7 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
                 exception.printStackTrace();
             }
             return false;
-        }// end if
+        } // end if
         return true;
     }
 
@@ -652,7 +728,8 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
 
     // -------------------------------------------------------------------------
 
-    int askForModelIsSavedReturnValue = 0;
+    /** The ask for model is saved return value. */
+    private int askForModelIsSavedReturnValue = 0;
 
     /**
      * Ask for model is saved. Only ask if there is an opened editor to the selected model.
@@ -700,7 +777,7 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
      * {@inheritDoc}
      */
     @Override
-    public void checkProperties(KiemProperty[] properties) throws KiemPropertyException {
+    public void checkProperties(final KiemProperty[] properties) throws KiemPropertyException {
         IEditorPart modelEditor = getModelEditor();
 
         // if NOT the active editor is selected but a different file check whether the file exists
@@ -753,9 +830,10 @@ public abstract class JSONObjectSimulationDataComponent extends JSONObjectDataCo
             }
         } else if (modelEditor != null) {
             // not dirty
-            if (getModelRootElement() != null) {
+            EObject modelRootElement = getModelRootElement();
+            if (modelRootElement != null && modelRootElement.eResource() != null) {
                 // if this is an EMF editor, grab the time stamp
-                modelTimeStamp = getModelRootElement().eResource().getTimeStamp();
+                modelTimeStamp = modelRootElement.eResource().getTimeStamp();
                 simulatingOldModelVersion = false;
             }
         }

@@ -49,30 +49,37 @@ import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
  * @kieler.rating 2012-01-24 red
  */
 public class KartProxyEditor extends MultiPageEditorPart {
-    IEditorInput editorInput;
+
+    /** The editor input. */
+    private IEditorInput editorInput;
 
     /** The id of the view for KIEM. */
     private static final String KIEMVIEWID = "de.cau.cs.kieler.sim.kiem.view";
 
+    // -------------------------------------------------------------------------
+
     /**
      * Instead of opening up a real editor, load a new schedule in KIEM and modify the properties of
      * the KART Replay component to set the opened file as the ESO file property.
+     * 
+     * @param editorSite
+     *            the editor site
+     * @param editorInputParam
+     *            the editor input
+     * @throws PartInitException
+     *             the part init exception
      */
     @Override
-    public void init(IEditorSite editorSite, IEditorInput editorInput) throws PartInitException {
-        super.init(editorSite, editorInput);
+    public void init(final IEditorSite editorSite, final IEditorInput editorInputParam)
+            throws PartInitException {
+        super.init(editorSite, editorInputParam);
 
-        this.editorInput = editorInput;
+        this.editorInput = editorInputParam;
 
         // bring KIEM view to the front (lazy loading)
-        try {
-            IWorkbenchWindow window = this.getSite().getWorkbenchWindow();
-            IViewPart vP = window.getActivePage().showView(KIEMVIEWID);
-            vP.setFocus();
-        } catch (Exception e) {
-            // do nothing, let it stay in the background
-            // this normally only happens during startup
-        }
+        IWorkbenchWindow window = this.getSite().getWorkbenchWindow();
+        IViewPart vP = window.getActivePage().showView(KIEMVIEWID);
+        vP.setFocus();
 
         boolean suc = updateProperty();
 
@@ -95,6 +102,8 @@ public class KartProxyEditor extends MultiPageEditorPart {
 
         this.closeEditor();
     }
+
+    // -------------------------------------------------------------------------
 
     /**
      * Update the ESO file property of the Replay component to reflect the "opened" ESO file.
@@ -128,8 +137,10 @@ public class KartProxyEditor extends MultiPageEditorPart {
         return success;
     }
 
+    // -------------------------------------------------------------------------
+
     /**
-     * Create just an empty fake page {@inheritDoc}
+     * Create just an empty fake page {@inheritDoc}.
      */
     @Override
     protected void createPages() {
@@ -141,34 +152,36 @@ public class KartProxyEditor extends MultiPageEditorPart {
         setPageText(index, " ");
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * This allows asynchronous closing of this fake editor.
      */
     public void closeEditor() {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
-                try {
-                    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-                    IWorkbenchPage page = window.getActivePage();
-                    IEditorPart editor = page.findEditor(editorInput);
-                    if (editor != null) {
-                        // page.activate(editor);
-                        page.closeEditor(editor, false);
-                    }
-                } catch (Exception e) {
-                    // In an unlikely case of an error leave the editor open//
+                IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+                IWorkbenchPage page = window.getActivePage();
+                IEditorPart editor = page.findEditor(editorInput);
+                if (editor != null) {
+                    // page.activate(editor);
+                    page.closeEditor(editor, false);
                 }
             }
         });
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public void doSave(IProgressMonitor monitor) {
+    public void doSave(final IProgressMonitor monitor) {
         // not implemented, PROXY editor only!
     }
+
+    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -178,6 +191,8 @@ public class KartProxyEditor extends MultiPageEditorPart {
         // not implemented, PROXY editor only!
     }
 
+    // -------------------------------------------------------------------------
+
     /**
      * {@inheritDoc}
      */
@@ -186,5 +201,7 @@ public class KartProxyEditor extends MultiPageEditorPart {
         // not implemented, PROXY editor only!
         return false;
     }
+
+    // -------------------------------------------------------------------------
 
 }
