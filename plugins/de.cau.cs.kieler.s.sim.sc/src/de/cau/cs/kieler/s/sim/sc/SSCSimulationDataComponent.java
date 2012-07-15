@@ -53,7 +53,7 @@ import de.cau.cs.kieler.sim.signals.JSONSignalValues;
  * 
  * @author cmot
  */
-public class SimulationDataComponent extends JSONObjectSimulationDataComponent implements
+public class SSCSimulationDataComponent extends JSONObjectSimulationDataComponent implements
         IJSONObjectDataComponent {
 
     /** The S program is the considered model to simulate. */
@@ -132,6 +132,9 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
                         boolean sSignalIsPresent = JSONSignalValues.isPresent(sSignalOutput
                                 .getJSONObject(sSignalOutputName));
 
+//                        returnObj.accumulate(sSignalOutputName, sSignalOutput
+//                                .getJSONObject(sSignalOutputName));
+                        
                         // Test if the output variable is an auxiliary signal
                         // that is only there to mark the current S statement
                         // in full_simulation mode of the simulator.
@@ -152,6 +155,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
 
                             } catch (Exception e) {
                                 // ignore error
+                                e.printStackTrace();
                             }
 
                         }
@@ -255,13 +259,23 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
      */
     public void doModel2ModelTransform(final ProgressMonitorAdapter monitor)
             throws KiemInitializationException {
+        // get active editor
+        doModel2ModelTransform(monitor, (Program) this.getModelRootElement(),
+                this.getProperties()[KIEM_PROPERTY_FULLDEBUGMODE].getValueAsBoolean());
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * {@inheritDoc}
+     */
+    public void doModel2ModelTransform(final ProgressMonitorAdapter monitor, final Program model,
+            final boolean debug) throws KiemInitializationException {
+        this.myModel = model;
         monitor.begin("S Simulation", NUMBER_OF_TASKS);
 
         String compile = "";
-
         try {
-            // get active editor
-            myModel = (Program) this.getModelRootElement();
 
             if (myModel == null) {
                 throw new KiemInitializationException(
@@ -280,7 +294,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             URI sOutput = URI.createURI("");
             URI scOutput = URI.createURI("");
             // By default there is no additional transformation necessary
-            Program transformedProgram =  myModel;
+            Program transformedProgram = myModel;
 
             // Calculate output path for possible S-m2m
             // FileEditorInput editorInput = (FileEditorInput) editorPart.getEditorInput();
@@ -292,7 +306,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
             // also states visualized.
             // Hence some pre-processing is needed and done by the
             // Esterl2Simulation Xtend2 model transformation
-            if (this.getProperties()[KIEM_PROPERTY_FULLDEBUGMODE].getValueAsBoolean()) {
+            if (debug) {
                 // Try to load SyncCharts model
                 // 'Full Debug Mode' is turned ON
                 S2Simulation transform = Guice.createInjector().getInstance(S2Simulation.class);
@@ -302,7 +316,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
                 // and pass this new file to the SC simulation instead.
                 sOutput = sOutput.trimFragment();
                 sOutput = sOutput.trimFileExtension().appendFileExtension("simulation.s");
-                
+
                 try {
                     // Write out copy/transformation of S program
                     Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
@@ -315,7 +329,7 @@ public class SimulationDataComponent extends JSONObjectSimulationDataComponent i
                 } catch (IOException e) {
                     throw new KiemInitializationException("Cannot write output S file.", true, null);
                 }
-            } 
+            }
 
             // Calculate output path for SC-m2t
             scOutput = URI.createURI(input.toString());

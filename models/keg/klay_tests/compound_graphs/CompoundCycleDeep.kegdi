@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_GlK2EOqgEeC-AY_WtBlTjw" type="Graphs" name="CompoundCycleDeep.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_P2TqQOqgEeC-AY_WtBlTjw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_P2URUOqgEeC-AY_WtBlTjw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_P2URUeqgEeC-AY_WtBlTjw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_TTQSQOqgEeC-AY_WtBlTjw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TTQSROqgEeC-AY_WtBlTjw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_TTQSReqgEeC-AY_WtBlTjw" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_YdlCEOqgEeC-AY_WtBlTjw" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_YdlpI-qgEeC-AY_WtBlTjw" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_YdlpJOqgEeC-AY_WtBlTjw" type="7002"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_YdlpIOqgEeC-AY_WtBlTjw"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_YdlpIeqgEeC-AY_WtBlTjw" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.0/@children.0/@children.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YdlpIuqgEeC-AY_WtBlTjw" x="41" y="10" width="40" height="40"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_r0z8gOqgEeC-AY_WtBlTjw" type="3001">
+            <children xmi:type="notation:DecorationNode" xmi:id="_r00jkOqgEeC-AY_WtBlTjw" type="5002"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_r00jkeqgEeC-AY_WtBlTjw" type="7002"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_r0z8geqgEeC-AY_WtBlTjw"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_r0z8guqgEeC-AY_WtBlTjw" fontName="Sans"/>
+            <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.0/@children.0/@children.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_r0z8g-qgEeC-AY_WtBlTjw" x="41" y="70" width="40" height="40"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_TTQSQeqgEeC-AY_WtBlTjw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_TTQSQuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+        <styles xmi:type="notation:StringValueStyle" xmi:id="_kel4MFdREeGR3YmVBoXGSg" name="layout:de.cau.cs.kieler.borderSpacing" stringValue="1.0"/>
+        <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TTQSQ-qgEeC-AY_WtBlTjw" x="21" y="10" width="162" height="211"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_P2TqQeqgEeC-AY_WtBlTjw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_P2TqQuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_hRzMEFdREeGR3YmVBoXGSg" name="layout:de.cau.cs.kieler.borderSpacing" stringValue="1.0"/>
+    <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_P2TqQ-qgEeC-AY_WtBlTjw" x="202" y="20" width="264" height="294"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_QRysYOqgEeC-AY_WtBlTjw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_QRzTcOqgEeC-AY_WtBlTjw" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_QRzTceqgEeC-AY_WtBlTjw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_bcTdAOqgEeC-AY_WtBlTjw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bcUEEeqgEeC-AY_WtBlTjw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_bcUEEuqgEeC-AY_WtBlTjw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_bcTdAeqgEeC-AY_WtBlTjw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_bcTdAuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.1/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bcUEEOqgEeC-AY_WtBlTjw" x="21" y="23" width="40" height="40"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_c6c2AOqgEeC-AY_WtBlTjw" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_c6ddEOqgEeC-AY_WtBlTjw" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_c6ddEeqgEeC-AY_WtBlTjw" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_c6c2AeqgEeC-AY_WtBlTjw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_c6c2AuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.1/@children.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_c6c2A-qgEeC-AY_WtBlTjw" x="21" y="83" width="40" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_QRysYeqgEeC-AY_WtBlTjw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_QRysYuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_mrPV8FdREeGR3YmVBoXGSg" name="layout:de.cau.cs.kieler.borderSpacing" stringValue="1.0"/>
+    <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QRysY-qgEeC-AY_WtBlTjw" x="20" y="48" width="162" height="195"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_GlK2EeqgEeC-AY_WtBlTjw"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_I_m4MOqgEeC-AY_WtBlTjw" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_KMQRgOqgEeC-AY_WtBlTjw" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_LKCvcOqgEeC-AY_WtBlTjw" name="layout:de.cau.cs.kieler.klay.layered.separateConnComp" stringValue="false"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_L99fsOqgEeC-AY_WtBlTjw" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_UHRqMPmIEeC9kYT9W0pRCQ" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_udiNkFdREeGR3YmVBoXGSg" name="layout:de.cau.cs.kieler.klay.layered.thoroughness" stringValue="5000"/>
+  <element xmi:type="keg:Node" href="CompoundCycleDeep.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_d3P1cOqgEeC-AY_WtBlTjw" type="4001" source="_YdlCEOqgEeC-AY_WtBlTjw" target="_bcTdAOqgEeC-AY_WtBlTjw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_d3QcgOqgEeC-AY_WtBlTjw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_d3QcgeqgEeC-AY_WtBlTjw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_d3QcguqgEeC-AY_WtBlTjw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_d3Qcg-qgEeC-AY_WtBlTjw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_d3QchOqgEeC-AY_WtBlTjw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_d3RDkOqgEeC-AY_WtBlTjw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_d3P1ceqgEeC-AY_WtBlTjw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_d3P1cuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="CompoundCycleDeep.keg#//@children.0/@children.0/@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_d3P1c-qgEeC-AY_WtBlTjw" points="[0, 0, 213, 0]$[-213, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_d3VVAOqgEeC-AY_WtBlTjw" id="(0.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_sgB_EFdREeGR3YmVBoXGSg" id="(1.0,0.4999998569488525)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_szd9IOqgEeC-AY_WtBlTjw" type="4001" source="_c6c2AOqgEeC-AY_WtBlTjw" target="_r0z8gOqgEeC-AY_WtBlTjw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_szekMOqgEeC-AY_WtBlTjw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_szekMeqgEeC-AY_WtBlTjw" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_szekMuqgEeC-AY_WtBlTjw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_szekM-qgEeC-AY_WtBlTjw" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_szekNOqgEeC-AY_WtBlTjw" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_szfLQOqgEeC-AY_WtBlTjw" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_szd9IeqgEeC-AY_WtBlTjw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_szd9IuqgEeC-AY_WtBlTjw" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="CompoundCycleDeep.keg#//@children.1/@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_szd9I-qgEeC-AY_WtBlTjw" points="[0, 0, -213, 0]$[213, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_szi1oOqgEeC-AY_WtBlTjw" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_sgBYAFdREeGR3YmVBoXGSg" id="(0.0,0.5000001907348632)"/>
+  </edges>
+</notation:Diagram>
