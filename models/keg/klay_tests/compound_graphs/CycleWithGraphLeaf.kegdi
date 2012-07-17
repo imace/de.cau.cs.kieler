@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_iHWv8MwREeGZifIX_kFD4g" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_iIfYYMwREeGZifIX_kFD4g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIf_cMwREeGZifIX_kFD4g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIf_ccwREeGZifIX_kFD4g" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_iIk38MwREeGZifIX_kFD4g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_iIk39MwREeGZifIX_kFD4g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_iIk39cwREeGZifIX_kFD4g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_iIk38cwREeGZifIX_kFD4g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_iIk38swREeGZifIX_kFD4g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iIk388wREeGZifIX_kFD4g" x="40" y="53" width="49" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_iIfYYcwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iIfYYswREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iIfYY8wREeGZifIX_kFD4g" x="20" y="21" width="189" height="191"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_iIgmgMwREeGZifIX_kFD4g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIgmhMwREeGZifIX_kFD4g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIgmhcwREeGZifIX_kFD4g" type="7001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_iIgmgcwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iIgmgswREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iIgmg8wREeGZifIX_kFD4g" x="249" y="93" width="40" height="40"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_iIhNkMwREeGZifIX_kFD4g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIhNlMwREeGZifIX_kFD4g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iIhNlcwREeGZifIX_kFD4g" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_iIpwcMwREeGZifIX_kFD4g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_iIqXg8wREeGZifIX_kFD4g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_iIqXhMwREeGZifIX_kFD4g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_iIqXgMwREeGZifIX_kFD4g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_iIqXgcwREeGZifIX_kFD4g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#//@children.2/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iIqXgswREeGZifIX_kFD4g" x="40" y="55" width="49" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_iIhNkcwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iIhNkswREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#//@children.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iIhNk8wREeGZifIX_kFD4g" x="329" y="20" width="189" height="193"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_iHWv8cwREeGZifIX_kFD4g"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_ktkkQMwREeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_lqXjsMwREeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_nN82UMwREeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_oYG8UMwREeGZifIX_kFD4g" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="CycleWithGraphLeaf.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_iI4Z8MwREeGZifIX_kFD4g" type="4001" source="_iIfYYMwREeGZifIX_kFD4g" target="_iIgmgMwREeGZifIX_kFD4g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI5BAMwREeGZifIX_kFD4g" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI5BAcwREeGZifIX_kFD4g" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI5BAswREeGZifIX_kFD4g" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI5BA8wREeGZifIX_kFD4g" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI5oEMwREeGZifIX_kFD4g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI5oEcwREeGZifIX_kFD4g" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_iI4Z8cwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iI4Z8swREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="CycleWithGraphLeaf.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_iI4Z88wREeGZifIX_kFD4g" points="[0, 0, -40, 0]$[40, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJkWccwREeGZifIX_kFD4g" id="(1.0,0.48034183663927554)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJk9gMwREeGZifIX_kFD4g" id="(0.0,0.5)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_iI9ScMwREeGZifIX_kFD4g" type="4001" source="_iIgmgMwREeGZifIX_kFD4g" target="_iIhNkMwREeGZifIX_kFD4g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI9SdMwREeGZifIX_kFD4g" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI9SdcwREeGZifIX_kFD4g" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI95gMwREeGZifIX_kFD4g" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI95gcwREeGZifIX_kFD4g" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iI95gswREeGZifIX_kFD4g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iI95g8wREeGZifIX_kFD4g" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_iI9SccwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iI9ScswREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="CycleWithGraphLeaf.keg#//@children.1/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_iI9Sc8wREeGZifIX_kFD4g" points="[0, 0, -40, 0]$[40, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJk9gcwREeGZifIX_kFD4g" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJlkkMwREeGZifIX_kFD4g" id="(0.0,0.48459491460900467)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_iJA80MwREeGZifIX_kFD4g" type="4001" source="_iIhNkMwREeGZifIX_kFD4g" target="_iIfYYMwREeGZifIX_kFD4g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iJA81MwREeGZifIX_kFD4g" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iJA81cwREeGZifIX_kFD4g" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iJBj4MwREeGZifIX_kFD4g" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iJBj4cwREeGZifIX_kFD4g" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_iJBj4swREeGZifIX_kFD4g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iJBj48wREeGZifIX_kFD4g" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_iJA80cwREeGZifIX_kFD4g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iJA80swREeGZifIX_kFD4g" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="CycleWithGraphLeaf.keg#//@children.2/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_iJA808wREeGZifIX_kFD4g" points="[0, 0, 120, 0]$[-20, 0, 100, 0]$[-20, -24, 100, -24]$[-100, -24, 20, -24]$[-100, 0, 20, 0]$[-120, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJjvYMwREeGZifIX_kFD4g" id="(0.0,0.4501091742781091)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_iJkWcMwREeGZifIX_kFD4g" id="(1.0,0.4455715269700661)"/>
+  </edges>
+</notation:Diagram>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_JC0ukAr9EeGGqLMlTa_i-g" type="Graphs" name="fromPortToInner.kegdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_Pvok0Ar9EeGGqLMlTa_i-g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_PvpL4Ar9EeGGqLMlTa_i-g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_PvpL4Qr9EeGGqLMlTa_i-g" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_VPBlsAr9EeGGqLMlTa_i-g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_VPBltAr9EeGGqLMlTa_i-g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_VPBltQr9EeGGqLMlTa_i-g" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_VPBlsQr9EeGGqLMlTa_i-g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_VPBlsgr9EeGGqLMlTa_i-g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="fromPortToInner.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VPBlswr9EeGGqLMlTa_i-g" x="45" y="88"/>
+      </children>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ZiIZoAr9EeGGqLMlTa_i-g" type="3002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_ZiJAsAr9EeGGqLMlTa_i-g" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZiJAsQr9EeGGqLMlTa_i-g" y="5"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_ZiIZoQr9EeGGqLMlTa_i-g"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_ZiIZogr9EeGGqLMlTa_i-g" fontName="Sans"/>
+      <element xmi:type="keg:Port" href="fromPortToInner.keg#//@children.0/@ports.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZiIZowr9EeGGqLMlTa_i-g"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_Pvok0Qr9EeGGqLMlTa_i-g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Pvok0gr9EeGGqLMlTa_i-g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="fromPortToInner.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Pvok0wr9EeGGqLMlTa_i-g" x="143" y="55" width="160" height="301"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_RXxnUAr9EeGGqLMlTa_i-g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_RXyOYAr9EeGGqLMlTa_i-g" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_RXyOYQr9EeGGqLMlTa_i-g" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_Xc7AoAr9EeGGqLMlTa_i-g" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_Xc7nsQr9EeGGqLMlTa_i-g" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_Xc7nsgr9EeGGqLMlTa_i-g" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_4L1_kB8iEeGF64yinuvH_w" type="3002">
+          <children xmi:type="notation:DecorationNode" xmi:id="_4L3NsB8iEeGF64yinuvH_w" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4L3NsR8iEeGF64yinuvH_w" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_4L2moB8iEeGF64yinuvH_w"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_4L2moR8iEeGF64yinuvH_w" fontName="Sans"/>
+          <element xmi:type="keg:Port" href="fromPortToInner.keg#//@children.1/@children.0/@ports.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4L2moh8iEeGF64yinuvH_w" x="-7" y="12"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_Xc7AoQr9EeGGqLMlTa_i-g"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_Xc7Aogr9EeGGqLMlTa_i-g" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="fromPortToInner.keg#//@children.1/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Xc7nsAr9EeGGqLMlTa_i-g" x="44" y="71"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_RXxnUQr9EeGGqLMlTa_i-g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_RXxnUgr9EeGGqLMlTa_i-g" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="fromPortToInner.keg#//@children.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RXxnUwr9EeGGqLMlTa_i-g" x="583" y="55" width="183" height="265"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_JC0ukQr9EeGGqLMlTa_i-g"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_LHWyIAr9EeGGqLMlTa_i-g" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_MGsvQAr9EeGGqLMlTa_i-g" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_ODRwsAr9EeGGqLMlTa_i-g" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_Okb9AAr9EeGGqLMlTa_i-g" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="fromPortToInner.keg#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_6wl0QB8iEeGF64yinuvH_w" type="4003" source="_ZiIZoAr9EeGGqLMlTa_i-g" target="_4L1_kB8iEeGF64yinuvH_w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_6wmbUB8iEeGF64yinuvH_w" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6wmbUR8iEeGF64yinuvH_w" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_6wmbUh8iEeGF64yinuvH_w" type="6012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6wnCYB8iEeGF64yinuvH_w" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_6wnCYR8iEeGF64yinuvH_w" type="6013">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6wnCYh8iEeGF64yinuvH_w" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_6wl0QR8iEeGF64yinuvH_w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_6wl0Qh8iEeGF64yinuvH_w" fontName="Sans"/>
+    <element xmi:type="keg:Edge" href="fromPortToInner.keg#//@children.0/@outgoingEdges.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6wl0Qx8iEeGF64yinuvH_w" points="[4, -1, -344, 28]$[347, -33, -1, -4]"/>
+  </edges>
+</notation:Diagram>

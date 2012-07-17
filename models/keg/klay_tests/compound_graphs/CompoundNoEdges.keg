@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keg:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:keg="http://kieler.cs.cau.de/KEG">
+  <children xsi:type="keg:Node" nodeLabel="c1">
+    <children xsi:type="keg:Node" nodeLabel="c2">
+      <children xsi:type="keg:Node" nodeLabel="i1"/>
+    </children>
+    <children xsi:type="keg:Node" nodeLabel="c3">
+      <children xsi:type="keg:Node" nodeLabel="i2"/>
+    </children>
+  </children>
+</keg:Node>
