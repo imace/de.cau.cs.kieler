@@ -39,7 +39,7 @@ public class SCExecution {
 
     private static final String COMPILER_DEFAULT = "gcc";
     private static final String EXECUTABLE_PREFIX = "SC-GENERATED-EXECUTABLE-";
-
+    
     private Process executionProcess = null;
     private PrintWriter executionInterfaceToSC;
     private BufferedReader executionInterfaceFromSC;
@@ -133,6 +133,7 @@ public class SCExecution {
             for (String filePath : filePaths) {
                 compileBuf.append(" " + filePath);
             }
+
             compile += compileBuf.toString();
 
             compile += " "
@@ -142,11 +143,17 @@ public class SCExecution {
                     // + "sim_data.c "
                     // + outPath
                     // + "misc.c "
-                    + bundleLocation + "sc.c " + bundleLocation + "cJSON.c " + "-I "
+                    + bundleLocation + "sc.c " + bundleLocation + "cJSON.c " + " -I "
                     + bundleLocation + " " + "-o " + outputPath + getExecutableName()
                     // -m32 = 32 bit compatibility mode to prevent compiler errors on
                     // 64bit machines/architectures.
-                    + " -lm -D_SC_NOTRACE -D_SC_SUPPRESS_ERROR_DETECT -D_SC_USE_PRE";
+                    + " -lm -D_SC_NOTRACE  -D_SC_USE_PRE -D_SC_NOASSEMBLER";
+            
+            // -D_SC_SUPPRESS_ERROR_DETECT
+            // cmot: removed this option for now because of strange error
+            // in causality-test @ #define _checkEMIT(s) in sc-generic.h
+            // EMAIL to rvh on 16. Jul 2012
+            
             /*
              * -m32"; REMOVED due to error with surefire on 64bit machine:
              * 
@@ -174,6 +181,7 @@ public class SCExecution {
              * bits/predefs.h: No such file or directory build 11-Jun-2012 11:42:26 compilation
              * terminated.
              */
+            System.out.println(compile);
             executionProcess = Runtime.getRuntime().exec(compile);
 
             InputStream stderr = executionProcess.getErrorStream();
@@ -240,6 +248,8 @@ public class SCExecution {
 
         // start compiled sc code
         String executable = outputPath + getExecutableName() + " ";
+        //executable = "C:\\Users\\delphino\\AppData\\Local\\Temp\\SC.exe";
+
         executionProcess = Runtime.getRuntime().exec(executable);
 
         setExecutionInterfaceToSC(new PrintWriter(new OutputStreamWriter(
