@@ -685,13 +685,12 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
      * @return the maude gen code location
      */
     public String getMaudeGenCodeLocation() throws MalformedURLException, URISyntaxException {
-        String outPath = getLocation().replace("%20", " ");
-        URI fileUri = KiemUtil.getFileStringAsEMFURI(KiemUtil.resolveBundleOrWorkspaceFile(
-                this.getModelFilePath().toString()).toString());
-        String stringUri = fileUri.lastSegment().toString();
-        String stringUri2 = stringUri.replace(".uml", "");
-        stringUri2 = stringUri2.substring(stringUri2.indexOf("/", 1) + 1);
-        return (outPath + stringUri2);
+        String maudeFileString = KiemUtil.resolveBundleOrWorkspaceFile(
+                this.getModelFilePath().toString()).toString();
+        maudeFileString = maudeFileString.substring(0, maudeFileString.lastIndexOf("/"));
+        maudeFileString += ".maude";
+        maudeFileString = maudeFileString.replace("file://", "");
+        return (maudeFileString);
     }
 
     // -------------------------------------------------------------------------
@@ -771,7 +770,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
         Reader emfReader = new Reader();
         URI fileUri = KiemUtil.getFileStringAsEMFURI(KiemUtil.resolveBundleOrWorkspaceFile(
                 this.getModelFilePath().toString()).toString());
-        String stringUri = fileUri.toString();
+        String stringUri = fileUri.toString().replace(".di", ".uml");
 
         // FIXME: Is this correct?! Seems not to work in RCA :(
         // emfReader.setUri("platform:/resource" + stringUri);
@@ -782,7 +781,12 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
         // emfReader.setResourceSet(this.getInputResourceSet());
         // emfReader.setResourceSet(ptolemyModel.getResourceSet());
 
-        outPath = (getLocation()).replace("%20", " ");
+        String fileOut = KiemUtil.resolveBundleOrWorkspaceFile(this.getModelFilePath().toString())
+                .toString();
+        outPath = fileOut.substring(0, fileOut.lastIndexOf('/'));
+        outPath = outPath.replace("%20", " ");
+        outPath = outPath.replace("file://", "");
+        // outPath = fileOutUri.trimSegments(1).toString().replace("%20", " ");;
 
         // Set model name (gets model.maude)
         GlobalVar modelname = new GlobalVar();
@@ -926,7 +930,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
      * @see de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent
      * #checkModelValidation (org.eclipse.emf.ecore.EObject)
      */
-    public boolean checkModelValidation(EObject rootEObject) {
+    public boolean checkModelValidation(final EObject rootEObject) {
         // FIXME: Reenable this later
         // Enable KlePto checks in possibly open GMF SyncCharts editor
         // ValidationManager.enableCheck("de.cau.cs.kieler.uml2.UMLMaudeChecks");
@@ -956,6 +960,37 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
     // -------------------------------------------------------------------------
 
     /**
+     * Gets the models root element, an EObject of the currently selected model file or null if no
+     * opened EMF editor was found.
+     * 
+     * @return the model root element
+     */
+    public final EObject getModelRootElement() {
+        IPath modelFilePath = this.getModelFilePath().removeFileExtension().addFileExtension("uml");
+        if (modelFilePath == null) {
+            return null;
+        }
+        EObject eObject = KiemPlugin.getOpenedModelRootObjects().get(
+                modelFilePath);
+        if (eObject == null) {
+            // try to load it
+            try {
+                eObject = KiemUtil.loadEObjectFromModelFile(modelFilePath);
+            } catch (IOException e) {
+                // ignore errors
+                e.printStackTrace();
+            }
+            if (eObject != null) {
+                // save in KIEM for future use
+                KiemPlugin.getOpenedModelRootObjects().put(modelFilePath, eObject);
+            }
+        }
+        return eObject;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
      * Gets all events of the model (cached).
      * 
      * @return the events
@@ -967,9 +1002,10 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
             XtendFacade facade = getXtendFacade();
 
             // first collect events
+            facade.call("ignore", "me");
             Object objectList = facade.call("getTriggerEvents", rootEObject);
             if (objectList instanceof ArrayList) {
-                for (Object key : ((ArrayList) objectList)) {
+                for (Object key : ((ArrayList<?>) objectList)) {
                     if (key instanceof String) {
                         String keyString = (String) key;
                         // not include noevent
@@ -1000,7 +1036,7 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
             // first collect events
             Object objectList = facade.call("getActions", rootEObject);
             if (objectList instanceof ArrayList) {
-                for (Object key : ((ArrayList) objectList)) {
+                for (Object key : ((ArrayList<?>) objectList)) {
                     if (key instanceof String) {
                         String keyString = (String) key;
                         // not include skip action
@@ -1026,11 +1062,12 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
         // we here read in the uml model and extract the necessary information
         Object rootObject = this.getModelRootElement();
         if (rootObject instanceof EObject) {
-            EObject eObject = (EObject) rootObject;
             EmfMetaModel metaModel0 = new EmfMetaModel(org.eclipse.uml2.uml.UMLPackage.eINSTANCE);
             EmfMetaModel metaModel1 = new EmfMetaModel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
 
             XtendFacade facade = XtendFacade.create("model::Extensions");
+            // XtendFacade facade =
+            // XtendFacade.create("de.cau.cs.kieler.uml2.sim.xtend::Extensions");
             facade.registerMetaModel(metaModel0);
             facade.registerMetaModel(metaModel1);
             return facade;
@@ -1040,11 +1077,8 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
 
     // -------------------------------------------------------------------------
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.cau.cs.kieler.sim.kiem.ui.datacomponent.JSONObjectSimulationDataComponent #
-     * doProvideInitialVariables()
+    /**
+     * {@inheritDoc}
      */
     public JSONObject doProvideInitialVariables() throws KiemInitializationException {
         JSONObject returnObj = new JSONObject();
@@ -1125,19 +1159,20 @@ public class DataComponent extends JSONObjectSimulationDataComponent implements
      * @param text
      *            the text
      */
-    protected void printConsole(String text) {
+    protected void printConsole(final String text) {
         MessageConsole maudeConsole = null;
 
         boolean found = false;
         ConsolePlugin plugin = ConsolePlugin.getDefault();
         IConsoleManager conMan = plugin.getConsoleManager();
         IConsole[] existing = conMan.getConsoles();
-        for (int i = 0; i < existing.length; i++)
+        for (int i = 0; i < existing.length; i++) {
             if (DataComponent.MAUDECONSOLENAME.equals(existing[i].getName())) {
                 maudeConsole = (MessageConsole) existing[i];
                 found = true;
                 break;
             }
+        }
         if (!found) {
             // if no console found, so create a new one
             maudeConsole = new MessageConsole(DataComponent.MAUDECONSOLENAME, null);
