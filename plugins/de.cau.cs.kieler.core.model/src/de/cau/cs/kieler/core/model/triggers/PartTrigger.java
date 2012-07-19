@@ -20,8 +20,12 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 import de.cau.cs.kieler.core.kivi.AbstractTrigger;
@@ -46,8 +50,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
     // refers to some
     // editors content (which is not explicitly given in ISelection).
     /** Name of the editorInputPath property. */
-    public static final String EDITOR_INPUT_ID
-            = "de.cau.cs.kieler.core.model.triggers.PartTrigger.editorInput";
+    public static final String EDITOR_INPUT_ID = "de.cau.cs.kieler.core.model.triggers.PartTrigger.editorInput";
 
     /**
      * The default property containing the editorInput path if the active is an editor.
@@ -56,8 +59,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
             EDITOR_INPUT_ID);
 
     /** Name of the editorInputPath property. */
-    public static final String EDITOR_INPUT_PATH_ID
-            = "de.cau.cs.kieler.core.model.triggers.PartTrigger.editorInputPath";
+    public static final String EDITOR_INPUT_PATH_ID = "de.cau.cs.kieler.core.model.triggers.PartTrigger.editorInputPath";
 
     /**
      * The default property containing the editorInput path if the active is an editor.
@@ -93,7 +95,9 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
      * {@inheritDoc}
      */
     public void partOpened(final IWorkbenchPart part) {
-        // @cmot: if a part is activated for the first time, Eclipse does not
+        updateActiveViewPartAndActiveEditorPart();
+
+        // cmot: if a part is activated for the first time, Eclipse does not
         // call partActivated but partOpened instead. This trigger should
         // execution in both cases.
         partActivated(part);
@@ -103,7 +107,10 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
      * {@inheritDoc}
      */
     public void partBroughtToTop(final IWorkbenchPart part) {
-        // this.partChanged(part);
+        // cmot: if one selects a different opened tab and bing
+        // another part to the front, this method should also
+        // delegate to partActivated
+        partActivated(part);
     }
 
     /**
@@ -117,6 +124,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
 
         if (part instanceof IEditorPart) {
             this.currentActiveEditor = (IEditorPart) part;
+            // currentActiveEditor.setFocus();
             type = EventType.EDITOR_ACTIVATED;
             isEditorReference = true;
         }
@@ -131,8 +139,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
 
                 if (editor.getEditorInput().getClass().equals(FileEditorInput.class)
                         && ((FileEditorInput) editor.getEditorInput()).getFile() != null
-                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI()
-                            != null) {
+                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI() != null) {
                     IPath editorInputPath = ((FileEditorInput) editor.getEditorInput()).getPath();
 
                     state.setProperty(EDITOR_INPUT, editor.getEditorInput());
@@ -200,8 +207,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
 
                 if (editor.getEditorInput().getClass().equals(FileEditorInput.class)
                         && ((FileEditorInput) editor.getEditorInput()).getFile() != null
-                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI()
-                            != null) {
+                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI() != null) {
                     IPath editorInputPath = ((FileEditorInput) editor.getEditorInput()).getPath();
 
                     state.setProperty(EDITOR_INPUT, editor.getEditorInput());
@@ -225,13 +231,13 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
      * {@inheritDoc}
      */
     public void partActivated(final IWorkbenchPartReference partRef) {
-        this.currentActivePart = partRef.getPart(false);
+        updateActiveViewPartAndActiveEditorPart();
+
         boolean isEditorReference = false;
         EventType type = null;
         type = EventType.VIEW_ACTIVATED;
 
         if (partRef instanceof IEditorReference) {
-            this.currentActiveEditor = ((IEditorReference) partRef).getEditor(false);
             type = EventType.EDITOR_ACTIVATED;
             isEditorReference = true;
         }
@@ -246,8 +252,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
 
                 if (editor.getEditorInput().getClass().equals(FileEditorInput.class)
                         && ((FileEditorInput) editor.getEditorInput()).getFile() != null
-                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI()
-                            != null) {
+                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI() != null) {
                     IPath editorInputPath = ((FileEditorInput) editor.getEditorInput()).getPath();
 
                     state.setProperty(EDITOR_INPUT, editor.getEditorInput());
@@ -303,8 +308,7 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
 
                 if (editor.getEditorInput().getClass().equals(FileEditorInput.class)
                         && ((FileEditorInput) editor.getEditorInput()).getFile() != null
-                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI()
-                            != null) {
+                        && ((FileEditorInput) editor.getEditorInput()).getFile().getLocationURI() != null) {
                     IPath editorInputPath = ((FileEditorInput) editor.getEditorInput()).getPath();
 
                     state.setProperty(EDITOR_INPUT, editor.getEditorInput());
@@ -359,6 +363,26 @@ public class PartTrigger extends AbstractTrigger implements IPartListener {
      * {@inheritDoc}
      */
     public void partInputChanged(final IWorkbenchPartReference partRef) {
+    }
+
+    /**
+     * Update active view part and active editor part.
+     */
+    private void updateActiveViewPartAndActiveEditorPart() {
+        IWorkbench wb = PlatformUI.getWorkbench();
+        if (wb != null) {
+            IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+            if (win != null) {
+                IWorkbenchPage page = win.getActivePage();
+                if (page != null) {
+                    // get the (last) active editor and view part
+                    IEditorPart activeEditorPart = page.getActiveEditor();
+                    IWorkbenchPart activePart = page.getActivePart();
+                    currentActiveEditor = activeEditorPart;
+                    currentActivePart = activePart;
+                }
+            }
+        }
     }
 
     /*****************************

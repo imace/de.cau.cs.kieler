@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:keg="http://kieler.cs.cau.de/KEG" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_OYl5wMwmEeGBveh0IWHGYQ" type="Graphs" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_OZre4MwmEeGBveh0IWHGYQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_OZsF8cwmEeGBveh0IWHGYQ" type="5003"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_OZsF8swmEeGBveh0IWHGYQ" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_OZuiMMwmEeGBveh0IWHGYQ" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_OZuiNMwmEeGBveh0IWHGYQ" type="5002"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_OZuiNcwmEeGBveh0IWHGYQ" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_OZuiMcwmEeGBveh0IWHGYQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_OZuiMswmEeGBveh0IWHGYQ" fontName="Sans"/>
+        <element xmi:type="keg:Node" href="Simplest.keg#//@children.0/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OZuiM8wmEeGBveh0IWHGYQ" x="40" y="30" width="41" height="40"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_OZre4cwmEeGBveh0IWHGYQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_OZre4swmEeGBveh0IWHGYQ" fontName="Sans"/>
+    <element xmi:type="keg:Node" href="Simplest.keg#//@children.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OZsF8MwmEeGBveh0IWHGYQ" x="20" y="30" width="181" height="168"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_OYl5wcwmEeGBveh0IWHGYQ"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_P16zYMwmEeGBveh0IWHGYQ" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_Qt0EsMwmEeGBveh0IWHGYQ" name="layout:de.cau.cs.kieler.edgeRouting" stringValue="ORTHOGONAL"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_Rv4lsMwmEeGBveh0IWHGYQ" name="layout:de.cau.cs.kieler.layoutHierarchy" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_Snb4wMwmEeGBveh0IWHGYQ" name="layout:de.cau.cs.kieler.separateConnComp" stringValue="false"/>
+  <element xmi:type="keg:Node" href="Simplest.keg#/"/>
+</notation:Diagram>

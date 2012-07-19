@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keg:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:keg="http://kieler.cs.cau.de/KEG">
+  <children xsi:type="keg:Node" nodeLabel="c1">
+    <children xsi:type="keg:Node" nodeLabel="i1"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.1" directed="true"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.2" directed="true"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.3" directed="true"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.0/@outgoingEdges.0" nodeLabel="c2">
+    <children xsi:type="keg:Node" nodeLabel="i2">
+      <outgoingEdges xsi:type="keg:Edge" target="//@children.2/@children.0" directed="true"/>
+    </children>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.3" directed="true"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.0/@outgoingEdges.1" nodeLabel="c3">
+    <children xsi:type="keg:Node" incomingEdges="//@children.1/@children.0/@outgoingEdges.0" nodeLabel="i3"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.1/@outgoingEdges.0 //@children.0/@outgoingEdges.2" nodeLabel="c4">
+    <children xsi:type="keg:Node" incomingEdges="//@children.3/@children.1/@outgoingEdges.1" nodeLabel="i4.1"/>
+    <children xsi:type="keg:Node" nodeLabel="i4.2">
+      <outgoingEdges xsi:type="keg:Edge" target="//@children.3/@children.2" directed="true"/>
+      <outgoingEdges xsi:type="keg:Edge" target="//@children.3/@children.0" directed="true"/>
+    </children>
+    <children xsi:type="keg:Node" incomingEdges="//@children.3/@children.1/@outgoingEdges.0" nodeLabel="i4.3"/>
+  </children>
+</keg:Node>
