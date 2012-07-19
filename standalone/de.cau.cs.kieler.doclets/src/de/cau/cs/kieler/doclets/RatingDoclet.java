@@ -13,8 +13,6 @@
  */
 package de.cau.cs.kieler.doclets;
 
-import java.io.IOException;
-
 import com.sun.javadoc.DocErrorReporter;
 import com.sun.javadoc.Doclet;
 import com.sun.javadoc.LanguageVersion;
@@ -24,6 +22,7 @@ import com.sun.javadoc.RootDoc;
  * Doclet for code ratings.
  *
  * @author msp
+ * @author cds
  */
 public class RatingDoclet extends Doclet {
 
@@ -42,25 +41,29 @@ public class RatingDoclet extends Doclet {
         String destination = ".";
         for (int i = 0; i < options.length; i++) {
             String[] option = options[i];
-            if (option.length == 2 && DESTINATION_OPTION.equals(option[0])
-                    && option[1].length() > 0) {
+            if (option.length == 2 && DESTINATION_OPTION.equals(option[0]) && option[1].length() > 0) {
                 destination = option[1];
             }
         }
         
-        // generate the rating overview
-        RatingOverviewGenerator overviewGenerator = new RatingOverviewGenerator();
-        overviewGenerator.setDestinationPath(destination);
+        // Generate the rating documentation
+        RatingGenerator generator = new RatingGenerator();
         try {
-            overviewGenerator.generate(rootDoc);
-        } catch (SecurityException exception) {
-            rootDoc.printError("Could not write to the specified destination: "
-                    + exception.getMessage());
+            generator.generateRatings(rootDoc, destination);
+        } catch (Exception exception) {
+            // Build a proper exception message
+            StringBuilder message = new StringBuilder(
+                    "Error producing rating documentation: " + exception.getMessage());
+            
+            StackTraceElement[] stackTrace = exception.getStackTrace();
+            for (int i = 0; i < stackTrace.length; i++) {
+                message.append("\n" + stackTrace[i].toString());
+            }
+            
+            rootDoc.printError(message.toString());
             return false;
-        } catch (IOException exception) {
-            rootDoc.printError("Could not write to the specified destination: "
-                    + exception.getMessage());
         }
+        
         return true;
     }
     
@@ -71,9 +74,9 @@ public class RatingDoclet extends Doclet {
      * @param reporter utility to print argument errors
      * @return true if the options are valid
      */
-    public static boolean validOptions(final String[][] options,
-            final DocErrorReporter reporter) {
+    public static boolean validOptions(final String[][] options, final DocErrorReporter reporter) {
         boolean foundDestOption = false;
+        
         for (int i = 0; i < options.length; i++) {
             if (DESTINATION_OPTION.equals(options[i][0])) {
                 if (foundDestOption) {
@@ -84,6 +87,7 @@ public class RatingDoclet extends Doclet {
                 }
             }
         }
+        
         return true;
     }
     
@@ -112,5 +116,4 @@ public class RatingDoclet extends Doclet {
     public static LanguageVersion languageVersion() {
         return LanguageVersion.JAVA_1_5;
     }
-    
 }
