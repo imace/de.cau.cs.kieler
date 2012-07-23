@@ -31,7 +31,6 @@ import de.cau.cs.kieler.doclets.model.Project;
  * Base class of all Html writers. Containts a whole lot of utility methods.
  * 
  * @author cds
- * @kieler.ignore
  */
 public class BasicHtmlWriter {
     
@@ -518,6 +517,11 @@ public class BasicHtmlWriter {
         // Generated class?
         if (classItem.isGenerated()) {
             buffer.append(" (generated)");
+        }
+        
+        // Ignored class?
+        if (classItem.isIgnored()) {
+            buffer.append(" (ignored)");
         }
         
         return buffer.append("</div>").toString();
