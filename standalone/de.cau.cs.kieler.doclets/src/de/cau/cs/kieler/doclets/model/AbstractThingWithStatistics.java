@@ -33,6 +33,10 @@ public abstract class AbstractThingWithStatistics implements Comparable<Abstract
      */
     protected int statsGenerated = 0;
     /**
+     * The number of ignored classes in this package.
+     */
+    protected int statsIgnored = 0;
+    /**
      * Design rating statistics.
      */
     protected int[] statsDesign = new int[DesignRating.values().length];
@@ -40,6 +44,10 @@ public abstract class AbstractThingWithStatistics implements Comparable<Abstract
      * Code rating statistics.
      */
     protected int[] statsCode = new int[CodeRating.values().length];
+    /**
+     * Lines of code statistics.
+     */
+    protected int statsLoc = 0;
     // CHECKSTYLEON VisibilityModifier
     
     
@@ -86,6 +94,15 @@ public abstract class AbstractThingWithStatistics implements Comparable<Abstract
     public int getStatsGenerated() {
         return statsGenerated;
     }
+    
+    /**
+     * Returns the number of classes that are to be ignored.
+     * 
+     * @return the number of ignored classes.
+     */
+    public int getStatsIgnored() {
+        return statsIgnored;
+    }
 
     /**
      * Returns the number of occurrences for each of the design rating levels.
@@ -103,6 +120,15 @@ public abstract class AbstractThingWithStatistics implements Comparable<Abstract
      */
     public int[] getStatsCode() {
         return statsCode;
+    }
+    
+    /**
+     * Returns the lines of code of contained classes.
+     * 
+     * @return the lines of code.
+     */
+    public int getStatsLoc() {
+        return statsLoc;
     }
     
     /**

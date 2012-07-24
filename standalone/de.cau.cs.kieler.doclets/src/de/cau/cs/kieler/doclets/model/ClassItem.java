@@ -13,6 +13,10 @@
  */
 package de.cau.cs.kieler.doclets.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.StringTokenizer;
 
 import com.sun.javadoc.ClassDoc;
@@ -36,9 +40,15 @@ public class ClassItem implements Comparable<ClassItem> {
     
     /**
      * Whether the class was generated or not. A generated class will usually not be counted, but may
-     * be if it still has a design or code rating.
+     * be if it still has an explicit design or code rating.
      */
     private boolean generated = false;
+    
+    /**
+     * Whether the class has an ignore tag. As generated classes, an ignored class will usually not be
+     * counted, but may be if it still has an explicit design or code rating.
+     */
+    private boolean ignored = false;
     
     /**
      * The class's design rating.
@@ -59,6 +69,11 @@ public class ClassItem implements Comparable<ClassItem> {
      * Code rating details, if any.
      */
     private String codeRatingDetails = null;
+    
+    /**
+     * The lines of code, or -1 if the source file is not available.
+     */
+    private int loc = -1;
 
     
     /////////////////////////////////////////////////////////////////////////////
@@ -77,22 +92,41 @@ public class ClassItem implements Comparable<ClassItem> {
             generated = true;
         }
         
+        // Check for the @kieler.ignore tag
+        if (classDoc.tags(RatingDocletConstants.TAG_IGNORE).length > 0) {
+            ignored = true;
+        }
+        
         // Check if the class is in one of the folders known for generated classes
-        String path = classDoc.position().file().getPath();
-        for (int i = 0; i < RatingDocletConstants.GEN_FOLDERS.length; i++) {
-            if (path.indexOf(RatingDocletConstants.GEN_FOLDERS[i]) >= 0) {
-                generated = true;
+        File file = classDoc.position().file();
+        if (file != null) {
+            String path = file.getPath();
+            for (int i = 0; i < RatingDocletConstants.GEN_FOLDERS.length; i++) {
+                if (path.indexOf(RatingDocletConstants.GEN_FOLDERS[i]) >= 0) {
+                    generated = true;
+                }
             }
         }
         
         // Extract the code and design review ratings
         extractCodeRating();
         extractDesignRating();
+        // Count the lines of code
+        countLinesOfCode();
     }
 
     
     /////////////////////////////////////////////////////////////////////////////
     // UTILITY METHODS
+    
+    /**
+     * Checks if the class should be displayed in class tables.
+     * 
+     * @return {@code true} if it should be displayed in class tables.
+     */
+    public boolean isClassDisplayed() {
+        return (!generated && !ignored) || designRating != null || codeRating != null;
+    }
     
     /**
      * Extracts the class's code rating, if any. If the class doesn't have a code rating, what happens
@@ -146,7 +180,7 @@ public class ClassItem implements Comparable<ClassItem> {
         if (codeRatingCandidate != null) {
             // A code rating was determined
             codeRating = codeRatingCandidate;
-        } else if (codeRatingCandidate == null && !isGenerated()) {
+        } else if (codeRatingCandidate == null && !isGenerated() && !isIgnored()) {
             // A code rating could not be found, but the class is not generated and must thus be
             // rated RED
             codeRating = CodeRating.RED;
@@ -185,10 +219,44 @@ public class ClassItem implements Comparable<ClassItem> {
         if (designRatingCandidate != null) {
             // A design rating was determined
             designRating = designRatingCandidate;
-        } else if (designRatingCandidate == null && !isGenerated()) {
+        } else if (designRatingCandidate == null && !isGenerated() && !isIgnored()) {
             // A design rating could not be found, but the class is not generated and must thus be
             // rated NONE
             designRating = DesignRating.NONE;
+        }
+    }
+    
+    /**
+     * Count the lines of code in the source file, including comments. If the file is not available,
+     * the line count is left at its default value -1, which marks unreadable source files.
+     */
+    private void countLinesOfCode() {
+        File file = classDoc.position().file();
+        if (file != null) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                int count = 0;
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    boolean hasCode = false;
+                    // check whether the line contains any non-whitespace character
+                    for (int i = 0; i < line.length(); i++) {
+                        char c = line.charAt(i);
+                        if (c != ' ' && c != '\t') {
+                            hasCode = true;
+                            break;
+                        }
+                    }
+                    if (hasCode) {
+                        // the line has source code or a comment, so count it
+                        count++;
+                    }
+                }
+                loc = count;
+                reader.close();
+            } catch (IOException exception) {
+                // ignore the exception and leave the line count to -1
+            }
         }
     }
 
@@ -212,6 +280,15 @@ public class ClassItem implements Comparable<ClassItem> {
      */
     public boolean isGenerated() {
         return generated;
+    }
+    
+    /**
+     * Checks whether this class is tagged to be ignored.
+     * 
+     * @return {@code true} if this class has an ignore tag.
+     */
+    public boolean isIgnored() {
+        return ignored;
     }
 
     /**
@@ -248,6 +325,15 @@ public class ClassItem implements Comparable<ClassItem> {
      */
     public String getCodeRatingDetails() {
         return codeRatingDetails;
+    }
+    
+    /**
+     * The lines of code, including comments.
+     * 
+     * @return the lines of code
+     */
+    public int getLoc() {
+        return loc;
     }
 
     

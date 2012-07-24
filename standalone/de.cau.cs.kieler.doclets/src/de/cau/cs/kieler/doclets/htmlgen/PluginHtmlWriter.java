@@ -88,21 +88,32 @@ public class PluginHtmlWriter extends BasicHtmlWriter {
         writer.write("    }");
         writer.write("  }");
         
-        // Expansion function
-        writer.write("  function expandAll() {");
-        for (PackageDoc pkgDoc : plugin.getPackageToClassMap().keySet()) {
-            writer.write("    document.getElementById('"
-                    + pkgDoc.name() + "').style.display = 'block';");
-        }
-        writer.write("  }");
+        // Build the code for mass expansion and collaps
+        StringBuilder expandCode = new StringBuilder();
+        StringBuilder collapseCode = new StringBuilder();
         
-        // Collapse function
-        writer.write("  function collapseAll() {");
         for (PackageDoc pkgDoc : plugin.getPackageToClassMap().keySet()) {
-            writer.write("    document.getElementById('"
-                    + pkgDoc.name() + "').style.display = 'none';");
+            // Determine if this package will be displayed
+            boolean displayPackage = false;
+            for (ClassItem item : plugin.getPackageToClassMap().get(pkgDoc)) {
+                if (item.isClassDisplayed()) {
+                    displayPackage = true;
+                    break;
+                }
+            }
+            
+            // If it will be displayed, include expand and collapse code for it
+            if (displayPackage) {
+                expandCode.append("document.getElementById('" + pkgDoc.name()
+                        + "').style.display = 'block';");
+                collapseCode.append("document.getElementById('" + pkgDoc.name()
+                        + "').style.display = 'none';");
+            }
         }
-        writer.write("  }");
+        
+        // Expand and Collapse functions
+        writer.write("  function expandAll() {" + expandCode.toString() + "}");
+        writer.write("  function collapseAll() {" + collapseCode.toString() + "}");
         
         writer.write("</script>");
     }
@@ -142,12 +153,24 @@ public class PluginHtmlWriter extends BasicHtmlWriter {
         Arrays.sort(packages);
         
         for (int i = 0; i < packages.length; i++) {
-            // Get sorted list of classes in the package
+            // Get list of classes in the package
             ClassItem[] classes =
                     plugin.getPackageToClassMap().get(packages[i]).toArray(new ClassItem[0]);
-            Arrays.sort(classes);
             
-            generatePackageInfos(plugin, packages[i], classes, writer);
+            // Check if we have at least one class to be displayed here
+            boolean hasTableRows = false;
+            for (int j = 0; j < classes.length; j++) {
+                if (classes[j].isClassDisplayed()) {
+                    hasTableRows = true;
+                    break;
+                }
+            }
+            
+            // If there are classes to be displayed, sort the list and generate package infos
+            if (hasTableRows) {
+                Arrays.sort(classes);
+                generatePackageInfos(plugin, packages[i], classes, writer);
+            }
         }
     }
     
@@ -171,19 +194,17 @@ public class PluginHtmlWriter extends BasicHtmlWriter {
         writer.write("<div id='" + pack.name() + "'><table cellspacing='0' cellpadding='6'>");
         writer.write("  <tr class='oddheader headerlinebottom'>");
         writer.write("    <th width='30%'>Thing</th>");
-        writer.write("    <th width='35%' class='newcolgroup'>Design Review</th>");
-        writer.write("    <th width='35%'>Code Review</th>");
+        writer.write("    <th width='30%' class='newcolgroup'>Design Review</th>");
+        writer.write("    <th width='30%'>Code Review</th>");
+        writer.write("    <th width='10%' class='numbercell'>LoC</th>");
         writer.write("  </tr>");
         
         // Iterate through classes (not every class is written into the table, requiring the use of a
         // second iteration variable to get alternating row colors)
         int tableRow = 0;
         for (int i = 0; i < classes.length; i++) {
-            // Generated classes are only added to the table if they have explicit ratings
-            if (classes[i].isGenerated()
-                    && classes[i].getDesignRating() == null
-                    && classes[i].getCodeRating() == null) {
-                
+            // Generated and ignored classes are only added to the table if they have explicit ratings
+            if (!classes[i].isClassDisplayed()) {
                 continue;
             }
             
@@ -207,6 +228,11 @@ public class PluginHtmlWriter extends BasicHtmlWriter {
             writer.write("<td>");
             writer.write("<img src='" + getIconForCodeRating(classes[i].getCodeRating()) + "' /> ");
             writer.write(linkifyReviewComment(classes[i].getCodeRatingDetails()));
+            writer.write("</td>");
+            
+            // Lines of code
+            writer.write("<td class='numbercell'>");
+            writer.write(BasicHtmlWriter.toString(classes[i].getLoc()));
             writer.write("</td>");
             
             // End table row
