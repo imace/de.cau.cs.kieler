@@ -131,6 +131,11 @@ public class BasicHtmlWriter {
     private void generateRatingsFooter(final Object currentPage, final BufferedWriter writer)
             throws Exception {
         
+        writer.write("<p class='helptext'>"
+                + "If you have no idea what all of this is about, feel free to take a look at our "
+                + "<a href='http://rtsys.informatik.uni-kiel.de/confluence/x/DIAN'>"
+                + "Wiki page on design and code reviews</a>!"
+                + "</p>");
         writer.write("<p class='timestamp'>" + new Date().toString() + "</p>");
         writer.write("</body></html>");
     }
@@ -230,14 +235,14 @@ public class BasicHtmlWriter {
         writer.write("    <th class='numbercell newcolgroup'>Classes</th>");
         writer.write("    <th class='numbercell'>Generated</th>");
         writer.write("    <th class='numbercell'>Ignored</th>");
-        writer.write("    <th class='numbercell newcolgroup'><img src='" + RatingDocletConstants.RES_FOLDER + "/design_no.png' alt='reviewed' /></th>");
-        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/design_yes.png' alt='reviewed' /></th>");
+        writer.write("    <th class='numbercell newcolgroup'><img src='" + RatingDocletConstants.RES_FOLDER + "/design_no.png' title='Number of classes that have not been design-reviewed yet.' /></th>");
+        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/design_yes.png' title='Number of classes that have been design-reviewed already.' /></th>");
         writer.write("    <th class='numbercell'>Proposed</th>");
         writer.write("    <th>Progress</th>");
-        writer.write("    <th class='numbercell newcolgroup'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_red.png' alt='red' /></th>");
-        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_yellow.png' alt='yellow' /></th>");
-        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_green.png' alt='green' /></th>");
-        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_blue.png' alt='blue' /></th>");
+        writer.write("    <th class='numbercell newcolgroup'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_red.png' title='Number of classes with red code rating. (have not been code-reviewed yet)' /></th>");
+        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_yellow.png' title='Number of classes with yellow code rating. (have received at least one code review)' /></th>");
+        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_green.png' title='Number of classes with green code rating. (have received at least two code reviews; be careful about changing public API)' /></th>");
+        writer.write("    <th class='numbercell'><img src='" + RatingDocletConstants.RES_FOLDER + "/code_blue.png' title='Number of classes with blue code rating. (mature classes; do not touch these if you value your life!)' /></th>");
         writer.write("    <th class='numbercell'>Proposed</th>");
         writer.write("    <th>Progress</th>");
         writer.write("    <th class='numbercell'>LoC</th>");
@@ -334,7 +339,7 @@ public class BasicHtmlWriter {
             writer.write("</td>");
             
             totalLoc += item.getStatsLoc();
-            writer.write("<td class='numbercell'>" + Integer.toString(item.getStatsLoc()) + "</td>");
+            writer.write("<td class='numbercell'>" + toString(item.getStatsLoc()) + "</td>");
             
             // End table row
             writer.write("</tr>");
@@ -378,26 +383,44 @@ public class BasicHtmlWriter {
      * @param x an integer number
      * @return a string representation
      */
+    // CHECKSTYLEOFF MagicNumber
     public static String toString(final int x) {
         // a negative number is treated as illegal
         if (x < 0) {
             return "n/a";
         }
-        // CHECKSTYLEOFF MagicNumber
         int thousands = x / 1000;
         if (thousands > 0) {
             int millions = thousands / 1000;
             if (millions > 0) {
-                return Integer.toString(millions) + " " + Integer.toString(thousands - millions * 1000)
-                        + " " + Integer.toString(x - thousands * 1000);
+                return Integer.toString(millions)
+                        + " " + toStringLeadingZeros(thousands - millions * 1000)
+                        + " " + toStringLeadingZeros(x - thousands * 1000);
             } else {
-                return Integer.toString(thousands) + " " + Integer.toString(x - thousands * 1000);
+                return Integer.toString(thousands) + " " + toStringLeadingZeros(x - thousands * 1000);
             }
         } else {
             return Integer.toString(x);
         }
-        // CHECKSTYLEON MagicNumber
     }
+    
+    /**
+     * Transforms an integer number (less than 1000) to a string with leading zeros.
+     * 
+     * @param x an integer number less than 1000
+     * @return a string with leading zeros
+     */
+    private static String toStringLeadingZeros(final int x) {
+        if (x < 10) {
+            return "00" + Integer.toString(x);
+        } else if (x < 100) {
+            return "0" + Integer.toString(x);
+        } else if (x < 1000) {
+            return Integer.toString(x);
+        }
+        throw new IllegalArgumentException();
+    }
+    // CHECKSTYLEON MagicNumber
     
     /**
      * Returns the proper icon URL for the given thing.
