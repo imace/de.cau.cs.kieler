@@ -39,6 +39,7 @@ import de.cau.cs.kieler.sim.signals.ui.views.SignalsView;
  * plots all signals and their histories.
  * 
  * @author cmot
+ * @kieler.rating proposed 2012-08-08 yellow KI-22
  */
 public class DataComponent extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
@@ -70,7 +71,7 @@ public class DataComponent extends JSONObjectDataComponent implements IJSONObjec
     private SignalList signalList = new SignalList(maximalTicks);
 
     /** An additional signal list to set or append. */
-    private SignalList additionalSignalList = null;
+    private SignalList additionalSignalList;
 
     // -------------------------------------------------------------------------
 
@@ -118,8 +119,6 @@ public class DataComponent extends JSONObjectDataComponent implements IJSONObjec
             throw new KiemInitializationException(
                     "Considering global variable initializations failed", false, e);
         }
-
-        // SignalsView.getInstance().setSignalDataComponent(this);
     }
 
     // -------------------------------------------------------------------------
@@ -296,11 +295,15 @@ public class DataComponent extends JSONObjectDataComponent implements IJSONObjec
         // update signal list
         SignalsView.getInstance().setSignalList(signalList);
         // asynchronous refresh
-        Display.getDefault().syncExec(new Runnable() {
-            public void run() {
-                SignalsView.getInstance().refresh(getTick());
-            }
-        });
+        try {
+            Display.getDefault().syncExec(new Runnable() {
+                public void run() {
+                    SignalsView.getInstance().refresh(getTick());
+                }
+            });
+        } catch (Exception e) {
+            // a refresh is supposed to  silently fail
+        }
 
         return null;
     }

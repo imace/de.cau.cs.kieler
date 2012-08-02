@@ -14,12 +14,14 @@
 
 package de.cau.cs.kieler.sim.signals;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 /**
  * The Class SignalList implements a list of synchronous pure signals.
  * 
  * @author cmot
+ * @kieler.rating 2012-07-25 yellow KI-21
  */
 public class SignalList extends LinkedList<Signal> {
 
@@ -47,8 +49,9 @@ public class SignalList extends LinkedList<Signal> {
 
     /**
      * Instantiates a new signal list.
-     *
-     * @param maximalTicks the maximal ticks
+     * 
+     * @param maximalTicks
+     *            the maximal ticks
      */
     public SignalList(final long maximalTicks) {
         super();
@@ -59,11 +62,13 @@ public class SignalList extends LinkedList<Signal> {
 
     /**
      * Instantiates a new signal list.
-     *
-     * @param signalList the signal list to initialize this SignalList with.
-     * @param maximalTicks the maximal ticks
+     * 
+     * @param signalList
+     *            the signal list to initialize this SignalList with.
+     * @param maximalTicks
+     *            the maximal ticks
      */
-    public SignalList(final LinkedList<Signal> signalList, final long maximalTicks) {
+    public SignalList(final Collection<Signal> signalList, final long maximalTicks) {
         this.maximalTicks = maximalTicks;
         for (Signal signal : signalList) {
             signal.setMaximalTicks(maximalTicks);
@@ -77,8 +82,8 @@ public class SignalList extends LinkedList<Signal> {
      * Contains signal.
      * 
      * @param name
-     *            the name
-     * @return true, if successful
+     *            the signal name
+     * @return true, if contained
      */
     public boolean containsSignal(final String name) {
         return (getSignal(name) != null);
@@ -87,13 +92,15 @@ public class SignalList extends LinkedList<Signal> {
     // -------------------------------------------------------------------------
 
     /**
-     * Gets the signal.
+     * Gets a signal by name.
      * 
      * @param name
-     *            the name
+     *            the signal name
      * @return the signal
      */
     public Signal getSignal(final String name) {
+        // FIXME: Possible improvement, if containsSignal and getSignal are used very often you
+        // would need a Map rather than a List. A map could also speed-up the look-up.
         for (Signal returnSignal : this) {
             if (returnSignal.getName().equals(name)) {
                 return returnSignal;
@@ -120,10 +127,10 @@ public class SignalList extends LinkedList<Signal> {
     // -------------------------------------------------------------------------
 
     /**
-     * Removes the signal.
+     * Removes the signal by name.
      * 
      * @param name
-     *            the name
+     *            the signal name
      */
     public void removeSignal(final String name) {
         Signal signal = this.getSignal(name);

@@ -19,6 +19,7 @@ import java.util.LinkedList;
  * The SignalASCIIPlotter plots ASCII art signals to a text file.
  * 
  * @author cmot
+ * @kieler.rating 2012-07-25 yellow KI-21
  */
 public class SignalASCIIChartPlotter extends SignalASCIIPlotter {
 
@@ -37,9 +38,9 @@ public class SignalASCIIChartPlotter extends SignalASCIIPlotter {
 
         // plot signal data
         int maxSignalNameLength = getMaxSignalNameLength(signalList);
-        String spaceLine = "";
+        StringBuffer spaceLine = new StringBuffer();
         for (Signal signal : signalList) {
-            String[] signalData = getASCISignalData(minTick, maxTick, signal, maxSignalNameLength);
+            String[] signalData = getASCIISignalData(minTick, maxTick, signal, maxSignalNameLength);
             if (spaceLine.equals("")) {
                 spaceLine = getSpaceCharacters(signalData[0].length());
             }
@@ -50,7 +51,7 @@ public class SignalASCIIChartPlotter extends SignalASCIIPlotter {
         }
 
         // build tick labels
-        stringList.add(spaceLine);
+        stringList.add(spaceLine.toString());
         String[] tickLabels = getTickLabels(minTick, maxTick, maxSignalNameLength);
 
         for (int line = 0; line < tickLabels.length; line++) {

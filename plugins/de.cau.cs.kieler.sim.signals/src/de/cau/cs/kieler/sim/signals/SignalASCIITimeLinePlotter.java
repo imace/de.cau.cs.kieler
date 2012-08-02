@@ -19,6 +19,7 @@ import java.util.LinkedList;
  * The SignalASCIITimeLinePlotter plots ASCII art signals to a text file.
  * 
  * @author cmot
+ * @kieler.rating 2012-07-25 yellow KI-21
  */
 public class SignalASCIITimeLinePlotter extends SignalASCIIPlotter {
 
@@ -42,14 +43,15 @@ public class SignalASCIITimeLinePlotter extends SignalASCIIPlotter {
         int maxLineLength = spaceLength * (int) (maxTick - minTick);
 
         // space line
-        stringList.add(getSpaceCharacters(maxLineLength));
+        stringList.add(getSpaceCharacters(maxLineLength).toString());
 
         // plot signal data
         for (Signal signal : signalList) {
             StringBuffer currentLineBuf = new StringBuffer();
             for (long tick = minTick; tick <= maxTick; tick++) {
                 if (signal.isPresent(tick)) {
-                    currentLineBuf.append(createSpacedLabel(signal.getName(), spaceLength, 0));
+                    currentLineBuf.append(createSpacedLabel(new StringBuffer(signal.getName()),
+                            spaceLength, 0));
                 } else {
                     currentLineBuf.append(getSpaceCharacters(spaceLength));
                 }
@@ -58,17 +60,17 @@ public class SignalASCIITimeLinePlotter extends SignalASCIIPlotter {
         }
 
         // space line
-        stringList.add(getSpaceCharacters(maxLineLength));
+        stringList.add(getSpaceCharacters(maxLineLength).toString());
 
         // plot time line and tick labels
-        String timeLine = "";
-        String tickLabels = "";
+        StringBuffer timeLine = new StringBuffer();
+        StringBuffer tickLabels = new StringBuffer();
         for (long tick = minTick; tick <= maxTick; tick++) {
-            timeLine += createSpacedLabel("|", spaceLength, 0, '-');
-            tickLabels += createSpacedLabel(tick + "", spaceLength, 0);
+            timeLine.append(createSpacedLabel(new StringBuffer("|"), spaceLength, 0, '-'));
+            tickLabels.append(createSpacedLabel(new StringBuffer(tick + ""), spaceLength, 0));
         }
-        stringList.add(timeLine);
-        stringList.add(tickLabels);
+        stringList.add(timeLine.toString());
+        stringList.add(tickLabels.toString());
 
         return (String[]) stringList.toArray(new String[signalList.size()]);
     }

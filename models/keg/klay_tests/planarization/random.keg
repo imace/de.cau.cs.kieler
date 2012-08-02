@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <keg:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:keg="http://kieler.cs.cau.de/KEG">
-  <children xsi:type="keg:Node" incomingEdges="//@children.12/@outgoingEdges.0" nodeLabel="N1">
+  <children xsi:type="keg:Node" incomingEdges="//@children.7/@outgoingEdges.0" nodeLabel="0">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.4"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.8"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.2/@outgoingEdges.0" nodeLabel="1">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.7"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="2">
     <outgoingEdges xsi:type="keg:Edge" target="//@children.1"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.7"/>
-  </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.0/@outgoingEdges.0 //@children.13/@outgoingEdges.2" nodeLabel="N2"/>
-  <children xsi:type="keg:Node" incomingEdges="//@children.3/@outgoingEdges.0" nodeLabel="N3">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.12"/>
-  </children>
-  <children xsi:type="keg:Node" nodeLabel="N4">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.2"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.7"/>
     <outgoingEdges xsi:type="keg:Edge" target="//@children.4"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.3"/>
   </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.3/@outgoingEdges.2 //@children.16/@outgoingEdges.0 //@children.10/@outgoingEdges.0" nodeLabel="N5"/>
-  <children xsi:type="keg:Node" incomingEdges="//@children.14/@outgoingEdges.0" nodeLabel="N6"/>
-  <children xsi:type="keg:Node" nodeLabel="N7">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.8"/>
+  <children xsi:type="keg:Node" incomingEdges="//@children.2/@outgoingEdges.2 //@children.11/@outgoingEdges.0 //@children.5/@outgoingEdges.0" nodeLabel="3"/>
+  <children xsi:type="keg:Node" incomingEdges="//@children.0/@outgoingEdges.0 //@children.2/@outgoingEdges.1 //@children.8/@outgoingEdges.0 //@children.10/@outgoingEdges.0" nodeLabel="4"/>
+  <children xsi:type="keg:Node" incomingEdges="//@children.10/@outgoingEdges.1" nodeLabel="5">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.3"/>
   </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.0/@outgoingEdges.1 //@children.3/@outgoingEdges.1 //@children.13/@outgoingEdges.0 //@children.15/@outgoingEdges.0" nodeLabel="N8"/>
-  <children xsi:type="keg:Node" incomingEdges="//@children.6/@outgoingEdges.0 //@children.11/@outgoingEdges.1" nodeLabel="N9"/>
-  <children xsi:type="keg:Node" nodeLabel="N10">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.14"/>
+  <children xsi:type="keg:Node" nodeLabel="6">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.11"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.9"/>
   </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.15/@outgoingEdges.1" nodeLabel="N11">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.4"/>
-  </children>
-  <children xsi:type="keg:Node" nodeLabel="N12">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.16"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.8"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.14"/>
-  </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.2/@outgoingEdges.0" nodeLabel="N13">
+  <children xsi:type="keg:Node" incomingEdges="//@children.1/@outgoingEdges.0" nodeLabel="7">
     <outgoingEdges xsi:type="keg:Edge" target="//@children.0"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.13"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.8"/>
   </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.12/@outgoingEdges.1" nodeLabel="N14">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.7"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.16"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.1"/>
-  </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.9/@outgoingEdges.0 //@children.11/@outgoingEdges.2" nodeLabel="N15">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.5"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.16"/>
-  </children>
-  <children xsi:type="keg:Node" nodeLabel="N16">
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.7"/>
-    <outgoingEdges xsi:type="keg:Edge" target="//@children.10"/>
-  </children>
-  <children xsi:type="keg:Node" incomingEdges="//@children.11/@outgoingEdges.0 //@children.13/@outgoingEdges.1 //@children.14/@outgoingEdges.1" nodeLabel="N18">
+  <children xsi:type="keg:Node" incomingEdges="//@children.7/@outgoingEdges.1 //@children.0/@outgoingEdges.1" nodeLabel="8">
     <outgoingEdges xsi:type="keg:Edge" target="//@children.4"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.11"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.6/@outgoingEdges.1" nodeLabel="9">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.11"/>
+  </children>
+  <children xsi:type="keg:Node" nodeLabel="10">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.4"/>
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.5"/>
+  </children>
+  <children xsi:type="keg:Node" incomingEdges="//@children.6/@outgoingEdges.0 //@children.9/@outgoingEdges.0 //@children.8/@outgoingEdges.1" nodeLabel="11">
+    <outgoingEdges xsi:type="keg:Edge" target="//@children.3"/>
   </children>
 </keg:Node>

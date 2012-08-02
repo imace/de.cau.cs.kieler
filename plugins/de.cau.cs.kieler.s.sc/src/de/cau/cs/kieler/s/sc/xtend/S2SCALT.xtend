@@ -36,6 +36,8 @@ import de.cau.cs.kieler.s.s.Term
 import de.cau.cs.kieler.s.s.Trans
 import de.cau.cs.kieler.core.kexpressions.IntValue
 import de.cau.cs.kieler.core.kexpressions.FloatValue
+import java.util.LinkedList
+import java.util.HashMap
 
 /**
  * Transformation of S code into SS code that can be executed using the GCC.
@@ -43,27 +45,34 @@ import de.cau.cs.kieler.core.kexpressions.FloatValue
  * @author cmot
  */
 class S2SCALT { 
+	
+	// These static lists are used in  expand(Fork forkInstruction)
+	// to combine consecutive fork statements.
+	static var forkThreadNameList = new LinkedList<String>();
+	static var forkThreadPrioMap = new HashMap<String, Integer>();
     
     // General method to create the c simulation interface.
-	def transform (Program program, String outputFolder) {
+	def transform (Program program, String outputFolder, String bufferSize) {
        '''
 	   «/* Generate the C header */»
        «scHeader(outputFolder, program)»
 
 	   «/* Simple Signal Reset, Input Output */»
-	   «sSimpleReset(program)»
+	   «sReset(program)»
 
-       «sSimpleInputs(program)»
+       «sInputs(program)»
 
        «sSimpleOutputs(program)»
 
 	   «/* Generate input functions that are then called my the main function's
 		   tick function of the module */»
-       «sSetInputsFunction(program)»
+       «sSetInputsFunction(program, bufferSize)»
 
-	   «/* Generate output functions for each S signal */» 
+	   «/* Generate output functions and reset functions for each S signal */» 
        «sSetOutputFunction(program)»
-	   
+
+	   «sResetOutputs(program)»
+
 	   «/* Generate the main function */»
 	   «mainFunction(program)»
 
@@ -95,21 +104,32 @@ class S2SCALT {
 	#include <stdlib.h>
 	#include <stdio.h>
 
-	#include "sc.h"
 	#include "cJSON.h"
 	
 	«/* Signal constants */»
 	«sSignalConstant(program)»
 	
+# define _BitScanReverse(set, bit)				      \
+  bit = 0;							      \
+  for (_setPart = set; _setPart > 1; _setPart >>= 1) {		      \
+    bit++;							      \
+  }
+
+	
+	// Highest thread id in use;
+	#define _SC_ID_MAX «program.priority + 1» 
 
 	// Highest signal id in use;
-	#define _SC_valSigInt_SIZE «program.getSignals().size» 
+	#define _SC_SIG_MAX «program.getSignals().size» 
+
+	#include "sc.h"
+
 
 	cJSON* output = 0;
 	cJSON* value = 0;
 	
-	int valSigInt[_SC_valSigInt_SIZE];
-	int valSigIntPre[_SC_valSigInt_SIZE];
+	int valSigInt[_SC_SIG_MAX];
+	int valSigIntPre[_SC_SIG_MAX];
 	
 	''' 
    }
@@ -118,15 +138,17 @@ class S2SCALT {
    
    // Generate signal constants.
    def sSignalConstant(Program program) {
-   	'''typedef enum {«FOR signal : program.getSignals() SEPARATOR ", "»sig_«signal.name»«ENDFOR»} signaltype;
+   	'''typedef enum {«FOR signal : program.getSignals() SEPARATOR ",
+ "»sig_«signal.name»«ENDFOR»} signaltype;
    	
-   	const char *s2signame[] = {«FOR signal : program.getSignals() SEPARATOR ", "»"sig_«signal.name»"«ENDFOR»};'''
+   	const char *s2signame[] = {«FOR signal : program.getSignals() SEPARATOR ", 
+"»"sig_«signal.name»"«ENDFOR»};'''
    }
    
    // Generate simple reset.
-   def sSimpleReset(Program program) {
+   def sReset(Program program) {
    	   	''' 
-   	int simple_reset() {
+   	int reset() {
 	RESET();
 	/* initialize all valued integer signals */
 	«FOR signal : program.getSignals()»
@@ -138,11 +160,15 @@ class S2SCALT {
    }
    
    // Generate simple signal inputs.
-   def sSimpleInputs(Program program) {
+   def sInputs(Program program) {
    	''' 
 	«FOR signal : program.getSignals().filter(e|e.isInput||e.isOutput)»
-void simple_INPUT_«signal.name»() {
-	signals = signals | (1 << sig_«signal.name»);
+void INPUT_«signal.name»() {
+	   _sigAdd(signals, sig_«signal.name»);
+«//     signalsPtr[sig_«signal.name»] = u2b(«signal.name»);
+»
+« //	signals = signals | (1 << sig_«signal.name»); 
+»
 }
 	«ENDFOR»
 '''
@@ -155,19 +181,35 @@ void simple_INPUT_«signal.name»() {
    	'''
 	void callOutputs() {
 	«FOR signal : program.getSignals().filter(e|e.isOutput)»
-		simple_OUTPUT_«signal.name»(signals & (1 << sig_«signal.name»));
+		OUTPUT_«signal.name»(_sigContains(signals, sig_«signal.name»));«/*OUTPUT_«signal.name»(signals & (1 << sig_«signal.name»)); */»
 	«ENDFOR»
-		signals=0;
+		}
+   	'''
+   }
+
+
+
+   // -------------------------------------------------------------------------
+   // Generate simple signal outputs.
+   def sResetOutputs(Program program) {
+   	'''
+	void resetOutputs() {
+		//signals=0;
+		_sigClear(signals);
+		//_checkTickInit;
+	«FOR signal : program.getSignals().filter(e|e.isOutput)»
+	  _sigDel(signals, sig_«signal.name»);
+	«ENDFOR»
 	}
    	'''
    }
    
    // Generate input functions that are then called my the main function's
    // tick function of the module.
-   def sSetInputsFunction(Program program) {
+   def sSetInputsFunction(Program program, String bufferSize) {
 '''
 void setInputs(){
-  char buffer[2048];
+  char buffer[«bufferSize»];
   int i=0;
   char c;
   // read next line
@@ -194,7 +236,7 @@ void setInputs(){
    // Generate the main function.
    def mainFunction(Program program) {
    	'''int main(int argc, const char* argv[]) {
-		simple_reset();
+		reset();
 		output = cJSON_CreateObject();
 		RESET();
 		setInputs();
@@ -205,7 +247,7 @@ void setInputs(){
 			strip_white_spaces(outString);
 			printf("%s\n", outString);
 			fflush(stdout);
-			//reset();
+			resetOutputs();
 			output = cJSON_CreateObject();
 			setInputs();
 			tick();
@@ -223,13 +265,21 @@ void setInputs(){
    // Generate the  tick function.
    def tickFunction(Program program) {
    	'''    int tick(){
-       TICKSTART(«program.priority»);
+   	      «// clear for the next usage
+   	       forkThreadNameList.clear()»
+   	      «// clear for the next usage
+   	       forkThreadPrioMap.clear()»
+   		
+       // Main thread has the highest priority + 1
+       «program.states.get(0).expand(program.priority + 1)»
        
-       «FOR state : program.states»
+       // All following threads/states
+       «FOR state : program.states.tail»
        «state.expand»
-       «ENDFOR»
        
-	   TICKEND;
+       «ENDFOR»
+
+       TICKEND;
     }
 	'''
    }
@@ -239,13 +289,14 @@ void setInputs(){
    // Define output functions to return JSON for each s signal.
    def sSimpleOutputs(Program program) {
 	'''«'''«FOR signal : program.signals.filter(e | e.isOutput)»
-		void simple_OUTPUT_«signal.name»(int status){
+		void OUTPUT_«signal.name»(int status){
 		value = cJSON_CreateObject();
 		cJSON_AddItemToObject(value, "present", status?cJSON_CreateTrue():cJSON_CreateFalse());
 	«IF signal.type == ValueType::INT»
 cJSON_AddItemToObject(value, "value", cJSON_CreateNumber(VAL(sig_«signal.name»)));
 	«ENDIF»
 		cJSON_AddItemToObject(output, "«signal.name»", value);
+		//printf("«signal.name»:%d\n", status);
 		}
 	«ENDFOR»'''»
 	'''
@@ -260,7 +311,7 @@ cJSON_AddItemToObject(value, "value", cJSON_CreateNumber(VAL(sig_«signal.name»
 			present = cJSON_GetObjectItem(child, "present");
 			value = cJSON_GetObjectItem(child, "value");
 			if (present != NULL && present->type) {
-				simple_INPUT_«signal.name»();
+				INPUT_«signal.name»();
 			}
 		}   
    	   
@@ -269,14 +320,23 @@ cJSON_AddItemToObject(value, "value", cJSON_CreateNumber(VAL(sig_«signal.name»
    
    // -------------------------------------------------------------------------   
    // -------------------------------------------------------------------------
-   
-   // Expand a state traversing all instructions of that state.
-   def dispatch expand(State state) {
-   		'''«state.name»: 
+
+   // Expand the main state traversing all instructions of that state.
+   def expand(State state, int priority) {
+   		'''MainThread(«priority») { 
    		«FOR instruction : state.instructions»
    		«instruction.expand»
    		«ENDFOR»
-   		'''
+}'''
+   }
+   
+   // Expand a state traversing all instructions of that state.
+   def dispatch expand(State state) {
+   		'''Thread(«state.name») { 
+   		«FOR instruction : state.instructions»
+   		«instruction.expand»
+   		«ENDFOR»
+}'''
    }
    
    // Expand an IF instruction traversing all instructions of that IF instruction.
@@ -285,10 +345,10 @@ cJSON_AddItemToObject(value, "value", cJSON_CreateNumber(VAL(sig_«signal.name»
    		«FOR instruction : ifInstruction.instructions»
    			«instruction.expand»
    		«ENDFOR»
-         }'''
+}'''
    }   
    
-   // Expand a PAUS instruction.
+   // Expand a PAUSE instruction.
    def dispatch expand(Pause pauseInstruction) {
    	'''PAUSE;'''
    }   
@@ -326,14 +386,34 @@ cJSON_AddItemToObject(value, "value", cJSON_CreateNumber(VAL(sig_«signal.name»
    }
    
    // Expand a FORK instruction.
+   // Add fork instructions to forkThreadName and forkThreadPrioList
+   // if the LAST fork instruction is reached, process these lists and clear them. 
    def dispatch expand(Fork forkInstruction) {
-   	'''«IF forkInstruction.getLastFork != forkInstruction» 
-   	      FORK(«forkInstruction.thread.name»,«forkInstruction.priority»);
+   	'''«IF forkInstruction.getLastFork != forkInstruction»
+   	     «forkThreadNameList.add(forkInstruction.thread.name).suppress» 
+   	     «forkThreadPrioMap.put(forkInstruction.thread.name, forkInstruction.priority)» 
    	   «ENDIF»
    	   «IF forkInstruction.getLastFork == forkInstruction» 
-   	      FORKE(«forkInstruction.thread.name»);
+«forkThreadNameList.add(forkInstruction.thread.name).suppress» 
+«forkThreadPrioMap.put(forkInstruction.thread.name, forkInstruction.priority)»
+«/*NOW PROCESS THE FILLED LISTS*/»
+FORK«forkThreadNameList.size»(«FOR forkThreadName : forkThreadNameList SEPARATOR ", "»«forkThreadName»,«forkThreadPrioMap.get(forkThreadName)»«ENDFOR»);
+   	      «// clear for the next usage
+   	       forkThreadNameList.clear()»
+   	      «// clear for the next usage
+   	       forkThreadPrioMap.clear()»
    	   «ENDIF»
    	'''
+   }   
+   
+   def suppress(String text) {
+   	''' '''
+   }
+   def suppress(int text) {
+   	''' '''
+   }   
+   def suppress(boolean text) {
+   	''' '''
    }   
 
    // Expand a TRANS instruction.	

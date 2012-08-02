@@ -51,6 +51,8 @@
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ayIF0Za-EeGd8ubvttIUQQ"/>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_03aMoJa-EeGd8ubvttIUQQ" name="layout:de.cau.cs.kieler.algorithm" stringValue="de.cau.cs.kieler.klay.planar.orthogonal"/>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_Z4pqsZa_EeG1n5RjP9KuzA" name="layout:de.cau.cs.kieler.debugMode" stringValue="true"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_SEXHQNrUEeGpZd7nLe0S-A" name="layout:de.cau.cs.kieler.klay.planar.planarityTest" stringValue="LEFT_RIGHT_PLANARITY_ALGORITHM"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_5lMKINu5EeGW744-xS9Iyw" name="layout:de.cau.cs.kieler.spacing" stringValue="40.0"/>
   <element xmi:type="keg:Node" href="kite.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_oc3XgJa-EeGd8ubvttIUQQ" type="4002" source="_bNXQUJa-EeGd8ubvttIUQQ" target="_bjQAwJa-EeGd8ubvttIUQQ">
     <children xmi:type="notation:DecorationNode" xmi:id="_oc3-kJa-EeGd8ubvttIUQQ" type="6006">
