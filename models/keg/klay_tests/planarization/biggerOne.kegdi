@@ -383,4 +383,19 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_O7qJ49l0EeGnGpcGMm9EIg" points="[-19, -7, 230, 84]$[-250, -82, -1, 9]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O7t0QNl0EeGnGpcGMm9EIg" id="(0.8,0.625)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_2q7OwN01EeGA56PyDW_SQg" type="4002" source="_3U0VIJa8EeGd8ubvttIUQQ" target="_JH0hMM_rEeGkzb4_N-hKdg">
+    <children xmi:type="notation:DecorationNode" xmi:id="_2q7OxN01EeGA56PyDW_SQg" type="6006">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2q7Oxd01EeGA56PyDW_SQg" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_2q710N01EeGA56PyDW_SQg" type="6007">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2q710d01EeGA56PyDW_SQg" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_2q710t01EeGA56PyDW_SQg" type="6008">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2q710901EeGA56PyDW_SQg" y="80"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_2q7Owd01EeGA56PyDW_SQg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_2q7Owt01EeGA56PyDW_SQg" fontName="Segoe UI"/>
+    <element xmi:type="keg:Edge" href="biggerOne.keg#//@children.4/@outgoingEdges.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2q7Ow901EeGA56PyDW_SQg" points="[-11, -17, 214, 343]$[-226, -341, -1, 19]"/>
+  </edges>
 </notation:Diagram>
