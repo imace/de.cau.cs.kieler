@@ -42,7 +42,7 @@
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_rZ_TotAcEeGjwfM_3ZdRsg"/>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_MPneENDnEeGmy8G9tskpcA" name="layout:de.cau.cs.kieler.algorithm" stringValue="de.cau.cs.kieler.klay.planar.orthogonal"/>
-  <styles xmi:type="notation:StringValueStyle" xmi:id="_pmEcINomEeGYQ5_oJwssAQ" name="layout:de.cau.cs.kieler.klay.planar.planarityTest" stringValue="LEFT_RIGHT_PLANARITY_ALGORITHM"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_pmEcINomEeGYQ5_oJwssAQ" name="layout:de.cau.cs.kieler.klay.planar.planarityTest" stringValue="BOYER_MYRVOLD_ALGORITHM"/>
   <element xmi:type="keg:Node" href="test1.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_6rGbUNAeEeGjwfM_3ZdRsg" type="4002" source="_-lpQMNAcEeGjwfM_3ZdRsg" target="__H1XQNAcEeGjwfM_3ZdRsg">
     <children xmi:type="notation:DecorationNode" xmi:id="_6rHCYNAeEeGjwfM_3ZdRsg" type="6006">
